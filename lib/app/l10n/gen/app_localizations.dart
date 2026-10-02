@@ -209,7 +209,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutPrivacy.
   ///
   /// In th, this message translates to:
-  /// **'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน\n\nแอพต่ออินเทอร์เน็ตแค่ 2 กรณี และปิดได้ในการตั้งค่าทั้งคู่:\n• ตรวจสอบเวอร์ชันใหม่จาก GitHub\n• ค้นหาข้อมูลสินค้าจากบาร์โค้ดใน Open Beauty Facts (ถามก่อนครั้งแรก ส่งเฉพาะเลขบาร์โค้ด)\nทั้งสองกรณีไม่ส่งข้อมูลใดๆ ของคุณออกไป'**
+  /// **'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน\n\nการเชื่อมต่ออินเทอร์เน็ตเพียงอย่างเดียวคือการตรวจสอบเวอร์ชันใหม่จาก GitHub (ปิดได้ในการตั้งค่า) ซึ่งไม่ส่งข้อมูลใดๆ ของคุณออกไป'**
   String get aboutPrivacy;
 
   /// No description provided for @todayHello.
@@ -533,13 +533,13 @@ abstract class AppLocalizations {
   /// No description provided for @fieldIngredients.
   ///
   /// In th, this message translates to:
-  /// **'ส่วนผสมสำคัญ'**
+  /// **'ส่วนผสม'**
   String get fieldIngredients;
 
   /// No description provided for @fieldIngredientsHelp.
   ///
   /// In th, this message translates to:
-  /// **'คั่นด้วยจุลภาค เช่น ไนอะซินาไมด์, วิตามินซี'**
+  /// **'พิมพ์ชื่อไทยหรืออังกฤษแล้วเลือกจากรายการ หรือวางรายชื่อจากฉลาก (คั่นด้วยจุลภาค)'**
   String get fieldIngredientsHelp;
 
   /// No description provided for @fieldInvalidNumber.
@@ -2024,113 +2024,233 @@ abstract class AppLocalizations {
   /// **'ภายหลัง'**
   String get updateLater;
 
-  /// No description provided for @scanTitle.
+  /// No description provided for @ingFnSurfactant.
   ///
   /// In th, this message translates to:
-  /// **'สแกนบาร์โค้ด'**
-  String get scanTitle;
+  /// **'สารทำความสะอาด'**
+  String get ingFnSurfactant;
 
-  /// No description provided for @scanHint.
+  /// No description provided for @ingFnUvChemical.
   ///
   /// In th, this message translates to:
-  /// **'เล็งบาร์โค้ดบนกล่องหรือขวดให้อยู่ในกรอบ'**
-  String get scanHint;
+  /// **'สารกันแดด (เคมี)'**
+  String get ingFnUvChemical;
 
-  /// No description provided for @scanManual.
+  /// No description provided for @ingFnUvMineral.
   ///
   /// In th, this message translates to:
-  /// **'พิมพ์เลขบาร์โค้ดเอง'**
-  String get scanManual;
+  /// **'สารกันแดด (แร่)'**
+  String get ingFnUvMineral;
 
-  /// No description provided for @scanManualTitle.
+  /// No description provided for @ingFnHumectant.
   ///
   /// In th, this message translates to:
-  /// **'เลขบาร์โค้ด'**
-  String get scanManualTitle;
+  /// **'ดึงความชุ่มชื้น'**
+  String get ingFnHumectant;
 
-  /// No description provided for @scanTorch.
+  /// No description provided for @ingFnEmollient.
   ///
   /// In th, this message translates to:
-  /// **'ไฟฉาย'**
-  String get scanTorch;
+  /// **'เพิ่มความนุ่มชุ่มชื่น'**
+  String get ingFnEmollient;
 
-  /// No description provided for @scanDenied.
+  /// No description provided for @ingFnOcclusive.
   ///
   /// In th, this message translates to:
-  /// **'ไม่ได้รับสิทธิ์ใช้กล้อง เปิดได้ในการตั้งค่าของเครื่อง หรือพิมพ์เลขบาร์โค้ดเองได้'**
-  String get scanDenied;
+  /// **'เคลือบกักความชุ่มชื้น'**
+  String get ingFnOcclusive;
 
-  /// No description provided for @scanButton.
+  /// No description provided for @ingFnBarrier.
   ///
   /// In th, this message translates to:
-  /// **'สแกนบาร์โค้ดเพื่อกรอกอัตโนมัติ'**
-  String get scanButton;
+  /// **'ฟื้นฟูเกราะผิว'**
+  String get ingFnBarrier;
 
-  /// No description provided for @scanBarcodeLabel.
+  /// No description provided for @ingFnBrightening.
   ///
   /// In th, this message translates to:
-  /// **'บาร์โค้ด {code}'**
-  String scanBarcodeLabel(String code);
+  /// **'ผิวกระจ่างใส'**
+  String get ingFnBrightening;
 
-  /// No description provided for @scanSearching.
+  /// No description provided for @ingFnAntioxidant.
   ///
   /// In th, this message translates to:
-  /// **'กำลังค้นหาข้อมูลสินค้า…'**
-  String get scanSearching;
+  /// **'ต้านอนุมูลอิสระ'**
+  String get ingFnAntioxidant;
 
-  /// No description provided for @scanFoundLocal.
+  /// No description provided for @ingFnExfoliant.
   ///
   /// In th, this message translates to:
-  /// **'เคยบันทึกสินค้านี้แล้ว กรอกข้อมูลเดิมให้แล้ว'**
-  String get scanFoundLocal;
+  /// **'ผลัดเซลล์ผิว'**
+  String get ingFnExfoliant;
 
-  /// No description provided for @scanFoundOnline.
+  /// No description provided for @ingFnAntiAcne.
   ///
   /// In th, this message translates to:
-  /// **'พบข้อมูลสินค้า กรอกให้แล้ว ตรวจสอบอีกครั้งนะ'**
-  String get scanFoundOnline;
+  /// **'ลดสิว'**
+  String get ingFnAntiAcne;
 
-  /// No description provided for @scanNotFound.
+  /// No description provided for @ingFnRetinoid.
   ///
   /// In th, this message translates to:
-  /// **'ยังไม่มีข้อมูลบาร์โค้ดนี้ กรอกเองได้เลย ครั้งหน้าสแกนแล้วแอพจะจำได้'**
-  String get scanNotFound;
+  /// **'เรตินอยด์'**
+  String get ingFnRetinoid;
 
-  /// No description provided for @lookupConsentTitle.
+  /// No description provided for @ingFnAntiAging.
   ///
   /// In th, this message translates to:
-  /// **'ค้นหาข้อมูลจากอินเทอร์เน็ต?'**
-  String get lookupConsentTitle;
+  /// **'ลดริ้วรอย'**
+  String get ingFnAntiAging;
 
-  /// No description provided for @lookupConsentBody.
+  /// No description provided for @ingFnSoothing.
   ///
   /// In th, this message translates to:
-  /// **'แอพจะส่งเฉพาะเลขบาร์โค้ดไปค้นในฐานข้อมูลเครื่องสำอางแบบเปิด Open Beauty Facts (ใช้ฟรี) ไม่ส่งข้อมูลอื่นของคุณ\n\nสินค้าไทยบางตัวอาจยังไม่มีข้อมูล'**
-  String get lookupConsentBody;
+  /// **'ปลอบประโลมผิว'**
+  String get ingFnSoothing;
 
-  /// No description provided for @lookupConsentAllow.
+  /// No description provided for @ingFnAbsorbent.
   ///
   /// In th, this message translates to:
-  /// **'ค้นหา'**
-  String get lookupConsentAllow;
+  /// **'ดูดซับความมัน'**
+  String get ingFnAbsorbent;
 
-  /// No description provided for @lookupConsentDeny.
+  /// No description provided for @ingFnFilmFormer.
   ///
   /// In th, this message translates to:
-  /// **'ไม่ต้อง'**
-  String get lookupConsentDeny;
+  /// **'สร้างฟิล์มบนผิว'**
+  String get ingFnFilmFormer;
 
-  /// No description provided for @settingsOnlineLookup.
+  /// No description provided for @ingFnEmulsifier.
   ///
   /// In th, this message translates to:
-  /// **'ค้นหาข้อมูลสินค้าจากบาร์โค้ดทางออนไลน์'**
-  String get settingsOnlineLookup;
+  /// **'ผสานน้ำกับน้ำมัน'**
+  String get ingFnEmulsifier;
 
-  /// No description provided for @settingsOnlineLookupHint.
+  /// No description provided for @ingFnThickener.
   ///
   /// In th, this message translates to:
-  /// **'ส่งเฉพาะเลขบาร์โค้ดไปที่ Open Beauty Facts (ฟรี)'**
-  String get settingsOnlineLookupHint;
+  /// **'ปรับเนื้อสัมผัส'**
+  String get ingFnThickener;
+
+  /// No description provided for @ingFnPreservative.
+  ///
+  /// In th, this message translates to:
+  /// **'สารกันเสีย'**
+  String get ingFnPreservative;
+
+  /// No description provided for @ingFnChelating.
+  ///
+  /// In th, this message translates to:
+  /// **'จับโลหะ (คีเลต)'**
+  String get ingFnChelating;
+
+  /// No description provided for @ingFnPhAdjuster.
+  ///
+  /// In th, this message translates to:
+  /// **'ปรับค่า pH'**
+  String get ingFnPhAdjuster;
+
+  /// No description provided for @ingFnSolvent.
+  ///
+  /// In th, this message translates to:
+  /// **'ตัวทำละลาย'**
+  String get ingFnSolvent;
+
+  /// No description provided for @ingFnFragrance.
+  ///
+  /// In th, this message translates to:
+  /// **'น้ำหอม/กลิ่น'**
+  String get ingFnFragrance;
+
+  /// No description provided for @ingFnOther.
+  ///
+  /// In th, this message translates to:
+  /// **'อื่นๆ'**
+  String get ingFnOther;
+
+  /// No description provided for @ingredientsSearchHint.
+  ///
+  /// In th, this message translates to:
+  /// **'เช่น ไนอะซินาไมด์, zinc oxide'**
+  String get ingredientsSearchHint;
+
+  /// No description provided for @ingredientsCommonIn.
+  ///
+  /// In th, this message translates to:
+  /// **'พบบ่อยใน{category} · แตะเพื่อเพิ่ม'**
+  String ingredientsCommonIn(String category);
+
+  /// No description provided for @ingredientsAddCustom.
+  ///
+  /// In th, this message translates to:
+  /// **'เพิ่ม “{name}”'**
+  String ingredientsAddCustom(String name);
+
+  /// No description provided for @ingredientsCustomSubtitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีในฐานข้อมูล'**
+  String get ingredientsCustomSubtitle;
+
+  /// No description provided for @ingredientsUsedBefore.
+  ///
+  /// In th, this message translates to:
+  /// **'เคยใช้ในสินค้าอื่น'**
+  String get ingredientsUsedBefore;
+
+  /// No description provided for @ingredientsUnknown.
+  ///
+  /// In th, this message translates to:
+  /// **'ส่วนผสมนี้ยังไม่มีในฐานข้อมูลของแอพ'**
+  String get ingredientsUnknown;
+
+  /// No description provided for @ingredientsTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ฐานข้อมูลส่วนผสม'**
+  String get ingredientsTitle;
+
+  /// No description provided for @ingredientsCount.
+  ///
+  /// In th, this message translates to:
+  /// **'{count} รายการ'**
+  String ingredientsCount(int count);
+
+  /// No description provided for @ingredientsAlsoKnownAs.
+  ///
+  /// In th, this message translates to:
+  /// **'ชื่ออื่น'**
+  String get ingredientsAlsoKnownAs;
+
+  /// No description provided for @ingredientsTypicalIn.
+  ///
+  /// In th, this message translates to:
+  /// **'พบบ่อยใน'**
+  String get ingredientsTypicalIn;
+
+  /// No description provided for @ingredientsCaution.
+  ///
+  /// In th, this message translates to:
+  /// **'ควรรู้'**
+  String get ingredientsCaution;
+
+  /// No description provided for @ingredientsNoMatch.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่พบส่วนผสมที่ค้นหา'**
+  String get ingredientsNoMatch;
+
+  /// No description provided for @ingredientsDisclaimer.
+  ///
+  /// In th, this message translates to:
+  /// **'ข้อมูลทั่วไปเพื่อประกอบการเลือกใช้ ไม่ใช่คำแนะนำทางการแพทย์'**
+  String get ingredientsDisclaimer;
+
+  /// No description provided for @ingredientsFilterAll.
+  ///
+  /// In th, this message translates to:
+  /// **'ทุกหน้าที่'**
+  String get ingredientsFilterAll;
 }
 
 class _AppLocalizationsDelegate

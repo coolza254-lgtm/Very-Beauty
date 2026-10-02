@@ -13,18 +13,13 @@ import '../../core/db/products_dao.dart';
 import '../../core/db/providers.dart';
 import '../../core/utils/date_utils.dart';
 import '../../core/utils/formatters.dart';
-import 'barcode_fill.dart';
 import 'product_providers.dart';
+import 'widgets/ingredient_widgets.dart';
 
 /// Add/edit form in two levels: the essentials up top, everything else in a
 /// collapsed "รายละเอียดเพิ่มเติม" section (docs/SPEC.md §2.4, §7.2).
 class ProductFormScreen extends ConsumerWidget {
-  const ProductFormScreen({
-    super.key,
-    this.productId,
-    this.initialStatus,
-    this.startWithScan = false,
-  });
+  const ProductFormScreen({super.key, this.productId, this.initialStatus});
 
   /// Null when creating.
   final int? productId;
@@ -32,18 +27,10 @@ class ProductFormScreen extends ConsumerWidget {
   /// Status preset for new products (e.g. wishlist).
   final ProductStatus? initialStatus;
 
-  /// Open the barcode scanner straight away (from the Products screen).
-  final bool startWithScan;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final id = productId;
-    if (id == null) {
-      return _ProductForm(
-        initialStatus: initialStatus,
-        startWithScan: startWithScan,
-      );
-    }
+    if (id == null) return _ProductForm(initialStatus: initialStatus);
     final details = ref.watch(productDetailsProvider(id));
     return switch (details) {
       AsyncData(value: final d?) => _ProductForm(existing: d),
@@ -57,15 +44,10 @@ class ProductFormScreen extends ConsumerWidget {
 }
 
 class _ProductForm extends ConsumerStatefulWidget {
-  const _ProductForm({
-    this.existing,
-    this.initialStatus,
-    this.startWithScan = false,
-  });
+  const _ProductForm({this.existing, this.initialStatus});
 
   final ProductDetails? existing;
   final ProductStatus? initialStatus;
-  final bool startWithScan;
 
   @override
   ConsumerState<_ProductForm> createState() => _ProductFormState();
@@ -82,7 +64,8 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
   late final TextEditingController _startWeight;
   late final TextEditingController _emptyWeight;
   late final TextEditingController _note;
-  late final TextEditingController _ingredients;
+  late List<String> _ingredients;
+  List<String> _usedIngredients = const [];
 
   ProductCategory? _category;
   late NetUnit _unit;
@@ -91,7 +74,6 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
   DateTime? _openedDate;
   DateTime? _expiryDate;
   bool _saving = false;
-  String? _barcode;
 
   bool get _isEdit => widget.existing != null;
 
@@ -112,9 +94,10 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
     _startWeight = TextEditingController(text: num(p?.startWeight));
     _emptyWeight = TextEditingController(text: num(p?.emptyBottleWeight));
     _note = TextEditingController(text: p?.note);
-    _ingredients = TextEditingController(
-      text: widget.existing?.ingredients.join(', '),
-    );
+    _ingredients = [...?widget.existing?.ingredients];
+    ref.read(productsDaoProvider).usedIngredientNames().then((names) {
+      if (mounted) setState(() => _usedIngredients = names);
+    });
     _category = p?.category;
     _unit = p?.netUnit ?? NetUnit.g;
     _status = p?.status ?? widget.initialStatus ?? ProductStatus.inUse;
@@ -123,10 +106,6 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
         date(p?.openedDate) ??
         (p == null && _status == ProductStatus.inUse ? DateTime.now() : null);
     _expiryDate = date(p?.expiryDate);
-    _barcode = p?.barcode;
-    if (widget.startWithScan) {
-      WidgetsBinding.instance.addPostFrameCallback((_) => _scan());
-    }
   }
 
   @override
@@ -141,7 +120,6 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
       _startWeight,
       _emptyWeight,
       _note,
-      _ingredients,
     ]) {
       c.dispose();
     }
@@ -182,8 +160,7 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
       startWeight: parseNumber(_startWeight.text),
       emptyBottleWeight: parseNumber(_emptyWeight.text),
       note: _note.text,
-      ingredients: _ingredients.text.split(RegExp(r'[,،、\n]')),
-      barcode: _barcode,
+      ingredients: _ingredients,
     );
     final dao = ref.read(productsDaoProvider);
     if (_isEdit) {
@@ -193,32 +170,6 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
       final id = await dao.createProduct(draft);
       if (mounted) context.pushReplacement(AppRoutes.productDetail(id));
     }
-  }
-
-  /// Scan, look up, and fill only the fields that are still empty.
-  Future<void> _scan() async {
-    final code = await ref.read(barcodeScannerProvider)(context);
-    if (code == null || !mounted) return;
-    setState(() => _barcode = code);
-    final info = await lookUpBarcode(context, ref, code);
-    if (info == null || !mounted) return;
-    String num(double v) => formatNumber(v).replaceAll(',', '');
-    void fill(TextEditingController c, String? value) {
-      if (c.text.trim().isEmpty && value != null) c.text = value;
-    }
-
-    setState(() {
-      fill(_name, info.name);
-      fill(_brand, info.brand);
-      fill(_netContent, info.netContent == null ? null : num(info.netContent!));
-      fill(_price, info.price == null ? null : num(info.price!));
-      _category ??= info.category;
-      if (info.netUnit != null &&
-          info.netContent != null &&
-          _netContent.text == num(info.netContent!)) {
-        _unit = info.netUnit!;
-      }
-    });
   }
 
   @override
@@ -246,23 +197,6 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
           children: [
-            OutlinedButton.icon(
-              icon: const Icon(Icons.qr_code_scanner_rounded),
-              label: Text(l10n.scanButton),
-              onPressed: _scan,
-            ),
-            if (_barcode != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Center(
-                  child: InputChip(
-                    avatar: const Icon(Icons.barcode_reader, size: 18),
-                    label: Text(l10n.scanBarcodeLabel(_barcode!)),
-                    onDeleted: () => setState(() => _barcode = null),
-                  ),
-                ),
-              ),
-            const SizedBox(height: 16),
             SoftCard(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -339,6 +273,15 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
                     ],
                   ),
                 ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            SoftCard(
+              child: IngredientInput(
+                values: _ingredients,
+                category: _category,
+                usedBefore: _usedIngredients,
+                onChanged: (v) => setState(() => _ingredients = v),
               ),
             ),
             const SizedBox(height: 16),
@@ -439,15 +382,6 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
         label: l10n.fieldPurchaseDate,
         value: _purchaseDate,
         onChanged: (d) => setState(() => _purchaseDate = d),
-      ),
-      gap,
-      TextFormField(
-        controller: _ingredients,
-        decoration: InputDecoration(
-          labelText: l10n.fieldIngredients,
-          helperText: l10n.fieldIngredientsHelp,
-          helperMaxLines: 2,
-        ),
       ),
       gap,
       TextFormField(

@@ -16,6 +16,7 @@ import '../../core/utils/formatters.dart';
 import 'finish_sheet.dart';
 import 'product_providers.dart';
 import 'weigh_sheet.dart';
+import 'widgets/ingredient_widgets.dart';
 import 'widgets/product_widgets.dart';
 import 'widgets/weight_chart.dart';
 
@@ -601,14 +602,7 @@ class _Info extends StatelessWidget {
             const SizedBox(height: 4),
             Text(l10n.fieldIngredients, style: theme.textTheme.bodySmall),
             const SizedBox(height: 6),
-            Wrap(
-              spacing: 6,
-              runSpacing: 6,
-              children: [
-                for (final i in details.ingredients)
-                  Chip(label: Text(i), visualDensity: VisualDensity.compact),
-              ],
-            ),
+            IngredientChips(names: details.ingredients),
           ],
           if (p.note != null) ...[
             const SizedBox(height: 12),

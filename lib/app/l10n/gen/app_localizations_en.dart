@@ -68,7 +68,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutPrivacy =>
-      'All your data and photos stay on this device. The app has no accounts, no servers and no tracking.\n\nIt only goes online in two cases, both can be turned off in Settings:\n• checking GitHub for a new version\n• looking up a scanned barcode on Open Beauty Facts (asked first; only the barcode number is sent)\nNeither sends any of your data.';
+      'All your data and photos stay on this device. The app has no accounts, no servers and no tracking.\n\nThe only internet connection is checking GitHub for a new version (can be turned off in Settings), which sends none of your data.';
 
   @override
   String get todayHello => 'Hello';
@@ -234,11 +234,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fieldNote => 'Note';
 
   @override
-  String get fieldIngredients => 'Key ingredients';
+  String get fieldIngredients => 'Ingredients';
 
   @override
   String get fieldIngredientsHelp =>
-      'Comma separated, e.g. niacinamide, vitamin C';
+      'Type a Thai or English name and pick from the list, or paste the list from the label (comma separated)';
 
   @override
   String get fieldInvalidNumber => 'Invalid number';
@@ -1071,63 +1071,124 @@ class AppLocalizationsEn extends AppLocalizations {
   String get updateLater => 'Later';
 
   @override
-  String get scanTitle => 'Scan barcode';
+  String get ingFnSurfactant => 'Cleansing agent';
 
   @override
-  String get scanHint => 'Point at the barcode on the box or bottle';
+  String get ingFnUvChemical => 'UV filter (chemical)';
 
   @override
-  String get scanManual => 'Type the number instead';
+  String get ingFnUvMineral => 'UV filter (mineral)';
 
   @override
-  String get scanManualTitle => 'Barcode number';
+  String get ingFnHumectant => 'Humectant';
 
   @override
-  String get scanTorch => 'Torch';
+  String get ingFnEmollient => 'Emollient';
 
   @override
-  String get scanDenied =>
-      'Camera access is off — allow it in phone settings or type the number';
+  String get ingFnOcclusive => 'Occlusive';
 
   @override
-  String get scanButton => 'Scan barcode to fill in';
+  String get ingFnBarrier => 'Barrier repair';
 
   @override
-  String scanBarcodeLabel(String code) {
-    return 'Barcode $code';
+  String get ingFnBrightening => 'Brightening';
+
+  @override
+  String get ingFnAntioxidant => 'Antioxidant';
+
+  @override
+  String get ingFnExfoliant => 'Exfoliant';
+
+  @override
+  String get ingFnAntiAcne => 'Anti-acne';
+
+  @override
+  String get ingFnRetinoid => 'Retinoid';
+
+  @override
+  String get ingFnAntiAging => 'Anti-aging';
+
+  @override
+  String get ingFnSoothing => 'Soothing';
+
+  @override
+  String get ingFnAbsorbent => 'Oil absorbing';
+
+  @override
+  String get ingFnFilmFormer => 'Film former';
+
+  @override
+  String get ingFnEmulsifier => 'Emulsifier';
+
+  @override
+  String get ingFnThickener => 'Texture / thickener';
+
+  @override
+  String get ingFnPreservative => 'Preservative';
+
+  @override
+  String get ingFnChelating => 'Chelating agent';
+
+  @override
+  String get ingFnPhAdjuster => 'pH adjuster';
+
+  @override
+  String get ingFnSolvent => 'Solvent';
+
+  @override
+  String get ingFnFragrance => 'Fragrance';
+
+  @override
+  String get ingFnOther => 'Other';
+
+  @override
+  String get ingredientsSearchHint => 'e.g. niacinamide, zinc oxide';
+
+  @override
+  String ingredientsCommonIn(String category) {
+    return 'Common in $category · tap to add';
   }
 
   @override
-  String get scanSearching => 'Looking up the product…';
+  String ingredientsAddCustom(String name) {
+    return 'Add “$name”';
+  }
 
   @override
-  String get scanFoundLocal => 'You\'ve had this before — details filled in';
+  String get ingredientsCustomSubtitle => 'Not in the database yet';
 
   @override
-  String get scanFoundOnline =>
-      'Found it — details filled in, please double-check';
+  String get ingredientsUsedBefore => 'Used in your other products';
 
   @override
-  String get scanNotFound =>
-      'No details for this barcode yet — fill it in and the app will remember it next time';
+  String get ingredientsUnknown =>
+      'This ingredient is not in the app database yet';
 
   @override
-  String get lookupConsentTitle => 'Look it up online?';
+  String get ingredientsTitle => 'Ingredient database';
 
   @override
-  String get lookupConsentBody =>
-      'Only the barcode number is sent to Open Beauty Facts, a free open cosmetics database. Nothing else about you is shared.\n\nSome local products may not be listed yet.';
+  String ingredientsCount(int count) {
+    return '$count ingredients';
+  }
 
   @override
-  String get lookupConsentAllow => 'Look it up';
+  String get ingredientsAlsoKnownAs => 'Also known as';
 
   @override
-  String get lookupConsentDeny => 'No thanks';
+  String get ingredientsTypicalIn => 'Common in';
 
   @override
-  String get settingsOnlineLookup => 'Look up barcodes online';
+  String get ingredientsCaution => 'Good to know';
 
   @override
-  String get settingsOnlineLookupHint =>
-      'Sends only the barcode number to Open Beauty Facts (free)';
+  String get ingredientsNoMatch => 'No matching ingredients';
+
+  @override
+  String get ingredientsDisclaimer =>
+      'General information only, not medical advice';
+
+  @override
+  String get ingredientsFilterAll => 'All functions';
 }

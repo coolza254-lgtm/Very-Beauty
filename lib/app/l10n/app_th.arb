@@ -25,7 +25,7 @@
   "aboutDisclaimerTitle": "ข้อควรทราบ",
   "aboutDisclaimer": "Very Beauty เป็นเครื่องมือช่วยบันทึกการดูแลผิวส่วนตัวเท่านั้น ไม่ใช่เครื่องมือวินิจฉัยหรือรักษาทางการแพทย์ หากมีอาการผิวผิดปกติ ควรปรึกษาแพทย์ผิวหนัง",
   "aboutPrivacyTitle": "ความเป็นส่วนตัว",
-  "aboutPrivacy": "ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน\n\nแอพต่ออินเทอร์เน็ตแค่ 2 กรณี และปิดได้ในการตั้งค่าทั้งคู่:\n• ตรวจสอบเวอร์ชันใหม่จาก GitHub\n• ค้นหาข้อมูลสินค้าจากบาร์โค้ดใน Open Beauty Facts (ถามก่อนครั้งแรก ส่งเฉพาะเลขบาร์โค้ด)\nทั้งสองกรณีไม่ส่งข้อมูลใดๆ ของคุณออกไป",
+  "aboutPrivacy": "ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน\n\nการเชื่อมต่ออินเทอร์เน็ตเพียงอย่างเดียวคือการตรวจสอบเวอร์ชันใหม่จาก GitHub (ปิดได้ในการตั้งค่า) ซึ่งไม่ส่งข้อมูลใดๆ ของคุณออกไป",
   "todayHello": "สวัสดีค่ะ",
   "todayHeroSubtitle": "ดูแลผิวทีละนิด ให้สวยในแบบของคุณ",
   "todayRoutinesTitle": "รูทีนของวันนี้",
@@ -79,8 +79,8 @@
   "fieldEmptyWeight": "น้ำหนักขวดเปล่า (กรัม)",
   "fieldEmptyWeightHelp": "ถ้ารู้ จะคำนวณปริมาณที่เหลือได้แม่นขึ้น",
   "fieldNote": "โน้ต",
-  "fieldIngredients": "ส่วนผสมสำคัญ",
-  "fieldIngredientsHelp": "คั่นด้วยจุลภาค เช่น ไนอะซินาไมด์, วิตามินซี",
+  "fieldIngredients": "ส่วนผสม",
+  "fieldIngredientsHelp": "พิมพ์ชื่อไทยหรืออังกฤษแล้วเลือกจากรายการ หรือวางรายชื่อจากฉลาก (คั่นด้วยจุลภาค)",
   "fieldInvalidNumber": "ตัวเลขไม่ถูกต้อง",
   "pickDate": "เลือกวันที่",
   "actionSave": "บันทึก",
@@ -586,29 +586,63 @@
   "updateKeepsData": "ดาวน์โหลดไฟล์ติดตั้งแล้วแตะเพื่ออัปเดต ข้อมูลยังอยู่ครบ (ถ้าแอพเซ็นด้วยกุญแจเดียวกัน) แนะนำให้สำรองข้อมูลก่อน",
   "updateDownload": "ดาวน์โหลด",
   "updateLater": "ภายหลัง",
-  "scanTitle": "สแกนบาร์โค้ด",
-  "scanHint": "เล็งบาร์โค้ดบนกล่องหรือขวดให้อยู่ในกรอบ",
-  "scanManual": "พิมพ์เลขบาร์โค้ดเอง",
-  "scanManualTitle": "เลขบาร์โค้ด",
-  "scanTorch": "ไฟฉาย",
-  "scanDenied": "ไม่ได้รับสิทธิ์ใช้กล้อง เปิดได้ในการตั้งค่าของเครื่อง หรือพิมพ์เลขบาร์โค้ดเองได้",
-  "scanButton": "สแกนบาร์โค้ดเพื่อกรอกอัตโนมัติ",
-  "scanBarcodeLabel": "บาร์โค้ด {code}",
-  "@scanBarcodeLabel": {
+  "ingFnSurfactant": "สารทำความสะอาด",
+  "ingFnUvChemical": "สารกันแดด (เคมี)",
+  "ingFnUvMineral": "สารกันแดด (แร่)",
+  "ingFnHumectant": "ดึงความชุ่มชื้น",
+  "ingFnEmollient": "เพิ่มความนุ่มชุ่มชื่น",
+  "ingFnOcclusive": "เคลือบกักความชุ่มชื้น",
+  "ingFnBarrier": "ฟื้นฟูเกราะผิว",
+  "ingFnBrightening": "ผิวกระจ่างใส",
+  "ingFnAntioxidant": "ต้านอนุมูลอิสระ",
+  "ingFnExfoliant": "ผลัดเซลล์ผิว",
+  "ingFnAntiAcne": "ลดสิว",
+  "ingFnRetinoid": "เรตินอยด์",
+  "ingFnAntiAging": "ลดริ้วรอย",
+  "ingFnSoothing": "ปลอบประโลมผิว",
+  "ingFnAbsorbent": "ดูดซับความมัน",
+  "ingFnFilmFormer": "สร้างฟิล์มบนผิว",
+  "ingFnEmulsifier": "ผสานน้ำกับน้ำมัน",
+  "ingFnThickener": "ปรับเนื้อสัมผัส",
+  "ingFnPreservative": "สารกันเสีย",
+  "ingFnChelating": "จับโลหะ (คีเลต)",
+  "ingFnPhAdjuster": "ปรับค่า pH",
+  "ingFnSolvent": "ตัวทำละลาย",
+  "ingFnFragrance": "น้ำหอม/กลิ่น",
+  "ingFnOther": "อื่นๆ",
+  "ingredientsSearchHint": "เช่น ไนอะซินาไมด์, zinc oxide",
+  "ingredientsCommonIn": "พบบ่อยใน{category} · แตะเพื่อเพิ่ม",
+  "@ingredientsCommonIn": {
     "placeholders": {
-      "code": {
+      "category": {
         "type": "String"
       }
     }
   },
-  "scanSearching": "กำลังค้นหาข้อมูลสินค้า…",
-  "scanFoundLocal": "เคยบันทึกสินค้านี้แล้ว กรอกข้อมูลเดิมให้แล้ว",
-  "scanFoundOnline": "พบข้อมูลสินค้า กรอกให้แล้ว ตรวจสอบอีกครั้งนะ",
-  "scanNotFound": "ยังไม่มีข้อมูลบาร์โค้ดนี้ กรอกเองได้เลย ครั้งหน้าสแกนแล้วแอพจะจำได้",
-  "lookupConsentTitle": "ค้นหาข้อมูลจากอินเทอร์เน็ต?",
-  "lookupConsentBody": "แอพจะส่งเฉพาะเลขบาร์โค้ดไปค้นในฐานข้อมูลเครื่องสำอางแบบเปิด Open Beauty Facts (ใช้ฟรี) ไม่ส่งข้อมูลอื่นของคุณ\n\nสินค้าไทยบางตัวอาจยังไม่มีข้อมูล",
-  "lookupConsentAllow": "ค้นหา",
-  "lookupConsentDeny": "ไม่ต้อง",
-  "settingsOnlineLookup": "ค้นหาข้อมูลสินค้าจากบาร์โค้ดทางออนไลน์",
-  "settingsOnlineLookupHint": "ส่งเฉพาะเลขบาร์โค้ดไปที่ Open Beauty Facts (ฟรี)"
+  "ingredientsAddCustom": "เพิ่ม “{name}”",
+  "@ingredientsAddCustom": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ingredientsCustomSubtitle": "ยังไม่มีในฐานข้อมูล",
+  "ingredientsUsedBefore": "เคยใช้ในสินค้าอื่น",
+  "ingredientsUnknown": "ส่วนผสมนี้ยังไม่มีในฐานข้อมูลของแอพ",
+  "ingredientsTitle": "ฐานข้อมูลส่วนผสม",
+  "ingredientsCount": "{count} รายการ",
+  "@ingredientsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ingredientsAlsoKnownAs": "ชื่ออื่น",
+  "ingredientsTypicalIn": "พบบ่อยใน",
+  "ingredientsCaution": "ควรรู้",
+  "ingredientsNoMatch": "ไม่พบส่วนผสมที่ค้นหา",
+  "ingredientsDisclaimer": "ข้อมูลทั่วไปเพื่อประกอบการเลือกใช้ ไม่ใช่คำแนะนำทางการแพทย์",
+  "ingredientsFilterAll": "ทุกหน้าที่"
 }

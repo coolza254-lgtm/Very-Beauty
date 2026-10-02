@@ -25,9 +25,9 @@ class ProductsScreen extends ConsumerWidget {
         title: Text(l10n.navProducts),
         actions: [
           IconButton(
-            tooltip: l10n.scanTitle,
-            icon: const Icon(Icons.qr_code_scanner_rounded),
-            onPressed: () => context.push(AppRoutes.productScan),
+            tooltip: l10n.ingredientsTitle,
+            icon: const Icon(Icons.menu_book_outlined),
+            onPressed: () => context.push(AppRoutes.ingredients),
           ),
           const SizedBox(width: 8),
         ],

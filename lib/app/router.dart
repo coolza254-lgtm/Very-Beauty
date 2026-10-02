@@ -11,6 +11,7 @@ import '../features/photos/photos_screen.dart';
 import '../core/db/app_database.dart';
 import '../core/utils/date_utils.dart';
 import '../features/products/product_detail_screen.dart';
+import '../features/products/ingredients_screen.dart';
 import '../features/products/product_form_screen.dart';
 import '../features/products/products_screen.dart';
 import '../features/routines/routine_editor_screen.dart';
@@ -28,9 +29,10 @@ abstract final class AppRoutes {
 
   static const productNew = '/product/new';
   static const productNewWishlist = '/product/new?status=wishlist';
-  static const productScan = '/product/new?scan=1';
   static String productDetail(int id) => '/product/$id';
   static String productEdit(int id) => '/product/$id/edit';
+
+  static const ingredients = '/ingredients';
 
   static const routines = '/routines';
   static String routine(int id) => '/routines/$id';
@@ -61,6 +63,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         ],
       ),
       GoRoute(
+        path: AppRoutes.ingredients,
+        builder: (context, state) => const IngredientsScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.camera,
         builder: (context, state) => const CameraScreen(),
       ),
@@ -86,7 +92,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           initialStatus: state.uri.queryParameters['status'] == 'wishlist'
               ? ProductStatus.wishlist
               : null,
-          startWithScan: state.uri.queryParameters['scan'] == '1',
         ),
       ),
       GoRoute(

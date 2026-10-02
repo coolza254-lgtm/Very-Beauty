@@ -174,6 +174,44 @@ void main() {
       demo: true,
       navigate: (t) => open(t, 'เพิ่มสินค้า'),
     ),
+    '15_product_form_ingredients': (t) => shoot(
+      t,
+      '15_product_form_ingredients',
+      tab: 'สินค้า',
+      demo: true,
+      navigate: (t) async {
+        await open(t, 'เพิ่มสินค้า');
+        await open(t, 'กันแดด');
+        final field = find.byKey(const Key('ingredientField'));
+        await t.enterText(field, 'Niacinamide, Glycerin,');
+        await t.pumpAndSettle();
+        await t.drag(find.byType(ListView).first, const Offset(0, -320));
+        await t.pumpAndSettle();
+        await t.enterText(field, 'zinc');
+        await t.pumpAndSettle();
+      },
+    ),
+    '16_ingredient_db': (t) => shoot(
+      t,
+      '16_ingredient_db',
+      tab: 'สินค้า',
+      navigate: (t) async {
+        await t.tap(find.byTooltip('ฐานข้อมูลส่วนผสม'));
+        await t.pumpAndSettle();
+      },
+    ),
+    '17_ingredient_info': (t) => shoot(
+      t,
+      '17_ingredient_info',
+      tab: 'สินค้า',
+      navigate: (t) async {
+        await t.tap(find.byTooltip('ฐานข้อมูลส่วนผสม'));
+        await t.pumpAndSettle();
+        await t.enterText(find.byType(TextField), 'salicylic');
+        await t.pumpAndSettle();
+        await open(t, 'Salicylic Acid');
+      },
+    ),
     '20_insights_calendar': (t) =>
         shoot(t, '20_insights_calendar', tab: 'สรุป', demo: true),
     '21_insights_day': (t) => shoot(

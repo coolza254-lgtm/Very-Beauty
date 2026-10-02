@@ -47,7 +47,8 @@ class Products extends Table with BaseColumns {
   /// When the product was closed as finished. Added in schema v2.
   IntColumn get finishedDate => integer().nullable()();
 
-  /// EAN/UPC from the package, for re-buys and lookups. Added in schema v3.
+  /// Added in schema v3 for barcode scanning, which was later removed at the
+  /// user's request. Kept (unused) so existing v3 databases stay valid.
   TextColumn get barcode => text().nullable()();
 }
 

@@ -558,7 +558,8 @@ class Product extends DataClass implements Insertable<Product> {
   /// When the product was closed as finished. Added in schema v2.
   final int? finishedDate;
 
-  /// EAN/UPC from the package, for re-buys and lookups. Added in schema v3.
+  /// Added in schema v3 for barcode scanning, which was later removed at the
+  /// user's request. Kept (unused) so existing v3 databases stay valid.
   final String? barcode;
   const Product({
     required this.id,

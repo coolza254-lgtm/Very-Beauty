@@ -196,20 +196,6 @@ class _PrivacySettings extends ConsumerWidget {
               await dao.setValue(SettingKeys.appLock, on ? '1' : '0');
             },
           ),
-          const Divider(),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            secondary: const PastelIconBadge(
-              icon: Icons.travel_explore_rounded,
-              color: BrandColors.sky,
-              size: 40,
-            ),
-            title: Text(l10n.settingsOnlineLookup),
-            subtitle: Text(l10n.settingsOnlineLookupHint),
-            value: settings[SettingKeys.barcodeLookup] == '1',
-            onChanged: (on) =>
-                dao.setValue(SettingKeys.barcodeLookup, on ? '1' : '0'),
-          ),
           if (Theme.of(context).platform == TargetPlatform.android) ...[
             const Divider(),
             SwitchListTile(

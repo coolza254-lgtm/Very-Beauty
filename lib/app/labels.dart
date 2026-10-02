@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/db/enums.dart';
+import '../core/ingredients/ingredient_db.dart';
 import 'l10n/gen/app_localizations.dart';
 import 'theme.dart';
 
@@ -65,3 +66,32 @@ extension SlotLabels on AppLocalizations {
   TimeOfDaySlot.evening => (Icons.nightlight_outlined, BrandColors.lavender),
   TimeOfDaySlot.other => (Icons.spa_outlined, BrandColors.blush),
 };
+
+extension IngredientLabels on AppLocalizations {
+  String ingredientFunction(IngredientFunction f) => switch (f) {
+    IngredientFunction.surfactant => ingFnSurfactant,
+    IngredientFunction.uvChemical => ingFnUvChemical,
+    IngredientFunction.uvMineral => ingFnUvMineral,
+    IngredientFunction.humectant => ingFnHumectant,
+    IngredientFunction.emollient => ingFnEmollient,
+    IngredientFunction.occlusive => ingFnOcclusive,
+    IngredientFunction.barrier => ingFnBarrier,
+    IngredientFunction.brightening => ingFnBrightening,
+    IngredientFunction.antioxidant => ingFnAntioxidant,
+    IngredientFunction.exfoliant => ingFnExfoliant,
+    IngredientFunction.antiAcne => ingFnAntiAcne,
+    IngredientFunction.retinoid => ingFnRetinoid,
+    IngredientFunction.antiAging => ingFnAntiAging,
+    IngredientFunction.soothing => ingFnSoothing,
+    IngredientFunction.absorbent => ingFnAbsorbent,
+    IngredientFunction.filmFormer => ingFnFilmFormer,
+    IngredientFunction.emulsifier => ingFnEmulsifier,
+    IngredientFunction.thickener => ingFnThickener,
+    IngredientFunction.preservative => ingFnPreservative,
+    IngredientFunction.chelating => ingFnChelating,
+    IngredientFunction.phAdjuster => ingFnPhAdjuster,
+    IngredientFunction.solvent => ingFnSolvent,
+    IngredientFunction.fragrance => ingFnFragrance,
+    IngredientFunction.other => ingFnOther,
+  };
+}

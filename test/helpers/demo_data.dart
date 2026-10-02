@@ -22,7 +22,7 @@ Future<void> seedDemoData(AppDatabase db, {DateTime? now}) async {
       paoMonths: 6,
       startWeight: 96,
       emptyBottleWeight: 64,
-      ingredients: const ['Vitamin C', 'Ferulic acid'],
+      ingredients: const ['Ascorbic Acid', 'Ferulic Acid', 'Tocopherol'],
     ),
   );
   await dao.addWeighing(serum, 88.5, at: daysAgo(26));

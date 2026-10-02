@@ -95,7 +95,6 @@ class ProductDraft {
     this.emptyBottleWeight,
     this.note,
     this.ingredients = const [],
-    this.barcode,
   });
 
   final String name;
@@ -114,7 +113,6 @@ class ProductDraft {
   final double? emptyBottleWeight;
   final String? note;
   final List<String> ingredients;
-  final String? barcode;
 
   ProductsCompanion toCompanion() => ProductsCompanion(
     name: Value(name.trim()),
@@ -132,7 +130,6 @@ class ProductDraft {
     startWeight: Value(startWeight),
     emptyBottleWeight: Value(emptyBottleWeight),
     note: Value(_blankToNull(note)),
-    barcode: Value(_blankToNull(barcode)),
   );
 }
 
@@ -226,14 +223,6 @@ class ProductsDao extends DatabaseAccessor<AppDatabase>
     );
   }
 
-  /// The most recently added product with this barcode, if any (re-buys).
-  Future<Product?> findByBarcode(String barcode) =>
-      (select(products)
-            ..where((p) => p.barcode.equals(barcode.trim()))
-            ..orderBy([(p) => OrderingTerm.desc(p.createdAt)])
-            ..limit(1))
-          .getSingleOrNull();
-
   Future<List<String>> ingredientsOf(int productId) {
     final query =
         select(
@@ -242,6 +231,16 @@ class ProductsDao extends DatabaseAccessor<AppDatabase>
           ..where(productTags.productId.equals(productId))
           ..orderBy([OrderingTerm.asc(tags.name)]);
     return query.map((row) => row.readTable(tags).name).get();
+  }
+
+  /// Ingredient names the user has saved on any product, for suggestions.
+  Future<List<String>> usedIngredientNames() {
+    final query = selectOnly(tags, distinct: true)
+      ..addColumns([tags.name])
+      ..join([innerJoin(productTags, productTags.tagId.equalsExp(tags.id))])
+      ..where(tags.type.equals(tagTypeConverter.toSql(TagType.ingredient)))
+      ..orderBy([OrderingTerm.asc(tags.name)]);
+    return query.map((row) => row.read(tags.name)!).get();
   }
 
   /// Inserts a product. If a start weight is given, also records the first

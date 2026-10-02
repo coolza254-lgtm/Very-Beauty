@@ -68,7 +68,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get aboutPrivacy =>
-      'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน\n\nแอพต่ออินเทอร์เน็ตแค่ 2 กรณี และปิดได้ในการตั้งค่าทั้งคู่:\n• ตรวจสอบเวอร์ชันใหม่จาก GitHub\n• ค้นหาข้อมูลสินค้าจากบาร์โค้ดใน Open Beauty Facts (ถามก่อนครั้งแรก ส่งเฉพาะเลขบาร์โค้ด)\nทั้งสองกรณีไม่ส่งข้อมูลใดๆ ของคุณออกไป';
+      'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน\n\nการเชื่อมต่ออินเทอร์เน็ตเพียงอย่างเดียวคือการตรวจสอบเวอร์ชันใหม่จาก GitHub (ปิดได้ในการตั้งค่า) ซึ่งไม่ส่งข้อมูลใดๆ ของคุณออกไป';
 
   @override
   String get todayHello => 'สวัสดีค่ะ';
@@ -233,11 +233,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get fieldNote => 'โน้ต';
 
   @override
-  String get fieldIngredients => 'ส่วนผสมสำคัญ';
+  String get fieldIngredients => 'ส่วนผสม';
 
   @override
   String get fieldIngredientsHelp =>
-      'คั่นด้วยจุลภาค เช่น ไนอะซินาไมด์, วิตามินซี';
+      'พิมพ์ชื่อไทยหรืออังกฤษแล้วเลือกจากรายการ หรือวางรายชื่อจากฉลาก (คั่นด้วยจุลภาค)';
 
   @override
   String get fieldInvalidNumber => 'ตัวเลขไม่ถูกต้อง';
@@ -1069,62 +1069,123 @@ class AppLocalizationsTh extends AppLocalizations {
   String get updateLater => 'ภายหลัง';
 
   @override
-  String get scanTitle => 'สแกนบาร์โค้ด';
+  String get ingFnSurfactant => 'สารทำความสะอาด';
 
   @override
-  String get scanHint => 'เล็งบาร์โค้ดบนกล่องหรือขวดให้อยู่ในกรอบ';
+  String get ingFnUvChemical => 'สารกันแดด (เคมี)';
 
   @override
-  String get scanManual => 'พิมพ์เลขบาร์โค้ดเอง';
+  String get ingFnUvMineral => 'สารกันแดด (แร่)';
 
   @override
-  String get scanManualTitle => 'เลขบาร์โค้ด';
+  String get ingFnHumectant => 'ดึงความชุ่มชื้น';
 
   @override
-  String get scanTorch => 'ไฟฉาย';
+  String get ingFnEmollient => 'เพิ่มความนุ่มชุ่มชื่น';
 
   @override
-  String get scanDenied =>
-      'ไม่ได้รับสิทธิ์ใช้กล้อง เปิดได้ในการตั้งค่าของเครื่อง หรือพิมพ์เลขบาร์โค้ดเองได้';
+  String get ingFnOcclusive => 'เคลือบกักความชุ่มชื้น';
 
   @override
-  String get scanButton => 'สแกนบาร์โค้ดเพื่อกรอกอัตโนมัติ';
+  String get ingFnBarrier => 'ฟื้นฟูเกราะผิว';
 
   @override
-  String scanBarcodeLabel(String code) {
-    return 'บาร์โค้ด $code';
+  String get ingFnBrightening => 'ผิวกระจ่างใส';
+
+  @override
+  String get ingFnAntioxidant => 'ต้านอนุมูลอิสระ';
+
+  @override
+  String get ingFnExfoliant => 'ผลัดเซลล์ผิว';
+
+  @override
+  String get ingFnAntiAcne => 'ลดสิว';
+
+  @override
+  String get ingFnRetinoid => 'เรตินอยด์';
+
+  @override
+  String get ingFnAntiAging => 'ลดริ้วรอย';
+
+  @override
+  String get ingFnSoothing => 'ปลอบประโลมผิว';
+
+  @override
+  String get ingFnAbsorbent => 'ดูดซับความมัน';
+
+  @override
+  String get ingFnFilmFormer => 'สร้างฟิล์มบนผิว';
+
+  @override
+  String get ingFnEmulsifier => 'ผสานน้ำกับน้ำมัน';
+
+  @override
+  String get ingFnThickener => 'ปรับเนื้อสัมผัส';
+
+  @override
+  String get ingFnPreservative => 'สารกันเสีย';
+
+  @override
+  String get ingFnChelating => 'จับโลหะ (คีเลต)';
+
+  @override
+  String get ingFnPhAdjuster => 'ปรับค่า pH';
+
+  @override
+  String get ingFnSolvent => 'ตัวทำละลาย';
+
+  @override
+  String get ingFnFragrance => 'น้ำหอม/กลิ่น';
+
+  @override
+  String get ingFnOther => 'อื่นๆ';
+
+  @override
+  String get ingredientsSearchHint => 'เช่น ไนอะซินาไมด์, zinc oxide';
+
+  @override
+  String ingredientsCommonIn(String category) {
+    return 'พบบ่อยใน$category · แตะเพื่อเพิ่ม';
   }
 
   @override
-  String get scanSearching => 'กำลังค้นหาข้อมูลสินค้า…';
+  String ingredientsAddCustom(String name) {
+    return 'เพิ่ม “$name”';
+  }
 
   @override
-  String get scanFoundLocal => 'เคยบันทึกสินค้านี้แล้ว กรอกข้อมูลเดิมให้แล้ว';
+  String get ingredientsCustomSubtitle => 'ยังไม่มีในฐานข้อมูล';
 
   @override
-  String get scanFoundOnline => 'พบข้อมูลสินค้า กรอกให้แล้ว ตรวจสอบอีกครั้งนะ';
+  String get ingredientsUsedBefore => 'เคยใช้ในสินค้าอื่น';
 
   @override
-  String get scanNotFound =>
-      'ยังไม่มีข้อมูลบาร์โค้ดนี้ กรอกเองได้เลย ครั้งหน้าสแกนแล้วแอพจะจำได้';
+  String get ingredientsUnknown => 'ส่วนผสมนี้ยังไม่มีในฐานข้อมูลของแอพ';
 
   @override
-  String get lookupConsentTitle => 'ค้นหาข้อมูลจากอินเทอร์เน็ต?';
+  String get ingredientsTitle => 'ฐานข้อมูลส่วนผสม';
 
   @override
-  String get lookupConsentBody =>
-      'แอพจะส่งเฉพาะเลขบาร์โค้ดไปค้นในฐานข้อมูลเครื่องสำอางแบบเปิด Open Beauty Facts (ใช้ฟรี) ไม่ส่งข้อมูลอื่นของคุณ\n\nสินค้าไทยบางตัวอาจยังไม่มีข้อมูล';
+  String ingredientsCount(int count) {
+    return '$count รายการ';
+  }
 
   @override
-  String get lookupConsentAllow => 'ค้นหา';
+  String get ingredientsAlsoKnownAs => 'ชื่ออื่น';
 
   @override
-  String get lookupConsentDeny => 'ไม่ต้อง';
+  String get ingredientsTypicalIn => 'พบบ่อยใน';
 
   @override
-  String get settingsOnlineLookup => 'ค้นหาข้อมูลสินค้าจากบาร์โค้ดทางออนไลน์';
+  String get ingredientsCaution => 'ควรรู้';
 
   @override
-  String get settingsOnlineLookupHint =>
-      'ส่งเฉพาะเลขบาร์โค้ดไปที่ Open Beauty Facts (ฟรี)';
+  String get ingredientsNoMatch => 'ไม่พบส่วนผสมที่ค้นหา';
+
+  @override
+  String get ingredientsDisclaimer =>
+      'ข้อมูลทั่วไปเพื่อประกอบการเลือกใช้ ไม่ใช่คำแนะนำทางการแพทย์';
+
+  @override
+  String get ingredientsFilterAll => 'ทุกหน้าที่';
 }
