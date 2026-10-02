@@ -792,5 +792,31 @@
   "ingredientsMissingTitle": "ส่วนผสมที่ยังไม่มีข้อมูล",
   "ingredientsMissingHint": "คัดลอกรายชื่อแล้วส่งให้ผู้พัฒนา เพื่อเพิ่มข้อมูลในเวอร์ชันถัดไป",
   "ingredientsMissingCopy": "คัดลอกรายชื่อ",
-  "ingredientsMissingCopied": "คัดลอกแล้ว"
+  "ingredientsMissingCopied": "คัดลอกแล้ว",
+  "ingredientsFix": "แก้ชื่อ",
+  "ingredientsFixTitle": "แก้ชื่อ “{name}”",
+  "@ingredientsFixTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ingredientsFixHint": "เลือกชื่อที่ถูกต้อง ระบบจะแก้ให้ในทุกสินค้าที่ใช้ชื่อนี้",
+  "ingredientsDidYouMean": "หมายถึง {name} ไหม?",
+  "@ingredientsDidYouMean": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ingredientsFixed": "แก้เป็น {name} แล้ว",
+  "@ingredientsFixed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

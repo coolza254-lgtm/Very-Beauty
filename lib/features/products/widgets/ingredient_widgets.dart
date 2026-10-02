@@ -170,18 +170,25 @@ class _IngredientInputState extends ConsumerState<IngredientInput> {
   void _remove(String name) =>
       widget.onChanged([...widget.values]..remove(name));
 
-  static final _separators = RegExp(r'[,،、;\n]');
+  static final _commas = RegExp(r'[,،、;]');
+
+  /// Splits a pasted list. Labels separate ingredients with commas and wrap
+  /// long names onto the next line, so with commas present line breaks are
+  /// just spaces; without commas, one ingredient per line.
+  static List<String> _split(String text) => text.contains(_commas)
+      ? text.replaceAll(RegExp(r'\s*\n\s*'), ' ').split(_commas)
+      : text.split('\n');
 
   /// Pasting "Water, Glycerin, ..." adds every complete name at once.
   void _onTextChanged(String text) {
-    if (!text.contains(_separators)) return;
-    final parts = text.split(_separators);
+    if (!text.contains(_commas) && !text.contains('\n')) return;
+    final parts = _split(text);
     _add(parts.take(parts.length - 1));
     _text.text = parts.last.trimLeft();
   }
 
   void _submit(String text) {
-    _add(text.split(_separators));
+    _add(_split(text));
     _text.clear();
     _focus.requestFocus();
   }

@@ -188,47 +188,88 @@ class _MissingBanner extends ConsumerWidget {
   }
 
   void _showMissing(BuildContext context, List<String> missing) {
-    final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
       showDragHandle: true,
-      builder: (sheetContext) => SafeArea(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.sizeOf(sheetContext).height * 0.75,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 0, 24, 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.ingredientsMissingTitle,
-                      style: theme.textTheme.titleLarge,
-                    ),
-                    Text(
-                      l10n.ingredientsMissingHint,
-                      style: theme.textTheme.bodySmall,
-                    ),
-                  ],
-                ),
+      builder: (_) => const _MissingSheet(),
+    );
+  }
+}
+
+class _MissingSheet extends ConsumerWidget {
+  const _MissingSheet();
+
+  Future<void> _fix(BuildContext context, WidgetRef ref, String name) async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final picked = await showDialog<String>(
+      context: context,
+      builder: (_) => _FixDialog(name: name),
+    );
+    if (picked == null) return;
+    await ref.read(productsDaoProvider).renameIngredient(name, picked);
+    ref.invalidate(missingIngredientsProvider);
+    messenger.showSnackBar(
+      SnackBar(content: Text(l10n.ingredientsFixed(picked))),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final missing = ref.watch(missingIngredientsProvider).value ?? const [];
+    final db = ref.watch(ingredientDbProvider).value;
+    return SafeArea(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.sizeOf(context).height * 0.75,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.ingredientsMissingTitle,
+                    style: theme.textTheme.titleLarge,
+                  ),
+                  Text(
+                    l10n.ingredientsMissingHint,
+                    style: theme.textTheme.bodySmall,
+                  ),
+                ],
               ),
-              Flexible(
-                child: ListView(
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  children: [
-                    for (final name in missing)
-                      ListTile(dense: true, title: SelectableText(name)),
-                  ],
-                ),
+            ),
+            Flexible(
+              child: ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                children: [
+                  for (final name in missing)
+                    ListTile(
+                      dense: true,
+                      title: Text(name),
+                      subtitle: switch (db?.search(name, limit: 1)) {
+                        [final best, ...] => Text(
+                          l10n.ingredientsDidYouMean(best.inci),
+                        ),
+                        _ => null,
+                      },
+                      trailing: TextButton(
+                        onPressed: () => _fix(context, ref, name),
+                        child: Text(l10n.ingredientsFix),
+                      ),
+                    ),
+                ],
               ),
+            ),
+            if (missing.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
                 child: FilledButton.icon(
@@ -238,18 +279,88 @@ class _MissingBanner extends ConsumerWidget {
                     await Clipboard.setData(
                       ClipboardData(text: missing.join('\n')),
                     );
-                    if (sheetContext.mounted) {
-                      ScaffoldMessenger.of(sheetContext).showSnackBar(
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(l10n.ingredientsMissingCopied)),
                       );
                     }
                   },
                 ),
               ),
-            ],
-          ),
+          ],
         ),
       ),
+    );
+  }
+}
+
+/// Search the database for the right name to replace [name] with.
+class _FixDialog extends ConsumerStatefulWidget {
+  const _FixDialog({required this.name});
+
+  final String name;
+
+  @override
+  ConsumerState<_FixDialog> createState() => _FixDialogState();
+}
+
+class _FixDialogState extends ConsumerState<_FixDialog> {
+  late final _query = TextEditingController(text: widget.name);
+
+  @override
+  void dispose() {
+    _query.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final db = ref.watch(ingredientDbProvider).value;
+    final results = db?.search(_query.text, limit: 8) ?? const <Ingredient>[];
+    return AlertDialog(
+      title: Text(l10n.ingredientsFixTitle(widget.name)),
+      content: SizedBox(
+        width: double.maxFinite,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.ingredientsFixHint),
+            const SizedBox(height: 8),
+            TextField(
+              controller: _query,
+              autofocus: true,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.search_rounded),
+                isDense: true,
+              ),
+              onChanged: (_) => setState(() {}),
+            ),
+            const SizedBox(height: 8),
+            Flexible(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  for (final i in results)
+                    ListTile(
+                      dense: true,
+                      title: Text(i.inci),
+                      subtitle: Text(i.thai),
+                      onTap: () => Navigator.of(context).pop(i.inci),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+        ),
+      ],
     );
   }
 }

@@ -240,8 +240,16 @@ class IngredientDb {
   static String normalize(String s) =>
       s.toLowerCase().replaceAll(RegExp(r'[\s\-_,.()/\[\]]+'), '');
 
+  static final _parenthetical = RegExp(r'\([^)]*\)');
+
   /// Finds an ingredient by INCI, Thai or alias name (exact, normalized).
-  Ingredient? lookup(String name) => _byName[normalize(name)];
+  /// Labels often add a common name in brackets, e.g. "Melaleuca
+  /// Alternifolia (Tea Tree) Leaf Extract"; those are ignored as a fallback.
+  Ingredient? lookup(String name) =>
+      _byName[normalize(name)] ??
+      (name.contains('(')
+          ? _byName[normalize(name.replaceAll(_parenthetical, ' '))]
+          : null);
 
   /// Ingredients matching [query] anywhere in their names. Exact matches come
   /// first, then names starting with the query (shortest first, so "glycer"

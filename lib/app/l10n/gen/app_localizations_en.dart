@@ -1463,4 +1463,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ingredientsMissingCopied => 'Copied';
+
+  @override
+  String get ingredientsFix => 'Fix';
+
+  @override
+  String ingredientsFixTitle(String name) {
+    return 'Fix “$name”';
+  }
+
+  @override
+  String get ingredientsFixHint =>
+      'Pick the right name; every product using it is updated';
+
+  @override
+  String ingredientsDidYouMean(String name) {
+    return 'Did you mean $name?';
+  }
+
+  @override
+  String ingredientsFixed(String name) {
+    return 'Changed to $name';
+  }
 }

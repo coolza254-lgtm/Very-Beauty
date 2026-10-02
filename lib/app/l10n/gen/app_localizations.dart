@@ -2713,6 +2713,36 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'คัดลอกแล้ว'**
   String get ingredientsMissingCopied;
+
+  /// No description provided for @ingredientsFix.
+  ///
+  /// In th, this message translates to:
+  /// **'แก้ชื่อ'**
+  String get ingredientsFix;
+
+  /// No description provided for @ingredientsFixTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'แก้ชื่อ “{name}”'**
+  String ingredientsFixTitle(String name);
+
+  /// No description provided for @ingredientsFixHint.
+  ///
+  /// In th, this message translates to:
+  /// **'เลือกชื่อที่ถูกต้อง ระบบจะแก้ให้ในทุกสินค้าที่ใช้ชื่อนี้'**
+  String get ingredientsFixHint;
+
+  /// No description provided for @ingredientsDidYouMean.
+  ///
+  /// In th, this message translates to:
+  /// **'หมายถึง {name} ไหม?'**
+  String ingredientsDidYouMean(String name);
+
+  /// No description provided for @ingredientsFixed.
+  ///
+  /// In th, this message translates to:
+  /// **'แก้เป็น {name} แล้ว'**
+  String ingredientsFixed(String name);
 }
 
 class _AppLocalizationsDelegate

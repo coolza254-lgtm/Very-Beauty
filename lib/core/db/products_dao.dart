@@ -295,6 +295,36 @@ class ProductsDao extends DatabaseAccessor<AppDatabase>
     );
   }
 
+  /// Renames an ingredient on every product (e.g. a name cut in half when it
+  /// was copied from a label). If [to] already exists the two are merged.
+  Future<void> renameIngredient(String from, String to) =>
+      transaction(() async {
+        final target = to.trim();
+        if (target.isEmpty || target == from) return;
+        final source =
+            await (select(tags)..where(
+                  (t) =>
+                      t.name.equals(from) &
+                      t.type.equals(tagTypeConverter.toSql(TagType.ingredient)),
+                ))
+                .getSingleOrNull();
+        if (source == null) return;
+        final targetId = await _tagId(target, TagType.ingredient);
+        final links = await (select(
+          productTags,
+        )..where((t) => t.tagId.equals(source.id))).get();
+        for (final link in links) {
+          await into(productTags).insert(
+            ProductTagsCompanion.insert(
+              productId: link.productId,
+              tagId: targetId,
+            ),
+            mode: InsertMode.insertOrIgnore,
+          );
+        }
+        await (delete(tags)..where((t) => t.id.equals(source.id))).go();
+      });
+
   /// Inserts a product. If a start weight is given, also records the first
   /// weighing (docs/SPEC.md §5 weight_logs).
   Future<int> createProduct(ProductDraft draft) => transaction(() async {

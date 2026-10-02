@@ -435,5 +435,10 @@
   "ingredientsMissingTitle": "Ingredients without info",
   "ingredientsMissingHint": "Copy the list and send it to the developer to add them in the next version",
   "ingredientsMissingCopy": "Copy list",
-  "ingredientsMissingCopied": "Copied"
+  "ingredientsMissingCopied": "Copied",
+  "ingredientsFix": "Fix",
+  "ingredientsFixTitle": "Fix “{name}”",
+  "ingredientsFixHint": "Pick the right name; every product using it is updated",
+  "ingredientsDidYouMean": "Did you mean {name}?",
+  "ingredientsFixed": "Changed to {name}"
 }

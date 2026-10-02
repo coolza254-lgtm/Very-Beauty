@@ -60,6 +60,17 @@ void main() {
     expect(db.lookup('ไนอะซินาไมด์')?.inci, 'Niacinamide');
     expect(db.lookup('  NIACIN-AMIDE ')?.inci, 'Niacinamide');
     expect(db.lookup('Unicorn Tears'), isNull);
+    // Common names in brackets on labels are ignored as a fallback.
+    expect(
+      db.lookup('Melaleuca Alternifolia (Tra Tree) Leaf Extract')?.inci,
+      'Melaleuca Alternifolia Leaf Extract',
+    );
+    expect(
+      db.lookup('Butyrospermum Parkii (Shea) Butter')?.inci,
+      'Butyrospermum Parkii Butter',
+    );
+    expect(db.lookup('Nylon-6/12'), isNotNull);
+    expect(db.lookup('polylysine')?.inci, 'Polylysine');
   });
 
   test('search ranks exact and prefix matches first', () {

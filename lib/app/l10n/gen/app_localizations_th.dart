@@ -1479,4 +1479,26 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ingredientsMissingCopied => 'คัดลอกแล้ว';
+
+  @override
+  String get ingredientsFix => 'แก้ชื่อ';
+
+  @override
+  String ingredientsFixTitle(String name) {
+    return 'แก้ชื่อ “$name”';
+  }
+
+  @override
+  String get ingredientsFixHint =>
+      'เลือกชื่อที่ถูกต้อง ระบบจะแก้ให้ในทุกสินค้าที่ใช้ชื่อนี้';
+
+  @override
+  String ingredientsDidYouMean(String name) {
+    return 'หมายถึง $name ไหม?';
+  }
+
+  @override
+  String ingredientsFixed(String name) {
+    return 'แก้เป็น $name แล้ว';
+  }
 }

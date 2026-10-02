@@ -203,4 +203,29 @@ void main() {
     expect(updated.extraCategories, isNull);
     expect(updated.photoPath, isNull);
   });
+
+  test('renaming an ingredient merges it on every product', () async {
+    final a = await dao.createProduct(
+      const ProductDraft(
+        name: 'A',
+        category: ProductCategory.serum,
+        ingredients: ['Polyacrylate', 'Crosspolymer-6', 'Glycerin'],
+      ),
+    );
+    final b = await dao.createProduct(
+      const ProductDraft(
+        name: 'B',
+        category: ProductCategory.serum,
+        ingredients: ['Crosspolymer-6'],
+      ),
+    );
+    await dao.renameIngredient('Crosspolymer-6', 'Polyacrylate Crosspolymer-6');
+    await dao.renameIngredient('Polyacrylate', 'Polyacrylate Crosspolymer-6');
+    expect(await dao.ingredientsOf(a), [
+      'Glycerin',
+      'Polyacrylate Crosspolymer-6',
+    ]);
+    expect(await dao.ingredientsOf(b), ['Polyacrylate Crosspolymer-6']);
+    expect(await dao.usedIngredientNames(), isNot(contains('Crosspolymer-6')));
+  });
 }

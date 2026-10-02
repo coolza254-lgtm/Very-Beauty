@@ -325,7 +325,7 @@ void main() {
         const ProductDraft(
           name: 'Mystery Toner',
           category: ProductCategory.toner,
-          ingredients: ['Glycerin', 'Unicorn Tears'],
+          ingredients: ['Glycerin', 'Unicorn Tears', 'Crosspolymer-6'],
         ),
       ),
     );
@@ -334,13 +334,30 @@ void main() {
     await tester.tap(find.byTooltip('ฐานข้อมูลส่วนผสม'));
     await tester.pumpAndSettle();
     expect(
-      find.text('มี 1 ส่วนผสมในสินค้าของคุณที่ยังไม่มีข้อมูล'),
+      find.text('มี 2 ส่วนผสมในสินค้าของคุณที่ยังไม่มีข้อมูล'),
       findsOneWidget,
     );
     await tester.tap(find.text('ดูรายชื่อ'));
     await tester.pumpAndSettle();
     expect(find.text('Unicorn Tears'), findsOneWidget);
     expect(find.text('คัดลอกรายชื่อ'), findsOneWidget);
+
+    // A name cut in half when copying from the label can be fixed.
+    expect(
+      find.text('หมายถึง Polyacrylate Crosspolymer-6 ไหม?'),
+      findsOneWidget,
+    );
+    await tester.tap(
+      find.descendant(
+        of: find.widgetWithText(ListTile, 'Crosspolymer-6'),
+        matching: find.text('แก้ชื่อ'),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Polyacrylate Crosspolymer-6').last);
+    await tester.pumpAndSettle();
+    expect(find.text('Crosspolymer-6'), findsNothing);
+    expect(find.text('Unicorn Tears'), findsOneWidget);
   });
 }
 
