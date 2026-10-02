@@ -36,6 +36,16 @@ abstract final class SettingKeys {
 
   /// '1' to block screenshots (Android FLAG_SECURE).
   static const secureScreen = 'secure_screen';
+
+  /// '0' turns off the daily automatic update check (on by default).
+  static const updateAutoCheck = 'update_auto_check';
+
+  /// Epoch ms of the last automatic update check.
+  static const lastUpdateCheck = 'last_update_check';
+
+  /// Version label the user chose "later" for; not offered again
+  /// automatically.
+  static const updateDismissed = 'update_dismissed';
 }
 
 @DriftAccessor(tables: [AppSettings])

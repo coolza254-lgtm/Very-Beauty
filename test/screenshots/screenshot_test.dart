@@ -14,7 +14,11 @@ import 'package:very_beauty/core/notifications/notification_service.dart';
 import 'package:very_beauty/core/notifications/reminder_sync.dart';
 import 'package:very_beauty/core/db/settings_dao.dart';
 
+import 'package:very_beauty/core/update/app_update_service.dart';
+import 'package:very_beauty/core/update/update_controller.dart';
+
 import '../helpers/demo_data.dart';
+import '../helpers/pump_app.dart';
 import '../helpers/test_database.dart';
 
 const _enabled = bool.fromEnvironment('SCREENSHOTS');
@@ -73,6 +77,10 @@ void main() {
             databaseProvider.overrideWithValue(db),
             notificationServiceProvider.overrideWithValue(
               NoopNotificationService(),
+            ),
+            appUpdateServiceProvider.overrideWithValue(NoUpdates()),
+            currentVersionProvider.overrideWith(
+              (ref) async => const AppVersionInfo(version: '1.0.0', build: 1),
             ),
           ],
           child: const VeryBeautyApp(),

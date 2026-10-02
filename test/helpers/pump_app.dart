@@ -7,6 +7,8 @@ import 'package:very_beauty/core/db/app_database.dart';
 import 'package:very_beauty/core/db/providers.dart';
 import 'package:very_beauty/core/notifications/notification_service.dart';
 import 'package:very_beauty/core/notifications/reminder_sync.dart';
+import 'package:very_beauty/core/update/app_update_service.dart';
+import 'package:very_beauty/core/update/update_controller.dart';
 
 import 'test_database.dart';
 
@@ -15,6 +17,7 @@ Future<AppDatabase> pumpApp(
   WidgetTester tester, {
   Future<void> Function(AppDatabase db)? seed,
   List<Override> overrides = const [],
+  AppUpdateService? updateService,
 }) async {
   tester.view.physicalSize = const Size(1080, 2340);
   tester.view.devicePixelRatio = 3;
@@ -34,6 +37,12 @@ Future<AppDatabase> pumpApp(
         databaseProvider.overrideWithValue(db),
         notificationServiceProvider.overrideWithValue(
           NoopNotificationService(),
+        ),
+        appUpdateServiceProvider.overrideWithValue(
+          updateService ?? NoUpdates(),
+        ),
+        currentVersionProvider.overrideWith(
+          (ref) async => const AppVersionInfo(version: '1.0.0', build: 1),
         ),
         ...overrides,
       ],
@@ -55,4 +64,10 @@ Future<void> tapVisible(WidgetTester tester, Finder finder) async {
   await tester.pumpAndSettle();
   await tester.tap(finder);
   await tester.pumpAndSettle();
+}
+
+/// Never touches the network in tests.
+class NoUpdates implements AppUpdateService {
+  @override
+  Future<UpdateInfo?> check(AppVersionInfo current) async => null;
 }

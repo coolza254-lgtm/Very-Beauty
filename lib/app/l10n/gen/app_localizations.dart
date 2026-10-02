@@ -209,7 +209,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutPrivacy.
   ///
   /// In th, this message translates to:
-  /// **'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน'**
+  /// **'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน\n\nการเชื่อมต่ออินเทอร์เน็ตเพียงอย่างเดียวคือการตรวจสอบเวอร์ชันใหม่จาก GitHub (ปิดได้ในการตั้งค่า) ซึ่งไม่ส่งข้อมูลใดๆ ของคุณออกไป'**
   String get aboutPrivacy;
 
   /// No description provided for @todayHello.
@@ -1945,6 +1945,84 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'ยืนยันตัวตนเพื่อเปิดใช้การล็อกแอพ'**
   String get lockEnableReason;
+
+  /// No description provided for @settingsUpdates.
+  ///
+  /// In th, this message translates to:
+  /// **'อัปเดต'**
+  String get settingsUpdates;
+
+  /// No description provided for @updateCheck.
+  ///
+  /// In th, this message translates to:
+  /// **'ตรวจสอบอัปเดต'**
+  String get updateCheck;
+
+  /// No description provided for @updateCurrent.
+  ///
+  /// In th, this message translates to:
+  /// **'เวอร์ชันปัจจุบัน {version}'**
+  String updateCurrent(String version);
+
+  /// No description provided for @updateAuto.
+  ///
+  /// In th, this message translates to:
+  /// **'ตรวจอัปเดตอัตโนมัติวันละครั้ง'**
+  String get updateAuto;
+
+  /// No description provided for @updateAutoHint.
+  ///
+  /// In th, this message translates to:
+  /// **'เชื่อมต่อ GitHub เพื่อดูเวอร์ชันล่าสุดเท่านั้น ไม่ส่งข้อมูลของคุณ'**
+  String get updateAutoHint;
+
+  /// No description provided for @updateChecking.
+  ///
+  /// In th, this message translates to:
+  /// **'กำลังตรวจสอบ…'**
+  String get updateChecking;
+
+  /// No description provided for @updateNone.
+  ///
+  /// In th, this message translates to:
+  /// **'เป็นเวอร์ชันล่าสุดแล้ว (หรือยังเชื่อมต่อไม่ได้)'**
+  String get updateNone;
+
+  /// No description provided for @updateAvailableTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'มีเวอร์ชันใหม่ ✨'**
+  String get updateAvailableTitle;
+
+  /// No description provided for @updateRequiredTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ต้องอัปเดตก่อนใช้งานต่อ'**
+  String get updateRequiredTitle;
+
+  /// No description provided for @updateRequiredBody.
+  ///
+  /// In th, this message translates to:
+  /// **'เวอร์ชันนี้เก่าเกินไปสำหรับข้อมูลรูปแบบใหม่'**
+  String get updateRequiredBody;
+
+  /// No description provided for @updateKeepsData.
+  ///
+  /// In th, this message translates to:
+  /// **'ดาวน์โหลดไฟล์ติดตั้งแล้วแตะเพื่ออัปเดต ข้อมูลยังอยู่ครบ (ถ้าแอพเซ็นด้วยกุญแจเดียวกัน) แนะนำให้สำรองข้อมูลก่อน'**
+  String get updateKeepsData;
+
+  /// No description provided for @updateDownload.
+  ///
+  /// In th, this message translates to:
+  /// **'ดาวน์โหลด'**
+  String get updateDownload;
+
+  /// No description provided for @updateLater.
+  ///
+  /// In th, this message translates to:
+  /// **'ภายหลัง'**
+  String get updateLater;
 }
 
 class _AppLocalizationsDelegate

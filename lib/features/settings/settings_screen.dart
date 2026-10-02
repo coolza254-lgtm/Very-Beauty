@@ -11,6 +11,7 @@ import '../../core/db/providers.dart';
 import '../../core/db/settings_dao.dart';
 import '../../core/notifications/permission.dart';
 import '../../core/security/app_lock.dart';
+import '../../core/update/update_controller.dart';
 import '../../core/utils/date_utils.dart';
 import '../../core/utils/formatters.dart';
 import 'about_screen.dart';
@@ -100,6 +101,8 @@ class SettingsScreen extends ConsumerWidget {
           const _PrivacySettings(),
           SectionTitle(l10n.settingsData),
           const _DataSettings(),
+          SectionTitle(l10n.settingsUpdates),
+          const _UpdateSettings(),
           SectionTitle(l10n.settingsAppInfo),
           SoftCard(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -353,6 +356,49 @@ class _NotificationSettings extends ConsumerWidget {
               }
               await dao.setValue(SettingKeys.expiryReminders, on ? '1' : '0');
             },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _UpdateSettings extends ConsumerWidget {
+  const _UpdateSettings();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final settings = ref.watch(settingsProvider).value ?? const {};
+    final current = ref.watch(currentVersionProvider).value;
+    return SoftCard(
+      padding: const EdgeInsets.fromLTRB(20, 8, 12, 8),
+      child: Column(
+        children: [
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const PastelIconBadge(
+              icon: Icons.system_update_rounded,
+              color: BrandColors.mint,
+              size: 40,
+            ),
+            title: Text(l10n.updateCheck),
+            subtitle: current == null
+                ? null
+                : Text(
+                    l10n.updateCurrent('${current.version} (${current.build})'),
+                  ),
+            onTap: () => manualCheckForUpdate(context, ref),
+          ),
+          const Divider(),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(l10n.updateAuto),
+            subtitle: Text(l10n.updateAutoHint),
+            value: settings[SettingKeys.updateAutoCheck] != '0',
+            onChanged: (on) => ref
+                .read(settingsDaoProvider)
+                .setValue(SettingKeys.updateAutoCheck, on ? '1' : '0'),
           ),
         ],
       ),

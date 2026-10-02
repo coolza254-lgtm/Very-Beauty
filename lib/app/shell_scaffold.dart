@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import '../core/update/update_controller.dart';
 
 import 'l10n/gen/app_localizations.dart';
 
 /// Bottom-navigation shell around the five top-level tabs.
-class ShellScaffold extends StatelessWidget {
+class ShellScaffold extends ConsumerStatefulWidget {
   const ShellScaffold({super.key, required this.shell});
 
   final StatefulNavigationShell shell;
+
+  @override
+  ConsumerState<ShellScaffold> createState() => _ShellScaffoldState();
+}
+
+class _ShellScaffoldState extends ConsumerState<ShellScaffold> {
+  StatefulNavigationShell get shell => widget.shell;
+
+  @override
+  void initState() {
+    super.initState();
+    // Quietly look for a newer version once the first frame is up.
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => autoCheckForUpdate(context, ref),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

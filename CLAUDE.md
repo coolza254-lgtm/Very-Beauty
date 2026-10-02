@@ -10,3 +10,11 @@
 - Generated code (`*.g.dart`, `lib/app/l10n/gen/`) is committed; regenerate with
   `dart run build_runner build` and `flutter gen-l10n`.
 - Before pushing: `dart format lib test`, `flutter analyze`, `flutter test`.
+- Tests: `test/helpers/pump_app.dart` pumps the whole app with an in-memory DB and
+  fakes for notifications/updates (never hit the network or platform plugins);
+  `test/helpers/demo_data.dart` seeds realistic data. Long lists are lazy — scroll
+  (`tapVisible`) before tapping. Unmount before closing the DB (pumpApp does this).
+- Design review: `flutter test test/screenshots --update-goldens --dart-define=SCREENSHOTS=true`
+  writes phone-size PNGs to `build/screenshots/`.
+- Re-running `flutter_native_splash:create` rewrites `android/app/src/main/res/values*/styles.xml`;
+  keep the AppCompat parents (needed by local_auth).

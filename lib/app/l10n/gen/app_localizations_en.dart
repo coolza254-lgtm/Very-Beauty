@@ -68,7 +68,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutPrivacy =>
-      'All your data and photos stay on this device. The app has no accounts, no servers and no tracking.';
+      'All your data and photos stay on this device. The app has no accounts, no servers and no tracking.\n\nThe only internet connection is checking GitHub for a new version (can be turned off in Settings), which sends none of your data.';
 
   @override
   String get todayHello => 'Hello';
@@ -1025,4 +1025,48 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lockEnableReason => 'Confirm it\'s you to turn on app lock';
+
+  @override
+  String get settingsUpdates => 'Updates';
+
+  @override
+  String get updateCheck => 'Check for updates';
+
+  @override
+  String updateCurrent(String version) {
+    return 'Current version $version';
+  }
+
+  @override
+  String get updateAuto => 'Check automatically once a day';
+
+  @override
+  String get updateAutoHint =>
+      'Only asks GitHub for the latest version — none of your data is sent';
+
+  @override
+  String get updateChecking => 'Checking…';
+
+  @override
+  String get updateNone => 'You\'re up to date (or offline)';
+
+  @override
+  String get updateAvailableTitle => 'A new version is ready ✨';
+
+  @override
+  String get updateRequiredTitle => 'Please update to continue';
+
+  @override
+  String get updateRequiredBody =>
+      'This version is too old for the new data format';
+
+  @override
+  String get updateKeepsData =>
+      'Download and tap the installer to update. Your data stays (if signed with the same key) — backing up first is a good idea.';
+
+  @override
+  String get updateDownload => 'Download';
+
+  @override
+  String get updateLater => 'Later';
 }

@@ -18,7 +18,7 @@
   "aboutDisclaimerTitle": "Please note",
   "aboutDisclaimer": "Very Beauty is a personal skincare journal only. It is not a medical diagnostic or treatment tool. If you have skin concerns, please consult a dermatologist.",
   "aboutPrivacyTitle": "Privacy",
-  "aboutPrivacy": "All your data and photos stay on this device. The app has no accounts, no servers and no tracking.",
+  "aboutPrivacy": "All your data and photos stay on this device. The app has no accounts, no servers and no tracking.\n\nThe only internet connection is checking GitHub for a new version (can be turned off in Settings), which sends none of your data.",
   "todayHello": "Hello",
   "todayHeroSubtitle": "Little steps, lovely skin.",
   "todayRoutinesTitle": "Today's routines",
@@ -307,5 +307,18 @@
   "lockTitle": "Very Beauty is locked",
   "lockUnlock": "Unlock",
   "lockReason": "Confirm it's you to open Very Beauty",
-  "lockEnableReason": "Confirm it's you to turn on app lock"
+  "lockEnableReason": "Confirm it's you to turn on app lock",
+  "settingsUpdates": "Updates",
+  "updateCheck": "Check for updates",
+  "updateCurrent": "Current version {version}",
+  "updateAuto": "Check automatically once a day",
+  "updateAutoHint": "Only asks GitHub for the latest version — none of your data is sent",
+  "updateChecking": "Checking…",
+  "updateNone": "You're up to date (or offline)",
+  "updateAvailableTitle": "A new version is ready ✨",
+  "updateRequiredTitle": "Please update to continue",
+  "updateRequiredBody": "This version is too old for the new data format",
+  "updateKeepsData": "Download and tap the installer to update. Your data stays (if signed with the same key) — backing up first is a good idea.",
+  "updateDownload": "Download",
+  "updateLater": "Later"
 }

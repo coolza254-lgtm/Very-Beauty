@@ -68,7 +68,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get aboutPrivacy =>
-      'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน';
+      'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน\n\nการเชื่อมต่ออินเทอร์เน็ตเพียงอย่างเดียวคือการตรวจสอบเวอร์ชันใหม่จาก GitHub (ปิดได้ในการตั้งค่า) ซึ่งไม่ส่งข้อมูลใดๆ ของคุณออกไป';
 
   @override
   String get todayHello => 'สวัสดีค่ะ';
@@ -1023,4 +1023,48 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get lockEnableReason => 'ยืนยันตัวตนเพื่อเปิดใช้การล็อกแอพ';
+
+  @override
+  String get settingsUpdates => 'อัปเดต';
+
+  @override
+  String get updateCheck => 'ตรวจสอบอัปเดต';
+
+  @override
+  String updateCurrent(String version) {
+    return 'เวอร์ชันปัจจุบัน $version';
+  }
+
+  @override
+  String get updateAuto => 'ตรวจอัปเดตอัตโนมัติวันละครั้ง';
+
+  @override
+  String get updateAutoHint =>
+      'เชื่อมต่อ GitHub เพื่อดูเวอร์ชันล่าสุดเท่านั้น ไม่ส่งข้อมูลของคุณ';
+
+  @override
+  String get updateChecking => 'กำลังตรวจสอบ…';
+
+  @override
+  String get updateNone => 'เป็นเวอร์ชันล่าสุดแล้ว (หรือยังเชื่อมต่อไม่ได้)';
+
+  @override
+  String get updateAvailableTitle => 'มีเวอร์ชันใหม่ ✨';
+
+  @override
+  String get updateRequiredTitle => 'ต้องอัปเดตก่อนใช้งานต่อ';
+
+  @override
+  String get updateRequiredBody =>
+      'เวอร์ชันนี้เก่าเกินไปสำหรับข้อมูลรูปแบบใหม่';
+
+  @override
+  String get updateKeepsData =>
+      'ดาวน์โหลดไฟล์ติดตั้งแล้วแตะเพื่ออัปเดต ข้อมูลยังอยู่ครบ (ถ้าแอพเซ็นด้วยกุญแจเดียวกัน) แนะนำให้สำรองข้อมูลก่อน';
+
+  @override
+  String get updateDownload => 'ดาวน์โหลด';
+
+  @override
+  String get updateLater => 'ภายหลัง';
 }

@@ -133,6 +133,7 @@ test/
 
 ### app_settings
 key-value: ภาษา, ธีม, ล็อกแอพ, เตือนชั่งน้ำหนัก (ความถี่), เวลาแจ้งเตือน ฯลฯ
+> คีย์ที่ใช้จริงอยู่ใน `SettingKeys` (`lib/core/db/settings_dao.dart`) · `daily_entries.period_phase` เก็บค่า `menstruation` / `follicular` / `ovulation` / `luteal`
 
 ## 6. สูตรคำนวณ (ต้องเขียน unit test ครบ)
 
@@ -216,6 +217,13 @@ key-value: ภาษา, ธีม, ล็อกแอพ, เตือนชั
 ### ตัวเลือกเสริม (ตัดสินใจภายหลัง)
 - **Shorebird (code push สำหรับ Flutter)** ส่งแพตช์โค้ด Dart ถึงผู้ใช้ทั้งสองแพลตฟอร์มโดยไม่ต้องผ่านรีวิวสโตร์ แต่ไม่ครอบคลุมการเปลี่ยนโค้ดเนทีฟ/ปลั๊กอินใหม่ และมีเงื่อนไขการใช้งาน ให้ประเมินก่อนใช้จริง
 
+> **สถานะ implementation (Phase 6)** — ตอนนี้แจกจ่ายเป็นไฟล์ APK ผ่าน GitHub Releases จึงใช้ทางนี้ก่อน:
+> - `GitHubReleasesUpdateService` อ่าน release ล่าสุด (`build-N`) จาก GitHub API เทียบกับ build number ของแอพ → แสดง dialog → เปิดลิงก์ดาวน์โหลด APK ในเบราว์เซอร์ (ไม่ต้องขอสิทธิ์ `REQUEST_INSTALL_PACKAGES`; ผู้ใช้แตะไฟล์เพื่อติดตั้งเอง)
+> - `min_supported_build: N` ในคำอธิบาย release = บังคับอัปเดต
+> - `AppStoreUpdateService` (iOS) ใช้ iTunes Lookup API ไว้แล้ว รอขึ้น App Store
+> - Google Play In-App Updates (`in_app_update`) ยังไม่ได้เพิ่ม เพราะใช้ได้เฉพาะแอพที่ติดตั้งจาก Play — เพิ่มเป็น implementation ใหม่ของ `AppUpdateService` เมื่อขึ้น Play
+> - ตรวจตอนเปิดแอพไม่เกินวันละครั้ง ปิดได้ใน Settings, ปุ่ม "ตรวจสอบอัปเดต", ล้มเหลวเงียบๆ เมื่อออฟไลน์
+
 ### การออกแบบในโค้ด (`core/update/`)
 - abstraction `AppUpdateService` เดียว มี implementation แยกตามแพลตฟอร์ม/ช่องทาง
 - ตรวจเวอร์ชันตอนเปิดแอพ (ไม่เกินวันละครั้ง) และมีปุ่ม "ตรวจสอบอัปเดต" ใน Settings
@@ -266,6 +274,8 @@ Export/Import zip, local_auth, สำรองเตือน
 **Phase 7 — Polish และเตรียมปล่อย**
 ไอคอนแอพ/splash, ทดสอบบนเครื่องจริงทั้ง iOS/Android, ปรับ performance (รายการรูปเยอะ), เตรียมข้อมูลขึ้น store (App Store / Google Play)
 
+> **สถานะ**: Phase 0–6 เสร็จแล้ว (ดู README) · Phase 7 ทำบางส่วนแล้ว: ไอคอน/splash, ภาพหน้าจอทดสอบ, CI สร้าง APK อัตโนมัติ — ที่เหลือคือทดสอบบนเครื่องจริงและเตรียมขึ้น store
+
 **ภายหลัง (ยังไม่ทำจนกว่าจะสั่ง)**: สแกนบาร์โค้ด, เครื่องชั่งบลูทูธ BLE, widget หน้าจอหลัก, Shorebird
 
 ## 12. เกณฑ์ความสำเร็จของ MVP (Phase 0–5)
@@ -287,6 +297,12 @@ Export/Import zip, local_auth, สำรองเตือน
 - รักษาหลักการในหัวข้อ 2 (offline, privacy, ใช้งานเร็ว) เหนือสิ่งอื่น
 
 ## 14. คำถามที่ยังเปิดอยู่ (ผู้ใช้ต้องตัดสินใจ)
+
+> **สถานะ**: ผู้ใช้สั่งให้ทำต่อจนจบ จึงใช้ค่าเริ่มต้นต่อไปนี้ (เปลี่ยนได้ภายหลัง):
+> 1. แจกจ่ายเป็น APK ผ่าน GitHub Releases ก่อน (ผู้ใช้ขอ "Native app .apk ก่อน")
+> 2. UI ไทยเป็นค่าเริ่มต้น พร้อมภาษาอังกฤษครบ เลือกได้ใน Settings
+> 3. ✅ ธีมชมพูอ่อน-ขาว พาสเทล เรียบหรู ตามที่ผู้ใช้ขอ
+> 4. ใช้คะแนนผิว 5 ด้านตามที่เสนอ (1 = น้อยมาก, 5 = มากที่สุด)
 
 1. **ช่องทางแจกจ่ายแอพ**: ขึ้น Google Play + App Store จริง หรือแจกเฉพาะตัวเอง/คนรู้จัก (TestFlight, APK)? — กระทบวิธีอัปเดตในหัวข้อ 8 และค่าใช้จ่าย (Apple Developer Program, Google Play Developer)
 2. **ภาษา UI**: ไทยอย่างเดียวก่อน หรือเตรียมอังกฤษด้วย
