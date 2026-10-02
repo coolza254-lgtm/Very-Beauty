@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../app/l10n/gen/app_localizations.dart';
 import '../db/providers.dart';
 import '../db/settings_dao.dart';
+import 'apk_installer.dart';
 import 'app_update_service.dart';
 
 final appUpdateServiceProvider = Provider<AppUpdateService>(
@@ -73,7 +77,9 @@ Future<void> showUpdateDialog(
   UpdateInfo info,
 ) async {
   final l10n = AppLocalizations.of(context);
-  final download = await showDialog<bool>(
+  final inApp =
+      info.apkUrl != null && defaultTargetPlatform == TargetPlatform.android;
+  final accepted = await showDialog<bool>(
     context: context,
     barrierDismissible: !info.mandatory,
     builder: (context) => PopScope(
@@ -88,7 +94,7 @@ Future<void> showUpdateDialog(
             [
               info.versionLabel,
               if (info.mandatory) l10n.updateRequiredBody,
-              l10n.updateKeepsData,
+              inApp ? l10n.updateInAppBody : l10n.updateKeepsData,
             ].join('\n\n'),
           ),
         ),
@@ -100,17 +106,158 @@ Future<void> showUpdateDialog(
             ),
           FilledButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: Text(l10n.updateDownload),
+            child: Text(inApp ? l10n.updateNow : l10n.updateDownload),
           ),
         ],
       ),
     ),
   );
-  if (download == true) {
-    await launchUrl(info.url, mode: LaunchMode.externalApplication);
+  if (accepted == true) {
+    if (inApp && context.mounted) {
+      await installUpdate(context, ref, info);
+    } else {
+      await launchUrl(info.url, mode: LaunchMode.externalApplication);
+    }
   } else {
     await ref
         .read(settingsDaoProvider)
         .setValue(SettingKeys.updateDismissed, info.versionLabel);
+  }
+}
+
+/// Downloads the APK with a progress dialog, makes sure the app may install
+/// packages (asked once), then hands it to Android. With the permanent
+/// signing key the new version replaces the app and keeps all data.
+Future<void> installUpdate(
+  BuildContext context,
+  WidgetRef ref,
+  UpdateInfo info,
+) async {
+  final l10n = AppLocalizations.of(context);
+  final messenger = ScaffoldMessenger.of(context);
+  final navigator = Navigator.of(context, rootNavigator: true);
+  final installer = ref.read(apkInstallerProvider);
+  final progress = ValueNotifier<double?>(null);
+
+  unawaited(
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => PopScope(
+        canPop: false,
+        child: AlertDialog(
+          title: Text(l10n.updateDownloading),
+          content: ValueListenableBuilder<double?>(
+            valueListenable: progress,
+            builder: (context, value, _) => Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                LinearProgressIndicator(value: value),
+                const SizedBox(height: 12),
+                Text(value == null ? '' : '${(value * 100).round()}%'),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+  File apk;
+  try {
+    apk = await installer.download(
+      info.apkUrl!,
+      onProgress: (p) => progress.value = p,
+    );
+  } catch (e) {
+    debugPrint('Update download failed: $e');
+    navigator.pop();
+    messenger.showSnackBar(SnackBar(content: Text(l10n.updateDownloadFailed)));
+    return;
+  } finally {
+    progress.dispose();
+  }
+  navigator.pop();
+
+  if (!await installer.canInstall()) {
+    if (!context.mounted) return;
+    final open = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(Icons.verified_user_outlined),
+        title: Text(l10n.updatePermissionTitle),
+        content: Text(l10n.updatePermissionBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(l10n.updateLater),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(l10n.updatePermissionOpen),
+          ),
+        ],
+      ),
+    );
+    if (open != true) return;
+    final resumed = Completer<void>();
+    final listener = AppLifecycleListener(
+      onResume: () => resumed.isCompleted ? null : resumed.complete(),
+    );
+    await installer.openInstallSettings();
+    await resumed.future;
+    listener.dispose();
+    if (!await installer.canInstall()) {
+      messenger.showSnackBar(
+        SnackBar(content: Text(l10n.updatePermissionMissing)),
+      );
+      return;
+    }
+  }
+
+  late final StreamSubscription<InstallStatus> subscription;
+  subscription = installer.statuses.listen((status) async {
+    if (status == InstallStatus.pendingUserAction) return;
+    unawaited(subscription.cancel());
+    if (status == InstallStatus.success) return; // The app is replaced.
+    if (status == InstallStatus.aborted) {
+      messenger.showSnackBar(SnackBar(content: Text(l10n.updateCancelled)));
+    } else if (status.isSignatureMismatch && context.mounted) {
+      final download = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          icon: const Icon(Icons.key_rounded),
+          title: Text(l10n.updateSignatureTitle),
+          content: Text(l10n.updateSignatureBody),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text(l10n.updateLater),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text(l10n.updateDownload),
+            ),
+          ],
+        ),
+      );
+      if (download == true) {
+        await launchUrl(info.url, mode: LaunchMode.externalApplication);
+      }
+    } else {
+      messenger.showSnackBar(SnackBar(content: Text(l10n.updateInstallFailed)));
+    }
+  });
+  messenger.showSnackBar(
+    SnackBar(
+      content: Text(l10n.updateInstalling),
+      duration: const Duration(seconds: 8),
+    ),
+  );
+  try {
+    await installer.install(apk);
+  } catch (e) {
+    debugPrint('Update install failed: $e');
+    await subscription.cancel();
+    messenger.showSnackBar(SnackBar(content: Text(l10n.updateInstallFailed)));
   }
 }

@@ -20,6 +20,7 @@ class UpdateInfo {
     required this.url,
     this.notes,
     this.mandatory = false,
+    this.apkUrl,
   });
 
   /// Shown to the user, e.g. "1.0.0 (build 12)".
@@ -32,6 +33,11 @@ class UpdateInfo {
   /// True when the installed build is below the release's
   /// `min_supported_build` (e.g. an incompatible data change).
   final bool mandatory;
+
+  /// Direct APK download the app can install itself. Only set for releases
+  /// signed with the permanent key (`signing: release` in the notes); other
+  /// builds can't update an installed app in place.
+  final Uri? apkUrl;
 }
 
 /// Checks for a newer version. The app's only network access
@@ -98,6 +104,7 @@ class AppStoreUpdateService implements AppUpdateService {
 
 final _buildTag = RegExp(r'^build-(\d+)$');
 final _minBuild = RegExp(r'min_supported_build:\s*(\d+)');
+final _releaseSigned = RegExp(r'^signing:\s*release\s*$', multiLine: true);
 
 /// Picks the newest `build-N` release with an APK newer than [current].
 UpdateInfo? parseGitHubReleases(Object? json, AppVersionInfo current) {
@@ -124,6 +131,9 @@ UpdateInfo? parseGitHubReleases(Object? json, AppVersionInfo current) {
       url: Uri.parse(url),
       notes: body.trim().isEmpty ? null : body.trim(),
       mandatory: minBuild != null && current.build < minBuild,
+      apkUrl: apk != null && _releaseSigned.hasMatch(body)
+          ? Uri.parse('${apk['browser_download_url']}')
+          : null,
     );
   }
   return best;

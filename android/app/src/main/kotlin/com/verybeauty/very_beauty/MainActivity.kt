@@ -24,5 +24,16 @@ class MainActivity : FlutterFragmentActivity() {
                     else -> result.notImplemented()
                 }
             }
+        // In-app updates (see ApkInstaller).
+        val installer = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "very_beauty/installer")
+        ApkInstaller.channel = installer
+        installer.setMethodCallHandler { call, result ->
+            ApkInstaller.handle(applicationContext, call.method, call.argument<String>("path"), result)
+        }
+    }
+
+    override fun onDestroy() {
+        ApkInstaller.channel = null
+        super.onDestroy()
     }
 }

@@ -1378,4 +1378,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ingredientRoles => 'Role in the formula';
+
+  @override
+  String get updateNow => 'Update now';
+
+  @override
+  String get updateInAppBody =>
+      'Tap \"Update now\" and the app downloads and installs the new version itself. All your data stays.';
+
+  @override
+  String get updateDownloading => 'Downloading update…';
+
+  @override
+  String get updateInstalling =>
+      'Installing… The app closes when done; tap the notification to reopen it.';
+
+  @override
+  String get updatePermissionTitle => 'Allow Very Beauty to install updates';
+
+  @override
+  String get updatePermissionBody =>
+      'One time only: turn on \"Allow from this source\", then go back to the app.';
+
+  @override
+  String get updatePermissionOpen => 'Open settings';
+
+  @override
+  String get updatePermissionMissing =>
+      'Not allowed yet. Try again from Settings → Check for updates.';
+
+  @override
+  String get updateDownloadFailed =>
+      'Download failed. Check your connection and try again.';
+
+  @override
+  String get updateInstallFailed => 'Install failed. Please try again.';
+
+  @override
+  String get updateCancelled => 'Update cancelled';
+
+  @override
+  String get updateSignatureTitle => 'One last reinstall needed';
+
+  @override
+  String get updateSignatureBody =>
+      'This installed copy was signed with a temporary key, so it can’t be updated in place. Back up, uninstall, install the new file and restore. Future updates will work from inside the app.';
 }

@@ -410,5 +410,18 @@
   "ingFnAboutFragrance": "Adds scent; can cause allergies",
   "ingFnAboutColorant": "Adds colour to the product or skin",
   "ingFnAboutOther": "Has a specialised role in the formula",
-  "ingredientRoles": "Role in the formula"
+  "ingredientRoles": "Role in the formula",
+  "updateNow": "Update now",
+  "updateInAppBody": "Tap \"Update now\" and the app downloads and installs the new version itself. All your data stays.",
+  "updateDownloading": "Downloading update…",
+  "updateInstalling": "Installing… The app closes when done; tap the notification to reopen it.",
+  "updatePermissionTitle": "Allow Very Beauty to install updates",
+  "updatePermissionBody": "One time only: turn on \"Allow from this source\", then go back to the app.",
+  "updatePermissionOpen": "Open settings",
+  "updatePermissionMissing": "Not allowed yet. Try again from Settings → Check for updates.",
+  "updateDownloadFailed": "Download failed. Check your connection and try again.",
+  "updateInstallFailed": "Install failed. Please try again.",
+  "updateCancelled": "Update cancelled",
+  "updateSignatureTitle": "One last reinstall needed",
+  "updateSignatureBody": "This installed copy was signed with a temporary key, so it can’t be updated in place. Back up, uninstall, install the new file and restore. Future updates will work from inside the app."
 }

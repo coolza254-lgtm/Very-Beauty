@@ -57,7 +57,11 @@ jobs:
           echo "signed=true" >> "$GITHUB_OUTPUT"
 
       - name: Build APK
-        run: flutter build apk --release --build-number=${{ github.run_number }}
+        # ARM only (every real Android phone): a much smaller download for
+        # in-app updates than a build that also carries x86_64 emulator code.
+        run: >-
+          flutter build apk --release --build-number=${{ github.run_number }}
+          --target-platform android-arm,android-arm64
 
       - name: Name the APK
         id: apk
@@ -85,6 +89,7 @@ jobs:
             ดาวน์โหลดไฟล์ `${{ steps.apk.outputs.name }}` ด้านล่างบนมือถือ Android แล้วแตะเพื่อติดตั้ง
             (ครั้งแรกระบบจะถามให้อนุญาต "ติดตั้งแอปที่ไม่รู้จัก" จากเบราว์เซอร์ — กดอนุญาต)
 
-            ${{ steps.signing.outputs.signed == 'true' && '✅ เซ็นด้วยกุญแจถาวร — ติดตั้งทับเวอร์ชันก่อนได้ ข้อมูลไม่หาย' || '⚠️ บิลด์นี้เซ็นด้วยกุญแจชั่วคราว: ถ้าจะติดตั้งเวอร์ชันใหม่ ต้องลบแอปเดิมก่อน (ข้อมูลในแอปจะหาย) — ตั้งค่ากุญแจถาวรตาม README หัวข้อ "เซ็นแอพ"' }}
+            ${{ steps.signing.outputs.signed == 'true' && '✅ เซ็นด้วยกุญแจถาวร — กด "อัปเดตเลย" ในแอปได้ ข้อมูลไม่หาย' || '⚠️ บิลด์นี้เซ็นด้วยกุญแจชั่วคราว: ถ้าจะติดตั้งเวอร์ชันใหม่ ต้องลบแอปเดิมก่อน (ข้อมูลในแอปจะหาย) — ตั้งค่ากุญแจถาวรตาม README หัวข้อ "เซ็นแอพ"' }}
+            ${{ steps.signing.outputs.signed == 'true' && 'signing: release' || '' }}
 
             Commit: ${{ github.sha }}

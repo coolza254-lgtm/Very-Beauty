@@ -1394,4 +1394,49 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ingredientRoles => 'หน้าที่ในสูตร';
+
+  @override
+  String get updateNow => 'อัปเดตเลย';
+
+  @override
+  String get updateInAppBody =>
+      'กด \"อัปเดตเลย\" แอปจะดาวน์โหลดและติดตั้งเวอร์ชันใหม่ให้เอง ข้อมูลทั้งหมดยังอยู่ครบ';
+
+  @override
+  String get updateDownloading => 'กำลังดาวน์โหลดอัปเดต…';
+
+  @override
+  String get updateInstalling =>
+      'กำลังติดตั้ง… แอปจะปิดลงเมื่อเสร็จ แตะการแจ้งเตือนเพื่อเปิดอีกครั้ง';
+
+  @override
+  String get updatePermissionTitle => 'อนุญาตให้ Very Beauty ติดตั้งอัปเดต';
+
+  @override
+  String get updatePermissionBody =>
+      'ทำแค่ครั้งเดียว: เปิดสวิตช์ \"อนุญาตจากแหล่งที่มานี้\" แล้วกดย้อนกลับมาที่แอป';
+
+  @override
+  String get updatePermissionOpen => 'ไปที่การตั้งค่า';
+
+  @override
+  String get updatePermissionMissing =>
+      'ยังไม่ได้อนุญาต ลองใหม่ได้ที่ ตั้งค่า → ตรวจสอบอัปเดต';
+
+  @override
+  String get updateDownloadFailed =>
+      'ดาวน์โหลดไม่สำเร็จ ตรวจการเชื่อมต่อแล้วลองใหม่';
+
+  @override
+  String get updateInstallFailed => 'ติดตั้งไม่สำเร็จ ลองใหม่อีกครั้ง';
+
+  @override
+  String get updateCancelled => 'ยกเลิกการอัปเดตแล้ว';
+
+  @override
+  String get updateSignatureTitle => 'ต้องติดตั้งใหม่อีกครั้งสุดท้าย';
+
+  @override
+  String get updateSignatureBody =>
+      'แอปที่ติดตั้งอยู่เป็นรุ่นที่เซ็นด้วยกุญแจชั่วคราว จึงอัปเดตทับไม่ได้ ให้กด \"สำรองข้อมูล\" ลบแอป แล้วติดตั้งไฟล์ใหม่และกู้คืนข้อมูล ครั้งต่อไปจะกดอัปเดตในแอปได้เลย';
 }

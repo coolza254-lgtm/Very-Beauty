@@ -2563,6 +2563,84 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'หน้าที่ในสูตร'**
   String get ingredientRoles;
+
+  /// No description provided for @updateNow.
+  ///
+  /// In th, this message translates to:
+  /// **'อัปเดตเลย'**
+  String get updateNow;
+
+  /// No description provided for @updateInAppBody.
+  ///
+  /// In th, this message translates to:
+  /// **'กด \"อัปเดตเลย\" แอปจะดาวน์โหลดและติดตั้งเวอร์ชันใหม่ให้เอง ข้อมูลทั้งหมดยังอยู่ครบ'**
+  String get updateInAppBody;
+
+  /// No description provided for @updateDownloading.
+  ///
+  /// In th, this message translates to:
+  /// **'กำลังดาวน์โหลดอัปเดต…'**
+  String get updateDownloading;
+
+  /// No description provided for @updateInstalling.
+  ///
+  /// In th, this message translates to:
+  /// **'กำลังติดตั้ง… แอปจะปิดลงเมื่อเสร็จ แตะการแจ้งเตือนเพื่อเปิดอีกครั้ง'**
+  String get updateInstalling;
+
+  /// No description provided for @updatePermissionTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'อนุญาตให้ Very Beauty ติดตั้งอัปเดต'**
+  String get updatePermissionTitle;
+
+  /// No description provided for @updatePermissionBody.
+  ///
+  /// In th, this message translates to:
+  /// **'ทำแค่ครั้งเดียว: เปิดสวิตช์ \"อนุญาตจากแหล่งที่มานี้\" แล้วกดย้อนกลับมาที่แอป'**
+  String get updatePermissionBody;
+
+  /// No description provided for @updatePermissionOpen.
+  ///
+  /// In th, this message translates to:
+  /// **'ไปที่การตั้งค่า'**
+  String get updatePermissionOpen;
+
+  /// No description provided for @updatePermissionMissing.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่ได้อนุญาต ลองใหม่ได้ที่ ตั้งค่า → ตรวจสอบอัปเดต'**
+  String get updatePermissionMissing;
+
+  /// No description provided for @updateDownloadFailed.
+  ///
+  /// In th, this message translates to:
+  /// **'ดาวน์โหลดไม่สำเร็จ ตรวจการเชื่อมต่อแล้วลองใหม่'**
+  String get updateDownloadFailed;
+
+  /// No description provided for @updateInstallFailed.
+  ///
+  /// In th, this message translates to:
+  /// **'ติดตั้งไม่สำเร็จ ลองใหม่อีกครั้ง'**
+  String get updateInstallFailed;
+
+  /// No description provided for @updateCancelled.
+  ///
+  /// In th, this message translates to:
+  /// **'ยกเลิกการอัปเดตแล้ว'**
+  String get updateCancelled;
+
+  /// No description provided for @updateSignatureTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ต้องติดตั้งใหม่อีกครั้งสุดท้าย'**
+  String get updateSignatureTitle;
+
+  /// No description provided for @updateSignatureBody.
+  ///
+  /// In th, this message translates to:
+  /// **'แอปที่ติดตั้งอยู่เป็นรุ่นที่เซ็นด้วยกุญแจชั่วคราว จึงอัปเดตทับไม่ได้ ให้กด \"สำรองข้อมูล\" ลบแอป แล้วติดตั้งไฟล์ใหม่และกู้คืนข้อมูล ครั้งต่อไปจะกดอัปเดตในแอปได้เลย'**
+  String get updateSignatureBody;
 }
 
 class _AppLocalizationsDelegate

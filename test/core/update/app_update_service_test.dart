@@ -37,6 +37,20 @@ void main() {
       expect(info.mandatory, isFalse);
     });
 
+    test('only releases signed with the permanent key update in-app', () {
+      expect(parseGitHubReleases([_release(7)], _current)!.apkUrl, isNull);
+      final signed = parseGitHubReleases([
+        _release(7, body: 'notes\nsigning: release\n'),
+      ], _current)!;
+      expect(signed.apkUrl!.path, endsWith('/build-7/a.apk'));
+      expect(
+        parseGitHubReleases([
+          _release(7, apk: false, body: 'signing: release'),
+        ], _current)!.apkUrl,
+        isNull,
+      );
+    });
+
     test('null when up to date, drafts ignored', () {
       expect(parseGitHubReleases([_release(5), _release(3)], _current), isNull);
       expect(parseGitHubReleases([_release(9, draft: true)], _current), isNull);

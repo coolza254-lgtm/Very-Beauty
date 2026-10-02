@@ -228,7 +228,12 @@ key-value: ภาษา, ธีม, ล็อกแอพ, เตือนชั
 - **Shorebird (code push สำหรับ Flutter)** ส่งแพตช์โค้ด Dart ถึงผู้ใช้ทั้งสองแพลตฟอร์มโดยไม่ต้องผ่านรีวิวสโตร์ แต่ไม่ครอบคลุมการเปลี่ยนโค้ดเนทีฟ/ปลั๊กอินใหม่ และมีเงื่อนไขการใช้งาน ให้ประเมินก่อนใช้จริง
 
 > **สถานะ implementation (Phase 6)** — ตอนนี้แจกจ่ายเป็นไฟล์ APK ผ่าน GitHub Releases จึงใช้ทางนี้ก่อน:
-> - `GitHubReleasesUpdateService` อ่าน release ล่าสุด (`build-N`) จาก GitHub API เทียบกับ build number ของแอพ → แสดง dialog → เปิดลิงก์ดาวน์โหลด APK ในเบราว์เซอร์ (ไม่ต้องขอสิทธิ์ `REQUEST_INSTALL_PACKAGES`; ผู้ใช้แตะไฟล์เพื่อติดตั้งเอง)
+> - `GitHubReleasesUpdateService` อ่าน release ล่าสุด (`build-N`) จาก GitHub API เทียบกับ build number ของแอพ → แสดง dialog
+> - **อัปเดตในแอพ (ผู้ใช้ขอ)**: ถ้า release เซ็นด้วยกุญแจถาวร (บรรทัด `signing: release` ในคำอธิบาย) ปุ่ม "อัปเดตเลย" จะดาวน์โหลด APK
+>   (แสดง %) แล้วติดตั้งผ่าน `PackageInstaller` (Kotlin, `ApkInstaller.kt`) — ใช้สิทธิ์ `REQUEST_INSTALL_PACKAGES` ซึ่งผู้ใช้อนุญาตครั้งเดียว
+>   Android 12+ ขอ `USER_ACTION_NOT_REQUIRED` จึงไม่ต้องกดยืนยันตั้งแต่ครั้งที่สองที่แอพติดตั้งตัวเอง; ถ้ากุญแจไม่ตรง (บิลด์เก่าเซ็นด้วย debug key)
+>   แจ้งให้สำรองข้อมูล ลบ แล้วติดตั้งใหม่ครั้งเดียว; release ที่ไม่ได้เซ็นถาวรยังใช้วิธีเปิดลิงก์ดาวน์โหลดในเบราว์เซอร์
+> - ⚠️ ถ้าจะขึ้น Google Play ต้องเอา `REQUEST_INSTALL_PACKAGES` และการติดตั้งเองออก (build flavor แยก) ตามนโยบาย Play
 > - `min_supported_build: N` ในคำอธิบาย release = บังคับอัปเดต
 > - `AppStoreUpdateService` (iOS) ใช้ iTunes Lookup API ไว้แล้ว รอขึ้น App Store
 > - Google Play In-App Updates (`in_app_update`) ยังไม่ได้เพิ่ม เพราะใช้ได้เฉพาะแอพที่ติดตั้งจาก Play — เพิ่มเป็น implementation ใหม่ของ `AppUpdateService` เมื่อขึ้น Play
