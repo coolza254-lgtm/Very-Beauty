@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../core/notifications/reminder_sync.dart';
 import 'app_settings_providers.dart';
 import 'l10n/gen/app_localizations.dart';
 import 'router.dart';
@@ -12,6 +13,8 @@ class VeryBeautyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeModeProvider).value ?? ThemeMode.light;
+    // Keeps scheduled reminders in sync with the database.
+    ref.watch(reminderSyncProvider);
     return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
       debugShowCheckedModeBanner: false,

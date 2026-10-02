@@ -1,24 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:very_beauty/app/app.dart';
-import 'package:very_beauty/core/db/providers.dart';
 
-import 'helpers/test_database.dart';
+import 'helpers/pump_app.dart';
 
 void main() {
-  Future<void> pumpApp(WidgetTester tester) async {
-    final db = createTestDatabase();
-    addTearDown(db.close);
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [databaseProvider.overrideWithValue(db)],
-        child: const VeryBeautyApp(),
-      ),
-    );
-    await tester.pumpAndSettle();
-  }
-
   testWidgets('opens on Today with Thai bottom navigation', (tester) async {
     await pumpApp(tester);
 

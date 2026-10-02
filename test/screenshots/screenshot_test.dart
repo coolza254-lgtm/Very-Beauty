@@ -10,6 +10,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:very_beauty/app/app.dart';
 import 'package:very_beauty/core/db/providers.dart';
+import 'package:very_beauty/core/notifications/notification_service.dart';
+import 'package:very_beauty/core/notifications/reminder_sync.dart';
 import 'package:very_beauty/core/db/settings_dao.dart';
 
 import '../helpers/demo_data.dart';
@@ -67,7 +69,12 @@ void main() {
     await tester.runAsync(() async {
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [databaseProvider.overrideWithValue(db)],
+          overrides: [
+            databaseProvider.overrideWithValue(db),
+            notificationServiceProvider.overrideWithValue(
+              NoopNotificationService(),
+            ),
+          ],
           child: const VeryBeautyApp(),
         ),
       );
@@ -103,6 +110,36 @@ void main() {
     '02_today': (t) => shoot(t, '02_today', demo: true),
     '03_today_dark': (t) =>
         shoot(t, '03_today_dark', theme: 'dark', demo: true),
+    '04_today_scrolled': (t) => shoot(
+      t,
+      '04_today_scrolled',
+      demo: true,
+      navigate: (t) async {
+        await t.tap(find.text('ใช้ตามปกติ').first);
+        await t.pumpAndSettle();
+        await t.drag(find.byType(ListView).first, const Offset(0, -900));
+        await t.pumpAndSettle();
+      },
+    ),
+    '05_daily_log': (t) => shoot(
+      t,
+      '05_daily_log',
+      demo: true,
+      navigate: (t) async {
+        await t.drag(find.byType(ListView).first, const Offset(0, -1400));
+        await t.pumpAndSettle();
+        await open(t, 'บันทึกสภาพผิว');
+      },
+    ),
+    '06_routine_editor': (t) => shoot(
+      t,
+      '06_routine_editor',
+      demo: true,
+      navigate: (t) async {
+        await open(t, 'จัดการรูทีน');
+        await open(t, 'เช้า');
+      },
+    ),
     '10_products_empty': (t) => shoot(t, '10_products_empty', tab: 'สินค้า'),
     '11_products': (t) => shoot(t, '11_products', tab: 'สินค้า', demo: true),
     '12_product_detail': (t) => shoot(

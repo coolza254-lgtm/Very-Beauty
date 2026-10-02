@@ -51,3 +51,17 @@ Color categoryColor(ProductCategory c) => switch (c) {
   ProductCategory.mask => BrandColors.mint,
   ProductCategory.other => BrandColors.sky,
 };
+
+extension SlotLabels on AppLocalizations {
+  String slot(TimeOfDaySlot s) => switch (s) {
+    TimeOfDaySlot.morning => slotMorning,
+    TimeOfDaySlot.evening => slotEvening,
+    TimeOfDaySlot.other => slotOther,
+  };
+}
+
+(IconData, Color) slotStyle(TimeOfDaySlot s) => switch (s) {
+  TimeOfDaySlot.morning => (Icons.wb_sunny_outlined, BrandColors.butter),
+  TimeOfDaySlot.evening => (Icons.nightlight_outlined, BrandColors.lavender),
+  TimeOfDaySlot.other => (Icons.spa_outlined, BrandColors.blush),
+};

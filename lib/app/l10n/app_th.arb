@@ -202,5 +202,191 @@
     }
   },
   "productNotFound": "ไม่พบสินค้านี้",
-  "valueSection": "ความคุ้มค่า"
+  "valueSection": "ความคุ้มค่า",
+  "reminderRoutineTitle": "ถึงเวลารูทีน{name}แล้ว ✨",
+  "@reminderRoutineTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderRoutineBody": "แตะเพื่อติ๊กว่าใช้อะไรไปบ้างวันนี้",
+  "reminderWeighTitle": "ถึงเวลาชั่งสกินแคร์",
+  "reminderWeighBody": "ชั่งขวดที่ใช้อยู่ จะได้รู้ว่าเหลือเท่าไหร่และหมดเมื่อไหร่",
+  "reminderExpiryTitle": "สินค้าใกล้หมดอายุ",
+  "reminderExpiryBody": "{name} จะหมดอายุในอีก 7 วัน",
+  "@reminderExpiryBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderBackupTitle": "สำรองข้อมูลกันไว้หน่อยไหม?",
+  "reminderBackupBody": "ข้อมูลทั้งหมดอยู่ในเครื่องนี้เท่านั้น สำรองไว้กันหายเวลาเปลี่ยนเครื่อง",
+  "routinesTitle": "รูทีนของฉัน",
+  "routinesManage": "จัดการรูทีน",
+  "routineNew": "รูทีนใหม่",
+  "routineName": "ชื่อรูทีน",
+  "routineSlot": "ช่วงเวลา",
+  "slotMorning": "เช้า",
+  "slotEvening": "เย็น",
+  "slotOther": "อื่นๆ",
+  "routineSteps": "ขั้นตอน",
+  "routineStepsHint": "กดค้างแล้วลากเพื่อจัดลำดับ",
+  "routineAddSteps": "เพิ่มขั้นตอน",
+  "routineAddStepsTitle": "เลือกสินค้าที่ใช้ในรูทีนนี้",
+  "routineAddStepsEmpty": "ยังไม่มีสินค้าที่ใช้อยู่ เพิ่มสินค้าก่อนนะ",
+  "routineAddSelected": "เพิ่ม {count} รายการ",
+  "@routineAddSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "routineReminder": "แจ้งเตือนรูทีนนี้",
+  "routineReminderAt": "ทุกวัน เวลา {time}",
+  "@routineReminderAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "routineDeleteTitle": "ลบรูทีนนี้?",
+  "routineDeleteBody": "ประวัติการใช้สินค้าจะยังอยู่",
+  "routineStepCount": "{count} ขั้นตอน",
+  "@routineStepCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "routineNotInUse": "ไม่ได้ใช้อยู่",
+  "routineEmptySteps": "ยังไม่มีขั้นตอน แตะเพื่อเพิ่มสินค้า",
+  "routineUseAsUsual": "ใช้ตามปกติ",
+  "routineAllDone": "ครบแล้ว",
+  "routineProgress": "{done}/{total}",
+  "@routineProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "todayProgress": "วันนี้ทำไปแล้ว {done} จาก {total} ขั้นตอน",
+  "@todayProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "todayAllDone": "ครบทุกขั้นตอนแล้ว เก่งมาก! 💗",
+  "todayAlertsTitle": "ควรรู้วันนี้",
+  "alertLow": "{name} เหลือประมาณ {percent}%",
+  "@alertLow": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "alertEmptySoon": "{name} คาดว่าจะหมด {date}",
+  "@alertEmptySoon": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "alertExpired": "{name} หมดอายุแล้ว ({date})",
+  "@alertExpired": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "alertExpiring": "{name} จะหมดอายุ {date}",
+  "@alertExpiring": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "alertWeighDue": "ถึงเวลาชั่ง {name} (ชั่งล่าสุด {days} วันก่อน)",
+  "@alertWeighDue": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "todaySkinTitle": "ผิววันนี้",
+  "todaySkinEmpty": "ยังไม่ได้บันทึก แตะเพื่อบันทึกสภาพผิว",
+  "todaySkinEdit": "แก้ไขบันทึก",
+  "dailyLogTitle": "บันทึกสภาพผิว",
+  "dailyLogScores": "ให้คะแนนผิว",
+  "dailyLogScoresHint": "1 = น้อยมาก · 5 = มากที่สุด แตะซ้ำเพื่อล้าง",
+  "dailyLogSymptoms": "อาการ",
+  "dailyLogFactors": "ปัจจัยแวดล้อม",
+  "dailyLogLifestyle": "ไลฟ์สไตล์",
+  "dailyLogSleep": "นอน (ชั่วโมง)",
+  "dailyLogStress": "ความเครียด",
+  "dailyLogSun": "โดนแดด",
+  "sunNone": "ไม่โดน",
+  "sunLow": "เล็กน้อย",
+  "sunHigh": "นาน",
+  "dailyLogPeriod": "รอบเดือน",
+  "periodMenstruation": "มีประจำเดือน",
+  "periodFollicular": "หลังมีประจำเดือน",
+  "periodOvulation": "ช่วงไข่ตก",
+  "periodLuteal": "ก่อนมีประจำเดือน",
+  "dailyLogNote": "โน้ต",
+  "dailyLogNoteHint": "วันนี้ผิวเป็นยังไงบ้าง ลองอะไรใหม่ไหม",
+  "dailyLogSaved": "บันทึกแล้ว",
+  "tagAdd": "เพิ่ม",
+  "tagAddTitle": "เพิ่มแท็กใหม่",
+  "tagName": "ชื่อแท็ก",
+  "settingsNotifications": "การแจ้งเตือน",
+  "settingsRoutineReminders": "แจ้งเตือนรูทีนเช้า/เย็น",
+  "settingsRoutineRemindersHint": "ตั้งเวลาได้ในแต่ละรูทีน",
+  "settingsWeighReminder": "เตือนให้ชั่งน้ำหนักสินค้า",
+  "weighReminderOff": "ปิด",
+  "weighReminderWeekly": "ทุกสัปดาห์",
+  "weighReminderBiweekly": "ทุก 2 สัปดาห์",
+  "settingsExpiryReminders": "เตือนก่อนหมดอายุ 7 วัน",
+  "settingsExpiryRemindersHint": "นับจากวันหมดอายุบนฉลาก หรืออายุหลังเปิด (PAO)",
+  "notificationPermissionTitle": "ขอสิทธิ์แจ้งเตือน",
+  "notificationPermissionBody": "Very Beauty จะส่งการแจ้งเตือนจากในเครื่องเท่านั้น เพื่อเตือนรูทีน การชั่ง และวันหมดอายุ ไม่มีการส่งข้อมูลออกไปไหน",
+  "notificationPermissionDenied": "ยังไม่ได้รับสิทธิ์แจ้งเตือน เปิดได้ในการตั้งค่าของเครื่อง",
+  "actionContinue": "ดำเนินการต่อ",
+  "actionDone": "เสร็จ",
+  "pickTime": "เลือกเวลา"
 }

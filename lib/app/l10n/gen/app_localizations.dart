@@ -919,6 +919,492 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'ความคุ้มค่า'**
   String get valueSection;
+
+  /// No description provided for @reminderRoutineTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ถึงเวลารูทีน{name}แล้ว ✨'**
+  String reminderRoutineTitle(String name);
+
+  /// No description provided for @reminderRoutineBody.
+  ///
+  /// In th, this message translates to:
+  /// **'แตะเพื่อติ๊กว่าใช้อะไรไปบ้างวันนี้'**
+  String get reminderRoutineBody;
+
+  /// No description provided for @reminderWeighTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ถึงเวลาชั่งสกินแคร์'**
+  String get reminderWeighTitle;
+
+  /// No description provided for @reminderWeighBody.
+  ///
+  /// In th, this message translates to:
+  /// **'ชั่งขวดที่ใช้อยู่ จะได้รู้ว่าเหลือเท่าไหร่และหมดเมื่อไหร่'**
+  String get reminderWeighBody;
+
+  /// No description provided for @reminderExpiryTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'สินค้าใกล้หมดอายุ'**
+  String get reminderExpiryTitle;
+
+  /// No description provided for @reminderExpiryBody.
+  ///
+  /// In th, this message translates to:
+  /// **'{name} จะหมดอายุในอีก 7 วัน'**
+  String reminderExpiryBody(String name);
+
+  /// No description provided for @reminderBackupTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'สำรองข้อมูลกันไว้หน่อยไหม?'**
+  String get reminderBackupTitle;
+
+  /// No description provided for @reminderBackupBody.
+  ///
+  /// In th, this message translates to:
+  /// **'ข้อมูลทั้งหมดอยู่ในเครื่องนี้เท่านั้น สำรองไว้กันหายเวลาเปลี่ยนเครื่อง'**
+  String get reminderBackupBody;
+
+  /// No description provided for @routinesTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'รูทีนของฉัน'**
+  String get routinesTitle;
+
+  /// No description provided for @routinesManage.
+  ///
+  /// In th, this message translates to:
+  /// **'จัดการรูทีน'**
+  String get routinesManage;
+
+  /// No description provided for @routineNew.
+  ///
+  /// In th, this message translates to:
+  /// **'รูทีนใหม่'**
+  String get routineNew;
+
+  /// No description provided for @routineName.
+  ///
+  /// In th, this message translates to:
+  /// **'ชื่อรูทีน'**
+  String get routineName;
+
+  /// No description provided for @routineSlot.
+  ///
+  /// In th, this message translates to:
+  /// **'ช่วงเวลา'**
+  String get routineSlot;
+
+  /// No description provided for @slotMorning.
+  ///
+  /// In th, this message translates to:
+  /// **'เช้า'**
+  String get slotMorning;
+
+  /// No description provided for @slotEvening.
+  ///
+  /// In th, this message translates to:
+  /// **'เย็น'**
+  String get slotEvening;
+
+  /// No description provided for @slotOther.
+  ///
+  /// In th, this message translates to:
+  /// **'อื่นๆ'**
+  String get slotOther;
+
+  /// No description provided for @routineSteps.
+  ///
+  /// In th, this message translates to:
+  /// **'ขั้นตอน'**
+  String get routineSteps;
+
+  /// No description provided for @routineStepsHint.
+  ///
+  /// In th, this message translates to:
+  /// **'กดค้างแล้วลากเพื่อจัดลำดับ'**
+  String get routineStepsHint;
+
+  /// No description provided for @routineAddSteps.
+  ///
+  /// In th, this message translates to:
+  /// **'เพิ่มขั้นตอน'**
+  String get routineAddSteps;
+
+  /// No description provided for @routineAddStepsTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'เลือกสินค้าที่ใช้ในรูทีนนี้'**
+  String get routineAddStepsTitle;
+
+  /// No description provided for @routineAddStepsEmpty.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีสินค้าที่ใช้อยู่ เพิ่มสินค้าก่อนนะ'**
+  String get routineAddStepsEmpty;
+
+  /// No description provided for @routineAddSelected.
+  ///
+  /// In th, this message translates to:
+  /// **'เพิ่ม {count} รายการ'**
+  String routineAddSelected(int count);
+
+  /// No description provided for @routineReminder.
+  ///
+  /// In th, this message translates to:
+  /// **'แจ้งเตือนรูทีนนี้'**
+  String get routineReminder;
+
+  /// No description provided for @routineReminderAt.
+  ///
+  /// In th, this message translates to:
+  /// **'ทุกวัน เวลา {time}'**
+  String routineReminderAt(String time);
+
+  /// No description provided for @routineDeleteTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ลบรูทีนนี้?'**
+  String get routineDeleteTitle;
+
+  /// No description provided for @routineDeleteBody.
+  ///
+  /// In th, this message translates to:
+  /// **'ประวัติการใช้สินค้าจะยังอยู่'**
+  String get routineDeleteBody;
+
+  /// No description provided for @routineStepCount.
+  ///
+  /// In th, this message translates to:
+  /// **'{count} ขั้นตอน'**
+  String routineStepCount(int count);
+
+  /// No description provided for @routineNotInUse.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่ได้ใช้อยู่'**
+  String get routineNotInUse;
+
+  /// No description provided for @routineEmptySteps.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีขั้นตอน แตะเพื่อเพิ่มสินค้า'**
+  String get routineEmptySteps;
+
+  /// No description provided for @routineUseAsUsual.
+  ///
+  /// In th, this message translates to:
+  /// **'ใช้ตามปกติ'**
+  String get routineUseAsUsual;
+
+  /// No description provided for @routineAllDone.
+  ///
+  /// In th, this message translates to:
+  /// **'ครบแล้ว'**
+  String get routineAllDone;
+
+  /// No description provided for @routineProgress.
+  ///
+  /// In th, this message translates to:
+  /// **'{done}/{total}'**
+  String routineProgress(int done, int total);
+
+  /// No description provided for @todayProgress.
+  ///
+  /// In th, this message translates to:
+  /// **'วันนี้ทำไปแล้ว {done} จาก {total} ขั้นตอน'**
+  String todayProgress(int done, int total);
+
+  /// No description provided for @todayAllDone.
+  ///
+  /// In th, this message translates to:
+  /// **'ครบทุกขั้นตอนแล้ว เก่งมาก! 💗'**
+  String get todayAllDone;
+
+  /// No description provided for @todayAlertsTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ควรรู้วันนี้'**
+  String get todayAlertsTitle;
+
+  /// No description provided for @alertLow.
+  ///
+  /// In th, this message translates to:
+  /// **'{name} เหลือประมาณ {percent}%'**
+  String alertLow(String name, String percent);
+
+  /// No description provided for @alertEmptySoon.
+  ///
+  /// In th, this message translates to:
+  /// **'{name} คาดว่าจะหมด {date}'**
+  String alertEmptySoon(String name, String date);
+
+  /// No description provided for @alertExpired.
+  ///
+  /// In th, this message translates to:
+  /// **'{name} หมดอายุแล้ว ({date})'**
+  String alertExpired(String name, String date);
+
+  /// No description provided for @alertExpiring.
+  ///
+  /// In th, this message translates to:
+  /// **'{name} จะหมดอายุ {date}'**
+  String alertExpiring(String name, String date);
+
+  /// No description provided for @alertWeighDue.
+  ///
+  /// In th, this message translates to:
+  /// **'ถึงเวลาชั่ง {name} (ชั่งล่าสุด {days} วันก่อน)'**
+  String alertWeighDue(String name, int days);
+
+  /// No description provided for @todaySkinTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ผิววันนี้'**
+  String get todaySkinTitle;
+
+  /// No description provided for @todaySkinEmpty.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่ได้บันทึก แตะเพื่อบันทึกสภาพผิว'**
+  String get todaySkinEmpty;
+
+  /// No description provided for @todaySkinEdit.
+  ///
+  /// In th, this message translates to:
+  /// **'แก้ไขบันทึก'**
+  String get todaySkinEdit;
+
+  /// No description provided for @dailyLogTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'บันทึกสภาพผิว'**
+  String get dailyLogTitle;
+
+  /// No description provided for @dailyLogScores.
+  ///
+  /// In th, this message translates to:
+  /// **'ให้คะแนนผิว'**
+  String get dailyLogScores;
+
+  /// No description provided for @dailyLogScoresHint.
+  ///
+  /// In th, this message translates to:
+  /// **'1 = น้อยมาก · 5 = มากที่สุด แตะซ้ำเพื่อล้าง'**
+  String get dailyLogScoresHint;
+
+  /// No description provided for @dailyLogSymptoms.
+  ///
+  /// In th, this message translates to:
+  /// **'อาการ'**
+  String get dailyLogSymptoms;
+
+  /// No description provided for @dailyLogFactors.
+  ///
+  /// In th, this message translates to:
+  /// **'ปัจจัยแวดล้อม'**
+  String get dailyLogFactors;
+
+  /// No description provided for @dailyLogLifestyle.
+  ///
+  /// In th, this message translates to:
+  /// **'ไลฟ์สไตล์'**
+  String get dailyLogLifestyle;
+
+  /// No description provided for @dailyLogSleep.
+  ///
+  /// In th, this message translates to:
+  /// **'นอน (ชั่วโมง)'**
+  String get dailyLogSleep;
+
+  /// No description provided for @dailyLogStress.
+  ///
+  /// In th, this message translates to:
+  /// **'ความเครียด'**
+  String get dailyLogStress;
+
+  /// No description provided for @dailyLogSun.
+  ///
+  /// In th, this message translates to:
+  /// **'โดนแดด'**
+  String get dailyLogSun;
+
+  /// No description provided for @sunNone.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่โดน'**
+  String get sunNone;
+
+  /// No description provided for @sunLow.
+  ///
+  /// In th, this message translates to:
+  /// **'เล็กน้อย'**
+  String get sunLow;
+
+  /// No description provided for @sunHigh.
+  ///
+  /// In th, this message translates to:
+  /// **'นาน'**
+  String get sunHigh;
+
+  /// No description provided for @dailyLogPeriod.
+  ///
+  /// In th, this message translates to:
+  /// **'รอบเดือน'**
+  String get dailyLogPeriod;
+
+  /// No description provided for @periodMenstruation.
+  ///
+  /// In th, this message translates to:
+  /// **'มีประจำเดือน'**
+  String get periodMenstruation;
+
+  /// No description provided for @periodFollicular.
+  ///
+  /// In th, this message translates to:
+  /// **'หลังมีประจำเดือน'**
+  String get periodFollicular;
+
+  /// No description provided for @periodOvulation.
+  ///
+  /// In th, this message translates to:
+  /// **'ช่วงไข่ตก'**
+  String get periodOvulation;
+
+  /// No description provided for @periodLuteal.
+  ///
+  /// In th, this message translates to:
+  /// **'ก่อนมีประจำเดือน'**
+  String get periodLuteal;
+
+  /// No description provided for @dailyLogNote.
+  ///
+  /// In th, this message translates to:
+  /// **'โน้ต'**
+  String get dailyLogNote;
+
+  /// No description provided for @dailyLogNoteHint.
+  ///
+  /// In th, this message translates to:
+  /// **'วันนี้ผิวเป็นยังไงบ้าง ลองอะไรใหม่ไหม'**
+  String get dailyLogNoteHint;
+
+  /// No description provided for @dailyLogSaved.
+  ///
+  /// In th, this message translates to:
+  /// **'บันทึกแล้ว'**
+  String get dailyLogSaved;
+
+  /// No description provided for @tagAdd.
+  ///
+  /// In th, this message translates to:
+  /// **'เพิ่ม'**
+  String get tagAdd;
+
+  /// No description provided for @tagAddTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'เพิ่มแท็กใหม่'**
+  String get tagAddTitle;
+
+  /// No description provided for @tagName.
+  ///
+  /// In th, this message translates to:
+  /// **'ชื่อแท็ก'**
+  String get tagName;
+
+  /// No description provided for @settingsNotifications.
+  ///
+  /// In th, this message translates to:
+  /// **'การแจ้งเตือน'**
+  String get settingsNotifications;
+
+  /// No description provided for @settingsRoutineReminders.
+  ///
+  /// In th, this message translates to:
+  /// **'แจ้งเตือนรูทีนเช้า/เย็น'**
+  String get settingsRoutineReminders;
+
+  /// No description provided for @settingsRoutineRemindersHint.
+  ///
+  /// In th, this message translates to:
+  /// **'ตั้งเวลาได้ในแต่ละรูทีน'**
+  String get settingsRoutineRemindersHint;
+
+  /// No description provided for @settingsWeighReminder.
+  ///
+  /// In th, this message translates to:
+  /// **'เตือนให้ชั่งน้ำหนักสินค้า'**
+  String get settingsWeighReminder;
+
+  /// No description provided for @weighReminderOff.
+  ///
+  /// In th, this message translates to:
+  /// **'ปิด'**
+  String get weighReminderOff;
+
+  /// No description provided for @weighReminderWeekly.
+  ///
+  /// In th, this message translates to:
+  /// **'ทุกสัปดาห์'**
+  String get weighReminderWeekly;
+
+  /// No description provided for @weighReminderBiweekly.
+  ///
+  /// In th, this message translates to:
+  /// **'ทุก 2 สัปดาห์'**
+  String get weighReminderBiweekly;
+
+  /// No description provided for @settingsExpiryReminders.
+  ///
+  /// In th, this message translates to:
+  /// **'เตือนก่อนหมดอายุ 7 วัน'**
+  String get settingsExpiryReminders;
+
+  /// No description provided for @settingsExpiryRemindersHint.
+  ///
+  /// In th, this message translates to:
+  /// **'นับจากวันหมดอายุบนฉลาก หรืออายุหลังเปิด (PAO)'**
+  String get settingsExpiryRemindersHint;
+
+  /// No description provided for @notificationPermissionTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ขอสิทธิ์แจ้งเตือน'**
+  String get notificationPermissionTitle;
+
+  /// No description provided for @notificationPermissionBody.
+  ///
+  /// In th, this message translates to:
+  /// **'Very Beauty จะส่งการแจ้งเตือนจากในเครื่องเท่านั้น เพื่อเตือนรูทีน การชั่ง และวันหมดอายุ ไม่มีการส่งข้อมูลออกไปไหน'**
+  String get notificationPermissionBody;
+
+  /// No description provided for @notificationPermissionDenied.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่ได้รับสิทธิ์แจ้งเตือน เปิดได้ในการตั้งค่าของเครื่อง'**
+  String get notificationPermissionDenied;
+
+  /// No description provided for @actionContinue.
+  ///
+  /// In th, this message translates to:
+  /// **'ดำเนินการต่อ'**
+  String get actionContinue;
+
+  /// No description provided for @actionDone.
+  ///
+  /// In th, this message translates to:
+  /// **'เสร็จ'**
+  String get actionDone;
+
+  /// No description provided for @pickTime.
+  ///
+  /// In th, this message translates to:
+  /// **'เลือกเวลา'**
+  String get pickTime;
 }
 
 class _AppLocalizationsDelegate

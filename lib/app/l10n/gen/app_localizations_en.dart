@@ -447,4 +447,277 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get valueSection => 'Value';
+
+  @override
+  String reminderRoutineTitle(String name) {
+    return 'Time for your $name routine ✨';
+  }
+
+  @override
+  String get reminderRoutineBody => 'Tap to check off what you used today';
+
+  @override
+  String get reminderWeighTitle => 'Time to weigh your skincare';
+
+  @override
+  String get reminderWeighBody =>
+      'Weigh what you\'re using to see what\'s left and when it runs out';
+
+  @override
+  String get reminderExpiryTitle => 'A product expires soon';
+
+  @override
+  String reminderExpiryBody(String name) {
+    return '$name expires in 7 days';
+  }
+
+  @override
+  String get reminderBackupTitle => 'Time for a backup?';
+
+  @override
+  String get reminderBackupBody =>
+      'Your data lives only on this phone — back it up in case you switch phones';
+
+  @override
+  String get routinesTitle => 'My routines';
+
+  @override
+  String get routinesManage => 'Manage routines';
+
+  @override
+  String get routineNew => 'New routine';
+
+  @override
+  String get routineName => 'Routine name';
+
+  @override
+  String get routineSlot => 'Time of day';
+
+  @override
+  String get slotMorning => 'Morning';
+
+  @override
+  String get slotEvening => 'Evening';
+
+  @override
+  String get slotOther => 'Other';
+
+  @override
+  String get routineSteps => 'Steps';
+
+  @override
+  String get routineStepsHint => 'Long-press and drag to reorder';
+
+  @override
+  String get routineAddSteps => 'Add steps';
+
+  @override
+  String get routineAddStepsTitle => 'Choose products for this routine';
+
+  @override
+  String get routineAddStepsEmpty => 'No products in use yet — add some first';
+
+  @override
+  String routineAddSelected(int count) {
+    return 'Add $count';
+  }
+
+  @override
+  String get routineReminder => 'Remind me';
+
+  @override
+  String routineReminderAt(String time) {
+    return 'Every day at $time';
+  }
+
+  @override
+  String get routineDeleteTitle => 'Delete this routine?';
+
+  @override
+  String get routineDeleteBody => 'Your usage history stays.';
+
+  @override
+  String routineStepCount(int count) {
+    return '$count steps';
+  }
+
+  @override
+  String get routineNotInUse => 'Not in use';
+
+  @override
+  String get routineEmptySteps => 'No steps yet — tap to add products';
+
+  @override
+  String get routineUseAsUsual => 'Done as usual';
+
+  @override
+  String get routineAllDone => 'All done';
+
+  @override
+  String routineProgress(int done, int total) {
+    return '$done/$total';
+  }
+
+  @override
+  String todayProgress(int done, int total) {
+    return '$done of $total steps done today';
+  }
+
+  @override
+  String get todayAllDone => 'Every step done — lovely! 💗';
+
+  @override
+  String get todayAlertsTitle => 'Heads up';
+
+  @override
+  String alertLow(String name, String percent) {
+    return '$name is about $percent% left';
+  }
+
+  @override
+  String alertEmptySoon(String name, String date) {
+    return '$name should run out $date';
+  }
+
+  @override
+  String alertExpired(String name, String date) {
+    return '$name has expired ($date)';
+  }
+
+  @override
+  String alertExpiring(String name, String date) {
+    return '$name expires $date';
+  }
+
+  @override
+  String alertWeighDue(String name, int days) {
+    return 'Time to weigh $name (last weighed $days days ago)';
+  }
+
+  @override
+  String get todaySkinTitle => 'Skin today';
+
+  @override
+  String get todaySkinEmpty => 'Not logged yet — tap to log your skin';
+
+  @override
+  String get todaySkinEdit => 'Edit log';
+
+  @override
+  String get dailyLogTitle => 'Skin log';
+
+  @override
+  String get dailyLogScores => 'Rate your skin';
+
+  @override
+  String get dailyLogScoresHint =>
+      '1 = very low · 5 = very high. Tap again to clear';
+
+  @override
+  String get dailyLogSymptoms => 'Symptoms';
+
+  @override
+  String get dailyLogFactors => 'Factors';
+
+  @override
+  String get dailyLogLifestyle => 'Lifestyle';
+
+  @override
+  String get dailyLogSleep => 'Sleep (hours)';
+
+  @override
+  String get dailyLogStress => 'Stress';
+
+  @override
+  String get dailyLogSun => 'Sun exposure';
+
+  @override
+  String get sunNone => 'None';
+
+  @override
+  String get sunLow => 'A little';
+
+  @override
+  String get sunHigh => 'A lot';
+
+  @override
+  String get dailyLogPeriod => 'Cycle';
+
+  @override
+  String get periodMenstruation => 'Period';
+
+  @override
+  String get periodFollicular => 'After period';
+
+  @override
+  String get periodOvulation => 'Ovulation';
+
+  @override
+  String get periodLuteal => 'Before period';
+
+  @override
+  String get dailyLogNote => 'Note';
+
+  @override
+  String get dailyLogNoteHint => 'How is your skin today? Tried anything new?';
+
+  @override
+  String get dailyLogSaved => 'Saved';
+
+  @override
+  String get tagAdd => 'Add';
+
+  @override
+  String get tagAddTitle => 'New tag';
+
+  @override
+  String get tagName => 'Tag name';
+
+  @override
+  String get settingsNotifications => 'Notifications';
+
+  @override
+  String get settingsRoutineReminders => 'Routine reminders';
+
+  @override
+  String get settingsRoutineRemindersHint => 'Set a time in each routine';
+
+  @override
+  String get settingsWeighReminder => 'Weighing reminder';
+
+  @override
+  String get weighReminderOff => 'Off';
+
+  @override
+  String get weighReminderWeekly => 'Weekly';
+
+  @override
+  String get weighReminderBiweekly => 'Every 2 weeks';
+
+  @override
+  String get settingsExpiryReminders => 'Remind 7 days before expiry';
+
+  @override
+  String get settingsExpiryRemindersHint =>
+      'Uses the printed date or period after opening (PAO)';
+
+  @override
+  String get notificationPermissionTitle => 'Allow notifications';
+
+  @override
+  String get notificationPermissionBody =>
+      'Very Beauty only sends reminders from this phone — for routines, weighing and expiry. Nothing leaves your device.';
+
+  @override
+  String get notificationPermissionDenied =>
+      'Notifications are blocked — you can allow them in your phone\'s settings';
+
+  @override
+  String get actionContinue => 'Continue';
+
+  @override
+  String get actionDone => 'Done';
+
+  @override
+  String get pickTime => 'Pick a time';
 }

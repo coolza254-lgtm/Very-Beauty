@@ -75,9 +75,12 @@ class PastelIconBadge extends StatelessWidget {
 
 /// Small heading above a group of cards.
 class SectionTitle extends StatelessWidget {
-  const SectionTitle(this.text, {super.key});
+  const SectionTitle(this.text, {super.key, this.trailing});
 
   final String text;
+
+  /// Optional action shown after the divider, e.g. a "manage" link.
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +99,7 @@ class SectionTitle extends StatelessWidget {
               color: theme.colorScheme.secondary.withValues(alpha: 0.35),
             ),
           ),
+          if (trailing != null) ...[const SizedBox(width: 4), trailing!],
         ],
       ),
     );

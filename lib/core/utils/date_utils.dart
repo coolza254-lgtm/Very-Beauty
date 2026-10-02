@@ -41,3 +41,13 @@ int daysBetween(DateTime from, DateTime to) {
   final b = DateTime.utc(to.year, to.month, to.day);
   return b.difference(a).inDays;
 }
+
+/// Local midnight of [day].
+DateTime startOfDay(DateTime day) => DateTime(day.year, day.month, day.day);
+
+/// `[start, end)` of the local calendar day as epoch milliseconds.
+(int, int) dayRangeMs(DateTime day) {
+  final start = startOfDay(day);
+  final end = DateTime(day.year, day.month, day.day + 1);
+  return (start.millisecondsSinceEpoch, end.millisecondsSinceEpoch);
+}

@@ -447,4 +447,278 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get valueSection => 'ความคุ้มค่า';
+
+  @override
+  String reminderRoutineTitle(String name) {
+    return 'ถึงเวลารูทีน$nameแล้ว ✨';
+  }
+
+  @override
+  String get reminderRoutineBody => 'แตะเพื่อติ๊กว่าใช้อะไรไปบ้างวันนี้';
+
+  @override
+  String get reminderWeighTitle => 'ถึงเวลาชั่งสกินแคร์';
+
+  @override
+  String get reminderWeighBody =>
+      'ชั่งขวดที่ใช้อยู่ จะได้รู้ว่าเหลือเท่าไหร่และหมดเมื่อไหร่';
+
+  @override
+  String get reminderExpiryTitle => 'สินค้าใกล้หมดอายุ';
+
+  @override
+  String reminderExpiryBody(String name) {
+    return '$name จะหมดอายุในอีก 7 วัน';
+  }
+
+  @override
+  String get reminderBackupTitle => 'สำรองข้อมูลกันไว้หน่อยไหม?';
+
+  @override
+  String get reminderBackupBody =>
+      'ข้อมูลทั้งหมดอยู่ในเครื่องนี้เท่านั้น สำรองไว้กันหายเวลาเปลี่ยนเครื่อง';
+
+  @override
+  String get routinesTitle => 'รูทีนของฉัน';
+
+  @override
+  String get routinesManage => 'จัดการรูทีน';
+
+  @override
+  String get routineNew => 'รูทีนใหม่';
+
+  @override
+  String get routineName => 'ชื่อรูทีน';
+
+  @override
+  String get routineSlot => 'ช่วงเวลา';
+
+  @override
+  String get slotMorning => 'เช้า';
+
+  @override
+  String get slotEvening => 'เย็น';
+
+  @override
+  String get slotOther => 'อื่นๆ';
+
+  @override
+  String get routineSteps => 'ขั้นตอน';
+
+  @override
+  String get routineStepsHint => 'กดค้างแล้วลากเพื่อจัดลำดับ';
+
+  @override
+  String get routineAddSteps => 'เพิ่มขั้นตอน';
+
+  @override
+  String get routineAddStepsTitle => 'เลือกสินค้าที่ใช้ในรูทีนนี้';
+
+  @override
+  String get routineAddStepsEmpty =>
+      'ยังไม่มีสินค้าที่ใช้อยู่ เพิ่มสินค้าก่อนนะ';
+
+  @override
+  String routineAddSelected(int count) {
+    return 'เพิ่ม $count รายการ';
+  }
+
+  @override
+  String get routineReminder => 'แจ้งเตือนรูทีนนี้';
+
+  @override
+  String routineReminderAt(String time) {
+    return 'ทุกวัน เวลา $time';
+  }
+
+  @override
+  String get routineDeleteTitle => 'ลบรูทีนนี้?';
+
+  @override
+  String get routineDeleteBody => 'ประวัติการใช้สินค้าจะยังอยู่';
+
+  @override
+  String routineStepCount(int count) {
+    return '$count ขั้นตอน';
+  }
+
+  @override
+  String get routineNotInUse => 'ไม่ได้ใช้อยู่';
+
+  @override
+  String get routineEmptySteps => 'ยังไม่มีขั้นตอน แตะเพื่อเพิ่มสินค้า';
+
+  @override
+  String get routineUseAsUsual => 'ใช้ตามปกติ';
+
+  @override
+  String get routineAllDone => 'ครบแล้ว';
+
+  @override
+  String routineProgress(int done, int total) {
+    return '$done/$total';
+  }
+
+  @override
+  String todayProgress(int done, int total) {
+    return 'วันนี้ทำไปแล้ว $done จาก $total ขั้นตอน';
+  }
+
+  @override
+  String get todayAllDone => 'ครบทุกขั้นตอนแล้ว เก่งมาก! 💗';
+
+  @override
+  String get todayAlertsTitle => 'ควรรู้วันนี้';
+
+  @override
+  String alertLow(String name, String percent) {
+    return '$name เหลือประมาณ $percent%';
+  }
+
+  @override
+  String alertEmptySoon(String name, String date) {
+    return '$name คาดว่าจะหมด $date';
+  }
+
+  @override
+  String alertExpired(String name, String date) {
+    return '$name หมดอายุแล้ว ($date)';
+  }
+
+  @override
+  String alertExpiring(String name, String date) {
+    return '$name จะหมดอายุ $date';
+  }
+
+  @override
+  String alertWeighDue(String name, int days) {
+    return 'ถึงเวลาชั่ง $name (ชั่งล่าสุด $days วันก่อน)';
+  }
+
+  @override
+  String get todaySkinTitle => 'ผิววันนี้';
+
+  @override
+  String get todaySkinEmpty => 'ยังไม่ได้บันทึก แตะเพื่อบันทึกสภาพผิว';
+
+  @override
+  String get todaySkinEdit => 'แก้ไขบันทึก';
+
+  @override
+  String get dailyLogTitle => 'บันทึกสภาพผิว';
+
+  @override
+  String get dailyLogScores => 'ให้คะแนนผิว';
+
+  @override
+  String get dailyLogScoresHint =>
+      '1 = น้อยมาก · 5 = มากที่สุด แตะซ้ำเพื่อล้าง';
+
+  @override
+  String get dailyLogSymptoms => 'อาการ';
+
+  @override
+  String get dailyLogFactors => 'ปัจจัยแวดล้อม';
+
+  @override
+  String get dailyLogLifestyle => 'ไลฟ์สไตล์';
+
+  @override
+  String get dailyLogSleep => 'นอน (ชั่วโมง)';
+
+  @override
+  String get dailyLogStress => 'ความเครียด';
+
+  @override
+  String get dailyLogSun => 'โดนแดด';
+
+  @override
+  String get sunNone => 'ไม่โดน';
+
+  @override
+  String get sunLow => 'เล็กน้อย';
+
+  @override
+  String get sunHigh => 'นาน';
+
+  @override
+  String get dailyLogPeriod => 'รอบเดือน';
+
+  @override
+  String get periodMenstruation => 'มีประจำเดือน';
+
+  @override
+  String get periodFollicular => 'หลังมีประจำเดือน';
+
+  @override
+  String get periodOvulation => 'ช่วงไข่ตก';
+
+  @override
+  String get periodLuteal => 'ก่อนมีประจำเดือน';
+
+  @override
+  String get dailyLogNote => 'โน้ต';
+
+  @override
+  String get dailyLogNoteHint => 'วันนี้ผิวเป็นยังไงบ้าง ลองอะไรใหม่ไหม';
+
+  @override
+  String get dailyLogSaved => 'บันทึกแล้ว';
+
+  @override
+  String get tagAdd => 'เพิ่ม';
+
+  @override
+  String get tagAddTitle => 'เพิ่มแท็กใหม่';
+
+  @override
+  String get tagName => 'ชื่อแท็ก';
+
+  @override
+  String get settingsNotifications => 'การแจ้งเตือน';
+
+  @override
+  String get settingsRoutineReminders => 'แจ้งเตือนรูทีนเช้า/เย็น';
+
+  @override
+  String get settingsRoutineRemindersHint => 'ตั้งเวลาได้ในแต่ละรูทีน';
+
+  @override
+  String get settingsWeighReminder => 'เตือนให้ชั่งน้ำหนักสินค้า';
+
+  @override
+  String get weighReminderOff => 'ปิด';
+
+  @override
+  String get weighReminderWeekly => 'ทุกสัปดาห์';
+
+  @override
+  String get weighReminderBiweekly => 'ทุก 2 สัปดาห์';
+
+  @override
+  String get settingsExpiryReminders => 'เตือนก่อนหมดอายุ 7 วัน';
+
+  @override
+  String get settingsExpiryRemindersHint =>
+      'นับจากวันหมดอายุบนฉลาก หรืออายุหลังเปิด (PAO)';
+
+  @override
+  String get notificationPermissionTitle => 'ขอสิทธิ์แจ้งเตือน';
+
+  @override
+  String get notificationPermissionBody =>
+      'Very Beauty จะส่งการแจ้งเตือนจากในเครื่องเท่านั้น เพื่อเตือนรูทีน การชั่ง และวันหมดอายุ ไม่มีการส่งข้อมูลออกไปไหน';
+
+  @override
+  String get notificationPermissionDenied =>
+      'ยังไม่ได้รับสิทธิ์แจ้งเตือน เปิดได้ในการตั้งค่าของเครื่อง';
+
+  @override
+  String get actionContinue => 'ดำเนินการต่อ';
+
+  @override
+  String get actionDone => 'เสร็จ';
+
+  @override
+  String get pickTime => 'เลือกเวลา';
 }
