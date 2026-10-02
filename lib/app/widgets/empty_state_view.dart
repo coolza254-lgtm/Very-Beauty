@@ -9,11 +9,19 @@ class EmptyStateView extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.body,
+    this.showSoonBadge = false,
+    this.action,
   });
 
   final IconData icon;
   final String title;
   final String body;
+
+  /// Shows a small "coming soon" pill for features in later phases.
+  final bool showSoonBadge;
+
+  /// Optional call to action under the text.
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
@@ -68,23 +76,29 @@ class EmptyStateView extends StatelessWidget {
               style: theme.textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(999),
-                border: Border.all(
-                  color: scheme.secondary.withValues(alpha: 0.6),
+            if (action != null) ...[const SizedBox(height: 24), action!],
+            if (showSoonBadge) ...[
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(
+                    color: scheme.secondary.withValues(alpha: 0.6),
+                  ),
+                ),
+                child: Text(
+                  AppLocalizations.of(context).comingSoonBadge,
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    color: scheme.secondary,
+                    letterSpacing: 1,
+                  ),
                 ),
               ),
-              child: Text(
-                AppLocalizations.of(context).comingSoonBadge,
-                style: theme.textTheme.labelMedium?.copyWith(
-                  color: scheme.secondary,
-                  letterSpacing: 1,
-                ),
-              ),
-            ),
+            ],
           ],
         ),
       ),

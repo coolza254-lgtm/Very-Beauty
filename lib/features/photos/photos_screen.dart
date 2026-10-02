@@ -14,6 +14,7 @@ class PhotosScreen extends StatelessWidget {
       body: EmptyStateView(
         icon: Icons.photo_camera_outlined,
         title: l10n.photosEmptyTitle,
+        showSoonBadge: true,
         body: l10n.photosEmptyBody,
       ),
     );

@@ -73,7 +73,7 @@ test/
 เวลาเก็บเป็น epoch milliseconds (UTC) ยกเว้น `daily_entries.date` เก็บเป็น `YYYY-MM-DD` ตามเวลาท้องถิ่นของผู้ใช้
 ทุกตารางมี `id` (integer PK autoincrement), `created_at`, `updated_at`
 
-> **สถานะ implementation: schema version 1** (`lib/core/db/tables.dart`, snapshot ใน `drift_schemas/`)
+> **สถานะ implementation: schema version 2** (`lib/core/db/tables.dart`, snapshot ใน `drift_schemas/`)
 > - ตารางเชื่อม `entry_tags` / `product_tags` ใช้ composite primary key (`entry_id, tag_id` / `product_id, tag_id`) แทน `id`
 > - ค่า enum เก็บเป็นข้อความ snake_case เช่น `in_use`
 > - คะแนน 1–5 (`score_*`, `stress_level`, `rating`) มี CHECK constraint
@@ -81,6 +81,7 @@ test/
 > - Foreign key เปิดใช้งาน: ลบสินค้า → ลบ weight/usage logs, routine steps, product tags ตาม; ลบ routine → `usage_logs.routine_id` เป็น NULL; ลบ daily entry ที่ยังมีรูปไม่ได้ (restrict)
 > - `photos.file_path` / `thumb_path` เก็บเป็น path สัมพัทธ์จาก application documents directory (ย้ายเครื่อง/restore แล้วไม่พัง)
 > - ข้อมูลตั้งต้น: tag อาการ/ปัจจัย ภาษาไทย และ routine "เช้า" / "เย็น"
+> - **v2**: เพิ่ม `products.finished_date` (int?, epoch ms) — วันที่ปิดสินค้าเป็น "ใช้หมด" ใช้กับเส้นมาร์กในกราฟ Insights
 
 ### products
 | field | type | หมายเหตุ |
@@ -102,6 +103,7 @@ test/
 | rating | int? | 1–5 ให้ตอนใช้หมด |
 | repurchase | bool? | |
 | note | text? | |
+| finished_date | int? | วันที่ใช้หมด (เพิ่มใน schema v2) |
 
 ### weight_logs
 `product_id` (FK), `weighed_at`, `weight` (กรัม), `note?`
@@ -142,6 +144,7 @@ key-value: ภาษา, ธีม, ล็อกแอพ, เตือนชั
   - ถ้าไม่มี: ประมาณจาก `net_content` โดยสมมติความหนาแน่น ≈ 1 g/ml → `(net_content − ใช้ไปแล้ว) ÷ net_content × 100` และแสดงเครื่องหมาย "ประมาณ"
 - **อัตราใช้ต่อวัน (g/วัน)** = `ใช้ไปแล้ว ÷ จำนวนวันตั้งแต่ opened_date` (หรือตั้งแต่ weight log แรก)
 - **วันที่คาดว่าจะหมด** = วันนี้ + `ปริมาณคงเหลือ ÷ อัตราใช้ต่อวัน` (ถ้าข้อมูลน้อยเกินไป ให้แสดงว่า "ยังประมาณไม่ได้")
+  - _implementation_: นับจาก **วันที่ชั่งล่าสุด** แทน "วันนี้" เพราะปริมาณคงเหลือวัดได้ ณ วันนั้น (ถ้านับจากวันนี้จะนับเวลาที่ผ่านไปซ้ำ) และอัตราใช้ต่อวันคิดถึงวันที่ชั่งล่าสุดเช่นกัน
 - **บาทต่อกรัมที่ใช้จริง** = `price ÷ net_content` (ราคาต่อหน่วยตามฉลาก) และ **ต้นทุนที่ใช้ไปแล้ว** = `price × (ใช้ไปแล้ว ÷ net_content)`
 - **บาทต่อครั้ง (โดยประมาณ)** = `ต้นทุนที่ใช้ไปแล้ว ÷ จำนวน usage_logs ของสินค้านั้น`
 - **คะแนนผิวเฉลี่ยช่วงที่ใช้สินค้า** = เฉลี่ย `score_*` ของ `daily_entries` ในวันที่มี usage_logs ของสินค้านั้น

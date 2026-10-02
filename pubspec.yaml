@@ -43,6 +43,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   package_info_plus: ^10.2.2
+  fl_chart: ^1.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

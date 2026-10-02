@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 
+import 'app_database.steps.dart';
 import 'enums.dart';
 import 'seed.dart';
 import 'tables.dart';
@@ -33,7 +34,7 @@ class AppDatabase extends _$AppDatabase {
   /// run `dart run drift_dev make-migrations` (see README) and update
   /// docs/SPEC.md §5.
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -41,13 +42,29 @@ class AppDatabase extends _$AppDatabase {
       await m.createAll();
       await _seed();
     },
-    // Future versions: use the generated `stepByStep` helper from
-    // app_database.steps.dart, e.g.
-    // onUpgrade: stepByStep(from1To2: (m, schema) async { ... }),
+    onUpgrade: stepByStep(
+      from1To2: (m, schema) async {
+        await m.addColumn(schema.products, schema.products.finishedDate);
+      },
+    ),
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON');
     },
   );
+
+  /// Emits [load]'s result now and again whenever any of [tables] changes.
+  ///
+  /// Use for screens that combine several tables, where a single drift
+  /// `watch()` query would not notice changes in the others.
+  Stream<T> watchTables<T>(
+    Iterable<TableInfo<Table, dynamic>> tables,
+    Future<T> Function() load,
+  ) async* {
+    yield await load();
+    await for (final _ in tableUpdates(TableUpdateQuery.onAllTables(tables))) {
+      yield await load();
+    }
+  }
 
   Future<void> _seed() async {
     await batch((b) {

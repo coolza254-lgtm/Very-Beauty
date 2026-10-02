@@ -14,6 +14,7 @@ class InsightsScreen extends StatelessWidget {
       body: EmptyStateView(
         icon: Icons.insights_outlined,
         title: l10n.insightsEmptyTitle,
+        showSoonBadge: true,
         body: l10n.insightsEmptyBody,
       ),
     );

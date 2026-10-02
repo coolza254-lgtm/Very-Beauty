@@ -86,7 +86,10 @@ class SectionTitle extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(4, 24, 4, 12),
       child: Row(
         children: [
-          Text(text, style: theme.textTheme.titleMedium),
+          Flexible(
+            flex: 3,
+            child: Text(text, style: theme.textTheme.titleMedium),
+          ),
           const SizedBox(width: 8),
           Expanded(
             child: Divider(

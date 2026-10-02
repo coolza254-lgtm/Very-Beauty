@@ -301,6 +301,624 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'ข้อมูลแอพ'**
   String get settingsAppInfo;
+
+  /// No description provided for @categoryCleanser.
+  ///
+  /// In th, this message translates to:
+  /// **'คลีนเซอร์'**
+  String get categoryCleanser;
+
+  /// No description provided for @categoryToner.
+  ///
+  /// In th, this message translates to:
+  /// **'โทนเนอร์'**
+  String get categoryToner;
+
+  /// No description provided for @categorySerum.
+  ///
+  /// In th, this message translates to:
+  /// **'เซรั่ม'**
+  String get categorySerum;
+
+  /// No description provided for @categoryMoisturizer.
+  ///
+  /// In th, this message translates to:
+  /// **'มอยส์เจอไรเซอร์'**
+  String get categoryMoisturizer;
+
+  /// No description provided for @categorySunscreen.
+  ///
+  /// In th, this message translates to:
+  /// **'กันแดด'**
+  String get categorySunscreen;
+
+  /// No description provided for @categoryTreatment.
+  ///
+  /// In th, this message translates to:
+  /// **'ทรีตเมนต์'**
+  String get categoryTreatment;
+
+  /// No description provided for @categoryMask.
+  ///
+  /// In th, this message translates to:
+  /// **'มาสก์'**
+  String get categoryMask;
+
+  /// No description provided for @categoryOther.
+  ///
+  /// In th, this message translates to:
+  /// **'อื่นๆ'**
+  String get categoryOther;
+
+  /// No description provided for @statusInUse.
+  ///
+  /// In th, this message translates to:
+  /// **'ใช้อยู่'**
+  String get statusInUse;
+
+  /// No description provided for @statusFinished.
+  ///
+  /// In th, this message translates to:
+  /// **'ใช้หมดแล้ว'**
+  String get statusFinished;
+
+  /// No description provided for @statusPaused.
+  ///
+  /// In th, this message translates to:
+  /// **'พักไว้'**
+  String get statusPaused;
+
+  /// No description provided for @statusWishlist.
+  ///
+  /// In th, this message translates to:
+  /// **'อยากได้'**
+  String get statusWishlist;
+
+  /// No description provided for @unitG.
+  ///
+  /// In th, this message translates to:
+  /// **'กรัม'**
+  String get unitG;
+
+  /// No description provided for @unitMl.
+  ///
+  /// In th, this message translates to:
+  /// **'มล.'**
+  String get unitMl;
+
+  /// No description provided for @filterAll.
+  ///
+  /// In th, this message translates to:
+  /// **'ทั้งหมด'**
+  String get filterAll;
+
+  /// No description provided for @productsSearchHint.
+  ///
+  /// In th, this message translates to:
+  /// **'ค้นหาชื่อหรือแบรนด์'**
+  String get productsSearchHint;
+
+  /// No description provided for @productsAdd.
+  ///
+  /// In th, this message translates to:
+  /// **'เพิ่มสินค้า'**
+  String get productsAdd;
+
+  /// No description provided for @productsNoMatch.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่พบสินค้าที่ตรงกับตัวกรอง'**
+  String get productsNoMatch;
+
+  /// No description provided for @productFormNew.
+  ///
+  /// In th, this message translates to:
+  /// **'เพิ่มสินค้า'**
+  String get productFormNew;
+
+  /// No description provided for @productFormEdit.
+  ///
+  /// In th, this message translates to:
+  /// **'แก้ไขสินค้า'**
+  String get productFormEdit;
+
+  /// No description provided for @fieldName.
+  ///
+  /// In th, this message translates to:
+  /// **'ชื่อสินค้า'**
+  String get fieldName;
+
+  /// No description provided for @fieldNameRequired.
+  ///
+  /// In th, this message translates to:
+  /// **'กรุณาใส่ชื่อสินค้า'**
+  String get fieldNameRequired;
+
+  /// No description provided for @fieldCategory.
+  ///
+  /// In th, this message translates to:
+  /// **'ประเภท'**
+  String get fieldCategory;
+
+  /// No description provided for @fieldPrice.
+  ///
+  /// In th, this message translates to:
+  /// **'ราคา (บาท)'**
+  String get fieldPrice;
+
+  /// No description provided for @fieldNetContent.
+  ///
+  /// In th, this message translates to:
+  /// **'ปริมาณสุทธิ'**
+  String get fieldNetContent;
+
+  /// No description provided for @fieldMoreDetails.
+  ///
+  /// In th, this message translates to:
+  /// **'รายละเอียดเพิ่มเติม'**
+  String get fieldMoreDetails;
+
+  /// No description provided for @fieldMoreDetailsHint.
+  ///
+  /// In th, this message translates to:
+  /// **'แบรนด์ วันที่เปิดใช้ น้ำหนัก ส่วนผสม ฯลฯ'**
+  String get fieldMoreDetailsHint;
+
+  /// No description provided for @fieldBrand.
+  ///
+  /// In th, this message translates to:
+  /// **'แบรนด์'**
+  String get fieldBrand;
+
+  /// No description provided for @fieldStatus.
+  ///
+  /// In th, this message translates to:
+  /// **'สถานะ'**
+  String get fieldStatus;
+
+  /// No description provided for @fieldPurchasePlace.
+  ///
+  /// In th, this message translates to:
+  /// **'ซื้อจากที่ไหน'**
+  String get fieldPurchasePlace;
+
+  /// No description provided for @fieldPurchaseDate.
+  ///
+  /// In th, this message translates to:
+  /// **'วันที่ซื้อ'**
+  String get fieldPurchaseDate;
+
+  /// No description provided for @fieldOpenedDate.
+  ///
+  /// In th, this message translates to:
+  /// **'วันที่เปิดใช้'**
+  String get fieldOpenedDate;
+
+  /// No description provided for @fieldPao.
+  ///
+  /// In th, this message translates to:
+  /// **'อายุหลังเปิด (เดือน)'**
+  String get fieldPao;
+
+  /// No description provided for @fieldExpiry.
+  ///
+  /// In th, this message translates to:
+  /// **'วันหมดอายุบนฉลาก'**
+  String get fieldExpiry;
+
+  /// No description provided for @fieldStartWeight.
+  ///
+  /// In th, this message translates to:
+  /// **'น้ำหนักตอนเริ่มใช้ (กรัม รวมขวด)'**
+  String get fieldStartWeight;
+
+  /// No description provided for @fieldEmptyWeight.
+  ///
+  /// In th, this message translates to:
+  /// **'น้ำหนักขวดเปล่า (กรัม)'**
+  String get fieldEmptyWeight;
+
+  /// No description provided for @fieldEmptyWeightHelp.
+  ///
+  /// In th, this message translates to:
+  /// **'ถ้ารู้ จะคำนวณปริมาณที่เหลือได้แม่นขึ้น'**
+  String get fieldEmptyWeightHelp;
+
+  /// No description provided for @fieldNote.
+  ///
+  /// In th, this message translates to:
+  /// **'โน้ต'**
+  String get fieldNote;
+
+  /// No description provided for @fieldIngredients.
+  ///
+  /// In th, this message translates to:
+  /// **'ส่วนผสมสำคัญ'**
+  String get fieldIngredients;
+
+  /// No description provided for @fieldIngredientsHelp.
+  ///
+  /// In th, this message translates to:
+  /// **'คั่นด้วยจุลภาค เช่น ไนอะซินาไมด์, วิตามินซี'**
+  String get fieldIngredientsHelp;
+
+  /// No description provided for @fieldInvalidNumber.
+  ///
+  /// In th, this message translates to:
+  /// **'ตัวเลขไม่ถูกต้อง'**
+  String get fieldInvalidNumber;
+
+  /// No description provided for @pickDate.
+  ///
+  /// In th, this message translates to:
+  /// **'เลือกวันที่'**
+  String get pickDate;
+
+  /// No description provided for @actionSave.
+  ///
+  /// In th, this message translates to:
+  /// **'บันทึก'**
+  String get actionSave;
+
+  /// No description provided for @actionCancel.
+  ///
+  /// In th, this message translates to:
+  /// **'ยกเลิก'**
+  String get actionCancel;
+
+  /// No description provided for @actionDelete.
+  ///
+  /// In th, this message translates to:
+  /// **'ลบ'**
+  String get actionDelete;
+
+  /// No description provided for @actionEdit.
+  ///
+  /// In th, this message translates to:
+  /// **'แก้ไข'**
+  String get actionEdit;
+
+  /// No description provided for @actionClear.
+  ///
+  /// In th, this message translates to:
+  /// **'ล้าง'**
+  String get actionClear;
+
+  /// No description provided for @remainingExact.
+  ///
+  /// In th, this message translates to:
+  /// **'เหลือ {percent}%'**
+  String remainingExact(String percent);
+
+  /// No description provided for @remainingApprox.
+  ///
+  /// In th, this message translates to:
+  /// **'เหลือประมาณ {percent}%'**
+  String remainingApprox(String percent);
+
+  /// No description provided for @remainingUnknown.
+  ///
+  /// In th, this message translates to:
+  /// **'ชั่งน้ำหนักเพื่อดูว่าเหลือเท่าไหร่'**
+  String get remainingUnknown;
+
+  /// No description provided for @statUsed.
+  ///
+  /// In th, this message translates to:
+  /// **'ใช้ไปแล้ว'**
+  String get statUsed;
+
+  /// No description provided for @statRemaining.
+  ///
+  /// In th, this message translates to:
+  /// **'คงเหลือ'**
+  String get statRemaining;
+
+  /// No description provided for @statPerDay.
+  ///
+  /// In th, this message translates to:
+  /// **'ใช้ต่อวัน'**
+  String get statPerDay;
+
+  /// No description provided for @statPricePerUnit.
+  ///
+  /// In th, this message translates to:
+  /// **'ราคาต่อ{unit}'**
+  String statPricePerUnit(String unit);
+
+  /// No description provided for @statCostUsed.
+  ///
+  /// In th, this message translates to:
+  /// **'มูลค่าที่ใช้ไป'**
+  String get statCostUsed;
+
+  /// No description provided for @statCostPerUse.
+  ///
+  /// In th, this message translates to:
+  /// **'บาทต่อครั้ง (ประมาณ)'**
+  String get statCostPerUse;
+
+  /// No description provided for @statUsageCount.
+  ///
+  /// In th, this message translates to:
+  /// **'จำนวนครั้งที่ใช้'**
+  String get statUsageCount;
+
+  /// No description provided for @statEmptyOn.
+  ///
+  /// In th, this message translates to:
+  /// **'คาดว่าจะหมด'**
+  String get statEmptyOn;
+
+  /// No description provided for @notEnoughData.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังประมาณไม่ได้'**
+  String get notEnoughData;
+
+  /// No description provided for @weightAnomaly.
+  ///
+  /// In th, this message translates to:
+  /// **'น้ำหนักล่าสุดมากกว่าตอนเริ่มต้น อาจชั่งผิด ลองชั่งใหม่หรือลบรายการที่ผิด'**
+  String get weightAnomaly;
+
+  /// No description provided for @weightHistory.
+  ///
+  /// In th, this message translates to:
+  /// **'ประวัติการชั่ง'**
+  String get weightHistory;
+
+  /// No description provided for @weightChartTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'น้ำหนักตามเวลา'**
+  String get weightChartTitle;
+
+  /// No description provided for @weighNow.
+  ///
+  /// In th, this message translates to:
+  /// **'ชั่งใหม่'**
+  String get weighNow;
+
+  /// No description provided for @weighTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ชั่งน้ำหนัก'**
+  String get weighTitle;
+
+  /// No description provided for @weighHint.
+  ///
+  /// In th, this message translates to:
+  /// **'น้ำหนักรวมขวด (กรัม)'**
+  String get weighHint;
+
+  /// No description provided for @weighDiff.
+  ///
+  /// In th, this message translates to:
+  /// **'{diff} กรัม จากครั้งก่อน'**
+  String weighDiff(String diff);
+
+  /// No description provided for @weighFirst.
+  ///
+  /// In th, this message translates to:
+  /// **'ครั้งแรก จะใช้เป็นน้ำหนักเริ่มต้น'**
+  String get weighFirst;
+
+  /// No description provided for @weighHeavier.
+  ///
+  /// In th, this message translates to:
+  /// **'หนักกว่าครั้งก่อน ตรวจสอบอีกครั้งนะ'**
+  String get weighHeavier;
+
+  /// No description provided for @weighEmpty.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีการชั่ง'**
+  String get weighEmpty;
+
+  /// No description provided for @skinWhileUsing.
+  ///
+  /// In th, this message translates to:
+  /// **'ผิวช่วงที่ใช้สินค้านี้'**
+  String get skinWhileUsing;
+
+  /// No description provided for @skinWhileUsingEmpty.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีบันทึกผิวในวันที่ใช้สินค้านี้'**
+  String get skinWhileUsingEmpty;
+
+  /// No description provided for @basedOnDays.
+  ///
+  /// In th, this message translates to:
+  /// **'จาก {count} วันที่บันทึก'**
+  String basedOnDays(int count);
+
+  /// No description provided for @scoreOil.
+  ///
+  /// In th, this message translates to:
+  /// **'ความมัน'**
+  String get scoreOil;
+
+  /// No description provided for @scoreMoisture.
+  ///
+  /// In th, this message translates to:
+  /// **'ความชุ่มชื้น'**
+  String get scoreMoisture;
+
+  /// No description provided for @scoreAcne.
+  ///
+  /// In th, this message translates to:
+  /// **'สิว'**
+  String get scoreAcne;
+
+  /// No description provided for @scoreRedness.
+  ///
+  /// In th, this message translates to:
+  /// **'ความแดง'**
+  String get scoreRedness;
+
+  /// No description provided for @scoreDullness.
+  ///
+  /// In th, this message translates to:
+  /// **'ความหมองคล้ำ'**
+  String get scoreDullness;
+
+  /// No description provided for @finishAction.
+  ///
+  /// In th, this message translates to:
+  /// **'ใช้หมดแล้ว'**
+  String get finishAction;
+
+  /// No description provided for @finishTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ปิดสินค้านี้'**
+  String get finishTitle;
+
+  /// No description provided for @finishRating.
+  ///
+  /// In th, this message translates to:
+  /// **'ให้คะแนน'**
+  String get finishRating;
+
+  /// No description provided for @finishRepurchase.
+  ///
+  /// In th, this message translates to:
+  /// **'จะซื้อซ้ำไหม?'**
+  String get finishRepurchase;
+
+  /// No description provided for @repurchaseYes.
+  ///
+  /// In th, this message translates to:
+  /// **'ซื้อซ้ำ'**
+  String get repurchaseYes;
+
+  /// No description provided for @repurchaseNo.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่ซื้อซ้ำ'**
+  String get repurchaseNo;
+
+  /// No description provided for @actionReopen.
+  ///
+  /// In th, this message translates to:
+  /// **'นำกลับมาใช้'**
+  String get actionReopen;
+
+  /// No description provided for @actionStartUsing.
+  ///
+  /// In th, this message translates to:
+  /// **'เริ่มใช้'**
+  String get actionStartUsing;
+
+  /// No description provided for @actionPause.
+  ///
+  /// In th, this message translates to:
+  /// **'พักไว้'**
+  String get actionPause;
+
+  /// No description provided for @deleteProductTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ลบสินค้านี้?'**
+  String get deleteProductTitle;
+
+  /// No description provided for @deleteProductBody.
+  ///
+  /// In th, this message translates to:
+  /// **'ประวัติการชั่งและการใช้ของสินค้านี้จะถูกลบด้วย'**
+  String get deleteProductBody;
+
+  /// No description provided for @deleteWeighingTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ลบรายการชั่งนี้?'**
+  String get deleteWeighingTitle;
+
+  /// No description provided for @wishlistCompare.
+  ///
+  /// In th, this message translates to:
+  /// **'เทียบความคุ้มค่า'**
+  String get wishlistCompare;
+
+  /// No description provided for @wishlistCompareEmpty.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีสินค้าประเภทเดียวกันที่มีราคาต่อหน่วยให้เทียบ'**
+  String get wishlistCompareEmpty;
+
+  /// No description provided for @wishlistCompareNeedsPrice.
+  ///
+  /// In th, this message translates to:
+  /// **'ใส่ราคาและปริมาณเพื่อเทียบความคุ้มค่า'**
+  String get wishlistCompareNeedsPrice;
+
+  /// No description provided for @cheaperBy.
+  ///
+  /// In th, this message translates to:
+  /// **'ถูกกว่า {percent}%'**
+  String cheaperBy(String percent);
+
+  /// No description provided for @pricierBy.
+  ///
+  /// In th, this message translates to:
+  /// **'แพงกว่า {percent}%'**
+  String pricierBy(String percent);
+
+  /// No description provided for @samePrice.
+  ///
+  /// In th, this message translates to:
+  /// **'ราคาพอๆ กัน'**
+  String get samePrice;
+
+  /// No description provided for @infoSection.
+  ///
+  /// In th, this message translates to:
+  /// **'ข้อมูลสินค้า'**
+  String get infoSection;
+
+  /// No description provided for @expiresOn.
+  ///
+  /// In th, this message translates to:
+  /// **'หมดอายุ'**
+  String get expiresOn;
+
+  /// No description provided for @ratingLabel.
+  ///
+  /// In th, this message translates to:
+  /// **'คะแนน'**
+  String get ratingLabel;
+
+  /// No description provided for @repurchaseLabel.
+  ///
+  /// In th, this message translates to:
+  /// **'ซื้อซ้ำ'**
+  String get repurchaseLabel;
+
+  /// No description provided for @finishedOn.
+  ///
+  /// In th, this message translates to:
+  /// **'ใช้หมดเมื่อ'**
+  String get finishedOn;
+
+  /// No description provided for @perUnitShort.
+  ///
+  /// In th, this message translates to:
+  /// **'฿{price}/{unit}'**
+  String perUnitShort(String price, String unit);
+
+  /// No description provided for @productNotFound.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่พบสินค้านี้'**
+  String get productNotFound;
+
+  /// No description provided for @valueSection.
+  ///
+  /// In th, this message translates to:
+  /// **'ความคุ้มค่า'**
+  String get valueSection;
 }
 
 class _AppLocalizationsDelegate

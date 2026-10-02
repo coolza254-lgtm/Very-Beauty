@@ -40,5 +40,167 @@
   "insightsEmptyTitle": "ยังไม่มีข้อมูลสรุป",
   "insightsEmptyBody": "ปฏิทิน กราฟสภาพผิว และความคุ้มค่าจะแสดงที่นี่",
   "comingSoonBadge": "เร็วๆ นี้",
-  "settingsAppInfo": "ข้อมูลแอพ"
+  "settingsAppInfo": "ข้อมูลแอพ",
+  "categoryCleanser": "คลีนเซอร์",
+  "categoryToner": "โทนเนอร์",
+  "categorySerum": "เซรั่ม",
+  "categoryMoisturizer": "มอยส์เจอไรเซอร์",
+  "categorySunscreen": "กันแดด",
+  "categoryTreatment": "ทรีตเมนต์",
+  "categoryMask": "มาสก์",
+  "categoryOther": "อื่นๆ",
+  "statusInUse": "ใช้อยู่",
+  "statusFinished": "ใช้หมดแล้ว",
+  "statusPaused": "พักไว้",
+  "statusWishlist": "อยากได้",
+  "unitG": "กรัม",
+  "unitMl": "มล.",
+  "filterAll": "ทั้งหมด",
+  "productsSearchHint": "ค้นหาชื่อหรือแบรนด์",
+  "productsAdd": "เพิ่มสินค้า",
+  "productsNoMatch": "ไม่พบสินค้าที่ตรงกับตัวกรอง",
+  "productFormNew": "เพิ่มสินค้า",
+  "productFormEdit": "แก้ไขสินค้า",
+  "fieldName": "ชื่อสินค้า",
+  "fieldNameRequired": "กรุณาใส่ชื่อสินค้า",
+  "fieldCategory": "ประเภท",
+  "fieldPrice": "ราคา (บาท)",
+  "fieldNetContent": "ปริมาณสุทธิ",
+  "fieldMoreDetails": "รายละเอียดเพิ่มเติม",
+  "fieldMoreDetailsHint": "แบรนด์ วันที่เปิดใช้ น้ำหนัก ส่วนผสม ฯลฯ",
+  "fieldBrand": "แบรนด์",
+  "fieldStatus": "สถานะ",
+  "fieldPurchasePlace": "ซื้อจากที่ไหน",
+  "fieldPurchaseDate": "วันที่ซื้อ",
+  "fieldOpenedDate": "วันที่เปิดใช้",
+  "fieldPao": "อายุหลังเปิด (เดือน)",
+  "fieldExpiry": "วันหมดอายุบนฉลาก",
+  "fieldStartWeight": "น้ำหนักตอนเริ่มใช้ (กรัม รวมขวด)",
+  "fieldEmptyWeight": "น้ำหนักขวดเปล่า (กรัม)",
+  "fieldEmptyWeightHelp": "ถ้ารู้ จะคำนวณปริมาณที่เหลือได้แม่นขึ้น",
+  "fieldNote": "โน้ต",
+  "fieldIngredients": "ส่วนผสมสำคัญ",
+  "fieldIngredientsHelp": "คั่นด้วยจุลภาค เช่น ไนอะซินาไมด์, วิตามินซี",
+  "fieldInvalidNumber": "ตัวเลขไม่ถูกต้อง",
+  "pickDate": "เลือกวันที่",
+  "actionSave": "บันทึก",
+  "actionCancel": "ยกเลิก",
+  "actionDelete": "ลบ",
+  "actionEdit": "แก้ไข",
+  "actionClear": "ล้าง",
+  "remainingExact": "เหลือ {percent}%",
+  "@remainingExact": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "remainingApprox": "เหลือประมาณ {percent}%",
+  "@remainingApprox": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "remainingUnknown": "ชั่งน้ำหนักเพื่อดูว่าเหลือเท่าไหร่",
+  "statUsed": "ใช้ไปแล้ว",
+  "statRemaining": "คงเหลือ",
+  "statPerDay": "ใช้ต่อวัน",
+  "statPricePerUnit": "ราคาต่อ{unit}",
+  "@statPricePerUnit": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "statCostUsed": "มูลค่าที่ใช้ไป",
+  "statCostPerUse": "บาทต่อครั้ง (ประมาณ)",
+  "statUsageCount": "จำนวนครั้งที่ใช้",
+  "statEmptyOn": "คาดว่าจะหมด",
+  "notEnoughData": "ยังประมาณไม่ได้",
+  "weightAnomaly": "น้ำหนักล่าสุดมากกว่าตอนเริ่มต้น อาจชั่งผิด ลองชั่งใหม่หรือลบรายการที่ผิด",
+  "weightHistory": "ประวัติการชั่ง",
+  "weightChartTitle": "น้ำหนักตามเวลา",
+  "weighNow": "ชั่งใหม่",
+  "weighTitle": "ชั่งน้ำหนัก",
+  "weighHint": "น้ำหนักรวมขวด (กรัม)",
+  "weighDiff": "{diff} กรัม จากครั้งก่อน",
+  "@weighDiff": {
+    "placeholders": {
+      "diff": {
+        "type": "String"
+      }
+    }
+  },
+  "weighFirst": "ครั้งแรก จะใช้เป็นน้ำหนักเริ่มต้น",
+  "weighHeavier": "หนักกว่าครั้งก่อน ตรวจสอบอีกครั้งนะ",
+  "weighEmpty": "ยังไม่มีการชั่ง",
+  "skinWhileUsing": "ผิวช่วงที่ใช้สินค้านี้",
+  "skinWhileUsingEmpty": "ยังไม่มีบันทึกผิวในวันที่ใช้สินค้านี้",
+  "basedOnDays": "จาก {count} วันที่บันทึก",
+  "@basedOnDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreOil": "ความมัน",
+  "scoreMoisture": "ความชุ่มชื้น",
+  "scoreAcne": "สิว",
+  "scoreRedness": "ความแดง",
+  "scoreDullness": "ความหมองคล้ำ",
+  "finishAction": "ใช้หมดแล้ว",
+  "finishTitle": "ปิดสินค้านี้",
+  "finishRating": "ให้คะแนน",
+  "finishRepurchase": "จะซื้อซ้ำไหม?",
+  "repurchaseYes": "ซื้อซ้ำ",
+  "repurchaseNo": "ไม่ซื้อซ้ำ",
+  "actionReopen": "นำกลับมาใช้",
+  "actionStartUsing": "เริ่มใช้",
+  "actionPause": "พักไว้",
+  "deleteProductTitle": "ลบสินค้านี้?",
+  "deleteProductBody": "ประวัติการชั่งและการใช้ของสินค้านี้จะถูกลบด้วย",
+  "deleteWeighingTitle": "ลบรายการชั่งนี้?",
+  "wishlistCompare": "เทียบความคุ้มค่า",
+  "wishlistCompareEmpty": "ยังไม่มีสินค้าประเภทเดียวกันที่มีราคาต่อหน่วยให้เทียบ",
+  "wishlistCompareNeedsPrice": "ใส่ราคาและปริมาณเพื่อเทียบความคุ้มค่า",
+  "cheaperBy": "ถูกกว่า {percent}%",
+  "@cheaperBy": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "pricierBy": "แพงกว่า {percent}%",
+  "@pricierBy": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "samePrice": "ราคาพอๆ กัน",
+  "infoSection": "ข้อมูลสินค้า",
+  "expiresOn": "หมดอายุ",
+  "ratingLabel": "คะแนน",
+  "repurchaseLabel": "ซื้อซ้ำ",
+  "finishedOn": "ใช้หมดเมื่อ",
+  "perUnitShort": "฿{price}/{unit}",
+  "@perUnitShort": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "productNotFound": "ไม่พบสินค้านี้",
+  "valueSection": "ความคุ้มค่า"
 }

@@ -43,6 +43,9 @@ class Products extends Table with BaseColumns {
       integer().nullable().check(rating.isBetweenValues(1, 5))();
   BoolColumn get repurchase => boolean().nullable()();
   TextColumn get note => text().nullable()();
+
+  /// When the product was closed as finished. Added in schema v2.
+  IntColumn get finishedDate => integer().nullable()();
 }
 
 @DataClassName('WeightLog')

@@ -187,6 +187,16 @@ ThemeData buildTheme(Brightness brightness) {
         ),
       ),
     ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: scheme.primary,
+      foregroundColor: scheme.onPrimary,
+      elevation: 2,
+      focusElevation: 2,
+      hoverElevation: 3,
+      highlightElevation: 3,
+      shape: const StadiumBorder(),
+      extendedTextStyle: textTheme.labelLarge,
+    ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
         shape: const StadiumBorder(),

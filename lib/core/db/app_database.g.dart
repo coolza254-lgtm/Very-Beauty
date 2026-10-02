@@ -224,6 +224,17 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _finishedDateMeta = const VerificationMeta(
+    'finishedDate',
+  );
+  @override
+  late final GeneratedColumn<int> finishedDate = GeneratedColumn<int>(
+    'finished_date',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -246,6 +257,7 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
     rating,
     repurchase,
     note,
+    finishedDate,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -372,6 +384,15 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
         note.isAcceptableOrUnknown(data['note']!, _noteMeta),
       );
     }
+    if (data.containsKey('finished_date')) {
+      context.handle(
+        _finishedDateMeta,
+        finishedDate.isAcceptableOrUnknown(
+          data['finished_date']!,
+          _finishedDateMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -467,6 +488,10 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
         DriftSqlType.string,
         data['${effectivePrefix}note'],
       ),
+      finishedDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}finished_date'],
+      ),
     );
   }
 
@@ -507,6 +532,9 @@ class Product extends DataClass implements Insertable<Product> {
   final int? rating;
   final bool? repurchase;
   final String? note;
+
+  /// When the product was closed as finished. Added in schema v2.
+  final int? finishedDate;
   const Product({
     required this.id,
     required this.createdAt,
@@ -528,6 +556,7 @@ class Product extends DataClass implements Insertable<Product> {
     this.rating,
     this.repurchase,
     this.note,
+    this.finishedDate,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -590,6 +619,9 @@ class Product extends DataClass implements Insertable<Product> {
     if (!nullToAbsent || note != null) {
       map['note'] = Variable<String>(note);
     }
+    if (!nullToAbsent || finishedDate != null) {
+      map['finished_date'] = Variable<int>(finishedDate);
+    }
     return map;
   }
 
@@ -639,6 +671,9 @@ class Product extends DataClass implements Insertable<Product> {
           ? const Value.absent()
           : Value(repurchase),
       note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+      finishedDate: finishedDate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(finishedDate),
     );
   }
 
@@ -670,6 +705,7 @@ class Product extends DataClass implements Insertable<Product> {
       rating: serializer.fromJson<int?>(json['rating']),
       repurchase: serializer.fromJson<bool?>(json['repurchase']),
       note: serializer.fromJson<String?>(json['note']),
+      finishedDate: serializer.fromJson<int?>(json['finishedDate']),
     );
   }
   @override
@@ -696,6 +732,7 @@ class Product extends DataClass implements Insertable<Product> {
       'rating': serializer.toJson<int?>(rating),
       'repurchase': serializer.toJson<bool?>(repurchase),
       'note': serializer.toJson<String?>(note),
+      'finishedDate': serializer.toJson<int?>(finishedDate),
     };
   }
 
@@ -720,6 +757,7 @@ class Product extends DataClass implements Insertable<Product> {
     Value<int?> rating = const Value.absent(),
     Value<bool?> repurchase = const Value.absent(),
     Value<String?> note = const Value.absent(),
+    Value<int?> finishedDate = const Value.absent(),
   }) => Product(
     id: id ?? this.id,
     createdAt: createdAt ?? this.createdAt,
@@ -745,6 +783,7 @@ class Product extends DataClass implements Insertable<Product> {
     rating: rating.present ? rating.value : this.rating,
     repurchase: repurchase.present ? repurchase.value : this.repurchase,
     note: note.present ? note.value : this.note,
+    finishedDate: finishedDate.present ? finishedDate.value : this.finishedDate,
   );
   Product copyWithCompanion(ProductsCompanion data) {
     return Product(
@@ -784,6 +823,9 @@ class Product extends DataClass implements Insertable<Product> {
           ? data.repurchase.value
           : this.repurchase,
       note: data.note.present ? data.note.value : this.note,
+      finishedDate: data.finishedDate.present
+          ? data.finishedDate.value
+          : this.finishedDate,
     );
   }
 
@@ -809,13 +851,14 @@ class Product extends DataClass implements Insertable<Product> {
           ..write('status: $status, ')
           ..write('rating: $rating, ')
           ..write('repurchase: $repurchase, ')
-          ..write('note: $note')
+          ..write('note: $note, ')
+          ..write('finishedDate: $finishedDate')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     id,
     createdAt,
     updatedAt,
@@ -836,7 +879,8 @@ class Product extends DataClass implements Insertable<Product> {
     rating,
     repurchase,
     note,
-  );
+    finishedDate,
+  ]);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -860,7 +904,8 @@ class Product extends DataClass implements Insertable<Product> {
           other.status == this.status &&
           other.rating == this.rating &&
           other.repurchase == this.repurchase &&
-          other.note == this.note);
+          other.note == this.note &&
+          other.finishedDate == this.finishedDate);
 }
 
 class ProductsCompanion extends UpdateCompanion<Product> {
@@ -884,6 +929,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
   final Value<int?> rating;
   final Value<bool?> repurchase;
   final Value<String?> note;
+  final Value<int?> finishedDate;
   const ProductsCompanion({
     this.id = const Value.absent(),
     this.createdAt = const Value.absent(),
@@ -905,6 +951,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     this.rating = const Value.absent(),
     this.repurchase = const Value.absent(),
     this.note = const Value.absent(),
+    this.finishedDate = const Value.absent(),
   });
   ProductsCompanion.insert({
     this.id = const Value.absent(),
@@ -927,6 +974,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     this.rating = const Value.absent(),
     this.repurchase = const Value.absent(),
     this.note = const Value.absent(),
+    this.finishedDate = const Value.absent(),
   }) : name = Value(name),
        category = Value(category);
   static Insertable<Product> custom({
@@ -950,6 +998,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     Expression<int>? rating,
     Expression<bool>? repurchase,
     Expression<String>? note,
+    Expression<int>? finishedDate,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -972,6 +1021,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
       if (rating != null) 'rating': rating,
       if (repurchase != null) 'repurchase': repurchase,
       if (note != null) 'note': note,
+      if (finishedDate != null) 'finished_date': finishedDate,
     });
   }
 
@@ -996,6 +1046,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     Value<int?>? rating,
     Value<bool?>? repurchase,
     Value<String?>? note,
+    Value<int?>? finishedDate,
   }) {
     return ProductsCompanion(
       id: id ?? this.id,
@@ -1018,6 +1069,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
       rating: rating ?? this.rating,
       repurchase: repurchase ?? this.repurchase,
       note: note ?? this.note,
+      finishedDate: finishedDate ?? this.finishedDate,
     );
   }
 
@@ -1090,6 +1142,9 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     if (note.present) {
       map['note'] = Variable<String>(note.value);
     }
+    if (finishedDate.present) {
+      map['finished_date'] = Variable<int>(finishedDate.value);
+    }
     return map;
   }
 
@@ -1115,7 +1170,8 @@ class ProductsCompanion extends UpdateCompanion<Product> {
           ..write('status: $status, ')
           ..write('rating: $rating, ')
           ..write('repurchase: $repurchase, ')
-          ..write('note: $note')
+          ..write('note: $note, ')
+          ..write('finishedDate: $finishedDate')
           ..write(')'))
         .toString();
   }
@@ -5582,6 +5638,7 @@ typedef $$ProductsTableCreateCompanionBuilder = ProductsCompanion Function({
   Value<int?> rating,
   Value<bool?> repurchase,
   Value<String?> note,
+  Value<int?> finishedDate,
 });
 typedef $$ProductsTableUpdateCompanionBuilder = ProductsCompanion Function({
   Value<int> id,
@@ -5604,6 +5661,7 @@ typedef $$ProductsTableUpdateCompanionBuilder = ProductsCompanion Function({
   Value<int?> rating,
   Value<bool?> repurchase,
   Value<String?> note,
+  Value<int?> finishedDate,
 });
 
 final class $$ProductsTableReferences
@@ -5792,6 +5850,11 @@ class $$ProductsTableFilterComposer
 
   ColumnFilters<String> get note => $composableBuilder(
     column: $table.note,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get finishedDate => $composableBuilder(
+    column: $table.finishedDate,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -6004,6 +6067,11 @@ class $$ProductsTableOrderingComposer
     column: $table.note,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<int> get finishedDate => $composableBuilder(
+    column: $table.finishedDate,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$ProductsTableAnnotationComposer
@@ -6090,6 +6158,11 @@ class $$ProductsTableAnnotationComposer
 
   GeneratedColumn<String> get note =>
       $composableBuilder(column: $table.note, builder: (column) => column);
+
+  GeneratedColumn<int> get finishedDate => $composableBuilder(
+    column: $table.finishedDate,
+    builder: (column) => column,
+  );
 
   Expression<T> weightLogsRefs<T extends Object>(
     Expression<T> Function($$WeightLogsTableAnnotationComposer a) f,
@@ -6245,6 +6318,7 @@ class $$ProductsTableTableManager
                 Value<int?> rating = const Value.absent(),
                 Value<bool?> repurchase = const Value.absent(),
                 Value<String?> note = const Value.absent(),
+                Value<int?> finishedDate = const Value.absent(),
               }) => ProductsCompanion(
                 id: id,
                 createdAt: createdAt,
@@ -6266,6 +6340,7 @@ class $$ProductsTableTableManager
                 rating: rating,
                 repurchase: repurchase,
                 note: note,
+                finishedDate: finishedDate,
               ),
           createCompanionCallback:
               ({
@@ -6289,6 +6364,7 @@ class $$ProductsTableTableManager
                 Value<int?> rating = const Value.absent(),
                 Value<bool?> repurchase = const Value.absent(),
                 Value<String?> note = const Value.absent(),
+                Value<int?> finishedDate = const Value.absent(),
               }) => ProductsCompanion.insert(
                 id: id,
                 createdAt: createdAt,
@@ -6310,6 +6386,7 @@ class $$ProductsTableTableManager
                 rating: rating,
                 repurchase: repurchase,
                 note: note,
+                finishedDate: finishedDate,
               ),
           withReferenceMapper: (p0) => p0
               .map(

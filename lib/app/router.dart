@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 
 import '../features/insights/insights_screen.dart';
 import '../features/photos/photos_screen.dart';
+import '../core/db/app_database.dart';
+import '../features/products/product_detail_screen.dart';
+import '../features/products/product_form_screen.dart';
 import '../features/products/products_screen.dart';
 import '../features/settings/settings_screen.dart';
 import '../features/today/today_screen.dart';
@@ -15,12 +18,39 @@ abstract final class AppRoutes {
   static const photos = '/photos';
   static const insights = '/insights';
   static const settings = '/settings';
+
+  static const productNew = '/product/new';
+  static const productNewWishlist = '/product/new?status=wishlist';
+  static String productDetail(int id) => '/product/$id';
+  static String productEdit(int id) => '/product/$id/edit';
 }
+
+final rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final routerProvider = Provider<GoRouter>((ref) {
   final router = GoRouter(
+    navigatorKey: rootNavigatorKey,
     initialLocation: AppRoutes.today,
     routes: [
+      GoRoute(
+        path: AppRoutes.productNew,
+        builder: (context, state) => ProductFormScreen(
+          initialStatus: state.uri.queryParameters['status'] == 'wishlist'
+              ? ProductStatus.wishlist
+              : null,
+        ),
+      ),
+      GoRoute(
+        path: '/product/:id',
+        builder: (context, state) => ProductDetailScreen(productId: _id(state)),
+        routes: [
+          GoRoute(
+            path: 'edit',
+            builder: (context, state) =>
+                ProductFormScreen(productId: _id(state)),
+          ),
+        ],
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => ShellScaffold(shell: shell),
         branches: [
@@ -40,3 +70,5 @@ final routerProvider = Provider<GoRouter>((ref) {
 StatefulShellBranch _branch(String path, Widget screen) => StatefulShellBranch(
   routes: [GoRoute(path: path, builder: (context, state) => screen)],
 );
+
+int _id(GoRouterState state) => int.parse(state.pathParameters['id']!);
