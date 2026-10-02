@@ -69,4 +69,52 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get aboutPrivacy =>
       'All your data and photos stay on this device. The app has no accounts, no servers and no tracking.';
+
+  @override
+  String get todayHello => 'Hello';
+
+  @override
+  String get todayHeroSubtitle => 'Little steps, lovely skin.';
+
+  @override
+  String get todayRoutinesTitle => 'Today\'s routines';
+
+  @override
+  String get routineNoSteps => 'No steps yet · adding products is coming soon';
+
+  @override
+  String get todayQuickTitle => 'Quick log';
+
+  @override
+  String get quickPhoto => 'Skin photo';
+
+  @override
+  String get quickSkinLog => 'Skin log';
+
+  @override
+  String get productsEmptyTitle => 'No products yet';
+
+  @override
+  String get productsEmptyBody =>
+      'Keep every bottle with its price, size and value.';
+
+  @override
+  String get photosEmptyTitle => 'No photos yet';
+
+  @override
+  String get photosEmptyBody =>
+      'Take photos at the same angle and compare over time.';
+
+  @override
+  String get insightsEmptyTitle => 'No insights yet';
+
+  @override
+  String get insightsEmptyBody =>
+      'Calendar, skin charts and value summaries will appear here.';
+
+  @override
+  String get comingSoonBadge => 'Soon';
+
+  @override
+  String get settingsAppInfo => 'App info';
 }

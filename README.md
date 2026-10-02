@@ -3,7 +3,7 @@
 แอพบันทึกและติดตามสกินแคร์แบบออฟไลน์ (Android + iOS) สร้างด้วย Flutter
 
 - spec ฉบับเต็ม: [`docs/SPEC.md`](docs/SPEC.md)
-- สถานะตอนนี้: **Phase 0 — Foundation** เสร็จแล้ว (โครงแอพ, ธีม, เมนูล่าง, ฐานข้อมูล, ภาษาไทย, CI)
+- สถานะตอนนี้: **Phase 0 — Foundation** เสร็จแล้ว (โครงแอพ, ธีมชมพูพาสเทล, ไอคอนแอพ, เมนูล่าง, ฐานข้อมูล, ภาษาไทย, CI + APK อัตโนมัติ)
 
 ---
 
@@ -31,14 +31,36 @@ flutter run
 - เสียบมือถือ (เปิด USB debugging บน Android) หรือเปิด emulator/simulator ก่อน `flutter run`
 - ถ้ามีหลายเครื่อง: `flutter devices` แล้ว `flutter run -d <id>`
 
-**ไม่อยากติดตั้งอะไรเลย?** ทุกครั้งที่ push โค้ด GitHub Actions จะสร้างไฟล์ APK (Android) ให้
-เข้าไปที่แท็บ **Actions** ของ repo → เลือกรอบล่าสุด → ดาวน์โหลด `very-beauty-debug-apk`
-แล้วนำไปติดตั้งบนมือถือ Android ได้เลย (ต้องอนุญาต "ติดตั้งจากแหล่งที่ไม่รู้จัก")
+## 2.1 ดาวน์โหลดไฟล์ APK ไปติดตั้งบนมือถือ Android (ไม่ต้องติดตั้งเครื่องมือใดๆ)
+
+ทุกครั้งที่มีการ push โค้ด GitHub จะสร้างไฟล์ APK ให้อัตโนมัติ (ใช้เวลาราว 10 นาที)
+
+1. เปิดหน้า repo บนมือถือ → แตะ **Releases** (หรือเข้า `https://github.com/coolza254-lgtm/Very-Beauty/releases`)
+2. เลือกรายการบนสุด → แตะไฟล์ `VeryBeauty-v….apk` เพื่อดาวน์โหลด
+3. แตะไฟล์ที่ดาวน์โหลดเสร็จ → ระบบจะถามให้อนุญาต "ติดตั้งแอปที่ไม่รู้จัก" → อนุญาต → ติดตั้ง
+
+### เซ็นแอพ (สำคัญ ถ้าต้องการอัปเดตโดยข้อมูลไม่หาย)
+
+Android จะยอมให้ติดตั้งเวอร์ชันใหม่ทับเวอร์ชันเดิมได้ ก็ต่อเมื่อทั้งสองเวอร์ชันเซ็นด้วย "กุญแจ" (keystore) ชุดเดียวกัน
+ถ้ายังไม่ได้ตั้งกุญแจ ระบบจะใช้กุญแจชั่วคราวที่เปลี่ยนทุกครั้ง → ต้องลบแอปเดิมก่อนติดตั้งใหม่ และ**ข้อมูลในแอปจะหาย**
+
+วิธีตั้งกุญแจถาวร (ทำครั้งเดียว ห้าม commit ไฟล์กุญแจลง repo เพราะ repo นี้เป็นสาธารณะ):
+
+1. สร้างกุญแจ (เครื่องที่มี Java):
+   `keytool -genkey -v -keystore release.jks -keyalg RSA -keysize 2048 -validity 10000 -alias verybeauty`
+2. แปลงเป็นข้อความ: `base64 -w0 release.jks` (macOS: `base64 -i release.jks`)
+3. ใน GitHub ไปที่ **Settings → Secrets and variables → Actions → New repository secret** แล้วเพิ่ม 3 ค่า:
+   - `ANDROID_KEYSTORE_BASE64` = ข้อความจากข้อ 2
+   - `ANDROID_KEYSTORE_PASSWORD` = รหัสผ่านที่ตั้งตอนสร้างกุญแจ
+   - `ANDROID_KEY_ALIAS` = `verybeauty`
+4. **เก็บไฟล์ `release.jks` และรหัสผ่านไว้ให้ดี** ถ้าหาย จะอัปเดตแอปทับของเดิมไม่ได้อีก
 
 ## 3. ทดสอบและตรวจโค้ด
 
 ```bash
 flutter test          # รัน unit test + widget test
+# ภาพหน้าจอตัวอย่าง (ออกที่ build/screenshots/)
+flutter test test/screenshots --update-goldens --dart-define=SCREENSHOTS=true
 flutter analyze       # ตรวจ lint
 dart format lib test  # จัดรูปแบบโค้ด
 ```
@@ -74,6 +96,8 @@ lib/
     storage/ notifications/ update/   # สำหรับเฟสถัดไป
   features/       # today, products, routines, log, photos, insights, settings
 assets/branding/  # โลโก้
+assets/icon/      # ไอคอนแอพ + splash (สร้างใหม่: dart run flutter_launcher_icons, dart run flutter_native_splash:create)
+assets/fonts/     # ฟอนต์ Mali (หัวข้อ) + Prompt (เนื้อความ), สัญญาอนุญาต OFL
 drift_schemas/    # ประวัติ schema สำหรับทดสอบ migration
 test/
 ```

@@ -1,0 +1,90 @@
+name: Release APK
+
+# Builds an installable Android APK and publishes it as a GitHub Release, so it
+# can be downloaded straight to a phone from the repo's "Releases" page.
+on:
+  push:
+    branches: [main, 'claude/**']
+    paths-ignore: ['**.md', 'docs/**']
+  workflow_dispatch:
+
+concurrency:
+  group: release-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+env:
+  FLUTTER_VERSION: '3.47.6'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: flutter test
+
+      - name: Set up release signing key (if configured)
+        id: signing
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          if [ -z "$KEYSTORE_BASE64" ]; then
+            echo "signed=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::No signing secrets; APK is signed with a temporary debug key."
+            exit 0
+          fi
+          echo "$KEYSTORE_BASE64" | base64 -d > android/app/release.jks
+          cat > android/key.properties <<PROPS
+          storeFile=release.jks
+          storePassword=$KEYSTORE_PASSWORD
+          keyAlias=$KEY_ALIAS
+          keyPassword=$KEYSTORE_PASSWORD
+          PROPS
+          echo "signed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Build APK
+        run: flutter build apk --release --build-number=${{ github.run_number }}
+
+      - name: Name the APK
+        id: apk
+        run: |
+          version=$(grep '^version:' pubspec.yaml | sed 's/version: *//; s/+.*//')
+          name="VeryBeauty-v${version}-build${{ github.run_number }}.apk"
+          mv build/app/outputs/flutter-apk/app-release.apk "$name"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.apk.outputs.name }}
+          path: ${{ steps.apk.outputs.name }}
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: Very Beauty v${{ steps.apk.outputs.version }} (build ${{ github.run_number }})
+          target_commitish: ${{ github.sha }}
+          prerelease: true
+          files: ${{ steps.apk.outputs.name }}
+          body: |
+            ดาวน์โหลดไฟล์ `${{ steps.apk.outputs.name }}` ด้านล่างบนมือถือ Android แล้วแตะเพื่อติดตั้ง
+            (ครั้งแรกระบบจะถามให้อนุญาต "ติดตั้งแอปที่ไม่รู้จัก" จากเบราว์เซอร์ — กดอนุญาต)
+
+            ${{ steps.signing.outputs.signed == 'true' && '✅ เซ็นด้วยกุญแจถาวร — ติดตั้งทับเวอร์ชันก่อนได้ ข้อมูลไม่หาย' || '⚠️ บิลด์นี้เซ็นด้วยกุญแจชั่วคราว: ถ้าจะติดตั้งเวอร์ชันใหม่ ต้องลบแอปเดิมก่อน (ข้อมูลในแอปจะหาย) — ตั้งค่ากุญแจถาวรตาม README หัวข้อ "เซ็นแอพ"' }}
+
+            Commit: ${{ github.sha }}

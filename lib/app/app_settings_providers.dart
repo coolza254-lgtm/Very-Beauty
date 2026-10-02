@@ -13,7 +13,7 @@ final themeModeProvider = StreamProvider<ThemeMode>((ref) {
 
 ThemeMode _parseThemeMode(String? value) => ThemeMode.values.firstWhere(
   (m) => m.name == value,
-  orElse: () => ThemeMode.system,
+  orElse: () => ThemeMode.light,
 );
 
 Future<void> setThemeMode(WidgetRef ref, ThemeMode mode) =>

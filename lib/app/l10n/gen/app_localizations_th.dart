@@ -69,4 +69,52 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get aboutPrivacy =>
       'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน';
+
+  @override
+  String get todayHello => 'สวัสดีค่ะ';
+
+  @override
+  String get todayHeroSubtitle => 'ดูแลผิวทีละนิด ให้สวยในแบบของคุณ';
+
+  @override
+  String get todayRoutinesTitle => 'รูทีนของวันนี้';
+
+  @override
+  String get routineNoSteps => 'ยังไม่มีขั้นตอน · เพิ่มสินค้าได้เร็วๆ นี้';
+
+  @override
+  String get todayQuickTitle => 'บันทึกด่วน';
+
+  @override
+  String get quickPhoto => 'ถ่ายรูปผิว';
+
+  @override
+  String get quickSkinLog => 'บันทึกสภาพผิว';
+
+  @override
+  String get productsEmptyTitle => 'ยังไม่มีสินค้า';
+
+  @override
+  String get productsEmptyBody =>
+      'เก็บสกินแคร์ทุกขวด พร้อมราคา ปริมาณ และความคุ้มค่า';
+
+  @override
+  String get photosEmptyTitle => 'ยังไม่มีรูปถ่าย';
+
+  @override
+  String get photosEmptyBody =>
+      'ถ่ายรูปผิวในมุมเดิมทุกครั้ง แล้วเทียบผลลัพธ์ตามเวลา';
+
+  @override
+  String get insightsEmptyTitle => 'ยังไม่มีข้อมูลสรุป';
+
+  @override
+  String get insightsEmptyBody =>
+      'ปฏิทิน กราฟสภาพผิว และความคุ้มค่าจะแสดงที่นี่';
+
+  @override
+  String get comingSoonBadge => 'เร็วๆ นี้';
+
+  @override
+  String get settingsAppInfo => 'ข้อมูลแอพ';
 }

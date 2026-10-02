@@ -211,6 +211,96 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน'**
   String get aboutPrivacy;
+
+  /// No description provided for @todayHello.
+  ///
+  /// In th, this message translates to:
+  /// **'สวัสดีค่ะ'**
+  String get todayHello;
+
+  /// No description provided for @todayHeroSubtitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ดูแลผิวทีละนิด ให้สวยในแบบของคุณ'**
+  String get todayHeroSubtitle;
+
+  /// No description provided for @todayRoutinesTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'รูทีนของวันนี้'**
+  String get todayRoutinesTitle;
+
+  /// No description provided for @routineNoSteps.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีขั้นตอน · เพิ่มสินค้าได้เร็วๆ นี้'**
+  String get routineNoSteps;
+
+  /// No description provided for @todayQuickTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'บันทึกด่วน'**
+  String get todayQuickTitle;
+
+  /// No description provided for @quickPhoto.
+  ///
+  /// In th, this message translates to:
+  /// **'ถ่ายรูปผิว'**
+  String get quickPhoto;
+
+  /// No description provided for @quickSkinLog.
+  ///
+  /// In th, this message translates to:
+  /// **'บันทึกสภาพผิว'**
+  String get quickSkinLog;
+
+  /// No description provided for @productsEmptyTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีสินค้า'**
+  String get productsEmptyTitle;
+
+  /// No description provided for @productsEmptyBody.
+  ///
+  /// In th, this message translates to:
+  /// **'เก็บสกินแคร์ทุกขวด พร้อมราคา ปริมาณ และความคุ้มค่า'**
+  String get productsEmptyBody;
+
+  /// No description provided for @photosEmptyTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีรูปถ่าย'**
+  String get photosEmptyTitle;
+
+  /// No description provided for @photosEmptyBody.
+  ///
+  /// In th, this message translates to:
+  /// **'ถ่ายรูปผิวในมุมเดิมทุกครั้ง แล้วเทียบผลลัพธ์ตามเวลา'**
+  String get photosEmptyBody;
+
+  /// No description provided for @insightsEmptyTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีข้อมูลสรุป'**
+  String get insightsEmptyTitle;
+
+  /// No description provided for @insightsEmptyBody.
+  ///
+  /// In th, this message translates to:
+  /// **'ปฏิทิน กราฟสภาพผิว และความคุ้มค่าจะแสดงที่นี่'**
+  String get insightsEmptyBody;
+
+  /// No description provided for @comingSoonBadge.
+  ///
+  /// In th, this message translates to:
+  /// **'เร็วๆ นี้'**
+  String get comingSoonBadge;
+
+  /// No description provided for @settingsAppInfo.
+  ///
+  /// In th, this message translates to:
+  /// **'ข้อมูลแอพ'**
+  String get settingsAppInfo;
 }
 
 class _AppLocalizationsDelegate
