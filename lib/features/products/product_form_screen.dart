@@ -11,6 +11,7 @@ import '../../app/widgets/soft_card.dart';
 import '../../core/db/app_database.dart';
 import '../../core/db/products_dao.dart';
 import '../../core/db/providers.dart';
+import '../../core/utils/calculations.dart';
 import '../../core/utils/date_utils.dart';
 import '../../core/utils/formatters.dart';
 import 'product_providers.dart';
@@ -317,6 +318,25 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
     );
   }
 
+  /// Shows `full − net = container` when the container weight is left blank.
+  String _packagingHelp(AppLocalizations l10n) {
+    final start = parseNumber(_startWeight.text);
+    final net = parseNumber(_netContent.text);
+    final packaging = packagingWeight(
+      emptyBottle: null,
+      start: start,
+      netContent: net,
+    );
+    if (_emptyWeight.text.trim().isNotEmpty || packaging == null) {
+      return l10n.fieldEmptyWeightHelp;
+    }
+    return l10n.fieldEmptyWeightAuto(
+      formatNumber(start!),
+      formatNumber(net!),
+      formatNumber(packaging),
+    );
+  }
+
   List<Widget> _moreFields(
     AppLocalizations l10n,
     TextInputType numberKeyboard,
@@ -331,7 +351,11 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
       controller: c,
       keyboardType: numberKeyboard,
       inputFormatters: [numberFormatter],
-      decoration: InputDecoration(labelText: label, helperText: helper),
+      decoration: InputDecoration(
+        labelText: label,
+        helperText: helper,
+        helperMaxLines: 2,
+      ),
       validator: _validateNumber,
     );
 
@@ -367,10 +391,14 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
       gap,
       numberField(_startWeight, l10n.fieldStartWeight),
       gap,
-      numberField(
-        _emptyWeight,
-        l10n.fieldEmptyWeight,
-        helper: l10n.fieldEmptyWeightHelp,
+      // Rebuilds the helper as the weights are typed.
+      ListenableBuilder(
+        listenable: Listenable.merge([_startWeight, _netContent, _emptyWeight]),
+        builder: (context, _) => numberField(
+          _emptyWeight,
+          l10n.fieldEmptyWeight,
+          helper: _packagingHelp(l10n),
+        ),
       ),
       gap,
       TextFormField(

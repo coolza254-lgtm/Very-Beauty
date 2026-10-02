@@ -357,4 +357,43 @@ void main() {
       expect(m.costUsed, 100);
     });
   });
+
+  group('packagingWeight', () {
+    test('prefers the measured empty weight', () {
+      expect(packagingWeight(emptyBottle: 42, start: 80, netContent: 30), 42);
+    });
+    test('derives full weight − net content', () {
+      expect(packagingWeight(emptyBottle: null, start: 80, netContent: 30), 50);
+    });
+    test('null when unknown or not positive', () {
+      expect(
+        packagingWeight(emptyBottle: null, start: null, netContent: 30),
+        isNull,
+      );
+      expect(
+        packagingWeight(emptyBottle: null, start: 80, netContent: null),
+        isNull,
+      );
+      expect(
+        packagingWeight(emptyBottle: null, start: 30, netContent: 30),
+        isNull,
+      );
+    });
+    test('metrics use the derived container weight', () {
+      final m = computeProductMetrics(
+        ProductInputs(
+          netContent: 50,
+          weighings: [
+            WeighPoint(DateTime(2026, 1, 1), 120),
+            WeighPoint(DateTime(2026, 1, 11), 95),
+          ],
+        ),
+      );
+      expect(m.packagingWeight, 70);
+      expect(m.packagingIsDerived, isTrue);
+      expect(m.remainingGrams, 25);
+      expect(m.remaining!.percent, 50);
+      expect(m.remaining!.isEstimate, isFalse);
+    });
+  });
 }

@@ -68,9 +68,9 @@
   "fieldOpenedDate": "Opened on",
   "fieldPao": "Period after opening (months)",
   "fieldExpiry": "Printed expiry date",
-  "fieldStartWeight": "Starting weight (g, incl. container)",
+  "fieldStartWeight": "Full weight before use (g, with container)",
   "fieldEmptyWeight": "Empty container weight (g)",
-  "fieldEmptyWeightHelp": "Optional — makes the remaining amount exact",
+  "fieldEmptyWeightHelp": "Leave blank to calculate it: full weight − net content",
   "fieldNote": "Note",
   "fieldIngredients": "Ingredients",
   "fieldIngredientsHelp": "Type a Thai or English name and pick from the list, or paste the list from the label (comma separated)",
@@ -100,7 +100,7 @@
   "weighTitle": "Weigh product",
   "weighHint": "Weight incl. container (g)",
   "weighDiff": "{diff} g since last time",
-  "weighFirst": "First weighing — becomes the starting weight",
+  "weighFirst": "First weighing — weigh it unused (with container); this becomes the start weight",
   "weighHeavier": "Heavier than last time — please double-check",
   "weighEmpty": "No weighings yet",
   "skinWhileUsing": "Skin while using this",
@@ -358,5 +358,11 @@
   "ingredientsCaution": "Good to know",
   "ingredientsNoMatch": "No matching ingredients",
   "ingredientsDisclaimer": "General information only, not medical advice",
-  "ingredientsFilterAll": "All functions"
+  "ingredientsFilterAll": "All functions",
+  "fieldEmptyWeightAuto": "Leave blank — calculated: {start} − {net} = {packaging} g",
+  "packagingCalculated": "{grams} (calculated)",
+  "statPackaging": "Container {grams} g",
+  "weighPackagingPreview": "Container ≈ {packaging} g ({total} − net content {net})",
+  "weighRemainingPreview": "{grams} g left ({percent}%)",
+  "weighMlNote": "For ml products, 1 ml ≈ 1 g is assumed"
 }

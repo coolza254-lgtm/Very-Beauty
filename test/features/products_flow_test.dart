@@ -38,16 +38,34 @@ void main() {
 
     await tester.tap(find.text('ชั่งใหม่'));
     await tester.pumpAndSettle();
-    expect(find.text('ครั้งแรก จะใช้เป็นน้ำหนักเริ่มต้น'), findsOneWidget);
+    expect(
+      find.text(
+        'ครั้งแรก ชั่งตอนยังไม่ได้ใช้ (รวมบรรจุภัณฑ์) จะใช้เป็นน้ำหนักเริ่มต้น',
+      ),
+      findsOneWidget,
+    );
     await tester.enterText(find.byType(TextField).last, '80');
     await tester.pump();
+    // Container = full weight − label net content.
+    expect(
+      find.text('บรรจุภัณฑ์ ≈ 50 กรัม (80 − ปริมาณสุทธิ 30)'),
+      findsOneWidget,
+    );
     await tester.tap(find.text('บันทึก').last);
     await tester.pumpAndSettle();
 
     final products = await tester.runAsync(() => ProductsDao(db).loadAll());
     expect(products!.single.product.startWeight, 80);
     expect(products.single.product.category, ProductCategory.serum);
-    expect(find.text('เหลือประมาณ 100%'), findsOneWidget);
+    expect(find.text('เหลือ 100%'), findsOneWidget);
+    expect(find.text('บรรจุภัณฑ์ 50 กรัม'), findsOneWidget);
+
+    // Later weighing shows what is left before saving.
+    await tester.tap(find.text('ชั่งใหม่'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).last, '65');
+    await tester.pump();
+    expect(find.text('เหลือ 15 กรัม (50%)'), findsOneWidget);
   });
 
   testWidgets('name is required', (tester) async {

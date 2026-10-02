@@ -107,6 +107,9 @@ class _Detail extends ConsumerWidget {
                 productName: p.name,
                 previousWeight: m.latestWeight,
                 startWeight: p.startWeight,
+                netContent: p.netContent,
+                packagingWeight: m.packagingWeight,
+                isMillilitres: p.netUnit == NetUnit.ml,
               ),
               icon: const Icon(Icons.scale_outlined),
               label: Text(l10n.weighNow),
@@ -318,6 +321,9 @@ class _Stats extends StatelessWidget {
                   ? null
                   : '${formatNumber(m.remainingGrams!)} ${l10n.unitG}',
             ),
+            caption: m.packagingWeight == null
+                ? null
+                : l10n.statPackaging(formatNumber(m.packagingWeight!)),
           ),
         ],
       ],
@@ -535,6 +541,7 @@ class _Info extends StatelessWidget {
     final theme = Theme.of(context);
     final locale = Localizations.localeOf(context).toLanguageTag();
     final p = details.product;
+    final m = details.metrics;
     String? date(int? ms) =>
         ms == null ? null : formatShortDate(fromEpochMs(ms), locale);
     final expiry = effectiveExpiry(
@@ -555,7 +562,13 @@ class _Info extends StatelessWidget {
       ),
       (
         l10n.fieldEmptyWeight,
-        p.emptyBottleWeight == null ? null : formatNumber(p.emptyBottleWeight!),
+        switch (m.packagingWeight) {
+          null => null,
+          final g when m.packagingIsDerived => l10n.packagingCalculated(
+            formatNumber(g),
+          ),
+          final g => formatNumber(g),
+        },
       ),
       (l10n.finishedOn, date(p.finishedDate)),
       (

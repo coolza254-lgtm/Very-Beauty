@@ -75,9 +75,9 @@
   "fieldOpenedDate": "วันที่เปิดใช้",
   "fieldPao": "อายุหลังเปิด (เดือน)",
   "fieldExpiry": "วันหมดอายุบนฉลาก",
-  "fieldStartWeight": "น้ำหนักตอนเริ่มใช้ (กรัม รวมขวด)",
-  "fieldEmptyWeight": "น้ำหนักขวดเปล่า (กรัม)",
-  "fieldEmptyWeightHelp": "ถ้ารู้ จะคำนวณปริมาณที่เหลือได้แม่นขึ้น",
+  "fieldStartWeight": "น้ำหนักทั้งหมดตอนยังไม่ใช้ (กรัม รวมบรรจุภัณฑ์)",
+  "fieldEmptyWeight": "น้ำหนักบรรจุภัณฑ์เปล่า (กรัม)",
+  "fieldEmptyWeightHelp": "เว้นว่างได้ แอพจะคำนวณให้จาก น้ำหนักทั้งหมด − ปริมาณสุทธิ",
   "fieldNote": "โน้ต",
   "fieldIngredients": "ส่วนผสม",
   "fieldIngredientsHelp": "พิมพ์ชื่อไทยหรืออังกฤษแล้วเลือกจากรายการ หรือวางรายชื่อจากฉลาก (คั่นด้วยจุลภาค)",
@@ -135,7 +135,7 @@
       }
     }
   },
-  "weighFirst": "ครั้งแรก จะใช้เป็นน้ำหนักเริ่มต้น",
+  "weighFirst": "ครั้งแรก ชั่งตอนยังไม่ได้ใช้ (รวมบรรจุภัณฑ์) จะใช้เป็นน้ำหนักเริ่มต้น",
   "weighHeavier": "หนักกว่าครั้งก่อน ตรวจสอบอีกครั้งนะ",
   "weighEmpty": "ยังไม่มีการชั่ง",
   "skinWhileUsing": "ผิวช่วงที่ใช้สินค้านี้",
@@ -644,5 +644,61 @@
   "ingredientsCaution": "ควรรู้",
   "ingredientsNoMatch": "ไม่พบส่วนผสมที่ค้นหา",
   "ingredientsDisclaimer": "ข้อมูลทั่วไปเพื่อประกอบการเลือกใช้ ไม่ใช่คำแนะนำทางการแพทย์",
-  "ingredientsFilterAll": "ทุกหน้าที่"
+  "ingredientsFilterAll": "ทุกหน้าที่",
+  "fieldEmptyWeightAuto": "เว้นว่างได้ — คำนวณให้: {start} − {net} = {packaging} กรัม",
+  "@fieldEmptyWeightAuto": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "net": {
+        "type": "String"
+      },
+      "packaging": {
+        "type": "String"
+      }
+    }
+  },
+  "packagingCalculated": "{grams} (คำนวณ)",
+  "@packagingCalculated": {
+    "placeholders": {
+      "grams": {
+        "type": "String"
+      }
+    }
+  },
+  "statPackaging": "บรรจุภัณฑ์ {grams} กรัม",
+  "@statPackaging": {
+    "placeholders": {
+      "grams": {
+        "type": "String"
+      }
+    }
+  },
+  "weighPackagingPreview": "บรรจุภัณฑ์ ≈ {packaging} กรัม ({total} − ปริมาณสุทธิ {net})",
+  "@weighPackagingPreview": {
+    "placeholders": {
+      "packaging": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      },
+      "net": {
+        "type": "String"
+      }
+    }
+  },
+  "weighRemainingPreview": "เหลือ {grams} กรัม ({percent}%)",
+  "@weighRemainingPreview": {
+    "placeholders": {
+      "grams": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "weighMlNote": "สินค้าหน่วย มล. คิดประมาณ 1 มล. ≈ 1 กรัม"
 }

@@ -221,14 +221,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fieldExpiry => 'Printed expiry date';
 
   @override
-  String get fieldStartWeight => 'Starting weight (g, incl. container)';
+  String get fieldStartWeight => 'Full weight before use (g, with container)';
 
   @override
   String get fieldEmptyWeight => 'Empty container weight (g)';
 
   @override
   String get fieldEmptyWeightHelp =>
-      'Optional — makes the remaining amount exact';
+      'Leave blank to calculate it: full weight − net content';
 
   @override
   String get fieldNote => 'Note';
@@ -328,7 +328,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get weighFirst => 'First weighing — becomes the starting weight';
+  String get weighFirst =>
+      'First weighing — weigh it unused (with container); this becomes the start weight';
 
   @override
   String get weighHeavier => 'Heavier than last time — please double-check';
@@ -1191,4 +1192,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ingredientsFilterAll => 'All functions';
+
+  @override
+  String fieldEmptyWeightAuto(String start, String net, String packaging) {
+    return 'Leave blank — calculated: $start − $net = $packaging g';
+  }
+
+  @override
+  String packagingCalculated(String grams) {
+    return '$grams (calculated)';
+  }
+
+  @override
+  String statPackaging(String grams) {
+    return 'Container $grams g';
+  }
+
+  @override
+  String weighPackagingPreview(String packaging, String total, String net) {
+    return 'Container ≈ $packaging g ($total − net content $net)';
+  }
+
+  @override
+  String weighRemainingPreview(String grams, String percent) {
+    return '$grams g left ($percent%)';
+  }
+
+  @override
+  String get weighMlNote => 'For ml products, 1 ml ≈ 1 g is assumed';
 }

@@ -509,19 +509,19 @@ abstract class AppLocalizations {
   /// No description provided for @fieldStartWeight.
   ///
   /// In th, this message translates to:
-  /// **'น้ำหนักตอนเริ่มใช้ (กรัม รวมขวด)'**
+  /// **'น้ำหนักทั้งหมดตอนยังไม่ใช้ (กรัม รวมบรรจุภัณฑ์)'**
   String get fieldStartWeight;
 
   /// No description provided for @fieldEmptyWeight.
   ///
   /// In th, this message translates to:
-  /// **'น้ำหนักขวดเปล่า (กรัม)'**
+  /// **'น้ำหนักบรรจุภัณฑ์เปล่า (กรัม)'**
   String get fieldEmptyWeight;
 
   /// No description provided for @fieldEmptyWeightHelp.
   ///
   /// In th, this message translates to:
-  /// **'ถ้ารู้ จะคำนวณปริมาณที่เหลือได้แม่นขึ้น'**
+  /// **'เว้นว่างได้ แอพจะคำนวณให้จาก น้ำหนักทั้งหมด − ปริมาณสุทธิ'**
   String get fieldEmptyWeightHelp;
 
   /// No description provided for @fieldNote.
@@ -701,7 +701,7 @@ abstract class AppLocalizations {
   /// No description provided for @weighFirst.
   ///
   /// In th, this message translates to:
-  /// **'ครั้งแรก จะใช้เป็นน้ำหนักเริ่มต้น'**
+  /// **'ครั้งแรก ชั่งตอนยังไม่ได้ใช้ (รวมบรรจุภัณฑ์) จะใช้เป็นน้ำหนักเริ่มต้น'**
   String get weighFirst;
 
   /// No description provided for @weighHeavier.
@@ -2251,6 +2251,42 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'ทุกหน้าที่'**
   String get ingredientsFilterAll;
+
+  /// No description provided for @fieldEmptyWeightAuto.
+  ///
+  /// In th, this message translates to:
+  /// **'เว้นว่างได้ — คำนวณให้: {start} − {net} = {packaging} กรัม'**
+  String fieldEmptyWeightAuto(String start, String net, String packaging);
+
+  /// No description provided for @packagingCalculated.
+  ///
+  /// In th, this message translates to:
+  /// **'{grams} (คำนวณ)'**
+  String packagingCalculated(String grams);
+
+  /// No description provided for @statPackaging.
+  ///
+  /// In th, this message translates to:
+  /// **'บรรจุภัณฑ์ {grams} กรัม'**
+  String statPackaging(String grams);
+
+  /// No description provided for @weighPackagingPreview.
+  ///
+  /// In th, this message translates to:
+  /// **'บรรจุภัณฑ์ ≈ {packaging} กรัม ({total} − ปริมาณสุทธิ {net})'**
+  String weighPackagingPreview(String packaging, String total, String net);
+
+  /// No description provided for @weighRemainingPreview.
+  ///
+  /// In th, this message translates to:
+  /// **'เหลือ {grams} กรัม ({percent}%)'**
+  String weighRemainingPreview(String grams, String percent);
+
+  /// No description provided for @weighMlNote.
+  ///
+  /// In th, this message translates to:
+  /// **'สินค้าหน่วย มล. คิดประมาณ 1 มล. ≈ 1 กรัม'**
+  String get weighMlNote;
 }
 
 class _AppLocalizationsDelegate

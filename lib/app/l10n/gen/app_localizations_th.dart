@@ -221,13 +221,15 @@ class AppLocalizationsTh extends AppLocalizations {
   String get fieldExpiry => 'วันหมดอายุบนฉลาก';
 
   @override
-  String get fieldStartWeight => 'น้ำหนักตอนเริ่มใช้ (กรัม รวมขวด)';
+  String get fieldStartWeight =>
+      'น้ำหนักทั้งหมดตอนยังไม่ใช้ (กรัม รวมบรรจุภัณฑ์)';
 
   @override
-  String get fieldEmptyWeight => 'น้ำหนักขวดเปล่า (กรัม)';
+  String get fieldEmptyWeight => 'น้ำหนักบรรจุภัณฑ์เปล่า (กรัม)';
 
   @override
-  String get fieldEmptyWeightHelp => 'ถ้ารู้ จะคำนวณปริมาณที่เหลือได้แม่นขึ้น';
+  String get fieldEmptyWeightHelp =>
+      'เว้นว่างได้ แอพจะคำนวณให้จาก น้ำหนักทั้งหมด − ปริมาณสุทธิ';
 
   @override
   String get fieldNote => 'โน้ต';
@@ -327,7 +329,8 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get weighFirst => 'ครั้งแรก จะใช้เป็นน้ำหนักเริ่มต้น';
+  String get weighFirst =>
+      'ครั้งแรก ชั่งตอนยังไม่ได้ใช้ (รวมบรรจุภัณฑ์) จะใช้เป็นน้ำหนักเริ่มต้น';
 
   @override
   String get weighHeavier => 'หนักกว่าครั้งก่อน ตรวจสอบอีกครั้งนะ';
@@ -1188,4 +1191,32 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ingredientsFilterAll => 'ทุกหน้าที่';
+
+  @override
+  String fieldEmptyWeightAuto(String start, String net, String packaging) {
+    return 'เว้นว่างได้ — คำนวณให้: $start − $net = $packaging กรัม';
+  }
+
+  @override
+  String packagingCalculated(String grams) {
+    return '$grams (คำนวณ)';
+  }
+
+  @override
+  String statPackaging(String grams) {
+    return 'บรรจุภัณฑ์ $grams กรัม';
+  }
+
+  @override
+  String weighPackagingPreview(String packaging, String total, String net) {
+    return 'บรรจุภัณฑ์ ≈ $packaging กรัม ($total − ปริมาณสุทธิ $net)';
+  }
+
+  @override
+  String weighRemainingPreview(String grams, String percent) {
+    return 'เหลือ $grams กรัม ($percent%)';
+  }
+
+  @override
+  String get weighMlNote => 'สินค้าหน่วย มล. คิดประมาณ 1 มล. ≈ 1 กรัม';
 }

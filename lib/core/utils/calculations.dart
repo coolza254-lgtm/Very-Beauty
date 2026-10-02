@@ -31,6 +31,22 @@ double? usedGrams({required double? start, required double? latest}) {
 bool isWeightAnomaly({required double? start, required double? latest}) =>
     start != null && latest != null && latest > start;
 
+/// Weight of the empty container (bottle, tube, jar, cap).
+///
+/// Uses the measured empty weight when the user entered one, otherwise
+/// derives it from the first full weighing: `start − netContent` (the label's
+/// net content). Null when neither works or the result is not positive.
+double? packagingWeight({
+  required double? emptyBottle,
+  required double? start,
+  required double? netContent,
+}) {
+  if (emptyBottle != null) return emptyBottle;
+  if (start == null || netContent == null || netContent <= 0) return null;
+  final packaging = start - netContent;
+  return packaging > 0 ? packaging : null;
+}
+
 /// Grams of product left. Uses the empty-container weight when known,
 /// otherwise `netContent − used`.
 double? remainingGrams({
@@ -233,6 +249,8 @@ class ProductMetrics {
     this.latestWeight,
     this.lastWeighedAt,
     this.weightAnomaly = false,
+    this.packagingWeight,
+    this.packagingIsDerived = false,
   });
 
   final double? usedGrams;
@@ -246,6 +264,12 @@ class ProductMetrics {
   final double? latestWeight;
   final DateTime? lastWeighedAt;
   final bool weightAnomaly;
+
+  /// Empty container weight, measured or derived (see [packagingWeight]).
+  final double? packagingWeight;
+
+  /// True when [packagingWeight] was calculated as `start − netContent`.
+  final bool packagingIsDerived;
 }
 
 ProductMetrics computeProductMetrics(ProductInputs input) {
@@ -258,9 +282,14 @@ ProductMetrics computeProductMetrics(ProductInputs input) {
   final latestGrams = latest?.grams;
 
   final used = usedGrams(start: start, latest: latestGrams);
+  final packaging = packagingWeight(
+    emptyBottle: input.emptyBottleWeight,
+    start: start,
+    netContent: input.netContent,
+  );
   final remaining = remainingGrams(
     latest: latestGrams,
-    emptyBottle: input.emptyBottleWeight,
+    emptyBottle: packaging,
     netContent: input.netContent,
     used: used,
   );
@@ -277,7 +306,7 @@ ProductMetrics computeProductMetrics(ProductInputs input) {
     remaining: remainingPercent(
       start: start,
       latest: latestGrams,
-      emptyBottle: input.emptyBottleWeight,
+      emptyBottle: packaging,
       netContent: input.netContent,
       isMillilitres: input.isMillilitres,
     ),
@@ -295,6 +324,8 @@ ProductMetrics computeProductMetrics(ProductInputs input) {
     costPerUse: costPerUse(costUsed: cost, usageCount: input.usageCount),
     latestWeight: latestGrams,
     lastWeighedAt: latest?.at,
+    packagingWeight: packaging,
+    packagingIsDerived: packaging != null && input.emptyBottleWeight == null,
     weightAnomaly: isWeightAnomaly(start: start, latest: latestGrams),
   );
 }
