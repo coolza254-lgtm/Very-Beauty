@@ -908,4 +908,121 @@ class AppLocalizationsEn extends AppLocalizations {
   String perUseShort(String price) {
     return '$price/use';
   }
+
+  @override
+  String get settingsLanguage => 'Language';
+
+  @override
+  String get languageThai => 'ไทย';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get settingsPrivacy => 'Privacy';
+
+  @override
+  String get settingsAppLock => 'App lock';
+
+  @override
+  String get settingsAppLockHint =>
+      'Use fingerprint, face or your phone\'s PIN to open the app';
+
+  @override
+  String get settingsAppLockUnavailable =>
+      'This phone has no screen lock or biometrics set up';
+
+  @override
+  String get settingsSecureScreen => 'Block screenshots';
+
+  @override
+  String get settingsSecureScreenHint =>
+      'Prevents screenshots and screen recording (Android)';
+
+  @override
+  String get settingsData => 'Data & backup';
+
+  @override
+  String get backupExport => 'Back up (export)';
+
+  @override
+  String get backupExportHint =>
+      'Creates one .zip with all data and photos — save it anywhere you like';
+
+  @override
+  String get backupImport => 'Restore (import)';
+
+  @override
+  String get backupImportHint => 'Pick a backup .zip to bring your data back';
+
+  @override
+  String backupLast(String date) {
+    return 'Last backup $date';
+  }
+
+  @override
+  String get backupNever => 'Never backed up';
+
+  @override
+  String get backupReminders => 'Monthly backup reminder';
+
+  @override
+  String get backupWorking => 'Preparing backup…';
+
+  @override
+  String get backupRestoring => 'Restoring…';
+
+  @override
+  String get backupShareSubject => 'Very Beauty backup';
+
+  @override
+  String get backupDone => 'Backup saved';
+
+  @override
+  String backupFailed(String error) {
+    return 'Backup failed: $error';
+  }
+
+  @override
+  String get restoreConfirmTitle => 'Restore from this backup?';
+
+  @override
+  String restoreConfirmBody(String date, int count) {
+    return 'Backup from $date with $count photos.\n\nAll data and photos currently on this phone will be replaced. This can\'t be undone.';
+  }
+
+  @override
+  String get restoreAction => 'Replace with backup';
+
+  @override
+  String get restoreDone => 'Restore complete';
+
+  @override
+  String get restoreNotBackup => 'This isn\'t a Very Beauty backup file';
+
+  @override
+  String restoreNewer(String version) {
+    return 'This backup is from a newer app version ($version) — update the app first';
+  }
+
+  @override
+  String get restoreCorrupt =>
+      'The backup file is damaged — your current data is untouched';
+
+  @override
+  String alertBackupDue(int days) {
+    return 'No backup for $days days';
+  }
+
+  @override
+  String get lockTitle => 'Very Beauty is locked';
+
+  @override
+  String get lockUnlock => 'Unlock';
+
+  @override
+  String get lockReason => 'Confirm it\'s you to open Very Beauty';
+
+  @override
+  String get lockEnableReason => 'Confirm it\'s you to turn on app lock';
 }

@@ -10,7 +10,11 @@ import '../../app/router.dart';
 import '../../core/db/providers.dart';
 import '../../core/db/settings_dao.dart';
 import '../../core/notifications/permission.dart';
+import '../../core/security/app_lock.dart';
+import '../../core/utils/date_utils.dart';
+import '../../core/utils/formatters.dart';
 import 'about_screen.dart';
+import 'backup_actions.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -20,6 +24,8 @@ class SettingsScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final themeMode = ref.watch(themeModeProvider).value ?? ThemeMode.light;
+    final settings = ref.watch(settingsProvider).value ?? const {};
+    final language = settings[SettingKeys.locale] ?? 'th';
     return Scaffold(
       appBar: AppBar(title: Text(l10n.navSettings)),
       body: ListView(
@@ -30,21 +36,12 @@ class SettingsScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    const PastelIconBadge(
-                      icon: Icons.palette_outlined,
-                      color: BrandColors.blush,
-                      size: 40,
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      l10n.settingsTheme,
-                      style: theme.textTheme.titleMedium,
-                    ),
-                  ],
+                _CardHeader(
+                  icon: Icons.palette_outlined,
+                  color: BrandColors.blush,
+                  title: l10n.settingsTheme,
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 SizedBox(
                   width: double.infinity,
                   child: SegmentedButton<ThemeMode>(
@@ -67,11 +64,42 @@ class SettingsScreen extends ConsumerWidget {
                     onSelectionChanged: (s) => setThemeMode(ref, s.single),
                   ),
                 ),
+                const SizedBox(height: 20),
+                _CardHeader(
+                  icon: Icons.translate_rounded,
+                  color: BrandColors.sky,
+                  title: l10n.settingsLanguage,
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: SegmentedButton<String>(
+                    showSelectedIcon: false,
+                    segments: [
+                      ButtonSegment(
+                        value: 'th',
+                        label: Text(l10n.languageThai),
+                      ),
+                      ButtonSegment(
+                        value: 'en',
+                        label: Text(l10n.languageEnglish),
+                      ),
+                    ],
+                    selected: {language},
+                    onSelectionChanged: (s) => ref
+                        .read(settingsDaoProvider)
+                        .setValue(SettingKeys.locale, s.single),
+                  ),
+                ),
               ],
             ),
           ),
           SectionTitle(l10n.settingsNotifications),
           const _NotificationSettings(),
+          SectionTitle(l10n.settingsPrivacy),
+          const _PrivacySettings(),
+          SectionTitle(l10n.settingsData),
+          const _DataSettings(),
           SectionTitle(l10n.settingsAppInfo),
           SoftCard(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -98,6 +126,151 @@ class SettingsScreen extends ConsumerWidget {
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CardHeader extends StatelessWidget {
+  const _CardHeader({
+    required this.icon,
+    required this.color,
+    required this.title,
+  });
+
+  final IconData icon;
+  final Color color;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      PastelIconBadge(icon: icon, color: color, size: 40),
+      const SizedBox(width: 12),
+      Expanded(
+        child: Text(title, style: Theme.of(context).textTheme.titleMedium),
+      ),
+    ],
+  );
+}
+
+class _PrivacySettings extends ConsumerWidget {
+  const _PrivacySettings();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final settings = ref.watch(settingsProvider).value ?? const {};
+    final dao = ref.read(settingsDaoProvider);
+    return SoftCard(
+      padding: const EdgeInsets.fromLTRB(20, 4, 12, 4),
+      child: Column(
+        children: [
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            secondary: const PastelIconBadge(
+              icon: Icons.lock_outline_rounded,
+              color: BrandColors.lavender,
+              size: 40,
+            ),
+            title: Text(l10n.settingsAppLock),
+            subtitle: Text(l10n.settingsAppLockHint),
+            value: settings[SettingKeys.appLock] == '1',
+            onChanged: (on) async {
+              final auth = ref.read(deviceAuthProvider);
+              final messenger = ScaffoldMessenger.of(context);
+              if (on) {
+                if (!await auth.isAvailable()) {
+                  messenger.showSnackBar(
+                    SnackBar(content: Text(l10n.settingsAppLockUnavailable)),
+                  );
+                  return;
+                }
+                if (!await auth.authenticate(l10n.lockEnableReason)) return;
+              }
+              await dao.setValue(SettingKeys.appLock, on ? '1' : '0');
+            },
+          ),
+          if (Theme.of(context).platform == TargetPlatform.android) ...[
+            const Divider(),
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              secondary: const PastelIconBadge(
+                icon: Icons.screenshot_monitor_outlined,
+                color: BrandColors.mint,
+                size: 40,
+              ),
+              title: Text(l10n.settingsSecureScreen),
+              subtitle: Text(l10n.settingsSecureScreenHint),
+              value: settings[SettingKeys.secureScreen] == '1',
+              onChanged: (on) =>
+                  dao.setValue(SettingKeys.secureScreen, on ? '1' : '0'),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _DataSettings extends ConsumerWidget {
+  const _DataSettings();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final locale = Localizations.localeOf(context).toLanguageTag();
+    final settings = ref.watch(settingsProvider).value ?? const {};
+    final lastMs = int.tryParse(settings[SettingKeys.lastBackupAt] ?? '');
+    return SoftCard(
+      padding: const EdgeInsets.fromLTRB(20, 8, 12, 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const PastelIconBadge(
+              icon: Icons.cloud_upload_outlined,
+              color: BrandColors.sky,
+              size: 40,
+            ),
+            title: Text(l10n.backupExport),
+            subtitle: Text(l10n.backupExportHint),
+            onTap: () => exportBackup(context, ref),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const PastelIconBadge(
+              icon: Icons.settings_backup_restore_rounded,
+              color: BrandColors.butter,
+              size: 40,
+            ),
+            title: Text(l10n.backupImport),
+            subtitle: Text(l10n.backupImportHint),
+            onTap: () => importBackup(context, ref),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 4, top: 4),
+            child: Text(
+              lastMs == null
+                  ? l10n.backupNever
+                  : l10n.backupLast(
+                      formatShortDate(fromEpochMs(lastMs), locale),
+                    ),
+              style: theme.textTheme.bodySmall,
+            ),
+          ),
+          const Divider(),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(l10n.backupReminders),
+            value: settings[SettingKeys.backupReminders] != '0',
+            onChanged: (on) => ref
+                .read(settingsDaoProvider)
+                .setValue(SettingKeys.backupReminders, on ? '1' : '0'),
           ),
         ],
       ),

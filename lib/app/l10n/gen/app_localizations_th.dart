@@ -908,4 +908,119 @@ class AppLocalizationsTh extends AppLocalizations {
   String perUseShort(String price) {
     return '$price/ครั้ง';
   }
+
+  @override
+  String get settingsLanguage => 'ภาษา';
+
+  @override
+  String get languageThai => 'ไทย';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get settingsPrivacy => 'ความเป็นส่วนตัว';
+
+  @override
+  String get settingsAppLock => 'ล็อกแอพ';
+
+  @override
+  String get settingsAppLockHint =>
+      'ใช้ลายนิ้วมือ ใบหน้า หรือรหัสของเครื่องเพื่อเปิดแอพ';
+
+  @override
+  String get settingsAppLockUnavailable =>
+      'เครื่องนี้ยังไม่ได้ตั้งรหัสหรือไบโอเมตริก';
+
+  @override
+  String get settingsSecureScreen => 'ป้องกันการแคปหน้าจอ';
+
+  @override
+  String get settingsSecureScreenHint => 'กันการแคปหรืออัดหน้าจอแอพ (Android)';
+
+  @override
+  String get settingsData => 'ข้อมูลและการสำรอง';
+
+  @override
+  String get backupExport => 'สำรองข้อมูล (Export)';
+
+  @override
+  String get backupExportHint =>
+      'สร้างไฟล์ .zip รวมข้อมูลและรูปทั้งหมด แล้วเลือกเก็บไว้ที่ไหนก็ได้';
+
+  @override
+  String get backupImport => 'กู้คืนข้อมูล (Import)';
+
+  @override
+  String get backupImportHint => 'เลือกไฟล์สำรอง .zip เพื่อนำข้อมูลกลับมา';
+
+  @override
+  String backupLast(String date) {
+    return 'สำรองล่าสุด $date';
+  }
+
+  @override
+  String get backupNever => 'ยังไม่เคยสำรองข้อมูล';
+
+  @override
+  String get backupReminders => 'เตือนให้สำรองข้อมูลทุกเดือน';
+
+  @override
+  String get backupWorking => 'กำลังเตรียมไฟล์สำรอง…';
+
+  @override
+  String get backupRestoring => 'กำลังกู้คืนข้อมูล…';
+
+  @override
+  String get backupShareSubject => 'ไฟล์สำรอง Very Beauty';
+
+  @override
+  String get backupDone => 'สำรองข้อมูลแล้ว';
+
+  @override
+  String backupFailed(String error) {
+    return 'สำรองข้อมูลไม่สำเร็จ: $error';
+  }
+
+  @override
+  String get restoreConfirmTitle => 'กู้คืนข้อมูลจากไฟล์นี้?';
+
+  @override
+  String restoreConfirmBody(String date, int count) {
+    return 'ไฟล์สำรองวันที่ $date มีรูป $count รูป\n\nข้อมูลและรูปทั้งหมดในเครื่องตอนนี้จะถูกแทนที่ และย้อนกลับไม่ได้';
+  }
+
+  @override
+  String get restoreAction => 'แทนที่ด้วยข้อมูลสำรอง';
+
+  @override
+  String get restoreDone => 'กู้คืนข้อมูลเรียบร้อย';
+
+  @override
+  String get restoreNotBackup => 'ไฟล์นี้ไม่ใช่ไฟล์สำรองของ Very Beauty';
+
+  @override
+  String restoreNewer(String version) {
+    return 'ไฟล์สำรองนี้มาจากแอพเวอร์ชันใหม่กว่า ($version) อัปเดตแอพก่อนนะ';
+  }
+
+  @override
+  String get restoreCorrupt => 'ไฟล์สำรองเสียหาย ข้อมูลเดิมยังอยู่ครบ';
+
+  @override
+  String alertBackupDue(int days) {
+    return 'ไม่ได้สำรองข้อมูลมา $days วัน';
+  }
+
+  @override
+  String get lockTitle => 'Very Beauty ถูกล็อกไว้';
+
+  @override
+  String get lockUnlock => 'ปลดล็อก';
+
+  @override
+  String get lockReason => 'ยืนยันตัวตนเพื่อเปิด Very Beauty';
+
+  @override
+  String get lockEnableReason => 'ยืนยันตัวตนเพื่อเปิดใช้การล็อกแอพ';
 }

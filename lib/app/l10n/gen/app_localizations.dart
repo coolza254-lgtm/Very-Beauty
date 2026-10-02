@@ -1741,6 +1741,210 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'{price}/ครั้ง'**
   String perUseShort(String price);
+
+  /// No description provided for @settingsLanguage.
+  ///
+  /// In th, this message translates to:
+  /// **'ภาษา'**
+  String get settingsLanguage;
+
+  /// No description provided for @languageThai.
+  ///
+  /// In th, this message translates to:
+  /// **'ไทย'**
+  String get languageThai;
+
+  /// No description provided for @languageEnglish.
+  ///
+  /// In th, this message translates to:
+  /// **'English'**
+  String get languageEnglish;
+
+  /// No description provided for @settingsPrivacy.
+  ///
+  /// In th, this message translates to:
+  /// **'ความเป็นส่วนตัว'**
+  String get settingsPrivacy;
+
+  /// No description provided for @settingsAppLock.
+  ///
+  /// In th, this message translates to:
+  /// **'ล็อกแอพ'**
+  String get settingsAppLock;
+
+  /// No description provided for @settingsAppLockHint.
+  ///
+  /// In th, this message translates to:
+  /// **'ใช้ลายนิ้วมือ ใบหน้า หรือรหัสของเครื่องเพื่อเปิดแอพ'**
+  String get settingsAppLockHint;
+
+  /// No description provided for @settingsAppLockUnavailable.
+  ///
+  /// In th, this message translates to:
+  /// **'เครื่องนี้ยังไม่ได้ตั้งรหัสหรือไบโอเมตริก'**
+  String get settingsAppLockUnavailable;
+
+  /// No description provided for @settingsSecureScreen.
+  ///
+  /// In th, this message translates to:
+  /// **'ป้องกันการแคปหน้าจอ'**
+  String get settingsSecureScreen;
+
+  /// No description provided for @settingsSecureScreenHint.
+  ///
+  /// In th, this message translates to:
+  /// **'กันการแคปหรืออัดหน้าจอแอพ (Android)'**
+  String get settingsSecureScreenHint;
+
+  /// No description provided for @settingsData.
+  ///
+  /// In th, this message translates to:
+  /// **'ข้อมูลและการสำรอง'**
+  String get settingsData;
+
+  /// No description provided for @backupExport.
+  ///
+  /// In th, this message translates to:
+  /// **'สำรองข้อมูล (Export)'**
+  String get backupExport;
+
+  /// No description provided for @backupExportHint.
+  ///
+  /// In th, this message translates to:
+  /// **'สร้างไฟล์ .zip รวมข้อมูลและรูปทั้งหมด แล้วเลือกเก็บไว้ที่ไหนก็ได้'**
+  String get backupExportHint;
+
+  /// No description provided for @backupImport.
+  ///
+  /// In th, this message translates to:
+  /// **'กู้คืนข้อมูล (Import)'**
+  String get backupImport;
+
+  /// No description provided for @backupImportHint.
+  ///
+  /// In th, this message translates to:
+  /// **'เลือกไฟล์สำรอง .zip เพื่อนำข้อมูลกลับมา'**
+  String get backupImportHint;
+
+  /// No description provided for @backupLast.
+  ///
+  /// In th, this message translates to:
+  /// **'สำรองล่าสุด {date}'**
+  String backupLast(String date);
+
+  /// No description provided for @backupNever.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่เคยสำรองข้อมูล'**
+  String get backupNever;
+
+  /// No description provided for @backupReminders.
+  ///
+  /// In th, this message translates to:
+  /// **'เตือนให้สำรองข้อมูลทุกเดือน'**
+  String get backupReminders;
+
+  /// No description provided for @backupWorking.
+  ///
+  /// In th, this message translates to:
+  /// **'กำลังเตรียมไฟล์สำรอง…'**
+  String get backupWorking;
+
+  /// No description provided for @backupRestoring.
+  ///
+  /// In th, this message translates to:
+  /// **'กำลังกู้คืนข้อมูล…'**
+  String get backupRestoring;
+
+  /// No description provided for @backupShareSubject.
+  ///
+  /// In th, this message translates to:
+  /// **'ไฟล์สำรอง Very Beauty'**
+  String get backupShareSubject;
+
+  /// No description provided for @backupDone.
+  ///
+  /// In th, this message translates to:
+  /// **'สำรองข้อมูลแล้ว'**
+  String get backupDone;
+
+  /// No description provided for @backupFailed.
+  ///
+  /// In th, this message translates to:
+  /// **'สำรองข้อมูลไม่สำเร็จ: {error}'**
+  String backupFailed(String error);
+
+  /// No description provided for @restoreConfirmTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'กู้คืนข้อมูลจากไฟล์นี้?'**
+  String get restoreConfirmTitle;
+
+  /// No description provided for @restoreConfirmBody.
+  ///
+  /// In th, this message translates to:
+  /// **'ไฟล์สำรองวันที่ {date} มีรูป {count} รูป\n\nข้อมูลและรูปทั้งหมดในเครื่องตอนนี้จะถูกแทนที่ และย้อนกลับไม่ได้'**
+  String restoreConfirmBody(String date, int count);
+
+  /// No description provided for @restoreAction.
+  ///
+  /// In th, this message translates to:
+  /// **'แทนที่ด้วยข้อมูลสำรอง'**
+  String get restoreAction;
+
+  /// No description provided for @restoreDone.
+  ///
+  /// In th, this message translates to:
+  /// **'กู้คืนข้อมูลเรียบร้อย'**
+  String get restoreDone;
+
+  /// No description provided for @restoreNotBackup.
+  ///
+  /// In th, this message translates to:
+  /// **'ไฟล์นี้ไม่ใช่ไฟล์สำรองของ Very Beauty'**
+  String get restoreNotBackup;
+
+  /// No description provided for @restoreNewer.
+  ///
+  /// In th, this message translates to:
+  /// **'ไฟล์สำรองนี้มาจากแอพเวอร์ชันใหม่กว่า ({version}) อัปเดตแอพก่อนนะ'**
+  String restoreNewer(String version);
+
+  /// No description provided for @restoreCorrupt.
+  ///
+  /// In th, this message translates to:
+  /// **'ไฟล์สำรองเสียหาย ข้อมูลเดิมยังอยู่ครบ'**
+  String get restoreCorrupt;
+
+  /// No description provided for @alertBackupDue.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่ได้สำรองข้อมูลมา {days} วัน'**
+  String alertBackupDue(int days);
+
+  /// No description provided for @lockTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'Very Beauty ถูกล็อกไว้'**
+  String get lockTitle;
+
+  /// No description provided for @lockUnlock.
+  ///
+  /// In th, this message translates to:
+  /// **'ปลดล็อก'**
+  String get lockUnlock;
+
+  /// No description provided for @lockReason.
+  ///
+  /// In th, this message translates to:
+  /// **'ยืนยันตัวตนเพื่อเปิด Very Beauty'**
+  String get lockReason;
+
+  /// No description provided for @lockEnableReason.
+  ///
+  /// In th, this message translates to:
+  /// **'ยืนยันตัวตนเพื่อเปิดใช้การล็อกแอพ'**
+  String get lockEnableReason;
 }
 
 class _AppLocalizationsDelegate

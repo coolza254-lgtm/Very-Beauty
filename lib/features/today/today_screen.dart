@@ -200,13 +200,15 @@ class _Alerts extends ConsumerWidget {
     final locale = Localizations.localeOf(context).toLanguageTag();
     final products = ref.watch(productsProvider).value ?? const [];
     final settings = ref.watch(settingsProvider).value ?? const {};
+    final today = ref.watch(currentDayProvider);
     final alerts = computeTodayAlerts(
       products,
-      now: ref.watch(currentDayProvider),
+      now: today,
       weighDueDays:
           int.tryParse(settings[SettingKeys.weighDueDays] ?? '') ?? 14,
     );
-    if (alerts.isEmpty) return const SizedBox.shrink();
+    final backupDays = backupDueDays(settings, today);
+    if (alerts.isEmpty && backupDays == null) return const SizedBox.shrink();
 
     String date(DateTime d) => formatShortDate(d, locale);
     String text(TodayAlert a) => switch (a.kind) {
@@ -234,6 +236,20 @@ class _Alerts extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(vertical: 6),
           child: Column(
             children: [
+              if (backupDays != null)
+                ListTile(
+                  leading: const PastelIconBadge(
+                    icon: Icons.cloud_upload_outlined,
+                    color: BrandColors.lavender,
+                    size: 36,
+                  ),
+                  title: Text(
+                    l10n.alertBackupDue(backupDays),
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                  trailing: const Icon(Icons.chevron_right_rounded),
+                  onTap: () => context.go(AppRoutes.settings),
+                ),
               for (final a in alerts.take(5))
                 ListTile(
                   leading: PastelIconBadge(

@@ -493,5 +493,77 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsLanguage": "ภาษา",
+  "languageThai": "ไทย",
+  "languageEnglish": "English",
+  "settingsPrivacy": "ความเป็นส่วนตัว",
+  "settingsAppLock": "ล็อกแอพ",
+  "settingsAppLockHint": "ใช้ลายนิ้วมือ ใบหน้า หรือรหัสของเครื่องเพื่อเปิดแอพ",
+  "settingsAppLockUnavailable": "เครื่องนี้ยังไม่ได้ตั้งรหัสหรือไบโอเมตริก",
+  "settingsSecureScreen": "ป้องกันการแคปหน้าจอ",
+  "settingsSecureScreenHint": "กันการแคปหรืออัดหน้าจอแอพ (Android)",
+  "settingsData": "ข้อมูลและการสำรอง",
+  "backupExport": "สำรองข้อมูล (Export)",
+  "backupExportHint": "สร้างไฟล์ .zip รวมข้อมูลและรูปทั้งหมด แล้วเลือกเก็บไว้ที่ไหนก็ได้",
+  "backupImport": "กู้คืนข้อมูล (Import)",
+  "backupImportHint": "เลือกไฟล์สำรอง .zip เพื่อนำข้อมูลกลับมา",
+  "backupLast": "สำรองล่าสุด {date}",
+  "@backupLast": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "backupNever": "ยังไม่เคยสำรองข้อมูล",
+  "backupReminders": "เตือนให้สำรองข้อมูลทุกเดือน",
+  "backupWorking": "กำลังเตรียมไฟล์สำรอง…",
+  "backupRestoring": "กำลังกู้คืนข้อมูล…",
+  "backupShareSubject": "ไฟล์สำรอง Very Beauty",
+  "backupDone": "สำรองข้อมูลแล้ว",
+  "backupFailed": "สำรองข้อมูลไม่สำเร็จ: {error}",
+  "@backupFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "restoreConfirmTitle": "กู้คืนข้อมูลจากไฟล์นี้?",
+  "restoreConfirmBody": "ไฟล์สำรองวันที่ {date} มีรูป {count} รูป\n\nข้อมูลและรูปทั้งหมดในเครื่องตอนนี้จะถูกแทนที่ และย้อนกลับไม่ได้",
+  "@restoreConfirmBody": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "restoreAction": "แทนที่ด้วยข้อมูลสำรอง",
+  "restoreDone": "กู้คืนข้อมูลเรียบร้อย",
+  "restoreNotBackup": "ไฟล์นี้ไม่ใช่ไฟล์สำรองของ Very Beauty",
+  "restoreNewer": "ไฟล์สำรองนี้มาจากแอพเวอร์ชันใหม่กว่า ({version}) อัปเดตแอพก่อนนะ",
+  "@restoreNewer": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "restoreCorrupt": "ไฟล์สำรองเสียหาย ข้อมูลเดิมยังอยู่ครบ",
+  "alertBackupDue": "ไม่ได้สำรองข้อมูลมา {days} วัน",
+  "@alertBackupDue": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "lockTitle": "Very Beauty ถูกล็อกไว้",
+  "lockUnlock": "ปลดล็อก",
+  "lockReason": "ยืนยันตัวตนเพื่อเปิด Very Beauty",
+  "lockEnableReason": "ยืนยันตัวตนเพื่อเปิดใช้การล็อกแอพ"
 }

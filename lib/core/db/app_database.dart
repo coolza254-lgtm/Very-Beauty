@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 import 'app_database.steps.dart';
 import 'enums.dart';
@@ -29,6 +33,17 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   static const databaseName = 'very_beauty';
+
+  bool _closed = false;
+
+  /// Safe to call more than once (restore closes the database before the
+  /// provider that owns it is disposed).
+  @override
+  Future<void> close() async {
+    if (_closed) return;
+    _closed = true;
+    await super.close();
+  }
 
   /// Bump this and add a step in [migration] for every schema change, then
   /// run `dart run drift_dev make-migrations` (see README) and update
@@ -81,5 +96,19 @@ class AppDatabase extends _$AppDatabase {
     });
   }
 
-  static QueryExecutor _openConnection() => driftDatabase(name: databaseName);
+  /// `<documents>/very_beauty.sqlite` — drift_flutter's default location,
+  /// spelled out so backup/restore can replace exactly this file.
+  static Future<File> defaultFile() async => File(
+    p.join(
+      (await getApplicationDocumentsDirectory()).path,
+      '$databaseName.sqlite',
+    ),
+  );
+
+  static QueryExecutor _openConnection() => driftDatabase(
+    name: databaseName,
+    native: DriftNativeOptions(
+      databasePath: () async => (await defaultFile()).path,
+    ),
+  );
 }

@@ -6,7 +6,9 @@
 		<true/>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
-		<key>NSCameraUsageDescription</key>
+		<key>NSFaceIDUsageDescription</key>
+	<string>ใช้ Face ID เพื่อล็อกแอพ ปกป้องรูปและข้อมูลผิวของคุณ</string>
+	<key>NSCameraUsageDescription</key>
 	<string>ใช้กล้องเพื่อถ่ายรูปผิวไว้เทียบผล รูปจะเก็บในแอพนี้เท่านั้น</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>แอพไม่บันทึกเสียง แต่ระบบกล้องอาจขอสิทธิ์นี้</string>

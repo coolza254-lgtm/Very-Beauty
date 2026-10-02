@@ -79,15 +79,14 @@ void main() {
         ),
       );
       await Future<void>.delayed(const Duration(milliseconds: 200));
-      for (final element in find.byType(Image).evaluate()) {
-        final image = element.widget as Image;
-        await precacheImage(image.image, element);
-      }
-      await precacheImage(
+    });
+    await tester.pumpAndSettle();
+    await tester.runAsync(
+      () => precacheImage(
         const AssetImage('assets/branding/face_round.png'),
         tester.element(find.byType(Scaffold).first),
-      );
-    });
+      ),
+    );
     await tester.pumpAndSettle();
     if (tab != null) {
       await tester.tap(find.text(tab).last);
@@ -195,6 +194,15 @@ void main() {
       navigate: (t) => open(t, 'ค่าใช้จ่าย'),
     ),
     '90_settings': (t) => shoot(t, '90_settings', tab: 'ตั้งค่า'),
+    '91_settings_more': (t) => shoot(
+      t,
+      '91_settings_more',
+      tab: 'ตั้งค่า',
+      navigate: (t) async {
+        await t.drag(find.byType(ListView).last, const Offset(0, -900));
+        await t.pumpAndSettle();
+      },
+    ),
   };
   for (final MapEntry(key: name, value: body) in shots.entries) {
     testWidgets(name, body, skip: !_enabled);

@@ -30,6 +30,12 @@ abstract final class SettingKeys {
 
   /// Epoch ms of the first launch; anchors the first backup reminder.
   static const firstRunAt = 'first_run_at';
+
+  /// '1' when the app asks for biometrics/PIN on open.
+  static const appLock = 'app_lock';
+
+  /// '1' to block screenshots (Android FLAG_SECURE).
+  static const secureScreen = 'secure_screen';
 }
 
 @DriftAccessor(tables: [AppSettings])

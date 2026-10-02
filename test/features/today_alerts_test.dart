@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:very_beauty/core/db/app_database.dart';
 import 'package:very_beauty/core/db/products_dao.dart';
+import 'package:very_beauty/core/db/settings_dao.dart';
 import 'package:very_beauty/core/utils/calculations.dart';
 import 'package:very_beauty/features/today/today_alerts.dart';
 
@@ -100,5 +101,21 @@ void main() {
         isEmpty,
       );
     }
+  });
+
+  test('backup due after 30 days, unless turned off', () {
+    final old = '${DateTime(2026, 8, 1).millisecondsSinceEpoch}';
+    final recent = '${DateTime(2026, 9, 20).millisecondsSinceEpoch}';
+    expect(backupDueDays({SettingKeys.lastBackupAt: old}, _now), 62);
+    expect(backupDueDays({SettingKeys.lastBackupAt: recent}, _now), isNull);
+    expect(backupDueDays({SettingKeys.firstRunAt: old}, _now), 62);
+    expect(
+      backupDueDays({
+        SettingKeys.lastBackupAt: old,
+        SettingKeys.backupReminders: '0',
+      }, _now),
+      isNull,
+    );
+    expect(backupDueDays(const {}, _now), isNull);
   });
 }

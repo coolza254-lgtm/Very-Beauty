@@ -1,5 +1,6 @@
 import '../../core/db/app_database.dart';
 import '../../core/db/products_dao.dart';
+import '../../core/db/settings_dao.dart';
 import '../../core/utils/calculations.dart';
 import '../../core/utils/date_utils.dart';
 
@@ -83,4 +84,18 @@ List<TodayAlert> computeTodayAlerts(
   }
   alerts.sort((a, b) => a.kind.index.compareTo(b.kind.index));
   return alerts;
+}
+
+/// Days since the last backup (or first launch) when a backup reminder is
+/// due (30+ days and reminders on), otherwise null.
+int? backupDueDays(Map<String, String> settings, DateTime now) {
+  if (settings[SettingKeys.backupReminders] == '0') return null;
+  final ms = int.tryParse(
+    settings[SettingKeys.lastBackupAt] ??
+        settings[SettingKeys.firstRunAt] ??
+        '',
+  );
+  if (ms == null) return null;
+  final days = daysBetween(fromEpochMs(ms), now);
+  return days >= 30 ? days : null;
 }
