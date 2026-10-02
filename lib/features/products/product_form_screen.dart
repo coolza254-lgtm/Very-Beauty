@@ -13,12 +13,18 @@ import '../../core/db/products_dao.dart';
 import '../../core/db/providers.dart';
 import '../../core/utils/date_utils.dart';
 import '../../core/utils/formatters.dart';
+import 'barcode_fill.dart';
 import 'product_providers.dart';
 
 /// Add/edit form in two levels: the essentials up top, everything else in a
 /// collapsed "รายละเอียดเพิ่มเติม" section (docs/SPEC.md §2.4, §7.2).
 class ProductFormScreen extends ConsumerWidget {
-  const ProductFormScreen({super.key, this.productId, this.initialStatus});
+  const ProductFormScreen({
+    super.key,
+    this.productId,
+    this.initialStatus,
+    this.startWithScan = false,
+  });
 
   /// Null when creating.
   final int? productId;
@@ -26,10 +32,18 @@ class ProductFormScreen extends ConsumerWidget {
   /// Status preset for new products (e.g. wishlist).
   final ProductStatus? initialStatus;
 
+  /// Open the barcode scanner straight away (from the Products screen).
+  final bool startWithScan;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final id = productId;
-    if (id == null) return _ProductForm(initialStatus: initialStatus);
+    if (id == null) {
+      return _ProductForm(
+        initialStatus: initialStatus,
+        startWithScan: startWithScan,
+      );
+    }
     final details = ref.watch(productDetailsProvider(id));
     return switch (details) {
       AsyncData(value: final d?) => _ProductForm(existing: d),
@@ -43,10 +57,15 @@ class ProductFormScreen extends ConsumerWidget {
 }
 
 class _ProductForm extends ConsumerStatefulWidget {
-  const _ProductForm({this.existing, this.initialStatus});
+  const _ProductForm({
+    this.existing,
+    this.initialStatus,
+    this.startWithScan = false,
+  });
 
   final ProductDetails? existing;
   final ProductStatus? initialStatus;
+  final bool startWithScan;
 
   @override
   ConsumerState<_ProductForm> createState() => _ProductFormState();
@@ -72,6 +91,7 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
   DateTime? _openedDate;
   DateTime? _expiryDate;
   bool _saving = false;
+  String? _barcode;
 
   bool get _isEdit => widget.existing != null;
 
@@ -103,6 +123,10 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
         date(p?.openedDate) ??
         (p == null && _status == ProductStatus.inUse ? DateTime.now() : null);
     _expiryDate = date(p?.expiryDate);
+    _barcode = p?.barcode;
+    if (widget.startWithScan) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scan());
+    }
   }
 
   @override
@@ -159,6 +183,7 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
       emptyBottleWeight: parseNumber(_emptyWeight.text),
       note: _note.text,
       ingredients: _ingredients.text.split(RegExp(r'[,،、\n]')),
+      barcode: _barcode,
     );
     final dao = ref.read(productsDaoProvider);
     if (_isEdit) {
@@ -168,6 +193,32 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
       final id = await dao.createProduct(draft);
       if (mounted) context.pushReplacement(AppRoutes.productDetail(id));
     }
+  }
+
+  /// Scan, look up, and fill only the fields that are still empty.
+  Future<void> _scan() async {
+    final code = await ref.read(barcodeScannerProvider)(context);
+    if (code == null || !mounted) return;
+    setState(() => _barcode = code);
+    final info = await lookUpBarcode(context, ref, code);
+    if (info == null || !mounted) return;
+    String num(double v) => formatNumber(v).replaceAll(',', '');
+    void fill(TextEditingController c, String? value) {
+      if (c.text.trim().isEmpty && value != null) c.text = value;
+    }
+
+    setState(() {
+      fill(_name, info.name);
+      fill(_brand, info.brand);
+      fill(_netContent, info.netContent == null ? null : num(info.netContent!));
+      fill(_price, info.price == null ? null : num(info.price!));
+      _category ??= info.category;
+      if (info.netUnit != null &&
+          info.netContent != null &&
+          _netContent.text == num(info.netContent!)) {
+        _unit = info.netUnit!;
+      }
+    });
   }
 
   @override
@@ -195,6 +246,23 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
           children: [
+            OutlinedButton.icon(
+              icon: const Icon(Icons.qr_code_scanner_rounded),
+              label: Text(l10n.scanButton),
+              onPressed: _scan,
+            ),
+            if (_barcode != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Center(
+                  child: InputChip(
+                    avatar: const Icon(Icons.barcode_reader, size: 18),
+                    label: Text(l10n.scanBarcodeLabel(_barcode!)),
+                    onDeleted: () => setState(() => _barcode = null),
+                  ),
+                ),
+              ),
+            const SizedBox(height: 16),
             SoftCard(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

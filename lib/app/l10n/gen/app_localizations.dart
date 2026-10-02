@@ -209,7 +209,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutPrivacy.
   ///
   /// In th, this message translates to:
-  /// **'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน\n\nการเชื่อมต่ออินเทอร์เน็ตเพียงอย่างเดียวคือการตรวจสอบเวอร์ชันใหม่จาก GitHub (ปิดได้ในการตั้งค่า) ซึ่งไม่ส่งข้อมูลใดๆ ของคุณออกไป'**
+  /// **'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน\n\nแอพต่ออินเทอร์เน็ตแค่ 2 กรณี และปิดได้ในการตั้งค่าทั้งคู่:\n• ตรวจสอบเวอร์ชันใหม่จาก GitHub\n• ค้นหาข้อมูลสินค้าจากบาร์โค้ดใน Open Beauty Facts (ถามก่อนครั้งแรก ส่งเฉพาะเลขบาร์โค้ด)\nทั้งสองกรณีไม่ส่งข้อมูลใดๆ ของคุณออกไป'**
   String get aboutPrivacy;
 
   /// No description provided for @todayHello.
@@ -2023,6 +2023,114 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'ภายหลัง'**
   String get updateLater;
+
+  /// No description provided for @scanTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'สแกนบาร์โค้ด'**
+  String get scanTitle;
+
+  /// No description provided for @scanHint.
+  ///
+  /// In th, this message translates to:
+  /// **'เล็งบาร์โค้ดบนกล่องหรือขวดให้อยู่ในกรอบ'**
+  String get scanHint;
+
+  /// No description provided for @scanManual.
+  ///
+  /// In th, this message translates to:
+  /// **'พิมพ์เลขบาร์โค้ดเอง'**
+  String get scanManual;
+
+  /// No description provided for @scanManualTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'เลขบาร์โค้ด'**
+  String get scanManualTitle;
+
+  /// No description provided for @scanTorch.
+  ///
+  /// In th, this message translates to:
+  /// **'ไฟฉาย'**
+  String get scanTorch;
+
+  /// No description provided for @scanDenied.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่ได้รับสิทธิ์ใช้กล้อง เปิดได้ในการตั้งค่าของเครื่อง หรือพิมพ์เลขบาร์โค้ดเองได้'**
+  String get scanDenied;
+
+  /// No description provided for @scanButton.
+  ///
+  /// In th, this message translates to:
+  /// **'สแกนบาร์โค้ดเพื่อกรอกอัตโนมัติ'**
+  String get scanButton;
+
+  /// No description provided for @scanBarcodeLabel.
+  ///
+  /// In th, this message translates to:
+  /// **'บาร์โค้ด {code}'**
+  String scanBarcodeLabel(String code);
+
+  /// No description provided for @scanSearching.
+  ///
+  /// In th, this message translates to:
+  /// **'กำลังค้นหาข้อมูลสินค้า…'**
+  String get scanSearching;
+
+  /// No description provided for @scanFoundLocal.
+  ///
+  /// In th, this message translates to:
+  /// **'เคยบันทึกสินค้านี้แล้ว กรอกข้อมูลเดิมให้แล้ว'**
+  String get scanFoundLocal;
+
+  /// No description provided for @scanFoundOnline.
+  ///
+  /// In th, this message translates to:
+  /// **'พบข้อมูลสินค้า กรอกให้แล้ว ตรวจสอบอีกครั้งนะ'**
+  String get scanFoundOnline;
+
+  /// No description provided for @scanNotFound.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีข้อมูลบาร์โค้ดนี้ กรอกเองได้เลย ครั้งหน้าสแกนแล้วแอพจะจำได้'**
+  String get scanNotFound;
+
+  /// No description provided for @lookupConsentTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ค้นหาข้อมูลจากอินเทอร์เน็ต?'**
+  String get lookupConsentTitle;
+
+  /// No description provided for @lookupConsentBody.
+  ///
+  /// In th, this message translates to:
+  /// **'แอพจะส่งเฉพาะเลขบาร์โค้ดไปค้นในฐานข้อมูลเครื่องสำอางแบบเปิด Open Beauty Facts (ใช้ฟรี) ไม่ส่งข้อมูลอื่นของคุณ\n\nสินค้าไทยบางตัวอาจยังไม่มีข้อมูล'**
+  String get lookupConsentBody;
+
+  /// No description provided for @lookupConsentAllow.
+  ///
+  /// In th, this message translates to:
+  /// **'ค้นหา'**
+  String get lookupConsentAllow;
+
+  /// No description provided for @lookupConsentDeny.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่ต้อง'**
+  String get lookupConsentDeny;
+
+  /// No description provided for @settingsOnlineLookup.
+  ///
+  /// In th, this message translates to:
+  /// **'ค้นหาข้อมูลสินค้าจากบาร์โค้ดทางออนไลน์'**
+  String get settingsOnlineLookup;
+
+  /// No description provided for @settingsOnlineLookupHint.
+  ///
+  /// In th, this message translates to:
+  /// **'ส่งเฉพาะเลขบาร์โค้ดไปที่ Open Beauty Facts (ฟรี)'**
+  String get settingsOnlineLookupHint;
 }
 
 class _AppLocalizationsDelegate

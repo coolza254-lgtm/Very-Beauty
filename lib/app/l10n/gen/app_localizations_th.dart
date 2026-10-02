@@ -68,7 +68,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get aboutPrivacy =>
-      'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน\n\nการเชื่อมต่ออินเทอร์เน็ตเพียงอย่างเดียวคือการตรวจสอบเวอร์ชันใหม่จาก GitHub (ปิดได้ในการตั้งค่า) ซึ่งไม่ส่งข้อมูลใดๆ ของคุณออกไป';
+      'ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน\n\nแอพต่ออินเทอร์เน็ตแค่ 2 กรณี และปิดได้ในการตั้งค่าทั้งคู่:\n• ตรวจสอบเวอร์ชันใหม่จาก GitHub\n• ค้นหาข้อมูลสินค้าจากบาร์โค้ดใน Open Beauty Facts (ถามก่อนครั้งแรก ส่งเฉพาะเลขบาร์โค้ด)\nทั้งสองกรณีไม่ส่งข้อมูลใดๆ ของคุณออกไป';
 
   @override
   String get todayHello => 'สวัสดีค่ะ';
@@ -1067,4 +1067,64 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get updateLater => 'ภายหลัง';
+
+  @override
+  String get scanTitle => 'สแกนบาร์โค้ด';
+
+  @override
+  String get scanHint => 'เล็งบาร์โค้ดบนกล่องหรือขวดให้อยู่ในกรอบ';
+
+  @override
+  String get scanManual => 'พิมพ์เลขบาร์โค้ดเอง';
+
+  @override
+  String get scanManualTitle => 'เลขบาร์โค้ด';
+
+  @override
+  String get scanTorch => 'ไฟฉาย';
+
+  @override
+  String get scanDenied =>
+      'ไม่ได้รับสิทธิ์ใช้กล้อง เปิดได้ในการตั้งค่าของเครื่อง หรือพิมพ์เลขบาร์โค้ดเองได้';
+
+  @override
+  String get scanButton => 'สแกนบาร์โค้ดเพื่อกรอกอัตโนมัติ';
+
+  @override
+  String scanBarcodeLabel(String code) {
+    return 'บาร์โค้ด $code';
+  }
+
+  @override
+  String get scanSearching => 'กำลังค้นหาข้อมูลสินค้า…';
+
+  @override
+  String get scanFoundLocal => 'เคยบันทึกสินค้านี้แล้ว กรอกข้อมูลเดิมให้แล้ว';
+
+  @override
+  String get scanFoundOnline => 'พบข้อมูลสินค้า กรอกให้แล้ว ตรวจสอบอีกครั้งนะ';
+
+  @override
+  String get scanNotFound =>
+      'ยังไม่มีข้อมูลบาร์โค้ดนี้ กรอกเองได้เลย ครั้งหน้าสแกนแล้วแอพจะจำได้';
+
+  @override
+  String get lookupConsentTitle => 'ค้นหาข้อมูลจากอินเทอร์เน็ต?';
+
+  @override
+  String get lookupConsentBody =>
+      'แอพจะส่งเฉพาะเลขบาร์โค้ดไปค้นในฐานข้อมูลเครื่องสำอางแบบเปิด Open Beauty Facts (ใช้ฟรี) ไม่ส่งข้อมูลอื่นของคุณ\n\nสินค้าไทยบางตัวอาจยังไม่มีข้อมูล';
+
+  @override
+  String get lookupConsentAllow => 'ค้นหา';
+
+  @override
+  String get lookupConsentDeny => 'ไม่ต้อง';
+
+  @override
+  String get settingsOnlineLookup => 'ค้นหาข้อมูลสินค้าจากบาร์โค้ดทางออนไลน์';
+
+  @override
+  String get settingsOnlineLookupHint =>
+      'ส่งเฉพาะเลขบาร์โค้ดไปที่ Open Beauty Facts (ฟรี)';
 }

@@ -95,6 +95,7 @@ class ProductDraft {
     this.emptyBottleWeight,
     this.note,
     this.ingredients = const [],
+    this.barcode,
   });
 
   final String name;
@@ -113,6 +114,7 @@ class ProductDraft {
   final double? emptyBottleWeight;
   final String? note;
   final List<String> ingredients;
+  final String? barcode;
 
   ProductsCompanion toCompanion() => ProductsCompanion(
     name: Value(name.trim()),
@@ -130,6 +132,7 @@ class ProductDraft {
     startWeight: Value(startWeight),
     emptyBottleWeight: Value(emptyBottleWeight),
     note: Value(_blankToNull(note)),
+    barcode: Value(_blankToNull(barcode)),
   );
 }
 
@@ -222,6 +225,14 @@ class ProductsDao extends DatabaseAccessor<AppDatabase>
       daysWithSkinLog: entries.length,
     );
   }
+
+  /// The most recently added product with this barcode, if any (re-buys).
+  Future<Product?> findByBarcode(String barcode) =>
+      (select(products)
+            ..where((p) => p.barcode.equals(barcode.trim()))
+            ..orderBy([(p) => OrderingTerm.desc(p.createdAt)])
+            ..limit(1))
+          .getSingleOrNull();
 
   Future<List<String>> ingredientsOf(int productId) {
     final query =

@@ -21,7 +21,17 @@ class ProductsScreen extends ConsumerWidget {
     final hasAny = all.value?.isNotEmpty ?? false;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.navProducts)),
+      appBar: AppBar(
+        title: Text(l10n.navProducts),
+        actions: [
+          IconButton(
+            tooltip: l10n.scanTitle,
+            icon: const Icon(Icons.qr_code_scanner_rounded),
+            onPressed: () => context.push(AppRoutes.productScan),
+          ),
+          const SizedBox(width: 8),
+        ],
+      ),
       floatingActionButton: hasAny
           ? FloatingActionButton.extended(
               onPressed: () => context.push(

@@ -68,7 +68,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutPrivacy =>
-      'All your data and photos stay on this device. The app has no accounts, no servers and no tracking.\n\nThe only internet connection is checking GitHub for a new version (can be turned off in Settings), which sends none of your data.';
+      'All your data and photos stay on this device. The app has no accounts, no servers and no tracking.\n\nIt only goes online in two cases, both can be turned off in Settings:\n• checking GitHub for a new version\n• looking up a scanned barcode on Open Beauty Facts (asked first; only the barcode number is sent)\nNeither sends any of your data.';
 
   @override
   String get todayHello => 'Hello';
@@ -1069,4 +1069,65 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateLater => 'Later';
+
+  @override
+  String get scanTitle => 'Scan barcode';
+
+  @override
+  String get scanHint => 'Point at the barcode on the box or bottle';
+
+  @override
+  String get scanManual => 'Type the number instead';
+
+  @override
+  String get scanManualTitle => 'Barcode number';
+
+  @override
+  String get scanTorch => 'Torch';
+
+  @override
+  String get scanDenied =>
+      'Camera access is off — allow it in phone settings or type the number';
+
+  @override
+  String get scanButton => 'Scan barcode to fill in';
+
+  @override
+  String scanBarcodeLabel(String code) {
+    return 'Barcode $code';
+  }
+
+  @override
+  String get scanSearching => 'Looking up the product…';
+
+  @override
+  String get scanFoundLocal => 'You\'ve had this before — details filled in';
+
+  @override
+  String get scanFoundOnline =>
+      'Found it — details filled in, please double-check';
+
+  @override
+  String get scanNotFound =>
+      'No details for this barcode yet — fill it in and the app will remember it next time';
+
+  @override
+  String get lookupConsentTitle => 'Look it up online?';
+
+  @override
+  String get lookupConsentBody =>
+      'Only the barcode number is sent to Open Beauty Facts, a free open cosmetics database. Nothing else about you is shared.\n\nSome local products may not be listed yet.';
+
+  @override
+  String get lookupConsentAllow => 'Look it up';
+
+  @override
+  String get lookupConsentDeny => 'No thanks';
+
+  @override
+  String get settingsOnlineLookup => 'Look up barcodes online';
+
+  @override
+  String get settingsOnlineLookupHint =>
+      'Sends only the barcode number to Open Beauty Facts (free)';
 }

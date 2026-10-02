@@ -28,6 +28,7 @@ abstract final class AppRoutes {
 
   static const productNew = '/product/new';
   static const productNewWishlist = '/product/new?status=wishlist';
+  static const productScan = '/product/new?scan=1';
   static String productDetail(int id) => '/product/$id';
   static String productEdit(int id) => '/product/$id/edit';
 
@@ -85,6 +86,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           initialStatus: state.uri.queryParameters['status'] == 'wishlist'
               ? ProductStatus.wishlist
               : null,
+          startWithScan: state.uri.queryParameters['scan'] == '1',
         ),
       ),
       GoRoute(

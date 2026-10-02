@@ -235,6 +235,17 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _barcodeMeta = const VerificationMeta(
+    'barcode',
+  );
+  @override
+  late final GeneratedColumn<String> barcode = GeneratedColumn<String>(
+    'barcode',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -258,6 +269,7 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
     repurchase,
     note,
     finishedDate,
+    barcode,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -393,6 +405,12 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
         ),
       );
     }
+    if (data.containsKey('barcode')) {
+      context.handle(
+        _barcodeMeta,
+        barcode.isAcceptableOrUnknown(data['barcode']!, _barcodeMeta),
+      );
+    }
     return context;
   }
 
@@ -492,6 +510,10 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
         DriftSqlType.int,
         data['${effectivePrefix}finished_date'],
       ),
+      barcode: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}barcode'],
+      ),
     );
   }
 
@@ -535,6 +557,9 @@ class Product extends DataClass implements Insertable<Product> {
 
   /// When the product was closed as finished. Added in schema v2.
   final int? finishedDate;
+
+  /// EAN/UPC from the package, for re-buys and lookups. Added in schema v3.
+  final String? barcode;
   const Product({
     required this.id,
     required this.createdAt,
@@ -557,6 +582,7 @@ class Product extends DataClass implements Insertable<Product> {
     this.repurchase,
     this.note,
     this.finishedDate,
+    this.barcode,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -622,6 +648,9 @@ class Product extends DataClass implements Insertable<Product> {
     if (!nullToAbsent || finishedDate != null) {
       map['finished_date'] = Variable<int>(finishedDate);
     }
+    if (!nullToAbsent || barcode != null) {
+      map['barcode'] = Variable<String>(barcode);
+    }
     return map;
   }
 
@@ -674,6 +703,9 @@ class Product extends DataClass implements Insertable<Product> {
       finishedDate: finishedDate == null && nullToAbsent
           ? const Value.absent()
           : Value(finishedDate),
+      barcode: barcode == null && nullToAbsent
+          ? const Value.absent()
+          : Value(barcode),
     );
   }
 
@@ -706,6 +738,7 @@ class Product extends DataClass implements Insertable<Product> {
       repurchase: serializer.fromJson<bool?>(json['repurchase']),
       note: serializer.fromJson<String?>(json['note']),
       finishedDate: serializer.fromJson<int?>(json['finishedDate']),
+      barcode: serializer.fromJson<String?>(json['barcode']),
     );
   }
   @override
@@ -733,6 +766,7 @@ class Product extends DataClass implements Insertable<Product> {
       'repurchase': serializer.toJson<bool?>(repurchase),
       'note': serializer.toJson<String?>(note),
       'finishedDate': serializer.toJson<int?>(finishedDate),
+      'barcode': serializer.toJson<String?>(barcode),
     };
   }
 
@@ -758,6 +792,7 @@ class Product extends DataClass implements Insertable<Product> {
     Value<bool?> repurchase = const Value.absent(),
     Value<String?> note = const Value.absent(),
     Value<int?> finishedDate = const Value.absent(),
+    Value<String?> barcode = const Value.absent(),
   }) => Product(
     id: id ?? this.id,
     createdAt: createdAt ?? this.createdAt,
@@ -784,6 +819,7 @@ class Product extends DataClass implements Insertable<Product> {
     repurchase: repurchase.present ? repurchase.value : this.repurchase,
     note: note.present ? note.value : this.note,
     finishedDate: finishedDate.present ? finishedDate.value : this.finishedDate,
+    barcode: barcode.present ? barcode.value : this.barcode,
   );
   Product copyWithCompanion(ProductsCompanion data) {
     return Product(
@@ -826,6 +862,7 @@ class Product extends DataClass implements Insertable<Product> {
       finishedDate: data.finishedDate.present
           ? data.finishedDate.value
           : this.finishedDate,
+      barcode: data.barcode.present ? data.barcode.value : this.barcode,
     );
   }
 
@@ -852,7 +889,8 @@ class Product extends DataClass implements Insertable<Product> {
           ..write('rating: $rating, ')
           ..write('repurchase: $repurchase, ')
           ..write('note: $note, ')
-          ..write('finishedDate: $finishedDate')
+          ..write('finishedDate: $finishedDate, ')
+          ..write('barcode: $barcode')
           ..write(')'))
         .toString();
   }
@@ -880,6 +918,7 @@ class Product extends DataClass implements Insertable<Product> {
     repurchase,
     note,
     finishedDate,
+    barcode,
   ]);
   @override
   bool operator ==(Object other) =>
@@ -905,7 +944,8 @@ class Product extends DataClass implements Insertable<Product> {
           other.rating == this.rating &&
           other.repurchase == this.repurchase &&
           other.note == this.note &&
-          other.finishedDate == this.finishedDate);
+          other.finishedDate == this.finishedDate &&
+          other.barcode == this.barcode);
 }
 
 class ProductsCompanion extends UpdateCompanion<Product> {
@@ -930,6 +970,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
   final Value<bool?> repurchase;
   final Value<String?> note;
   final Value<int?> finishedDate;
+  final Value<String?> barcode;
   const ProductsCompanion({
     this.id = const Value.absent(),
     this.createdAt = const Value.absent(),
@@ -952,6 +993,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     this.repurchase = const Value.absent(),
     this.note = const Value.absent(),
     this.finishedDate = const Value.absent(),
+    this.barcode = const Value.absent(),
   });
   ProductsCompanion.insert({
     this.id = const Value.absent(),
@@ -975,6 +1017,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     this.repurchase = const Value.absent(),
     this.note = const Value.absent(),
     this.finishedDate = const Value.absent(),
+    this.barcode = const Value.absent(),
   }) : name = Value(name),
        category = Value(category);
   static Insertable<Product> custom({
@@ -999,6 +1042,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     Expression<bool>? repurchase,
     Expression<String>? note,
     Expression<int>? finishedDate,
+    Expression<String>? barcode,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1022,6 +1066,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
       if (repurchase != null) 'repurchase': repurchase,
       if (note != null) 'note': note,
       if (finishedDate != null) 'finished_date': finishedDate,
+      if (barcode != null) 'barcode': barcode,
     });
   }
 
@@ -1047,6 +1092,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     Value<bool?>? repurchase,
     Value<String?>? note,
     Value<int?>? finishedDate,
+    Value<String?>? barcode,
   }) {
     return ProductsCompanion(
       id: id ?? this.id,
@@ -1070,6 +1116,7 @@ class ProductsCompanion extends UpdateCompanion<Product> {
       repurchase: repurchase ?? this.repurchase,
       note: note ?? this.note,
       finishedDate: finishedDate ?? this.finishedDate,
+      barcode: barcode ?? this.barcode,
     );
   }
 
@@ -1145,6 +1192,9 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     if (finishedDate.present) {
       map['finished_date'] = Variable<int>(finishedDate.value);
     }
+    if (barcode.present) {
+      map['barcode'] = Variable<String>(barcode.value);
+    }
     return map;
   }
 
@@ -1171,7 +1221,8 @@ class ProductsCompanion extends UpdateCompanion<Product> {
           ..write('rating: $rating, ')
           ..write('repurchase: $repurchase, ')
           ..write('note: $note, ')
-          ..write('finishedDate: $finishedDate')
+          ..write('finishedDate: $finishedDate, ')
+          ..write('barcode: $barcode')
           ..write(')'))
         .toString();
   }
@@ -5639,6 +5690,7 @@ typedef $$ProductsTableCreateCompanionBuilder = ProductsCompanion Function({
   Value<bool?> repurchase,
   Value<String?> note,
   Value<int?> finishedDate,
+  Value<String?> barcode,
 });
 typedef $$ProductsTableUpdateCompanionBuilder = ProductsCompanion Function({
   Value<int> id,
@@ -5662,6 +5714,7 @@ typedef $$ProductsTableUpdateCompanionBuilder = ProductsCompanion Function({
   Value<bool?> repurchase,
   Value<String?> note,
   Value<int?> finishedDate,
+  Value<String?> barcode,
 });
 
 final class $$ProductsTableReferences
@@ -5855,6 +5908,11 @@ class $$ProductsTableFilterComposer
 
   ColumnFilters<int> get finishedDate => $composableBuilder(
     column: $table.finishedDate,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get barcode => $composableBuilder(
+    column: $table.barcode,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -6072,6 +6130,11 @@ class $$ProductsTableOrderingComposer
     column: $table.finishedDate,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get barcode => $composableBuilder(
+    column: $table.barcode,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$ProductsTableAnnotationComposer
@@ -6163,6 +6226,9 @@ class $$ProductsTableAnnotationComposer
     column: $table.finishedDate,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get barcode =>
+      $composableBuilder(column: $table.barcode, builder: (column) => column);
 
   Expression<T> weightLogsRefs<T extends Object>(
     Expression<T> Function($$WeightLogsTableAnnotationComposer a) f,
@@ -6319,6 +6385,7 @@ class $$ProductsTableTableManager
                 Value<bool?> repurchase = const Value.absent(),
                 Value<String?> note = const Value.absent(),
                 Value<int?> finishedDate = const Value.absent(),
+                Value<String?> barcode = const Value.absent(),
               }) => ProductsCompanion(
                 id: id,
                 createdAt: createdAt,
@@ -6341,6 +6408,7 @@ class $$ProductsTableTableManager
                 repurchase: repurchase,
                 note: note,
                 finishedDate: finishedDate,
+                barcode: barcode,
               ),
           createCompanionCallback:
               ({
@@ -6365,6 +6433,7 @@ class $$ProductsTableTableManager
                 Value<bool?> repurchase = const Value.absent(),
                 Value<String?> note = const Value.absent(),
                 Value<int?> finishedDate = const Value.absent(),
+                Value<String?> barcode = const Value.absent(),
               }) => ProductsCompanion.insert(
                 id: id,
                 createdAt: createdAt,
@@ -6387,6 +6456,7 @@ class $$ProductsTableTableManager
                 repurchase: repurchase,
                 note: note,
                 finishedDate: finishedDate,
+                barcode: barcode,
               ),
           withReferenceMapper: (p0) => p0
               .map(

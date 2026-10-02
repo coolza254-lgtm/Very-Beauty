@@ -1,7 +1,6 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
+
+import '../net/http_json.dart';
 
 /// The installed app's version.
 class AppVersionInfo {
@@ -159,23 +158,4 @@ int compareVersions(String a, String b) {
     if (x != y) return x.compareTo(y);
   }
   return 0;
-}
-
-/// Minimal GET returning decoded JSON. No cookies, ids or user data.
-Future<Object?> getJson(Uri uri, Duration timeout) async {
-  final client = HttpClient()..connectionTimeout = timeout;
-  try {
-    final request = await client.getUrl(uri).timeout(timeout);
-    request.headers
-      ..set(HttpHeaders.acceptHeader, 'application/json')
-      ..set(HttpHeaders.userAgentHeader, 'VeryBeauty-update-check');
-    final response = await request.close().timeout(timeout);
-    if (response.statusCode != 200) {
-      throw HttpException('HTTP ${response.statusCode}', uri: uri);
-    }
-    final body = await response.transform(utf8.decoder).join().timeout(timeout);
-    return jsonDecode(body);
-  } finally {
-    client.close(force: true);
-  }
 }

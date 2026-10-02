@@ -19,6 +19,7 @@
 
 1. **Offline เต็มรูปแบบ**: ทุกฟีเจอร์หลักทำงานได้โดยไม่ต้องมีอินเทอร์เน็ต ไม่มี backend ไม่มีบัญชีผู้ใช้
    - ข้อยกเว้นเดียวที่ใช้เน็ต: **การตรวจสอบเวอร์ชันใหม่ของแอพ** (ดูหัวข้อ 8) ต้องล้มเหลวเงียบๆ ได้เมื่อออฟไลน์
+   - _เพิ่มตามคำขอผู้ใช้_: **ค้นหาข้อมูลสินค้าจากบาร์โค้ด** ผ่าน Open Beauty Facts (ฟรี, ฐานข้อมูลเปิด) — ถามความยินยอมครั้งแรก ส่งเฉพาะเลขบาร์โค้ด ปิดได้ใน Settings; ค้นจากสินค้าที่เคยบันทึกในเครื่องก่อนเสมอ (ออฟไลน์)
 2. **ความเป็นส่วนตัวมาก่อน**: รูปหน้าและข้อมูลทั้งหมดอยู่ในเครื่องเท่านั้น ไม่ส่งออกไปไหน ไม่มี analytics/tracking ของบุคคลที่สาม
 3. **ใช้งานเร็ว ลดจำนวนแตะ**: การบันทึกประจำวันต้องจบได้ในไม่กี่วินาที ทุกอย่างที่ละเอียดต้องเป็นตัวเลือก ข้ามได้เสมอ
 4. **ละเอียดเมื่ออยากละเอียด**: ฟอร์มสองระดับ — หน้าหลักกรอกแค่ที่จำเป็น ส่วน "รายละเอียดเพิ่มเติม" พับไว้
@@ -73,7 +74,7 @@ test/
 เวลาเก็บเป็น epoch milliseconds (UTC) ยกเว้น `daily_entries.date` เก็บเป็น `YYYY-MM-DD` ตามเวลาท้องถิ่นของผู้ใช้
 ทุกตารางมี `id` (integer PK autoincrement), `created_at`, `updated_at`
 
-> **สถานะ implementation: schema version 2** (`lib/core/db/tables.dart`, snapshot ใน `drift_schemas/`)
+> **สถานะ implementation: schema version 3** (`lib/core/db/tables.dart`, snapshot ใน `drift_schemas/`)
 > - ตารางเชื่อม `entry_tags` / `product_tags` ใช้ composite primary key (`entry_id, tag_id` / `product_id, tag_id`) แทน `id`
 > - ค่า enum เก็บเป็นข้อความ snake_case เช่น `in_use`
 > - คะแนน 1–5 (`score_*`, `stress_level`, `rating`) มี CHECK constraint
@@ -81,6 +82,7 @@ test/
 > - Foreign key เปิดใช้งาน: ลบสินค้า → ลบ weight/usage logs, routine steps, product tags ตาม; ลบ routine → `usage_logs.routine_id` เป็น NULL; ลบ daily entry ที่ยังมีรูปไม่ได้ (restrict)
 > - `photos.file_path` / `thumb_path` เก็บเป็น path สัมพัทธ์จาก application documents directory (ย้ายเครื่อง/restore แล้วไม่พัง)
 > - ข้อมูลตั้งต้น: tag อาการ/ปัจจัย ภาษาไทย และ routine "เช้า" / "เย็น"
+> - **v3**: เพิ่ม `products.barcode` (text?) — เลข EAN/UPC จากการสแกน ใช้หาสินค้าที่เคยซื้อซ้ำ
 > - **v2**: เพิ่ม `products.finished_date` (int?, epoch ms) — วันที่ปิดสินค้าเป็น "ใช้หมด" ใช้กับเส้นมาร์กในกราฟ Insights
 
 ### products
@@ -104,6 +106,7 @@ test/
 | repurchase | bool? | |
 | note | text? | |
 | finished_date | int? | วันที่ใช้หมด (เพิ่มใน schema v2) |
+| barcode | text? | EAN/UPC จากการสแกน (เพิ่มใน schema v3) |
 
 ### weight_logs
 `product_id` (FK), `weighed_at`, `weight` (กรัม), `note?`
@@ -276,7 +279,7 @@ Export/Import zip, local_auth, สำรองเตือน
 
 > **สถานะ**: Phase 0–6 เสร็จแล้ว (ดู README) · Phase 7 ทำบางส่วนแล้ว: ไอคอน/splash, ภาพหน้าจอทดสอบ, CI สร้าง APK อัตโนมัติ — ที่เหลือคือทดสอบบนเครื่องจริงและเตรียมขึ้น store
 
-**ภายหลัง (ยังไม่ทำจนกว่าจะสั่ง)**: สแกนบาร์โค้ด, เครื่องชั่งบลูทูธ BLE, widget หน้าจอหลัก, Shorebird
+**ภายหลัง (ยังไม่ทำจนกว่าจะสั่ง)**: ~~สแกนบาร์โค้ด~~ (ทำแล้ว: `mobile_scanner` ถอดรหัสในเครื่อง + Open Beauty Facts), เครื่องชั่งบลูทูธ BLE, widget หน้าจอหลัก, Shorebird
 
 ## 12. เกณฑ์ความสำเร็จของ MVP (Phase 0–5)
 

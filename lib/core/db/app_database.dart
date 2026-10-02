@@ -49,7 +49,7 @@ class AppDatabase extends _$AppDatabase {
   /// run `dart run drift_dev make-migrations` (see README) and update
   /// docs/SPEC.md §5.
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -60,6 +60,9 @@ class AppDatabase extends _$AppDatabase {
     onUpgrade: stepByStep(
       from1To2: (m, schema) async {
         await m.addColumn(schema.products, schema.products.finishedDate);
+      },
+      from2To3: (m, schema) async {
+        await m.addColumn(schema.products, schema.products.barcode);
       },
     ),
     beforeOpen: (details) async {

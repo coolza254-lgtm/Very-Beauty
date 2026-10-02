@@ -46,6 +46,9 @@ class Products extends Table with BaseColumns {
 
   /// When the product was closed as finished. Added in schema v2.
   IntColumn get finishedDate => integer().nullable()();
+
+  /// EAN/UPC from the package, for re-buys and lookups. Added in schema v3.
+  TextColumn get barcode => text().nullable()();
 }
 
 @DataClassName('WeightLog')

@@ -46,6 +46,9 @@ abstract final class SettingKeys {
   /// Version label the user chose "later" for; not offered again
   /// automatically.
   static const updateDismissed = 'update_dismissed';
+
+  /// Online barcode lookup: '1' allowed, '0' declined, absent = ask first.
+  static const barcodeLookup = 'barcode_lookup';
 }
 
 @DriftAccessor(tables: [AppSettings])

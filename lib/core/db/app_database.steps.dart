@@ -896,8 +896,310 @@ i1.GeneratedColumn<String> _column_51(String aliasedName) =>
       type: i1.DriftSqlType.string,
       $customConstraints: 'NOT NULL',
     );
+
+final class Schema3 extends i0.VersionedSchema {
+  Schema3({required super.database}) : super(version: 3);
+  @override
+  late final List<i1.DatabaseSchemaEntity> entities = [
+    products,
+    weightLogs,
+    routines,
+    routineSteps,
+    usageLogs,
+    dailyEntries,
+    photos,
+    tags,
+    entryTags,
+    productTags,
+    appSettings,
+    idxWeightLogsProduct,
+    idxRoutineStepsRoutine,
+    idxUsageLogsProduct,
+    idxUsageLogsUsedAt,
+    idxPhotosTakenAt,
+  ];
+  late final Shape11 products = Shape11(
+    source: i0.VersionedTable(
+      entityName: 'products',
+      withoutRowId: false,
+      isStrict: false,
+      tableConstraints: [],
+      columns: [
+        _column_0,
+        _column_1,
+        _column_2,
+        _column_3,
+        _column_4,
+        _column_5,
+        _column_6,
+        _column_7,
+        _column_8,
+        _column_9,
+        _column_10,
+        _column_11,
+        _column_12,
+        _column_13,
+        _column_14,
+        _column_15,
+        _column_16,
+        _column_17,
+        _column_18,
+        _column_19,
+        _column_20,
+        _column_52,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape1 weightLogs = Shape1(
+    source: i0.VersionedTable(
+      entityName: 'weight_logs',
+      withoutRowId: false,
+      isStrict: false,
+      tableConstraints: [],
+      columns: [
+        _column_0,
+        _column_1,
+        _column_2,
+        _column_21,
+        _column_22,
+        _column_23,
+        _column_19,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape2 routines = Shape2(
+    source: i0.VersionedTable(
+      entityName: 'routines',
+      withoutRowId: false,
+      isStrict: false,
+      tableConstraints: [],
+      columns: [
+        _column_0,
+        _column_1,
+        _column_2,
+        _column_3,
+        _column_24,
+        _column_25,
+        _column_26,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape3 routineSteps = Shape3(
+    source: i0.VersionedTable(
+      entityName: 'routine_steps',
+      withoutRowId: false,
+      isStrict: false,
+      tableConstraints: [],
+      columns: [
+        _column_0,
+        _column_1,
+        _column_2,
+        _column_27,
+        _column_21,
+        _column_28,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape4 usageLogs = Shape4(
+    source: i0.VersionedTable(
+      entityName: 'usage_logs',
+      withoutRowId: false,
+      isStrict: false,
+      tableConstraints: [],
+      columns: [
+        _column_0,
+        _column_1,
+        _column_2,
+        _column_21,
+        _column_29,
+        _column_30,
+        _column_31,
+        _column_19,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape5 dailyEntries = Shape5(
+    source: i0.VersionedTable(
+      entityName: 'daily_entries',
+      withoutRowId: false,
+      isStrict: false,
+      tableConstraints: [],
+      columns: [
+        _column_0,
+        _column_1,
+        _column_2,
+        _column_32,
+        _column_33,
+        _column_34,
+        _column_35,
+        _column_36,
+        _column_37,
+        _column_38,
+        _column_39,
+        _column_40,
+        _column_41,
+        _column_19,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape6 photos = Shape6(
+    source: i0.VersionedTable(
+      entityName: 'photos',
+      withoutRowId: false,
+      isStrict: false,
+      tableConstraints: [],
+      columns: [
+        _column_0,
+        _column_1,
+        _column_2,
+        _column_42,
+        _column_43,
+        _column_44,
+        _column_45,
+        _column_46,
+        _column_19,
+      ],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape7 tags = Shape7(
+    source: i0.VersionedTable(
+      entityName: 'tags',
+      withoutRowId: false,
+      isStrict: false,
+      tableConstraints: ['UNIQUE(name, type)'],
+      columns: [_column_0, _column_1, _column_2, _column_3, _column_47],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape8 entryTags = Shape8(
+    source: i0.VersionedTable(
+      entityName: 'entry_tags',
+      withoutRowId: false,
+      isStrict: false,
+      tableConstraints: ['PRIMARY KEY(entry_id, tag_id)'],
+      columns: [_column_48, _column_49],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape9 productTags = Shape9(
+    source: i0.VersionedTable(
+      entityName: 'product_tags',
+      withoutRowId: false,
+      isStrict: false,
+      tableConstraints: ['PRIMARY KEY(product_id, tag_id)'],
+      columns: [_column_21, _column_49],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  late final Shape10 appSettings = Shape10(
+    source: i0.VersionedTable(
+      entityName: 'app_settings',
+      withoutRowId: false,
+      isStrict: false,
+      tableConstraints: [],
+      columns: [_column_0, _column_1, _column_2, _column_50, _column_51],
+      attachedDatabase: database,
+    ),
+    alias: null,
+  );
+  final i1.Index idxWeightLogsProduct = i1.Index(
+    'idx_weight_logs_product',
+    'CREATE INDEX idx_weight_logs_product ON weight_logs (product_id, weighed_at)',
+  );
+  final i1.Index idxRoutineStepsRoutine = i1.Index(
+    'idx_routine_steps_routine',
+    'CREATE INDEX idx_routine_steps_routine ON routine_steps (routine_id, step_order)',
+  );
+  final i1.Index idxUsageLogsProduct = i1.Index(
+    'idx_usage_logs_product',
+    'CREATE INDEX idx_usage_logs_product ON usage_logs (product_id, used_at)',
+  );
+  final i1.Index idxUsageLogsUsedAt = i1.Index(
+    'idx_usage_logs_used_at',
+    'CREATE INDEX idx_usage_logs_used_at ON usage_logs (used_at)',
+  );
+  final i1.Index idxPhotosTakenAt = i1.Index(
+    'idx_photos_taken_at',
+    'CREATE INDEX idx_photos_taken_at ON photos (taken_at)',
+  );
+}
+
+class Shape11 extends i0.VersionedTable {
+  Shape11({required super.source, required super.alias}) : super.aliased();
+  i1.GeneratedColumn<int> get id =>
+      columnsByName['id']! as i1.GeneratedColumn<int>;
+  i1.GeneratedColumn<int> get createdAt =>
+      columnsByName['created_at']! as i1.GeneratedColumn<int>;
+  i1.GeneratedColumn<int> get updatedAt =>
+      columnsByName['updated_at']! as i1.GeneratedColumn<int>;
+  i1.GeneratedColumn<String> get name =>
+      columnsByName['name']! as i1.GeneratedColumn<String>;
+  i1.GeneratedColumn<String> get brand =>
+      columnsByName['brand']! as i1.GeneratedColumn<String>;
+  i1.GeneratedColumn<String> get category =>
+      columnsByName['category']! as i1.GeneratedColumn<String>;
+  i1.GeneratedColumn<double> get price =>
+      columnsByName['price']! as i1.GeneratedColumn<double>;
+  i1.GeneratedColumn<double> get netContent =>
+      columnsByName['net_content']! as i1.GeneratedColumn<double>;
+  i1.GeneratedColumn<String> get netUnit =>
+      columnsByName['net_unit']! as i1.GeneratedColumn<String>;
+  i1.GeneratedColumn<String> get purchasePlace =>
+      columnsByName['purchase_place']! as i1.GeneratedColumn<String>;
+  i1.GeneratedColumn<int> get purchaseDate =>
+      columnsByName['purchase_date']! as i1.GeneratedColumn<int>;
+  i1.GeneratedColumn<int> get openedDate =>
+      columnsByName['opened_date']! as i1.GeneratedColumn<int>;
+  i1.GeneratedColumn<int> get paoMonths =>
+      columnsByName['pao_months']! as i1.GeneratedColumn<int>;
+  i1.GeneratedColumn<int> get expiryDate =>
+      columnsByName['expiry_date']! as i1.GeneratedColumn<int>;
+  i1.GeneratedColumn<double> get startWeight =>
+      columnsByName['start_weight']! as i1.GeneratedColumn<double>;
+  i1.GeneratedColumn<double> get emptyBottleWeight =>
+      columnsByName['empty_bottle_weight']! as i1.GeneratedColumn<double>;
+  i1.GeneratedColumn<String> get status =>
+      columnsByName['status']! as i1.GeneratedColumn<String>;
+  i1.GeneratedColumn<int> get rating =>
+      columnsByName['rating']! as i1.GeneratedColumn<int>;
+  i1.GeneratedColumn<int> get repurchase =>
+      columnsByName['repurchase']! as i1.GeneratedColumn<int>;
+  i1.GeneratedColumn<String> get note =>
+      columnsByName['note']! as i1.GeneratedColumn<String>;
+  i1.GeneratedColumn<int> get finishedDate =>
+      columnsByName['finished_date']! as i1.GeneratedColumn<int>;
+  i1.GeneratedColumn<String> get barcode =>
+      columnsByName['barcode']! as i1.GeneratedColumn<String>;
+}
+
+i1.GeneratedColumn<String> _column_52(String aliasedName) =>
+    i1.GeneratedColumn<String>(
+      'barcode',
+      aliasedName,
+      true,
+      type: i1.DriftSqlType.string,
+      $customConstraints: 'NULL',
+    );
 i0.MigrationStepWithVersion migrationSteps({
   required Future<void> Function(i1.Migrator m, Schema2 schema) from1To2,
+  required Future<void> Function(i1.Migrator m, Schema3 schema) from2To3,
 }) {
   return (currentVersion, database) async {
     switch (currentVersion) {
@@ -906,6 +1208,11 @@ i0.MigrationStepWithVersion migrationSteps({
         final migrator = i1.Migrator(database, schema);
         await from1To2(migrator, schema);
         return 2;
+      case 2:
+        final schema = Schema3(database: database);
+        final migrator = i1.Migrator(database, schema);
+        await from2To3(migrator, schema);
+        return 3;
       default:
         throw ArgumentError.value('Unknown migration from $currentVersion');
     }
@@ -914,6 +1221,7 @@ i0.MigrationStepWithVersion migrationSteps({
 
 i1.OnUpgrade stepByStep({
   required Future<void> Function(i1.Migrator m, Schema2 schema) from1To2,
+  required Future<void> Function(i1.Migrator m, Schema3 schema) from2To3,
 }) => i0.VersionedSchema.stepByStepHelper(
-  step: migrationSteps(from1To2: from1To2),
+  step: migrationSteps(from1To2: from1To2, from2To3: from2To3),
 );
