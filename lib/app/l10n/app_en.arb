@@ -1,0 +1,22 @@
+{
+  "@@locale": "en",
+  "appTitle": "Very Beauty",
+  "navToday": "Today",
+  "navProducts": "Products",
+  "navPhotos": "Photos",
+  "navInsights": "Insights",
+  "navSettings": "Settings",
+  "comingSoon": "Coming in a later phase",
+  "todayGreeting": "Have you taken care of your skin today?",
+  "settingsAppearance": "Appearance",
+  "settingsTheme": "Theme",
+  "themeSystem": "System",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "settingsAbout": "About",
+  "aboutVersion": "Version {version}",
+  "aboutDisclaimerTitle": "Please note",
+  "aboutDisclaimer": "Very Beauty is a personal skincare journal only. It is not a medical diagnostic or treatment tool. If you have skin concerns, please consult a dermatologist.",
+  "aboutPrivacyTitle": "Privacy",
+  "aboutPrivacy": "All your data and photos stay on this device. The app has no accounts, no servers and no tracking."
+}

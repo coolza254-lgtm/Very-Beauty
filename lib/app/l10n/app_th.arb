@@ -1,0 +1,29 @@
+{
+  "@@locale": "th",
+  "appTitle": "Very Beauty",
+  "navToday": "วันนี้",
+  "navProducts": "สินค้า",
+  "navPhotos": "รูปถ่าย",
+  "navInsights": "สรุป",
+  "navSettings": "ตั้งค่า",
+  "comingSoon": "กำลังพัฒนา — จะมาในเฟสถัดไป",
+  "todayGreeting": "วันนี้ดูแลผิวแล้วหรือยัง?",
+  "settingsAppearance": "รูปลักษณ์",
+  "settingsTheme": "ธีม",
+  "themeSystem": "ตามระบบ",
+  "themeLight": "สว่าง",
+  "themeDark": "มืด",
+  "settingsAbout": "เกี่ยวกับแอพ",
+  "aboutVersion": "เวอร์ชัน {version}",
+  "@aboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutDisclaimerTitle": "ข้อควรทราบ",
+  "aboutDisclaimer": "Very Beauty เป็นเครื่องมือช่วยบันทึกการดูแลผิวส่วนตัวเท่านั้น ไม่ใช่เครื่องมือวินิจฉัยหรือรักษาทางการแพทย์ หากมีอาการผิวผิดปกติ ควรปรึกษาแพทย์ผิวหนัง",
+  "aboutPrivacyTitle": "ความเป็นส่วนตัว",
+  "aboutPrivacy": "ข้อมูลและรูปถ่ายทั้งหมดถูกเก็บไว้ในเครื่องของคุณเท่านั้น แอพไม่มีบัญชีผู้ใช้ ไม่มีเซิร์ฟเวอร์ และไม่มีระบบติดตามการใช้งาน"
+}

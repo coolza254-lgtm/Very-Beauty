@@ -1,0 +1,1713 @@
+{
+  "_meta": {
+    "description": "This file contains a serialized version of schema entities for drift.",
+    "version": "1.3.0"
+  },
+  "options": {
+    "store_date_time_values_as_text": false
+  },
+  "entities": [
+    {
+      "id": 0,
+      "references": [],
+      "type": "table",
+      "data": {
+        "name": "products",
+        "was_declared_in_moor": false,
+        "columns": [
+          {
+            "name": "id",
+            "getter_name": "id",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "PRIMARY KEY AUTOINCREMENT",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "PRIMARY KEY AUTOINCREMENT"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              "auto-increment"
+            ]
+          },
+          {
+            "name": "created_at",
+            "getter_name": "createdAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "updated_at",
+            "getter_name": "updatedAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "name",
+            "getter_name": "name",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "allowed-lengths": {
+                  "min": 1,
+                  "max": null
+                }
+              }
+            ]
+          },
+          {
+            "name": "brand",
+            "getter_name": "brand",
+            "moor_type": "string",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "category",
+            "getter_name": "category",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [],
+            "type_converter": {
+              "dart_expr": "productCategoryConverter",
+              "dart_type_name": "ProductCategory"
+            }
+          },
+          {
+            "name": "price",
+            "getter_name": "price",
+            "moor_type": "double",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "net_content",
+            "getter_name": "netContent",
+            "moor_type": "double",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "net_unit",
+            "getter_name": "netUnit",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": "const CustomExpression('\\'g\\'')",
+            "default_client_dart": null,
+            "dsl_features": [],
+            "type_converter": {
+              "dart_expr": "netUnitConverter",
+              "dart_type_name": "NetUnit"
+            }
+          },
+          {
+            "name": "purchase_place",
+            "getter_name": "purchasePlace",
+            "moor_type": "string",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "purchase_date",
+            "getter_name": "purchaseDate",
+            "moor_type": "int",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "opened_date",
+            "getter_name": "openedDate",
+            "moor_type": "int",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "pao_months",
+            "getter_name": "paoMonths",
+            "moor_type": "int",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "expiry_date",
+            "getter_name": "expiryDate",
+            "moor_type": "int",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "start_weight",
+            "getter_name": "startWeight",
+            "moor_type": "double",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "empty_bottle_weight",
+            "getter_name": "emptyBottleWeight",
+            "moor_type": "double",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "status",
+            "getter_name": "status",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": "const CustomExpression('\\'in_use\\'')",
+            "default_client_dart": null,
+            "dsl_features": [],
+            "type_converter": {
+              "dart_expr": "productStatusConverter",
+              "dart_type_name": "ProductStatus"
+            }
+          },
+          {
+            "name": "rating",
+            "getter_name": "rating",
+            "moor_type": "int",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "check": {
+                  "dart_expression": {
+                    "elements": [
+                      {
+                        "lexeme": "ComparableExpr",
+                        "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+                      },
+                      "(",
+                      {
+                        "lexeme": "rating",
+                        "tag": "rating"
+                      },
+                      ").isBetweenValues(1,5)"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "repurchase",
+            "getter_name": "repurchase",
+            "moor_type": "bool",
+            "nullable": true,
+            "customConstraints": null,
+            "defaultConstraints": "CHECK (\"repurchase\" IN (0, 1))",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "CHECK (\"repurchase\" IN (0, 1))"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "note",
+            "getter_name": "note",
+            "moor_type": "string",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          }
+        ],
+        "is_virtual": false,
+        "without_rowid": false,
+        "constraints": []
+      }
+    },
+    {
+      "id": 1,
+      "references": [
+        0
+      ],
+      "type": "table",
+      "data": {
+        "name": "weight_logs",
+        "was_declared_in_moor": false,
+        "columns": [
+          {
+            "name": "id",
+            "getter_name": "id",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "PRIMARY KEY AUTOINCREMENT",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "PRIMARY KEY AUTOINCREMENT"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              "auto-increment"
+            ]
+          },
+          {
+            "name": "created_at",
+            "getter_name": "createdAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "updated_at",
+            "getter_name": "updatedAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "product_id",
+            "getter_name": "productId",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "REFERENCES products (id) ON DELETE CASCADE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES products (id) ON DELETE CASCADE"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "products",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "cascade"
+                }
+              }
+            ]
+          },
+          {
+            "name": "weighed_at",
+            "getter_name": "weighedAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "weight",
+            "getter_name": "weight",
+            "moor_type": "double",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "note",
+            "getter_name": "note",
+            "moor_type": "string",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          }
+        ],
+        "is_virtual": false,
+        "without_rowid": false,
+        "constraints": []
+      }
+    },
+    {
+      "id": 2,
+      "references": [],
+      "type": "table",
+      "data": {
+        "name": "routines",
+        "was_declared_in_moor": false,
+        "columns": [
+          {
+            "name": "id",
+            "getter_name": "id",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "PRIMARY KEY AUTOINCREMENT",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "PRIMARY KEY AUTOINCREMENT"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              "auto-increment"
+            ]
+          },
+          {
+            "name": "created_at",
+            "getter_name": "createdAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "updated_at",
+            "getter_name": "updatedAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "name",
+            "getter_name": "name",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "time_of_day",
+            "getter_name": "timeOfDay",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [],
+            "type_converter": {
+              "dart_expr": "timeOfDaySlotConverter",
+              "dart_type_name": "TimeOfDaySlot"
+            }
+          },
+          {
+            "name": "reminder_time",
+            "getter_name": "reminderTime",
+            "moor_type": "string",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "reminder_enabled",
+            "getter_name": "reminderEnabled",
+            "moor_type": "bool",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "CHECK (\"reminder_enabled\" IN (0, 1))",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "CHECK (\"reminder_enabled\" IN (0, 1))"
+            },
+            "default_dart": "const CustomExpression('0')",
+            "default_client_dart": null,
+            "dsl_features": []
+          }
+        ],
+        "is_virtual": false,
+        "without_rowid": false,
+        "constraints": []
+      }
+    },
+    {
+      "id": 3,
+      "references": [
+        2,
+        0
+      ],
+      "type": "table",
+      "data": {
+        "name": "routine_steps",
+        "was_declared_in_moor": false,
+        "columns": [
+          {
+            "name": "id",
+            "getter_name": "id",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "PRIMARY KEY AUTOINCREMENT",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "PRIMARY KEY AUTOINCREMENT"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              "auto-increment"
+            ]
+          },
+          {
+            "name": "created_at",
+            "getter_name": "createdAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "updated_at",
+            "getter_name": "updatedAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "routine_id",
+            "getter_name": "routineId",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "REFERENCES routines (id) ON DELETE CASCADE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES routines (id) ON DELETE CASCADE"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "routines",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "cascade"
+                }
+              }
+            ]
+          },
+          {
+            "name": "product_id",
+            "getter_name": "productId",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "REFERENCES products (id) ON DELETE CASCADE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES products (id) ON DELETE CASCADE"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "products",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "cascade"
+                }
+              }
+            ]
+          },
+          {
+            "name": "step_order",
+            "getter_name": "stepOrder",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          }
+        ],
+        "is_virtual": false,
+        "without_rowid": false,
+        "constraints": []
+      }
+    },
+    {
+      "id": 4,
+      "references": [
+        0,
+        2
+      ],
+      "type": "table",
+      "data": {
+        "name": "usage_logs",
+        "was_declared_in_moor": false,
+        "columns": [
+          {
+            "name": "id",
+            "getter_name": "id",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "PRIMARY KEY AUTOINCREMENT",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "PRIMARY KEY AUTOINCREMENT"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              "auto-increment"
+            ]
+          },
+          {
+            "name": "created_at",
+            "getter_name": "createdAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "updated_at",
+            "getter_name": "updatedAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "product_id",
+            "getter_name": "productId",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "REFERENCES products (id) ON DELETE CASCADE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES products (id) ON DELETE CASCADE"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "products",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "cascade"
+                }
+              }
+            ]
+          },
+          {
+            "name": "routine_id",
+            "getter_name": "routineId",
+            "moor_type": "int",
+            "nullable": true,
+            "customConstraints": null,
+            "defaultConstraints": "REFERENCES routines (id) ON DELETE SET NULL",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES routines (id) ON DELETE SET NULL"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "routines",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "setNull"
+                }
+              }
+            ]
+          },
+          {
+            "name": "used_at",
+            "getter_name": "usedAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "area",
+            "getter_name": "area",
+            "moor_type": "string",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "note",
+            "getter_name": "note",
+            "moor_type": "string",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          }
+        ],
+        "is_virtual": false,
+        "without_rowid": false,
+        "constraints": []
+      }
+    },
+    {
+      "id": 5,
+      "references": [],
+      "type": "table",
+      "data": {
+        "name": "daily_entries",
+        "was_declared_in_moor": false,
+        "columns": [
+          {
+            "name": "id",
+            "getter_name": "id",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "PRIMARY KEY AUTOINCREMENT",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "PRIMARY KEY AUTOINCREMENT"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              "auto-increment"
+            ]
+          },
+          {
+            "name": "created_at",
+            "getter_name": "createdAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "updated_at",
+            "getter_name": "updatedAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "date",
+            "getter_name": "date",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "UNIQUE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "UNIQUE"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "allowed-lengths": {
+                  "min": 10,
+                  "max": 10
+                }
+              },
+              "unique"
+            ]
+          },
+          {
+            "name": "score_oil",
+            "getter_name": "scoreOil",
+            "moor_type": "int",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "check": {
+                  "dart_expression": {
+                    "elements": [
+                      {
+                        "lexeme": "ComparableExpr",
+                        "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+                      },
+                      "(",
+                      {
+                        "lexeme": "scoreOil",
+                        "tag": "scoreOil"
+                      },
+                      ").isBetweenValues(1,5)"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "score_moisture",
+            "getter_name": "scoreMoisture",
+            "moor_type": "int",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "check": {
+                  "dart_expression": {
+                    "elements": [
+                      {
+                        "lexeme": "ComparableExpr",
+                        "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+                      },
+                      "(",
+                      {
+                        "lexeme": "scoreMoisture",
+                        "tag": "scoreMoisture"
+                      },
+                      ").isBetweenValues(1,5)"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "score_acne",
+            "getter_name": "scoreAcne",
+            "moor_type": "int",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "check": {
+                  "dart_expression": {
+                    "elements": [
+                      {
+                        "lexeme": "ComparableExpr",
+                        "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+                      },
+                      "(",
+                      {
+                        "lexeme": "scoreAcne",
+                        "tag": "scoreAcne"
+                      },
+                      ").isBetweenValues(1,5)"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "score_redness",
+            "getter_name": "scoreRedness",
+            "moor_type": "int",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "check": {
+                  "dart_expression": {
+                    "elements": [
+                      {
+                        "lexeme": "ComparableExpr",
+                        "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+                      },
+                      "(",
+                      {
+                        "lexeme": "scoreRedness",
+                        "tag": "scoreRedness"
+                      },
+                      ").isBetweenValues(1,5)"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "score_dullness",
+            "getter_name": "scoreDullness",
+            "moor_type": "int",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "check": {
+                  "dart_expression": {
+                    "elements": [
+                      {
+                        "lexeme": "ComparableExpr",
+                        "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+                      },
+                      "(",
+                      {
+                        "lexeme": "scoreDullness",
+                        "tag": "scoreDullness"
+                      },
+                      ").isBetweenValues(1,5)"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "sleep_hours",
+            "getter_name": "sleepHours",
+            "moor_type": "double",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "stress_level",
+            "getter_name": "stressLevel",
+            "moor_type": "int",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "check": {
+                  "dart_expression": {
+                    "elements": [
+                      {
+                        "lexeme": "ComparableExpr",
+                        "import_uri": "package:drift/src/runtime/query_builder/query_builder.dart"
+                      },
+                      "(",
+                      {
+                        "lexeme": "stressLevel",
+                        "tag": "stressLevel"
+                      },
+                      ").isBetweenValues(1,5)"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "sun_exposure",
+            "getter_name": "sunExposure",
+            "moor_type": "string",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [],
+            "type_converter": {
+              "dart_expr": "sunExposureConverter",
+              "dart_type_name": "SunExposure"
+            }
+          },
+          {
+            "name": "period_phase",
+            "getter_name": "periodPhase",
+            "moor_type": "string",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "note",
+            "getter_name": "note",
+            "moor_type": "string",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          }
+        ],
+        "is_virtual": false,
+        "without_rowid": false,
+        "constraints": []
+      }
+    },
+    {
+      "id": 6,
+      "references": [
+        5
+      ],
+      "type": "table",
+      "data": {
+        "name": "photos",
+        "was_declared_in_moor": false,
+        "columns": [
+          {
+            "name": "id",
+            "getter_name": "id",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "PRIMARY KEY AUTOINCREMENT",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "PRIMARY KEY AUTOINCREMENT"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              "auto-increment"
+            ]
+          },
+          {
+            "name": "created_at",
+            "getter_name": "createdAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "updated_at",
+            "getter_name": "updatedAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "daily_entry_id",
+            "getter_name": "dailyEntryId",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "REFERENCES daily_entries (id) ON DELETE RESTRICT",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES daily_entries (id) ON DELETE RESTRICT"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "daily_entries",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "restrict"
+                }
+              }
+            ]
+          },
+          {
+            "name": "taken_at",
+            "getter_name": "takenAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "file_path",
+            "getter_name": "filePath",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "thumb_path",
+            "getter_name": "thumbPath",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          },
+          {
+            "name": "session",
+            "getter_name": "session",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [],
+            "type_converter": {
+              "dart_expr": "timeOfDaySlotConverter",
+              "dart_type_name": "TimeOfDaySlot"
+            }
+          },
+          {
+            "name": "note",
+            "getter_name": "note",
+            "moor_type": "string",
+            "nullable": true,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          }
+        ],
+        "is_virtual": false,
+        "without_rowid": false,
+        "constraints": []
+      }
+    },
+    {
+      "id": 7,
+      "references": [],
+      "type": "table",
+      "data": {
+        "name": "tags",
+        "was_declared_in_moor": false,
+        "columns": [
+          {
+            "name": "id",
+            "getter_name": "id",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "PRIMARY KEY AUTOINCREMENT",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "PRIMARY KEY AUTOINCREMENT"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              "auto-increment"
+            ]
+          },
+          {
+            "name": "created_at",
+            "getter_name": "createdAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "updated_at",
+            "getter_name": "updatedAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "name",
+            "getter_name": "name",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "allowed-lengths": {
+                  "min": 1,
+                  "max": null
+                }
+              }
+            ]
+          },
+          {
+            "name": "type",
+            "getter_name": "type",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [],
+            "type_converter": {
+              "dart_expr": "tagTypeConverter",
+              "dart_type_name": "TagType"
+            }
+          }
+        ],
+        "is_virtual": false,
+        "without_rowid": false,
+        "constraints": [],
+        "unique_keys": [
+          [
+            "name",
+            "type"
+          ]
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "references": [
+        5,
+        7
+      ],
+      "type": "table",
+      "data": {
+        "name": "entry_tags",
+        "was_declared_in_moor": false,
+        "columns": [
+          {
+            "name": "entry_id",
+            "getter_name": "entryId",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "REFERENCES daily_entries (id) ON DELETE CASCADE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES daily_entries (id) ON DELETE CASCADE"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "daily_entries",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "cascade"
+                }
+              }
+            ]
+          },
+          {
+            "name": "tag_id",
+            "getter_name": "tagId",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "REFERENCES tags (id) ON DELETE CASCADE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES tags (id) ON DELETE CASCADE"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "tags",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "cascade"
+                }
+              }
+            ]
+          }
+        ],
+        "is_virtual": false,
+        "without_rowid": false,
+        "constraints": [],
+        "explicit_pk": [
+          "entry_id",
+          "tag_id"
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "references": [
+        0,
+        7
+      ],
+      "type": "table",
+      "data": {
+        "name": "product_tags",
+        "was_declared_in_moor": false,
+        "columns": [
+          {
+            "name": "product_id",
+            "getter_name": "productId",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "REFERENCES products (id) ON DELETE CASCADE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES products (id) ON DELETE CASCADE"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "products",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "cascade"
+                }
+              }
+            ]
+          },
+          {
+            "name": "tag_id",
+            "getter_name": "tagId",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "REFERENCES tags (id) ON DELETE CASCADE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "REFERENCES tags (id) ON DELETE CASCADE"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              {
+                "foreign_key": {
+                  "to": {
+                    "table": "tags",
+                    "column": "id"
+                  },
+                  "initially_deferred": false,
+                  "on_update": null,
+                  "on_delete": "cascade"
+                }
+              }
+            ]
+          }
+        ],
+        "is_virtual": false,
+        "without_rowid": false,
+        "constraints": [],
+        "explicit_pk": [
+          "product_id",
+          "tag_id"
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "references": [],
+      "type": "table",
+      "data": {
+        "name": "app_settings",
+        "was_declared_in_moor": false,
+        "columns": [
+          {
+            "name": "id",
+            "getter_name": "id",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "PRIMARY KEY AUTOINCREMENT",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "PRIMARY KEY AUTOINCREMENT"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              "auto-increment"
+            ]
+          },
+          {
+            "name": "created_at",
+            "getter_name": "createdAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "updated_at",
+            "getter_name": "updatedAt",
+            "moor_type": "int",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": "nowEpochMs",
+            "dsl_features": []
+          },
+          {
+            "name": "key",
+            "getter_name": "key",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "defaultConstraints": "UNIQUE",
+            "dialectAwareDefaultConstraints": {
+              "sqlite": "UNIQUE"
+            },
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": [
+              "unique"
+            ]
+          },
+          {
+            "name": "value",
+            "getter_name": "value",
+            "moor_type": "string",
+            "nullable": false,
+            "customConstraints": null,
+            "default_dart": null,
+            "default_client_dart": null,
+            "dsl_features": []
+          }
+        ],
+        "is_virtual": false,
+        "without_rowid": false,
+        "constraints": []
+      }
+    },
+    {
+      "id": 11,
+      "references": [
+        1
+      ],
+      "type": "index",
+      "data": {
+        "on": 1,
+        "name": "idx_weight_logs_product",
+        "sql": null,
+        "unique": false,
+        "columns": [
+          {
+            "column": "product_id",
+            "order_by": null
+          },
+          {
+            "column": "weighed_at",
+            "order_by": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "references": [
+        3
+      ],
+      "type": "index",
+      "data": {
+        "on": 3,
+        "name": "idx_routine_steps_routine",
+        "sql": null,
+        "unique": false,
+        "columns": [
+          {
+            "column": "routine_id",
+            "order_by": null
+          },
+          {
+            "column": "step_order",
+            "order_by": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "references": [
+        4
+      ],
+      "type": "index",
+      "data": {
+        "on": 4,
+        "name": "idx_usage_logs_product",
+        "sql": null,
+        "unique": false,
+        "columns": [
+          {
+            "column": "product_id",
+            "order_by": null
+          },
+          {
+            "column": "used_at",
+            "order_by": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "references": [
+        4
+      ],
+      "type": "index",
+      "data": {
+        "on": 4,
+        "name": "idx_usage_logs_used_at",
+        "sql": null,
+        "unique": false,
+        "columns": [
+          {
+            "column": "used_at",
+            "order_by": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "references": [
+        6
+      ],
+      "type": "index",
+      "data": {
+        "on": 6,
+        "name": "idx_photos_taken_at",
+        "sql": null,
+        "unique": false,
+        "columns": [
+          {
+            "column": "taken_at",
+            "order_by": null
+          }
+        ]
+      }
+    }
+  ],
+  "fixed_sql": [
+    {
+      "name": "products",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE TABLE IF NOT EXISTS \"products\" (\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \"created_at\" INTEGER NOT NULL, \"updated_at\" INTEGER NOT NULL, \"name\" TEXT NOT NULL, \"brand\" TEXT NULL, \"category\" TEXT NOT NULL, \"price\" REAL NULL, \"net_content\" REAL NULL, \"net_unit\" TEXT NOT NULL DEFAULT 'g', \"purchase_place\" TEXT NULL, \"purchase_date\" INTEGER NULL, \"opened_date\" INTEGER NULL, \"pao_months\" INTEGER NULL, \"expiry_date\" INTEGER NULL, \"start_weight\" REAL NULL, \"empty_bottle_weight\" REAL NULL, \"status\" TEXT NOT NULL DEFAULT 'in_use', \"rating\" INTEGER NULL CHECK(\"rating\" BETWEEN 1 AND 5), \"repurchase\" INTEGER NULL CHECK (\"repurchase\" IN (0, 1)), \"note\" TEXT NULL);"
+        }
+      ]
+    },
+    {
+      "name": "weight_logs",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE TABLE IF NOT EXISTS \"weight_logs\" (\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \"created_at\" INTEGER NOT NULL, \"updated_at\" INTEGER NOT NULL, \"product_id\" INTEGER NOT NULL REFERENCES products (id) ON DELETE CASCADE, \"weighed_at\" INTEGER NOT NULL, \"weight\" REAL NOT NULL, \"note\" TEXT NULL);"
+        }
+      ]
+    },
+    {
+      "name": "routines",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE TABLE IF NOT EXISTS \"routines\" (\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \"created_at\" INTEGER NOT NULL, \"updated_at\" INTEGER NOT NULL, \"name\" TEXT NOT NULL, \"time_of_day\" TEXT NOT NULL, \"reminder_time\" TEXT NULL, \"reminder_enabled\" INTEGER NOT NULL DEFAULT 0 CHECK (\"reminder_enabled\" IN (0, 1)));"
+        }
+      ]
+    },
+    {
+      "name": "routine_steps",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE TABLE IF NOT EXISTS \"routine_steps\" (\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \"created_at\" INTEGER NOT NULL, \"updated_at\" INTEGER NOT NULL, \"routine_id\" INTEGER NOT NULL REFERENCES routines (id) ON DELETE CASCADE, \"product_id\" INTEGER NOT NULL REFERENCES products (id) ON DELETE CASCADE, \"step_order\" INTEGER NOT NULL);"
+        }
+      ]
+    },
+    {
+      "name": "usage_logs",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE TABLE IF NOT EXISTS \"usage_logs\" (\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \"created_at\" INTEGER NOT NULL, \"updated_at\" INTEGER NOT NULL, \"product_id\" INTEGER NOT NULL REFERENCES products (id) ON DELETE CASCADE, \"routine_id\" INTEGER NULL REFERENCES routines (id) ON DELETE SET NULL, \"used_at\" INTEGER NOT NULL, \"area\" TEXT NULL, \"note\" TEXT NULL);"
+        }
+      ]
+    },
+    {
+      "name": "daily_entries",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE TABLE IF NOT EXISTS \"daily_entries\" (\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \"created_at\" INTEGER NOT NULL, \"updated_at\" INTEGER NOT NULL, \"date\" TEXT NOT NULL UNIQUE, \"score_oil\" INTEGER NULL CHECK(\"score_oil\" BETWEEN 1 AND 5), \"score_moisture\" INTEGER NULL CHECK(\"score_moisture\" BETWEEN 1 AND 5), \"score_acne\" INTEGER NULL CHECK(\"score_acne\" BETWEEN 1 AND 5), \"score_redness\" INTEGER NULL CHECK(\"score_redness\" BETWEEN 1 AND 5), \"score_dullness\" INTEGER NULL CHECK(\"score_dullness\" BETWEEN 1 AND 5), \"sleep_hours\" REAL NULL, \"stress_level\" INTEGER NULL CHECK(\"stress_level\" BETWEEN 1 AND 5), \"sun_exposure\" TEXT NULL, \"period_phase\" TEXT NULL, \"note\" TEXT NULL);"
+        }
+      ]
+    },
+    {
+      "name": "photos",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE TABLE IF NOT EXISTS \"photos\" (\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \"created_at\" INTEGER NOT NULL, \"updated_at\" INTEGER NOT NULL, \"daily_entry_id\" INTEGER NOT NULL REFERENCES daily_entries (id) ON DELETE RESTRICT, \"taken_at\" INTEGER NOT NULL, \"file_path\" TEXT NOT NULL, \"thumb_path\" TEXT NOT NULL, \"session\" TEXT NOT NULL, \"note\" TEXT NULL);"
+        }
+      ]
+    },
+    {
+      "name": "tags",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE TABLE IF NOT EXISTS \"tags\" (\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \"created_at\" INTEGER NOT NULL, \"updated_at\" INTEGER NOT NULL, \"name\" TEXT NOT NULL, \"type\" TEXT NOT NULL, UNIQUE (\"name\", \"type\"));"
+        }
+      ]
+    },
+    {
+      "name": "entry_tags",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE TABLE IF NOT EXISTS \"entry_tags\" (\"entry_id\" INTEGER NOT NULL REFERENCES daily_entries (id) ON DELETE CASCADE, \"tag_id\" INTEGER NOT NULL REFERENCES tags (id) ON DELETE CASCADE, PRIMARY KEY (\"entry_id\", \"tag_id\"));"
+        }
+      ]
+    },
+    {
+      "name": "product_tags",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE TABLE IF NOT EXISTS \"product_tags\" (\"product_id\" INTEGER NOT NULL REFERENCES products (id) ON DELETE CASCADE, \"tag_id\" INTEGER NOT NULL REFERENCES tags (id) ON DELETE CASCADE, PRIMARY KEY (\"product_id\", \"tag_id\"));"
+        }
+      ]
+    },
+    {
+      "name": "app_settings",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE TABLE IF NOT EXISTS \"app_settings\" (\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \"created_at\" INTEGER NOT NULL, \"updated_at\" INTEGER NOT NULL, \"key\" TEXT NOT NULL UNIQUE, \"value\" TEXT NOT NULL);"
+        }
+      ]
+    },
+    {
+      "name": "idx_weight_logs_product",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE INDEX idx_weight_logs_product ON weight_logs (product_id, weighed_at)"
+        }
+      ]
+    },
+    {
+      "name": "idx_routine_steps_routine",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE INDEX idx_routine_steps_routine ON routine_steps (routine_id, step_order)"
+        }
+      ]
+    },
+    {
+      "name": "idx_usage_logs_product",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE INDEX idx_usage_logs_product ON usage_logs (product_id, used_at)"
+        }
+      ]
+    },
+    {
+      "name": "idx_usage_logs_used_at",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE INDEX idx_usage_logs_used_at ON usage_logs (used_at)"
+        }
+      ]
+    },
+    {
+      "name": "idx_photos_taken_at",
+      "sql": [
+        {
+          "dialect": "sqlite",
+          "sql": "CREATE INDEX idx_photos_taken_at ON photos (taken_at)"
+        }
+      ]
+    }
+  ]
+}
