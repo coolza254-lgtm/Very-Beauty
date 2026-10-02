@@ -302,3 +302,21 @@ ProductMetrics computeProductMetrics(ProductInputs input) {
 double _atLeastZero(double v) => v < 0 ? 0 : v;
 
 double _clampPercent(double v) => v.clamp(0, 100).toDouble();
+
+/// One number for "how is my skin" on a day, 1 (calm) to 5 (troubled), used
+/// to colour the calendar. Oiliness, breakouts, redness and dullness count
+/// as they are; hydration is inverted (more hydrated = calmer). Null when no
+/// score was logged.
+double? skinTroubleIndex({
+  int? oil,
+  int? moisture,
+  int? acne,
+  int? redness,
+  int? dullness,
+}) => average([
+  oil,
+  moisture == null ? null : 6 - moisture,
+  acne,
+  redness,
+  dullness,
+]);

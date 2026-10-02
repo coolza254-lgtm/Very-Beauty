@@ -797,4 +797,115 @@ class AppLocalizationsTh extends AppLocalizations {
   String compareDaysApart(int days) {
     return 'ห่างกัน $days วัน';
   }
+
+  @override
+  String get insightsTabCalendar => 'ปฏิทิน';
+
+  @override
+  String get insightsTabChart => 'กราฟผิว';
+
+  @override
+  String get insightsTabSearch => 'ค้นหา';
+
+  @override
+  String get insightsTabSpending => 'ค่าใช้จ่าย';
+
+  @override
+  String get calendarLegendCalm => 'ผิวดี';
+
+  @override
+  String get calendarLegendTroubled => 'มีปัญหา';
+
+  @override
+  String get calendarLegendPhoto => 'มีรูป';
+
+  @override
+  String get calendarLegendUsage => 'ใช้สินค้า';
+
+  @override
+  String get daySummaryNoLog => 'ยังไม่มีบันทึกผิววันนี้';
+
+  @override
+  String get daySummaryProducts => 'สินค้าที่ใช้';
+
+  @override
+  String get daySummaryNoProducts => 'ไม่ได้บันทึกการใช้สินค้า';
+
+  @override
+  String daySummaryTimes(int count) {
+    return '$count ครั้ง';
+  }
+
+  @override
+  String get daySummaryEdit => 'แก้ไขบันทึกวันนี้';
+
+  @override
+  String get daySummaryPhotos => 'รูปถ่าย';
+
+  @override
+  String get chartRange30 => '30 วัน';
+
+  @override
+  String get chartRange90 => '90 วัน';
+
+  @override
+  String get chartRange180 => '6 เดือน';
+
+  @override
+  String get chartEmpty => 'ยังไม่มีคะแนนผิวในช่วงนี้ ลองบันทึกผิวทุกวันดูนะ';
+
+  @override
+  String get chartMarkers => 'เริ่มใช้ / ใช้หมด';
+
+  @override
+  String chartMarkerStart(String name) {
+    return 'เริ่มใช้ $name';
+  }
+
+  @override
+  String chartMarkerEnd(String name) {
+    return 'ใช้หมด $name';
+  }
+
+  @override
+  String get searchPrompt =>
+      'เลือกอาการหรือปัจจัย เพื่อดูว่าวันนั้นและ 3 วันก่อนหน้าใช้อะไรไปบ้าง';
+
+  @override
+  String get searchNoDays => 'ยังไม่มีวันที่ติดแท็กนี้';
+
+  @override
+  String searchDaysFound(int count) {
+    return 'พบ $count วัน';
+  }
+
+  @override
+  String get searchRecentProducts => 'ใช้ในช่วง 3 วันก่อน';
+
+  @override
+  String get spendingThisMonth => 'เดือนนี้';
+
+  @override
+  String get spendingSixMonths => '6 เดือนล่าสุด';
+
+  @override
+  String get spendingPerMonth => 'ค่าใช้จ่ายต่อเดือน';
+
+  @override
+  String get spendingNote =>
+      'นับตามวันที่ซื้อ (หรือวันที่เปิดใช้) ไม่รวมรายการอยากได้';
+
+  @override
+  String get spendingValue => 'ความคุ้มค่าต่อสินค้า';
+
+  @override
+  String get spendingValueHint => 'เรียงจากบาทต่อครั้งถูกสุด';
+
+  @override
+  String get spendingNoProducts => 'ใส่ราคาสินค้าเพื่อดูสรุปค่าใช้จ่าย';
+
+  @override
+  String perUseShort(String price) {
+    return '$price/ครั้ง';
+  }
 }

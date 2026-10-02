@@ -1543,6 +1543,204 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'ห่างกัน {days} วัน'**
   String compareDaysApart(int days);
+
+  /// No description provided for @insightsTabCalendar.
+  ///
+  /// In th, this message translates to:
+  /// **'ปฏิทิน'**
+  String get insightsTabCalendar;
+
+  /// No description provided for @insightsTabChart.
+  ///
+  /// In th, this message translates to:
+  /// **'กราฟผิว'**
+  String get insightsTabChart;
+
+  /// No description provided for @insightsTabSearch.
+  ///
+  /// In th, this message translates to:
+  /// **'ค้นหา'**
+  String get insightsTabSearch;
+
+  /// No description provided for @insightsTabSpending.
+  ///
+  /// In th, this message translates to:
+  /// **'ค่าใช้จ่าย'**
+  String get insightsTabSpending;
+
+  /// No description provided for @calendarLegendCalm.
+  ///
+  /// In th, this message translates to:
+  /// **'ผิวดี'**
+  String get calendarLegendCalm;
+
+  /// No description provided for @calendarLegendTroubled.
+  ///
+  /// In th, this message translates to:
+  /// **'มีปัญหา'**
+  String get calendarLegendTroubled;
+
+  /// No description provided for @calendarLegendPhoto.
+  ///
+  /// In th, this message translates to:
+  /// **'มีรูป'**
+  String get calendarLegendPhoto;
+
+  /// No description provided for @calendarLegendUsage.
+  ///
+  /// In th, this message translates to:
+  /// **'ใช้สินค้า'**
+  String get calendarLegendUsage;
+
+  /// No description provided for @daySummaryNoLog.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีบันทึกผิววันนี้'**
+  String get daySummaryNoLog;
+
+  /// No description provided for @daySummaryProducts.
+  ///
+  /// In th, this message translates to:
+  /// **'สินค้าที่ใช้'**
+  String get daySummaryProducts;
+
+  /// No description provided for @daySummaryNoProducts.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่ได้บันทึกการใช้สินค้า'**
+  String get daySummaryNoProducts;
+
+  /// No description provided for @daySummaryTimes.
+  ///
+  /// In th, this message translates to:
+  /// **'{count} ครั้ง'**
+  String daySummaryTimes(int count);
+
+  /// No description provided for @daySummaryEdit.
+  ///
+  /// In th, this message translates to:
+  /// **'แก้ไขบันทึกวันนี้'**
+  String get daySummaryEdit;
+
+  /// No description provided for @daySummaryPhotos.
+  ///
+  /// In th, this message translates to:
+  /// **'รูปถ่าย'**
+  String get daySummaryPhotos;
+
+  /// No description provided for @chartRange30.
+  ///
+  /// In th, this message translates to:
+  /// **'30 วัน'**
+  String get chartRange30;
+
+  /// No description provided for @chartRange90.
+  ///
+  /// In th, this message translates to:
+  /// **'90 วัน'**
+  String get chartRange90;
+
+  /// No description provided for @chartRange180.
+  ///
+  /// In th, this message translates to:
+  /// **'6 เดือน'**
+  String get chartRange180;
+
+  /// No description provided for @chartEmpty.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีคะแนนผิวในช่วงนี้ ลองบันทึกผิวทุกวันดูนะ'**
+  String get chartEmpty;
+
+  /// No description provided for @chartMarkers.
+  ///
+  /// In th, this message translates to:
+  /// **'เริ่มใช้ / ใช้หมด'**
+  String get chartMarkers;
+
+  /// No description provided for @chartMarkerStart.
+  ///
+  /// In th, this message translates to:
+  /// **'เริ่มใช้ {name}'**
+  String chartMarkerStart(String name);
+
+  /// No description provided for @chartMarkerEnd.
+  ///
+  /// In th, this message translates to:
+  /// **'ใช้หมด {name}'**
+  String chartMarkerEnd(String name);
+
+  /// No description provided for @searchPrompt.
+  ///
+  /// In th, this message translates to:
+  /// **'เลือกอาการหรือปัจจัย เพื่อดูว่าวันนั้นและ 3 วันก่อนหน้าใช้อะไรไปบ้าง'**
+  String get searchPrompt;
+
+  /// No description provided for @searchNoDays.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีวันที่ติดแท็กนี้'**
+  String get searchNoDays;
+
+  /// No description provided for @searchDaysFound.
+  ///
+  /// In th, this message translates to:
+  /// **'พบ {count} วัน'**
+  String searchDaysFound(int count);
+
+  /// No description provided for @searchRecentProducts.
+  ///
+  /// In th, this message translates to:
+  /// **'ใช้ในช่วง 3 วันก่อน'**
+  String get searchRecentProducts;
+
+  /// No description provided for @spendingThisMonth.
+  ///
+  /// In th, this message translates to:
+  /// **'เดือนนี้'**
+  String get spendingThisMonth;
+
+  /// No description provided for @spendingSixMonths.
+  ///
+  /// In th, this message translates to:
+  /// **'6 เดือนล่าสุด'**
+  String get spendingSixMonths;
+
+  /// No description provided for @spendingPerMonth.
+  ///
+  /// In th, this message translates to:
+  /// **'ค่าใช้จ่ายต่อเดือน'**
+  String get spendingPerMonth;
+
+  /// No description provided for @spendingNote.
+  ///
+  /// In th, this message translates to:
+  /// **'นับตามวันที่ซื้อ (หรือวันที่เปิดใช้) ไม่รวมรายการอยากได้'**
+  String get spendingNote;
+
+  /// No description provided for @spendingValue.
+  ///
+  /// In th, this message translates to:
+  /// **'ความคุ้มค่าต่อสินค้า'**
+  String get spendingValue;
+
+  /// No description provided for @spendingValueHint.
+  ///
+  /// In th, this message translates to:
+  /// **'เรียงจากบาทต่อครั้งถูกสุด'**
+  String get spendingValueHint;
+
+  /// No description provided for @spendingNoProducts.
+  ///
+  /// In th, this message translates to:
+  /// **'ใส่ราคาสินค้าเพื่อดูสรุปค่าใช้จ่าย'**
+  String get spendingNoProducts;
+
+  /// No description provided for @perUseShort.
+  ///
+  /// In th, this message translates to:
+  /// **'{price}/ครั้ง'**
+  String perUseShort(String price);
 }
 
 class _AppLocalizationsDelegate

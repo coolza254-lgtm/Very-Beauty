@@ -796,4 +796,116 @@ class AppLocalizationsEn extends AppLocalizations {
   String compareDaysApart(int days) {
     return '$days days apart';
   }
+
+  @override
+  String get insightsTabCalendar => 'Calendar';
+
+  @override
+  String get insightsTabChart => 'Skin chart';
+
+  @override
+  String get insightsTabSearch => 'Search';
+
+  @override
+  String get insightsTabSpending => 'Spending';
+
+  @override
+  String get calendarLegendCalm => 'Calm';
+
+  @override
+  String get calendarLegendTroubled => 'Troubled';
+
+  @override
+  String get calendarLegendPhoto => 'Photo';
+
+  @override
+  String get calendarLegendUsage => 'Used products';
+
+  @override
+  String get daySummaryNoLog => 'No skin log for this day';
+
+  @override
+  String get daySummaryProducts => 'Products used';
+
+  @override
+  String get daySummaryNoProducts => 'No products logged';
+
+  @override
+  String daySummaryTimes(int count) {
+    return '$count×';
+  }
+
+  @override
+  String get daySummaryEdit => 'Edit this day';
+
+  @override
+  String get daySummaryPhotos => 'Photos';
+
+  @override
+  String get chartRange30 => '30 days';
+
+  @override
+  String get chartRange90 => '90 days';
+
+  @override
+  String get chartRange180 => '6 months';
+
+  @override
+  String get chartEmpty =>
+      'No skin scores in this range yet — try logging daily';
+
+  @override
+  String get chartMarkers => 'Started / finished';
+
+  @override
+  String chartMarkerStart(String name) {
+    return 'Started $name';
+  }
+
+  @override
+  String chartMarkerEnd(String name) {
+    return 'Finished $name';
+  }
+
+  @override
+  String get searchPrompt =>
+      'Pick a symptom or factor to see what you used that day and the 3 days before';
+
+  @override
+  String get searchNoDays => 'No days with this tag yet';
+
+  @override
+  String searchDaysFound(int count) {
+    return '$count days';
+  }
+
+  @override
+  String get searchRecentProducts => 'Used in the 3 days before';
+
+  @override
+  String get spendingThisMonth => 'This month';
+
+  @override
+  String get spendingSixMonths => 'Last 6 months';
+
+  @override
+  String get spendingPerMonth => 'Spending per month';
+
+  @override
+  String get spendingNote =>
+      'Counted by purchase (or opening) date; wishlist excluded';
+
+  @override
+  String get spendingValue => 'Value per product';
+
+  @override
+  String get spendingValueHint => 'Sorted by cheapest per use';
+
+  @override
+  String get spendingNoProducts => 'Add product prices to see spending';
+
+  @override
+  String perUseShort(String price) {
+    return '$price/use';
+  }
 }

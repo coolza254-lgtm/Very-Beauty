@@ -425,5 +425,73 @@
         "type": "int"
       }
     }
+  },
+  "insightsTabCalendar": "ปฏิทิน",
+  "insightsTabChart": "กราฟผิว",
+  "insightsTabSearch": "ค้นหา",
+  "insightsTabSpending": "ค่าใช้จ่าย",
+  "calendarLegendCalm": "ผิวดี",
+  "calendarLegendTroubled": "มีปัญหา",
+  "calendarLegendPhoto": "มีรูป",
+  "calendarLegendUsage": "ใช้สินค้า",
+  "daySummaryNoLog": "ยังไม่มีบันทึกผิววันนี้",
+  "daySummaryProducts": "สินค้าที่ใช้",
+  "daySummaryNoProducts": "ไม่ได้บันทึกการใช้สินค้า",
+  "daySummaryTimes": "{count} ครั้ง",
+  "@daySummaryTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "daySummaryEdit": "แก้ไขบันทึกวันนี้",
+  "daySummaryPhotos": "รูปถ่าย",
+  "chartRange30": "30 วัน",
+  "chartRange90": "90 วัน",
+  "chartRange180": "6 เดือน",
+  "chartEmpty": "ยังไม่มีคะแนนผิวในช่วงนี้ ลองบันทึกผิวทุกวันดูนะ",
+  "chartMarkers": "เริ่มใช้ / ใช้หมด",
+  "chartMarkerStart": "เริ่มใช้ {name}",
+  "@chartMarkerStart": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chartMarkerEnd": "ใช้หมด {name}",
+  "@chartMarkerEnd": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "searchPrompt": "เลือกอาการหรือปัจจัย เพื่อดูว่าวันนั้นและ 3 วันก่อนหน้าใช้อะไรไปบ้าง",
+  "searchNoDays": "ยังไม่มีวันที่ติดแท็กนี้",
+  "searchDaysFound": "พบ {count} วัน",
+  "@searchDaysFound": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "searchRecentProducts": "ใช้ในช่วง 3 วันก่อน",
+  "spendingThisMonth": "เดือนนี้",
+  "spendingSixMonths": "6 เดือนล่าสุด",
+  "spendingPerMonth": "ค่าใช้จ่ายต่อเดือน",
+  "spendingNote": "นับตามวันที่ซื้อ (หรือวันที่เปิดใช้) ไม่รวมรายการอยากได้",
+  "spendingValue": "ความคุ้มค่าต่อสินค้า",
+  "spendingValueHint": "เรียงจากบาทต่อครั้งถูกสุด",
+  "spendingNoProducts": "ใส่ราคาสินค้าเพื่อดูสรุปค่าใช้จ่าย",
+  "perUseShort": "{price}/ครั้ง",
+  "@perUseShort": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
   }
 }

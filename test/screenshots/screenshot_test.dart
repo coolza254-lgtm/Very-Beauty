@@ -167,6 +167,33 @@ void main() {
       demo: true,
       navigate: (t) => open(t, 'เพิ่มสินค้า'),
     ),
+    '20_insights_calendar': (t) =>
+        shoot(t, '20_insights_calendar', tab: 'สรุป', demo: true),
+    '21_insights_day': (t) => shoot(
+      t,
+      '21_insights_day',
+      tab: 'สรุป',
+      demo: true,
+      navigate: (t) async {
+        final yesterday = DateTime.now().subtract(const Duration(days: 1));
+        await t.tap(find.text('${yesterday.day}').last);
+        await t.pumpAndSettle();
+      },
+    ),
+    '22_insights_chart': (t) => shoot(
+      t,
+      '22_insights_chart',
+      tab: 'สรุป',
+      demo: true,
+      navigate: (t) => open(t, 'กราฟผิว'),
+    ),
+    '23_insights_spending': (t) => shoot(
+      t,
+      '23_insights_spending',
+      tab: 'สรุป',
+      demo: true,
+      navigate: (t) => open(t, 'ค่าใช้จ่าย'),
+    ),
     '90_settings': (t) => shoot(t, '90_settings', tab: 'ตั้งค่า'),
   };
   for (final MapEntry(key: name, value: body) in shots.entries) {
