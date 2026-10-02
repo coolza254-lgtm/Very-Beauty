@@ -21,7 +21,7 @@ class ProductFilter {
 
   bool matches(Product p) {
     if (status != null && p.status != status) return false;
-    if (category != null && p.category != category) return false;
+    if (category != null && !p.categories.contains(category)) return false;
     final q = query.trim().toLowerCase();
     if (q.isEmpty) return true;
     return p.name.toLowerCase().contains(q) ||

@@ -116,7 +116,7 @@ class IngredientInput extends ConsumerStatefulWidget {
     super.key,
     required this.values,
     required this.onChanged,
-    this.category,
+    this.categories = const [],
     this.usedBefore = const [],
   });
 
@@ -124,7 +124,7 @@ class IngredientInput extends ConsumerStatefulWidget {
   final ValueChanged<List<String>> onChanged;
 
   /// Drives the "common in ..." quick-add chips.
-  final ProductCategory? category;
+  final List<ProductCategory> categories;
 
   /// Names the user typed on other products (also suggested).
   final List<String> usedBefore;
@@ -216,12 +216,13 @@ class _IngredientInputState extends ConsumerState<IngredientInput> {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final db = ref.watch(ingredientDbProvider).value;
-    final category = widget.category;
-    final popular = [
-      if (db != null && category != null)
-        for (final i in db.popularFor(category))
-          if (!_has(i.inci)) i,
-    ].take(12).toList();
+    final categories = widget.categories;
+    final popular = <Ingredient>{
+      if (db != null)
+        for (final c in categories)
+          for (final i in db.popularFor(c))
+            if (!_has(i.inci)) i,
+    }.take(12).toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -314,10 +315,10 @@ class _IngredientInputState extends ConsumerState<IngredientInput> {
             ),
           ),
         ),
-        if (popular.isNotEmpty && category != null) ...[
+        if (popular.isNotEmpty) ...[
           const SizedBox(height: 16),
           Text(
-            l10n.ingredientsCommonIn(l10n.category(category)),
+            l10n.ingredientsCommonIn(categories.map(l10n.category).join(' · ')),
             style: theme.textTheme.bodySmall,
           ),
           const SizedBox(height: 6),

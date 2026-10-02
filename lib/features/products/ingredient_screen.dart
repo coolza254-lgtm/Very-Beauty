@@ -11,6 +11,7 @@ import '../../core/db/providers.dart';
 import '../../core/ingredients/ingredient_db.dart';
 import '../../core/utils/formatters.dart';
 import 'widgets/ingredient_widgets.dart';
+import 'widgets/product_widgets.dart';
 import 'widgets/molecule_view.dart';
 
 final _productsWithIngredientProvider = StreamProvider.autoDispose
@@ -282,7 +283,7 @@ class _MyProducts extends ConsumerWidget {
             ),
             for (final p in products)
               ListTile(
-                leading: Icon(categoryIcon(p.category)),
+                leading: ProductThumb(product: p, size: 40),
                 title: Text(p.name),
                 subtitle: p.brand == null ? null : Text(p.brand!),
                 trailing: const Icon(Icons.chevron_right_rounded),

@@ -423,5 +423,11 @@
   "updateInstallFailed": "Install failed. Please try again.",
   "updateCancelled": "Update cancelled",
   "updateSignatureTitle": "One last reinstall needed",
-  "updateSignatureBody": "This installed copy was signed with a temporary key, so it can’t be updated in place. Back up, uninstall, install the new file and restore. Future updates will work from inside the app."
+  "updateSignatureBody": "This installed copy was signed with a temporary key, so it can’t be updated in place. Back up, uninstall, install the new file and restore. Future updates will work from inside the app.",
+  "productPhotoAdd": "Add photo",
+  "productPhotoCamera": "Take a photo",
+  "productPhotoGallery": "Choose from gallery",
+  "productPhotoRemove": "Remove photo",
+  "productPhotoFailed": "Couldn’t open this image. Try another one.",
+  "fieldCategoryMultiHint": "Pick one or more · the first one is the main icon"
 }

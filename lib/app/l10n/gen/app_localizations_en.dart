@@ -1423,4 +1423,23 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get updateSignatureBody =>
       'This installed copy was signed with a temporary key, so it can’t be updated in place. Back up, uninstall, install the new file and restore. Future updates will work from inside the app.';
+
+  @override
+  String get productPhotoAdd => 'Add photo';
+
+  @override
+  String get productPhotoCamera => 'Take a photo';
+
+  @override
+  String get productPhotoGallery => 'Choose from gallery';
+
+  @override
+  String get productPhotoRemove => 'Remove photo';
+
+  @override
+  String get productPhotoFailed => 'Couldn’t open this image. Try another one.';
+
+  @override
+  String get fieldCategoryMultiHint =>
+      'Pick one or more · the first one is the main icon';
 }

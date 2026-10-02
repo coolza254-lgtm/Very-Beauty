@@ -66,3 +66,23 @@ const sunExposureConverter = SnakeCaseEnumConverter<SunExposure>(
   SunExposure.values,
 );
 const tagTypeConverter = SnakeCaseEnumConverter<TagType>(TagType.values);
+
+/// Extra product categories stored as comma-separated snake_case names, e.g.
+/// `'serum,moisturizer'`. Unknown names (from a newer app) are skipped.
+class ProductCategoryListConverter
+    extends TypeConverter<List<ProductCategory>, String> {
+  const ProductCategoryListConverter();
+
+  @override
+  List<ProductCategory> fromSql(String fromDb) => [
+    for (final part in fromDb.split(','))
+      if (part.trim().isNotEmpty)
+        ?ProductCategory.values
+            .where((c) => productCategoryConverter.toSql(c) == part.trim())
+            .firstOrNull,
+  ];
+
+  @override
+  String toSql(List<ProductCategory> value) =>
+      value.map(productCategoryConverter.toSql).join(',');
+}

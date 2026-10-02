@@ -50,6 +50,16 @@ class Products extends Table with BaseColumns {
   /// Added in schema v3 for barcode scanning, which was later removed at the
   /// user's request. Kept (unused) so existing v3 databases stay valid.
   TextColumn get barcode => text().nullable()();
+
+  /// More categories besides [category] (the main one, used for the icon),
+  /// e.g. a sunscreen that is also a serum. Added in schema v4.
+  TextColumn get extraCategories =>
+      text().map(const ProductCategoryListConverter()).nullable()();
+
+  /// Product photo and its thumbnail, relative to the documents directory
+  /// (under `photos/products/`). Added in schema v4.
+  TextColumn get photoPath => text().nullable()();
+  TextColumn get photoThumbPath => text().nullable()();
 }
 
 @DataClassName('WeightLog')

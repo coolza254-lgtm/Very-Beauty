@@ -40,6 +40,20 @@ class PhotoStorage {
     return StoredPhoto(filePath: full, thumbPath: thumb);
   }
 
+  /// Saves a product photo under `photos/products/` (thumbnail under
+  /// `photos/thumbs/products/`), so backups include it automatically.
+  Future<StoredPhoto> saveProduct(Uint8List bytes) async {
+    final processed = await Isolate.run(
+      () => processPhoto(PhotoJob(bytes, maxSide: 1600, thumbSide: 320)),
+    );
+    final name = '${DateTime.now().microsecondsSinceEpoch}.jpg';
+    final full = p.join('photos', 'products', name);
+    final thumb = p.join('photos', 'thumbs', 'products', name);
+    await _write(full, processed.full);
+    await _write(thumb, processed.thumb);
+    return StoredPhoto(filePath: full, thumbPath: thumb);
+  }
+
   Future<void> delete(StoredPhoto photo) async {
     for (final rel in [photo.filePath, photo.thumbPath]) {
       final f = File(paths.resolve(rel));

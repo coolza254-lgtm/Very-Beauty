@@ -82,6 +82,7 @@ test/
 > - `photos.file_path` / `thumb_path` เก็บเป็น path สัมพัทธ์จาก application documents directory (ย้ายเครื่อง/restore แล้วไม่พัง)
 > - ข้อมูลตั้งต้น: tag อาการ/ปัจจัย ภาษาไทย และ routine "เช้า" / "เย็น"
 > - **v3**: เพิ่ม `products.barcode` (text?) สำหรับฟีเจอร์สแกนบาร์โค้ด — **ผู้ใช้ให้เอาฟีเจอร์ออกแล้ว** คอลัมน์ยังคงอยู่ (ไม่ได้ใช้) เพื่อไม่ต้อง migrate ฐานข้อมูลของผู้ที่ติดตั้ง build 11 ไปแล้ว
+> - **v4**: เพิ่ม `products.extra_categories` (text?, ชื่อหมวดคั่นด้วยจุลภาค — สินค้าหนึ่งชิ้นอยู่ได้หลายหมวด, `category` คือหมวดหลักที่ใช้เป็นไอคอน) และ `products.photo_path` / `photo_thumb_path` (text?, รูปสินค้าใต้ `photos/products/` ซึ่งรวมอยู่ในไฟล์สำรองข้อมูลอัตโนมัติ)
 > - **v2**: เพิ่ม `products.finished_date` (int?, epoch ms) — วันที่ปิดสินค้าเป็น "ใช้หมด" ใช้กับเส้นมาร์กในกราฟ Insights
 
 ### products
@@ -106,6 +107,9 @@ test/
 | note | text? | |
 | finished_date | int? | วันที่ใช้หมด (เพิ่มใน schema v2) |
 | barcode | text? | ไม่ได้ใช้ (เพิ่มใน v3 ตอนมีฟีเจอร์สแกน ซึ่งถูกเอาออกแล้ว) |
+| extra_categories | text? | หมวดเพิ่มเติม เช่น `serum,moisturizer` (v4) |
+| photo_path | text? | รูปสินค้า (path สัมพัทธ์) ลบ EXIF แล้ว (v4) |
+| photo_thumb_path | text? | รูปย่อของรูปสินค้า (v4) |
 
 ### weight_logs
 `product_id` (FK), `weighed_at`, `weight` (กรัม), `note?`

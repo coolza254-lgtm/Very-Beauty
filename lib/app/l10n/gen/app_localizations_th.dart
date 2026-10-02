@@ -1439,4 +1439,23 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get updateSignatureBody =>
       'แอปที่ติดตั้งอยู่เป็นรุ่นที่เซ็นด้วยกุญแจชั่วคราว จึงอัปเดตทับไม่ได้ ให้กด \"สำรองข้อมูล\" ลบแอป แล้วติดตั้งไฟล์ใหม่และกู้คืนข้อมูล ครั้งต่อไปจะกดอัปเดตในแอปได้เลย';
+
+  @override
+  String get productPhotoAdd => 'เพิ่มรูป';
+
+  @override
+  String get productPhotoCamera => 'ถ่ายรูป';
+
+  @override
+  String get productPhotoGallery => 'เลือกจากคลังภาพ';
+
+  @override
+  String get productPhotoRemove => 'ลบรูป';
+
+  @override
+  String get productPhotoFailed => 'เปิดรูปนี้ไม่ได้ ลองรูปอื่น';
+
+  @override
+  String get fieldCategoryMultiHint =>
+      'เลือกได้หลายหมวด · หมวดแรกเป็นหมวดหลัก ★';
 }

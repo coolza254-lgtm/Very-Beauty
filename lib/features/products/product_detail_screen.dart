@@ -10,6 +10,8 @@ import '../../app/widgets/soft_card.dart';
 import '../../core/db/app_database.dart';
 import '../../core/db/products_dao.dart';
 import '../../core/db/providers.dart';
+import '../../core/storage/app_paths.dart';
+import '../../core/storage/photo_storage.dart';
 import '../../core/utils/calculations.dart';
 import '../../core/utils/date_utils.dart';
 import '../../core/utils/formatters.dart';
@@ -170,6 +172,15 @@ class _Detail extends ConsumerWidget {
         if (ok && context.mounted) {
           context.pop();
           await dao.deleteProduct(p.id);
+          if (p.photoPath case final photo?) {
+            final paths = await ref.read(appPathsProvider.future);
+            await PhotoStorage(paths).delete(
+              StoredPhoto(
+                filePath: photo,
+                thumbPath: p.photoThumbPath ?? photo,
+              ),
+            );
+          }
         }
     }
   }
@@ -199,7 +210,7 @@ class _Header extends StatelessWidget {
         children: [
           Row(
             children: [
-              CategoryBadge(category: p.category, size: 56),
+              ProductThumb(product: p, size: 72, zoomable: true),
               const SizedBox(width: 16),
               Expanded(
                 child: Column(
@@ -209,7 +220,7 @@ class _Header extends StatelessWidget {
                     Text(
                       [
                         if (p.brand != null) p.brand!,
-                        l10n.category(p.category),
+                        categoryLabels(l10n, p),
                         if (p.netContent != null)
                           '${formatNumber(p.netContent!)} ${l10n.unit(p.netUnit)}',
                       ].join(' · '),
@@ -488,7 +499,7 @@ class _WishlistCompare extends ConsumerWidget {
         .where(
           (o) =>
               o.product.id != product.id &&
-              o.product.category == product.category &&
+              o.product.categories.any(product.categories.contains) &&
               o.product.status != ProductStatus.wishlist &&
               o.metrics.pricePerUnit != null,
         )
@@ -502,7 +513,7 @@ class _WishlistCompare extends ConsumerWidget {
         children: [
           for (final o in others)
             ListTile(
-              leading: CategoryBadge(category: o.product.category, size: 36),
+              leading: ProductThumb(product: o.product, size: 36),
               title: Text(o.product.name),
               subtitle: Text(
                 l10n.perUnitShort(

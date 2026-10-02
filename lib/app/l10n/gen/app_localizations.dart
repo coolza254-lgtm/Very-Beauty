@@ -2641,6 +2641,42 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'แอปที่ติดตั้งอยู่เป็นรุ่นที่เซ็นด้วยกุญแจชั่วคราว จึงอัปเดตทับไม่ได้ ให้กด \"สำรองข้อมูล\" ลบแอป แล้วติดตั้งไฟล์ใหม่และกู้คืนข้อมูล ครั้งต่อไปจะกดอัปเดตในแอปได้เลย'**
   String get updateSignatureBody;
+
+  /// No description provided for @productPhotoAdd.
+  ///
+  /// In th, this message translates to:
+  /// **'เพิ่มรูป'**
+  String get productPhotoAdd;
+
+  /// No description provided for @productPhotoCamera.
+  ///
+  /// In th, this message translates to:
+  /// **'ถ่ายรูป'**
+  String get productPhotoCamera;
+
+  /// No description provided for @productPhotoGallery.
+  ///
+  /// In th, this message translates to:
+  /// **'เลือกจากคลังภาพ'**
+  String get productPhotoGallery;
+
+  /// No description provided for @productPhotoRemove.
+  ///
+  /// In th, this message translates to:
+  /// **'ลบรูป'**
+  String get productPhotoRemove;
+
+  /// No description provided for @productPhotoFailed.
+  ///
+  /// In th, this message translates to:
+  /// **'เปิดรูปนี้ไม่ได้ ลองรูปอื่น'**
+  String get productPhotoFailed;
+
+  /// No description provided for @fieldCategoryMultiHint.
+  ///
+  /// In th, this message translates to:
+  /// **'เลือกได้หลายหมวด · หมวดแรกเป็นหมวดหลัก ★'**
+  String get fieldCategoryMultiHint;
 }
 
 class _AppLocalizationsDelegate

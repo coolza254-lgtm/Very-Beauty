@@ -238,7 +238,7 @@ class _EditorState extends ConsumerState<_Editor> {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  CategoryBadge(category: s.product.category, size: 40),
+                  ProductThumb(product: s.product, size: 40),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
@@ -252,7 +252,7 @@ class _EditorState extends ConsumerState<_Editor> {
                         ),
                         Text(
                           inUse
-                              ? l10n.category(s.product.category)
+                              ? categoryLabels(l10n, s.product)
                               : l10n.routineNotInUse,
                           style: theme.textTheme.bodySmall,
                         ),
@@ -347,12 +347,9 @@ class _AddStepsSheetState extends State<_AddStepsSheet> {
                                 ? _selected.add(p.id)
                                 : _selected.remove(p.id),
                           ),
-                          secondary: CategoryBadge(
-                            category: p.category,
-                            size: 40,
-                          ),
+                          secondary: ProductThumb(product: p, size: 40),
                           title: Text(p.name),
-                          subtitle: Text(l10n.category(p.category)),
+                          subtitle: Text(categoryLabels(l10n, p)),
                         ),
                     ],
                   ),

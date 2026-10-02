@@ -247,6 +247,40 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
     requiredDuringInsert: false,
   );
   @override
+  late final GeneratedColumnWithTypeConverter<List<ProductCategory>?, String>
+  extraCategories =
+      GeneratedColumn<String>(
+        'extra_categories',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      ).withConverter<List<ProductCategory>?>(
+        $ProductsTable.$converterextraCategoriesn,
+      );
+  static const VerificationMeta _photoPathMeta = const VerificationMeta(
+    'photoPath',
+  );
+  @override
+  late final GeneratedColumn<String> photoPath = GeneratedColumn<String>(
+    'photo_path',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _photoThumbPathMeta = const VerificationMeta(
+    'photoThumbPath',
+  );
+  @override
+  late final GeneratedColumn<String> photoThumbPath = GeneratedColumn<String>(
+    'photo_thumb_path',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
   List<GeneratedColumn> get $columns => [
     id,
     createdAt,
@@ -270,6 +304,9 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
     note,
     finishedDate,
     barcode,
+    extraCategories,
+    photoPath,
+    photoThumbPath,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -411,6 +448,21 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
         barcode.isAcceptableOrUnknown(data['barcode']!, _barcodeMeta),
       );
     }
+    if (data.containsKey('photo_path')) {
+      context.handle(
+        _photoPathMeta,
+        photoPath.isAcceptableOrUnknown(data['photo_path']!, _photoPathMeta),
+      );
+    }
+    if (data.containsKey('photo_thumb_path')) {
+      context.handle(
+        _photoThumbPathMeta,
+        photoThumbPath.isAcceptableOrUnknown(
+          data['photo_thumb_path']!,
+          _photoThumbPathMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -514,6 +566,20 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
         DriftSqlType.string,
         data['${effectivePrefix}barcode'],
       ),
+      extraCategories: $ProductsTable.$converterextraCategoriesn.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}extra_categories'],
+        ),
+      ),
+      photoPath: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}photo_path'],
+      ),
+      photoThumbPath: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}photo_thumb_path'],
+      ),
     );
   }
 
@@ -527,6 +593,12 @@ class $ProductsTable extends Products with TableInfo<$ProductsTable, Product> {
   static TypeConverter<NetUnit, String> $converternetUnit = netUnitConverter;
   static TypeConverter<ProductStatus, String> $converterstatus =
       productStatusConverter;
+  static TypeConverter<List<ProductCategory>, String>
+  $converterextraCategories = const ProductCategoryListConverter();
+  static TypeConverter<List<ProductCategory>?, String?>
+  $converterextraCategoriesn = NullAwareTypeConverter.wrap(
+    $converterextraCategories,
+  );
 }
 
 class Product extends DataClass implements Insertable<Product> {
@@ -561,6 +633,15 @@ class Product extends DataClass implements Insertable<Product> {
   /// Added in schema v3 for barcode scanning, which was later removed at the
   /// user's request. Kept (unused) so existing v3 databases stay valid.
   final String? barcode;
+
+  /// More categories besides [category] (the main one, used for the icon),
+  /// e.g. a sunscreen that is also a serum. Added in schema v4.
+  final List<ProductCategory>? extraCategories;
+
+  /// Product photo and its thumbnail, relative to the documents directory
+  /// (under `photos/products/`). Added in schema v4.
+  final String? photoPath;
+  final String? photoThumbPath;
   const Product({
     required this.id,
     required this.createdAt,
@@ -584,6 +665,9 @@ class Product extends DataClass implements Insertable<Product> {
     this.note,
     this.finishedDate,
     this.barcode,
+    this.extraCategories,
+    this.photoPath,
+    this.photoThumbPath,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -652,6 +736,17 @@ class Product extends DataClass implements Insertable<Product> {
     if (!nullToAbsent || barcode != null) {
       map['barcode'] = Variable<String>(barcode);
     }
+    if (!nullToAbsent || extraCategories != null) {
+      map['extra_categories'] = Variable<String>(
+        $ProductsTable.$converterextraCategoriesn.toSql(extraCategories),
+      );
+    }
+    if (!nullToAbsent || photoPath != null) {
+      map['photo_path'] = Variable<String>(photoPath);
+    }
+    if (!nullToAbsent || photoThumbPath != null) {
+      map['photo_thumb_path'] = Variable<String>(photoThumbPath);
+    }
     return map;
   }
 
@@ -707,6 +802,15 @@ class Product extends DataClass implements Insertable<Product> {
       barcode: barcode == null && nullToAbsent
           ? const Value.absent()
           : Value(barcode),
+      extraCategories: extraCategories == null && nullToAbsent
+          ? const Value.absent()
+          : Value(extraCategories),
+      photoPath: photoPath == null && nullToAbsent
+          ? const Value.absent()
+          : Value(photoPath),
+      photoThumbPath: photoThumbPath == null && nullToAbsent
+          ? const Value.absent()
+          : Value(photoThumbPath),
     );
   }
 
@@ -740,6 +844,11 @@ class Product extends DataClass implements Insertable<Product> {
       note: serializer.fromJson<String?>(json['note']),
       finishedDate: serializer.fromJson<int?>(json['finishedDate']),
       barcode: serializer.fromJson<String?>(json['barcode']),
+      extraCategories: serializer.fromJson<List<ProductCategory>?>(
+        json['extraCategories'],
+      ),
+      photoPath: serializer.fromJson<String?>(json['photoPath']),
+      photoThumbPath: serializer.fromJson<String?>(json['photoThumbPath']),
     );
   }
   @override
@@ -768,6 +877,11 @@ class Product extends DataClass implements Insertable<Product> {
       'note': serializer.toJson<String?>(note),
       'finishedDate': serializer.toJson<int?>(finishedDate),
       'barcode': serializer.toJson<String?>(barcode),
+      'extraCategories': serializer.toJson<List<ProductCategory>?>(
+        extraCategories,
+      ),
+      'photoPath': serializer.toJson<String?>(photoPath),
+      'photoThumbPath': serializer.toJson<String?>(photoThumbPath),
     };
   }
 
@@ -794,6 +908,9 @@ class Product extends DataClass implements Insertable<Product> {
     Value<String?> note = const Value.absent(),
     Value<int?> finishedDate = const Value.absent(),
     Value<String?> barcode = const Value.absent(),
+    Value<List<ProductCategory>?> extraCategories = const Value.absent(),
+    Value<String?> photoPath = const Value.absent(),
+    Value<String?> photoThumbPath = const Value.absent(),
   }) => Product(
     id: id ?? this.id,
     createdAt: createdAt ?? this.createdAt,
@@ -821,6 +938,13 @@ class Product extends DataClass implements Insertable<Product> {
     note: note.present ? note.value : this.note,
     finishedDate: finishedDate.present ? finishedDate.value : this.finishedDate,
     barcode: barcode.present ? barcode.value : this.barcode,
+    extraCategories: extraCategories.present
+        ? extraCategories.value
+        : this.extraCategories,
+    photoPath: photoPath.present ? photoPath.value : this.photoPath,
+    photoThumbPath: photoThumbPath.present
+        ? photoThumbPath.value
+        : this.photoThumbPath,
   );
   Product copyWithCompanion(ProductsCompanion data) {
     return Product(
@@ -864,6 +988,13 @@ class Product extends DataClass implements Insertable<Product> {
           ? data.finishedDate.value
           : this.finishedDate,
       barcode: data.barcode.present ? data.barcode.value : this.barcode,
+      extraCategories: data.extraCategories.present
+          ? data.extraCategories.value
+          : this.extraCategories,
+      photoPath: data.photoPath.present ? data.photoPath.value : this.photoPath,
+      photoThumbPath: data.photoThumbPath.present
+          ? data.photoThumbPath.value
+          : this.photoThumbPath,
     );
   }
 
@@ -891,7 +1022,10 @@ class Product extends DataClass implements Insertable<Product> {
           ..write('repurchase: $repurchase, ')
           ..write('note: $note, ')
           ..write('finishedDate: $finishedDate, ')
-          ..write('barcode: $barcode')
+          ..write('barcode: $barcode, ')
+          ..write('extraCategories: $extraCategories, ')
+          ..write('photoPath: $photoPath, ')
+          ..write('photoThumbPath: $photoThumbPath')
           ..write(')'))
         .toString();
   }
@@ -920,6 +1054,9 @@ class Product extends DataClass implements Insertable<Product> {
     note,
     finishedDate,
     barcode,
+    extraCategories,
+    photoPath,
+    photoThumbPath,
   ]);
   @override
   bool operator ==(Object other) =>
@@ -946,7 +1083,10 @@ class Product extends DataClass implements Insertable<Product> {
           other.repurchase == this.repurchase &&
           other.note == this.note &&
           other.finishedDate == this.finishedDate &&
-          other.barcode == this.barcode);
+          other.barcode == this.barcode &&
+          other.extraCategories == this.extraCategories &&
+          other.photoPath == this.photoPath &&
+          other.photoThumbPath == this.photoThumbPath);
 }
 
 class ProductsCompanion extends UpdateCompanion<Product> {
@@ -972,6 +1112,9 @@ class ProductsCompanion extends UpdateCompanion<Product> {
   final Value<String?> note;
   final Value<int?> finishedDate;
   final Value<String?> barcode;
+  final Value<List<ProductCategory>?> extraCategories;
+  final Value<String?> photoPath;
+  final Value<String?> photoThumbPath;
   const ProductsCompanion({
     this.id = const Value.absent(),
     this.createdAt = const Value.absent(),
@@ -995,6 +1138,9 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     this.note = const Value.absent(),
     this.finishedDate = const Value.absent(),
     this.barcode = const Value.absent(),
+    this.extraCategories = const Value.absent(),
+    this.photoPath = const Value.absent(),
+    this.photoThumbPath = const Value.absent(),
   });
   ProductsCompanion.insert({
     this.id = const Value.absent(),
@@ -1019,6 +1165,9 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     this.note = const Value.absent(),
     this.finishedDate = const Value.absent(),
     this.barcode = const Value.absent(),
+    this.extraCategories = const Value.absent(),
+    this.photoPath = const Value.absent(),
+    this.photoThumbPath = const Value.absent(),
   }) : name = Value(name),
        category = Value(category);
   static Insertable<Product> custom({
@@ -1044,6 +1193,9 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     Expression<String>? note,
     Expression<int>? finishedDate,
     Expression<String>? barcode,
+    Expression<String>? extraCategories,
+    Expression<String>? photoPath,
+    Expression<String>? photoThumbPath,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1068,6 +1220,9 @@ class ProductsCompanion extends UpdateCompanion<Product> {
       if (note != null) 'note': note,
       if (finishedDate != null) 'finished_date': finishedDate,
       if (barcode != null) 'barcode': barcode,
+      if (extraCategories != null) 'extra_categories': extraCategories,
+      if (photoPath != null) 'photo_path': photoPath,
+      if (photoThumbPath != null) 'photo_thumb_path': photoThumbPath,
     });
   }
 
@@ -1094,6 +1249,9 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     Value<String?>? note,
     Value<int?>? finishedDate,
     Value<String?>? barcode,
+    Value<List<ProductCategory>?>? extraCategories,
+    Value<String?>? photoPath,
+    Value<String?>? photoThumbPath,
   }) {
     return ProductsCompanion(
       id: id ?? this.id,
@@ -1118,6 +1276,9 @@ class ProductsCompanion extends UpdateCompanion<Product> {
       note: note ?? this.note,
       finishedDate: finishedDate ?? this.finishedDate,
       barcode: barcode ?? this.barcode,
+      extraCategories: extraCategories ?? this.extraCategories,
+      photoPath: photoPath ?? this.photoPath,
+      photoThumbPath: photoThumbPath ?? this.photoThumbPath,
     );
   }
 
@@ -1196,6 +1357,17 @@ class ProductsCompanion extends UpdateCompanion<Product> {
     if (barcode.present) {
       map['barcode'] = Variable<String>(barcode.value);
     }
+    if (extraCategories.present) {
+      map['extra_categories'] = Variable<String>(
+        $ProductsTable.$converterextraCategoriesn.toSql(extraCategories.value),
+      );
+    }
+    if (photoPath.present) {
+      map['photo_path'] = Variable<String>(photoPath.value);
+    }
+    if (photoThumbPath.present) {
+      map['photo_thumb_path'] = Variable<String>(photoThumbPath.value);
+    }
     return map;
   }
 
@@ -1223,7 +1395,10 @@ class ProductsCompanion extends UpdateCompanion<Product> {
           ..write('repurchase: $repurchase, ')
           ..write('note: $note, ')
           ..write('finishedDate: $finishedDate, ')
-          ..write('barcode: $barcode')
+          ..write('barcode: $barcode, ')
+          ..write('extraCategories: $extraCategories, ')
+          ..write('photoPath: $photoPath, ')
+          ..write('photoThumbPath: $photoThumbPath')
           ..write(')'))
         .toString();
   }
@@ -5692,6 +5867,9 @@ typedef $$ProductsTableCreateCompanionBuilder = ProductsCompanion Function({
   Value<String?> note,
   Value<int?> finishedDate,
   Value<String?> barcode,
+  Value<List<ProductCategory>?> extraCategories,
+  Value<String?> photoPath,
+  Value<String?> photoThumbPath,
 });
 typedef $$ProductsTableUpdateCompanionBuilder = ProductsCompanion Function({
   Value<int> id,
@@ -5716,6 +5894,9 @@ typedef $$ProductsTableUpdateCompanionBuilder = ProductsCompanion Function({
   Value<String?> note,
   Value<int?> finishedDate,
   Value<String?> barcode,
+  Value<List<ProductCategory>?> extraCategories,
+  Value<String?> photoPath,
+  Value<String?> photoThumbPath,
 });
 
 final class $$ProductsTableReferences
@@ -5914,6 +6095,26 @@ class $$ProductsTableFilterComposer
 
   ColumnFilters<String> get barcode => $composableBuilder(
     column: $table.barcode,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<
+    List<ProductCategory>?,
+    List<ProductCategory>,
+    String
+  >
+  get extraCategories => $composableBuilder(
+    column: $table.extraCategories,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnFilters<String> get photoPath => $composableBuilder(
+    column: $table.photoPath,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get photoThumbPath => $composableBuilder(
+    column: $table.photoThumbPath,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -6136,6 +6337,21 @@ class $$ProductsTableOrderingComposer
     column: $table.barcode,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get extraCategories => $composableBuilder(
+    column: $table.extraCategories,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get photoPath => $composableBuilder(
+    column: $table.photoPath,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get photoThumbPath => $composableBuilder(
+    column: $table.photoThumbPath,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$ProductsTableAnnotationComposer
@@ -6230,6 +6446,20 @@ class $$ProductsTableAnnotationComposer
 
   GeneratedColumn<String> get barcode =>
       $composableBuilder(column: $table.barcode, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<List<ProductCategory>?, String>
+  get extraCategories => $composableBuilder(
+    column: $table.extraCategories,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get photoPath =>
+      $composableBuilder(column: $table.photoPath, builder: (column) => column);
+
+  GeneratedColumn<String> get photoThumbPath => $composableBuilder(
+    column: $table.photoThumbPath,
+    builder: (column) => column,
+  );
 
   Expression<T> weightLogsRefs<T extends Object>(
     Expression<T> Function($$WeightLogsTableAnnotationComposer a) f,
@@ -6387,6 +6617,10 @@ class $$ProductsTableTableManager
                 Value<String?> note = const Value.absent(),
                 Value<int?> finishedDate = const Value.absent(),
                 Value<String?> barcode = const Value.absent(),
+                Value<List<ProductCategory>?> extraCategories =
+                    const Value.absent(),
+                Value<String?> photoPath = const Value.absent(),
+                Value<String?> photoThumbPath = const Value.absent(),
               }) => ProductsCompanion(
                 id: id,
                 createdAt: createdAt,
@@ -6410,6 +6644,9 @@ class $$ProductsTableTableManager
                 note: note,
                 finishedDate: finishedDate,
                 barcode: barcode,
+                extraCategories: extraCategories,
+                photoPath: photoPath,
+                photoThumbPath: photoThumbPath,
               ),
           createCompanionCallback:
               ({
@@ -6435,6 +6672,10 @@ class $$ProductsTableTableManager
                 Value<String?> note = const Value.absent(),
                 Value<int?> finishedDate = const Value.absent(),
                 Value<String?> barcode = const Value.absent(),
+                Value<List<ProductCategory>?> extraCategories =
+                    const Value.absent(),
+                Value<String?> photoPath = const Value.absent(),
+                Value<String?> photoThumbPath = const Value.absent(),
               }) => ProductsCompanion.insert(
                 id: id,
                 createdAt: createdAt,
@@ -6458,6 +6699,9 @@ class $$ProductsTableTableManager
                 note: note,
                 finishedDate: finishedDate,
                 barcode: barcode,
+                extraCategories: extraCategories,
+                photoPath: photoPath,
+                photoThumbPath: photoThumbPath,
               ),
           withReferenceMapper: (p0) => p0
               .map(

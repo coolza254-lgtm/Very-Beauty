@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/l10n/gen/app_localizations.dart';
 import '../../../app/labels.dart';
@@ -6,6 +9,7 @@ import '../../../app/theme.dart';
 import '../../../app/widgets/soft_card.dart';
 import '../../../core/db/app_database.dart';
 import '../../../core/db/products_dao.dart';
+import '../../../core/storage/app_paths.dart';
 import '../../../core/utils/calculations.dart';
 import '../../../core/utils/formatters.dart';
 
@@ -54,6 +58,66 @@ class RemainingBar extends StatelessWidget {
     );
   }
 }
+
+/// The product's own photo when it has one, otherwise its category icon.
+/// Tapping a photo (when [zoomable]) shows it full screen.
+class ProductThumb extends ConsumerWidget {
+  const ProductThumb({
+    super.key,
+    required this.product,
+    this.size = 48,
+    this.zoomable = false,
+  });
+
+  final Product product;
+  final double size;
+  final bool zoomable;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final paths = ref.watch(appPathsProvider).value;
+    final thumb = product.photoThumbPath;
+    if (thumb == null || paths == null) {
+      return CategoryBadge(category: product.category, size: size);
+    }
+    final image = ClipRRect(
+      borderRadius: BorderRadius.circular(size * 0.3),
+      child: Image.file(
+        File(paths.resolve(thumb)),
+        width: size,
+        height: size,
+        fit: BoxFit.cover,
+        gaplessPlayback: true,
+        errorBuilder: (_, _, _) =>
+            CategoryBadge(category: product.category, size: size),
+      ),
+    );
+    final full = product.photoPath;
+    if (!zoomable || full == null) return image;
+    return GestureDetector(
+      onTap: () => showDialog<void>(
+        context: context,
+        builder: (context) => Dialog(
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: InteractiveViewer(
+              child: Image.file(File(paths.resolve(full))),
+            ),
+          ),
+        ),
+      ),
+      child: image,
+    );
+  }
+}
+
+/// "กันแดด · เซรั่ม" — every category of a product, main one first.
+String categoryLabels(AppLocalizations l10n, Product p) =>
+    p.categories.map(l10n.category).join(' · ');
 
 /// Category icon in a pastel circle.
 class CategoryBadge extends StatelessWidget {
@@ -128,7 +192,7 @@ class ProductCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CategoryBadge(category: p.category),
+          ProductThumb(product: p),
           const SizedBox(width: 14),
           Expanded(
             child: Column(
@@ -151,7 +215,7 @@ class ProductCard extends StatelessWidget {
                 Text(
                   [
                     if (p.brand != null) p.brand!,
-                    l10n.category(p.category),
+                    categoryLabels(l10n, p),
                     if (perUnit != null)
                       l10n.perUnitShort(
                         formatNumber(perUnit),

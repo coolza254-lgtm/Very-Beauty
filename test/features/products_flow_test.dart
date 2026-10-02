@@ -1,4 +1,10 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:image/image.dart' as img;
+import 'package:very_beauty/core/storage/app_paths.dart';
+import 'package:very_beauty/core/storage/product_photo_picker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:very_beauty/core/db/app_database.dart';
 import 'package:very_beauty/core/db/products_dao.dart';
@@ -144,7 +150,11 @@ void main() {
 
     // Typing Thai shows the database entry; picking it saves the INCI name.
     final field = find.byKey(const Key('ingredientField'));
-    await tester.ensureVisible(field);
+    await tester.scrollUntilVisible(
+      field,
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
     await tester.enterText(field, 'ไนอะซิน');
     await tester.pumpAndSettle();
     expect(find.textContaining('ไนอะซินาไมด์ (วิตามินบี 3) ·'), findsOneWidget);
@@ -229,4 +239,86 @@ void main() {
     expect(find.text('ประวัติการชั่ง'), findsNothing);
     expect(find.text('Barrier Cream'), findsWidgets);
   });
+
+  testWidgets('a product can have several categories and its own photo', (
+    tester,
+  ) async {
+    final dir = (await tester.runAsync(
+      () => Directory.systemTemp.createTemp('vb_product_photo'),
+    ))!;
+    addTearDown(() => dir.delete(recursive: true));
+    final db = await pumpApp(
+      tester,
+      overrides: [
+        appPathsProvider.overrideWith((ref) async => AppPaths(dir)),
+        productPhotoPickerProvider.overrideWithValue(_FakePicker()),
+      ],
+    );
+    await tester.tap(find.text('สินค้า'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('เพิ่มสินค้า').last);
+    await tester.pumpAndSettle();
+
+    await tester.enterText(
+      find.widgetWithText(TextFormField, 'ชื่อสินค้า'),
+      'Sun Serum SPF50',
+    );
+    await tester.tap(find.text('กันแดด'));
+    await tester.pump();
+    await tester.tap(find.text('เซรั่ม'));
+    await tester.pump();
+    expect(find.text('กันแดด ★'), findsOneWidget); // main category
+
+    await tester.tap(find.byKey(const Key('productPhotoBox')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('เลือกจากคลังภาพ'));
+    await tester.pump();
+    // Image processing and file writes are real async work.
+    final photo = find.descendant(
+      of: find.byKey(const Key('productPhotoBox')),
+      matching: find.byType(Image),
+    );
+    for (var i = 0; i < 50 && photo.evaluate().isEmpty; i++) {
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 100)),
+      );
+      await tester.pump();
+    }
+    expect(photo, findsOneWidget);
+
+    await tester.tap(find.text('บันทึก').first);
+    await tester.pumpAndSettle();
+    expect(find.text('กันแดด · เซรั่ม'), findsOneWidget);
+
+    final p = (await tester.runAsync(() => ProductsDao(db).loadAll()))!
+        .single
+        .product;
+    expect(p.categories, [ProductCategory.sunscreen, ProductCategory.serum]);
+    expect(p.photoThumbPath, startsWith('photos/thumbs/products/'));
+    expect(File(AppPaths(dir).resolve(p.photoPath!)).existsSync(), isTrue);
+
+    // The serum filter finds it too.
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
+    final serum = find.widgetWithText(ChoiceChip, 'เซรั่ม');
+    await tester.scrollUntilVisible(
+      serum,
+      100,
+      scrollable: find
+          .ancestor(
+            of: find.widgetWithText(ChoiceChip, 'คลีนเซอร์'),
+            matching: find.byType(Scrollable),
+          )
+          .first,
+    );
+    await tester.tap(serum);
+    await tester.pumpAndSettle();
+    expect(find.text('Sun Serum SPF50'), findsOneWidget);
+  });
+}
+
+class _FakePicker implements ProductPhotoPicker {
+  @override
+  Future<Uint8List?> pick({required bool fromCamera}) async =>
+      img.encodeJpg(img.Image(width: 40, height: 60));
 }

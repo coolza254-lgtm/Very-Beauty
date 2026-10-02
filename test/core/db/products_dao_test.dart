@@ -169,4 +169,38 @@ void main() {
     );
     expect(await dao.ingredientsOf(id), ['Retinal']);
   });
+
+  test('extra categories and photo paths round-trip', () async {
+    final id = await dao.createProduct(
+      const ProductDraft(
+        name: 'Sun Serum',
+        category: ProductCategory.sunscreen,
+        // Duplicates and the main category are dropped.
+        extraCategories: [
+          ProductCategory.serum,
+          ProductCategory.sunscreen,
+          ProductCategory.serum,
+        ],
+        photoPath: 'photos/products/1.jpg',
+        photoThumbPath: 'photos/thumbs/products/1.jpg',
+      ),
+    );
+    final p = (await dao.loadAll())
+        .singleWhere((x) => x.product.id == id)
+        .product;
+    expect(p.categories, [ProductCategory.sunscreen, ProductCategory.serum]);
+    expect(p.photoPath, 'photos/products/1.jpg');
+    expect(p.photoThumbPath, 'photos/thumbs/products/1.jpg');
+
+    await dao.updateProduct(
+      id,
+      const ProductDraft(name: 'Sun Serum', category: ProductCategory.serum),
+    );
+    final updated = (await dao.loadAll())
+        .singleWhere((x) => x.product.id == id)
+        .product;
+    expect(updated.categories, [ProductCategory.serum]);
+    expect(updated.extraCategories, isNull);
+    expect(updated.photoPath, isNull);
+  });
 }

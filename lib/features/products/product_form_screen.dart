@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,6 +13,9 @@ import '../../app/widgets/soft_card.dart';
 import '../../core/db/app_database.dart';
 import '../../core/db/products_dao.dart';
 import '../../core/db/providers.dart';
+import '../../core/storage/app_paths.dart';
+import '../../core/storage/photo_storage.dart';
+import '../../core/storage/product_photo_picker.dart';
 import '../../core/utils/calculations.dart';
 import '../../core/utils/date_utils.dart';
 import '../../core/utils/formatters.dart';
@@ -68,7 +73,16 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
   late List<String> _ingredients;
   List<String> _usedIngredients = const [];
 
-  ProductCategory? _category;
+  /// Selected categories in the order they were picked; the first is main.
+  late List<ProductCategory> _categories;
+
+  /// Photo currently shown; [_original] is the one the product had.
+  StoredPhoto? _photo;
+  StoredPhoto? _original;
+
+  /// Photos saved while this form was open; unused ones are deleted.
+  final _newPhotos = <StoredPhoto>[];
+  bool _saved = false;
   late NetUnit _unit;
   late ProductStatus _status;
   DateTime? _purchaseDate;
@@ -99,7 +113,13 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
     ref.read(productsDaoProvider).usedIngredientNames().then((names) {
       if (mounted) setState(() => _usedIngredients = names);
     });
-    _category = p?.category;
+    _categories = [...?p?.categories];
+    if (p?.photoPath case final path?) {
+      _original = _photo = StoredPhoto(
+        filePath: path,
+        thumbPath: p!.photoThumbPath ?? path,
+      );
+    }
     _unit = p?.netUnit ?? NetUnit.g;
     _status = p?.status ?? widget.initialStatus ?? ProductStatus.inUse;
     _purchaseDate = date(p?.purchaseDate);
@@ -111,6 +131,7 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
 
   @override
   void dispose() {
+    if (!_saved) _deletePhotos(_newPhotos);
     for (final c in [
       _name,
       _brand,
@@ -127,6 +148,65 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
     super.dispose();
   }
 
+  Future<void> _deletePhotos(Iterable<StoredPhoto> photos) async {
+    final list = photos.toList();
+    if (list.isEmpty) return;
+    final paths = await ref.read(appPathsProvider.future);
+    for (final photo in list) {
+      await PhotoStorage(paths).delete(photo);
+    }
+  }
+
+  Future<void> _pickPhoto() async {
+    final l10n = AppLocalizations.of(context);
+    final choice = await showModalBottomSheet<String>(
+      context: context,
+      showDragHandle: true,
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.photo_camera_outlined),
+              title: Text(l10n.productPhotoCamera),
+              onTap: () => Navigator.of(context).pop('camera'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_library_outlined),
+              title: Text(l10n.productPhotoGallery),
+              onTap: () => Navigator.of(context).pop('gallery'),
+            ),
+            if (_photo != null)
+              ListTile(
+                leading: const Icon(Icons.delete_outline_rounded),
+                title: Text(l10n.productPhotoRemove),
+                onTap: () => Navigator.of(context).pop('remove'),
+              ),
+          ],
+        ),
+      ),
+    );
+    if (choice == null || !mounted) return;
+    if (choice == 'remove') {
+      setState(() => _photo = null);
+      return;
+    }
+    final messenger = ScaffoldMessenger.of(context);
+    try {
+      final bytes = await ref
+          .read(productPhotoPickerProvider)
+          .pick(fromCamera: choice == 'camera');
+      if (bytes == null) return;
+      final paths = await ref.read(appPathsProvider.future);
+      final stored = await PhotoStorage(paths).saveProduct(bytes);
+      _newPhotos.add(stored);
+      if (mounted) setState(() => _photo = stored);
+    } catch (e) {
+      debugPrint('Product photo failed: $e');
+      messenger.showSnackBar(SnackBar(content: Text(l10n.productPhotoFailed)));
+    }
+  }
+
   String? _validateNumber(String? v) {
     if (v == null || v.trim().isEmpty) return null;
     final n = parseNumber(v);
@@ -139,7 +219,7 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
     if (_saving) return;
     final l10n = AppLocalizations.of(context);
     if (!_formKey.currentState!.validate()) return;
-    if (_category == null) {
+    if (_categories.isEmpty) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('${l10n.fieldCategory}?')));
       return;
@@ -147,7 +227,10 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
     setState(() => _saving = true);
     final draft = ProductDraft(
       name: _name.text,
-      category: _category!,
+      category: _categories.first,
+      extraCategories: _categories.skip(1).toList(),
+      photoPath: _photo?.filePath,
+      photoThumbPath: _photo?.thumbPath,
       brand: _brand.text,
       price: parseNumber(_price.text),
       netContent: parseNumber(_netContent.text),
@@ -164,6 +247,12 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
       ingredients: _ingredients,
     );
     final dao = ref.read(productsDaoProvider);
+    _saved = true;
+    // Drop photo files nothing points to any more.
+    await _deletePhotos([
+      for (final photo in [..._newPhotos, ?_original])
+        if (photo.filePath != _photo?.filePath) photo,
+    ]);
     if (_isEdit) {
       await dao.updateProduct(widget.existing!.product.id, draft);
       if (mounted) context.pop();
@@ -202,29 +291,51 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextFormField(
-                    controller: _name,
-                    autofocus: !_isEdit,
-                    textCapitalization: TextCapitalization.sentences,
-                    decoration: InputDecoration(labelText: l10n.fieldName),
-                    validator: (v) => v == null || v.trim().isEmpty
-                        ? l10n.fieldNameRequired
-                        : null,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _PhotoBox(photo: _photo, onTap: _pickPhoto),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: TextFormField(
+                          controller: _name,
+                          autofocus: !_isEdit,
+                          textCapitalization: TextCapitalization.sentences,
+                          decoration: InputDecoration(
+                            labelText: l10n.fieldName,
+                          ),
+                          validator: (v) => v == null || v.trim().isEmpty
+                              ? l10n.fieldNameRequired
+                              : null,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 16),
                   Text(l10n.fieldCategory, style: theme.textTheme.labelLarge),
+                  Text(
+                    l10n.fieldCategoryMultiHint,
+                    style: theme.textTheme.bodySmall,
+                  ),
                   const SizedBox(height: 8),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
                     children: [
                       for (final c in ProductCategory.values)
-                        ChoiceChip(
+                        FilterChip(
                           avatar: Icon(categoryIcon(c), size: 18),
-                          label: Text(l10n.category(c)),
-                          selected: _category == c,
+                          label: Text(
+                            _categories.length > 1 && _categories.first == c
+                                ? '${l10n.category(c)} ★'
+                                : l10n.category(c),
+                          ),
+                          selected: _categories.contains(c),
                           showCheckmark: false,
-                          onSelected: (_) => setState(() => _category = c),
+                          onSelected: (on) => setState(
+                            () =>
+                                on ? _categories.add(c) : _categories.remove(c),
+                          ),
                         ),
                     ],
                   ),
@@ -280,7 +391,7 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
             SoftCard(
               child: IngredientInput(
                 values: _ingredients,
-                category: _category,
+                categories: _categories,
                 usedBefore: _usedIngredients,
                 onChanged: (v) => setState(() => _ingredients = v),
               ),
@@ -419,5 +530,54 @@ class _ProductFormState extends ConsumerState<_ProductForm> {
         decoration: InputDecoration(labelText: l10n.fieldNote),
       ),
     ];
+  }
+}
+
+/// Square photo slot next to the name; tap to take/choose/remove a photo.
+class _PhotoBox extends ConsumerWidget {
+  const _PhotoBox({required this.photo, required this.onTap});
+
+  final StoredPhoto? photo;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final scheme = Theme.of(context).colorScheme;
+    final paths = ref.watch(appPathsProvider).value;
+    final thumb = photo == null || paths == null
+        ? null
+        : File(paths.resolve(photo!.thumbPath));
+    return Semantics(
+      button: true,
+      label: AppLocalizations.of(context).productPhotoAdd,
+      child: InkWell(
+        key: const Key('productPhotoBox'),
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(18),
+        child: Container(
+          width: 76,
+          height: 76,
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            color: scheme.surfaceContainerHigh,
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: scheme.outlineVariant),
+          ),
+          child: thumb == null
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.add_a_photo_outlined, color: scheme.primary),
+                    const SizedBox(height: 2),
+                    Text(
+                      AppLocalizations.of(context).productPhotoAdd,
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ],
+                )
+              : Image.file(thumb, fit: BoxFit.cover, gaplessPlayback: true),
+        ),
+      ),
+    );
   }
 }

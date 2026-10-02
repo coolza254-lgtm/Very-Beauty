@@ -95,10 +95,22 @@ class ProductDraft {
     this.emptyBottleWeight,
     this.note,
     this.ingredients = const [],
+    this.extraCategories = const [],
+    this.photoPath,
+    this.photoThumbPath,
   });
 
   final String name;
+
+  /// Main category (drives the icon and colour).
   final ProductCategory category;
+
+  /// Further categories the product also belongs to.
+  final List<ProductCategory> extraCategories;
+
+  /// Photo paths relative to the documents directory.
+  final String? photoPath;
+  final String? photoThumbPath;
   final String? brand;
   final double? price;
   final double? netContent;
@@ -130,7 +142,24 @@ class ProductDraft {
     startWeight: Value(startWeight),
     emptyBottleWeight: Value(emptyBottleWeight),
     note: Value(_blankToNull(note)),
+    extraCategories: Value(_extras.isEmpty ? null : _extras),
+    photoPath: Value(photoPath),
+    photoThumbPath: Value(photoThumbPath),
   );
+
+  List<ProductCategory> get _extras => [
+    for (final c in extraCategories.toSet())
+      if (c != category) c,
+  ];
+}
+
+extension ProductCategories on Product {
+  /// Main category first, then the extra ones.
+  List<ProductCategory> get categories => [
+    category,
+    for (final c in extraCategories ?? const <ProductCategory>[])
+      if (c != category) c,
+  ];
 }
 
 String? _blankToNull(String? s) {
