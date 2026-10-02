@@ -1458,4 +1458,25 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get fieldCategoryMultiHint =>
       'เลือกได้หลายหมวด · หมวดแรกเป็นหมวดหลัก ★';
+
+  @override
+  String ingredientsMissing(int count) {
+    return 'มี $count ส่วนผสมในสินค้าของคุณที่ยังไม่มีข้อมูล';
+  }
+
+  @override
+  String get ingredientsMissingShow => 'ดูรายชื่อ';
+
+  @override
+  String get ingredientsMissingTitle => 'ส่วนผสมที่ยังไม่มีข้อมูล';
+
+  @override
+  String get ingredientsMissingHint =>
+      'คัดลอกรายชื่อแล้วส่งให้ผู้พัฒนา เพื่อเพิ่มข้อมูลในเวอร์ชันถัดไป';
+
+  @override
+  String get ingredientsMissingCopy => 'คัดลอกรายชื่อ';
+
+  @override
+  String get ingredientsMissingCopied => 'คัดลอกแล้ว';
 }

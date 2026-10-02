@@ -429,5 +429,11 @@
   "productPhotoGallery": "Choose from gallery",
   "productPhotoRemove": "Remove photo",
   "productPhotoFailed": "Couldn’t open this image. Try another one.",
-  "fieldCategoryMultiHint": "Pick one or more · the first one is the main icon"
+  "fieldCategoryMultiHint": "Pick one or more · the first one is the main icon",
+  "ingredientsMissing": "{count} of your ingredients have no info yet",
+  "ingredientsMissingShow": "Show list",
+  "ingredientsMissingTitle": "Ingredients without info",
+  "ingredientsMissingHint": "Copy the list and send it to the developer to add them in the next version",
+  "ingredientsMissingCopy": "Copy list",
+  "ingredientsMissingCopied": "Copied"
 }

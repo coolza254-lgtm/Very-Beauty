@@ -779,5 +779,18 @@
   "productPhotoGallery": "เลือกจากคลังภาพ",
   "productPhotoRemove": "ลบรูป",
   "productPhotoFailed": "เปิดรูปนี้ไม่ได้ ลองรูปอื่น",
-  "fieldCategoryMultiHint": "เลือกได้หลายหมวด · หมวดแรกเป็นหมวดหลัก ★"
+  "fieldCategoryMultiHint": "เลือกได้หลายหมวด · หมวดแรกเป็นหมวดหลัก ★",
+  "ingredientsMissing": "มี {count} ส่วนผสมในสินค้าของคุณที่ยังไม่มีข้อมูล",
+  "@ingredientsMissing": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ingredientsMissingShow": "ดูรายชื่อ",
+  "ingredientsMissingTitle": "ส่วนผสมที่ยังไม่มีข้อมูล",
+  "ingredientsMissingHint": "คัดลอกรายชื่อแล้วส่งให้ผู้พัฒนา เพื่อเพิ่มข้อมูลในเวอร์ชันถัดไป",
+  "ingredientsMissingCopy": "คัดลอกรายชื่อ",
+  "ingredientsMissingCopied": "คัดลอกแล้ว"
 }

@@ -1442,4 +1442,25 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get fieldCategoryMultiHint =>
       'Pick one or more · the first one is the main icon';
+
+  @override
+  String ingredientsMissing(int count) {
+    return '$count of your ingredients have no info yet';
+  }
+
+  @override
+  String get ingredientsMissingShow => 'Show list';
+
+  @override
+  String get ingredientsMissingTitle => 'Ingredients without info';
+
+  @override
+  String get ingredientsMissingHint =>
+      'Copy the list and send it to the developer to add them in the next version';
+
+  @override
+  String get ingredientsMissingCopy => 'Copy list';
+
+  @override
+  String get ingredientsMissingCopied => 'Copied';
 }

@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app/l10n/gen/app_localizations.dart';
 import '../../app/labels.dart';
+import '../../core/db/providers.dart';
 import '../../core/ingredients/ingredient_db.dart';
 import 'widgets/ingredient_widgets.dart';
+
+/// Ingredient names saved on the user's products that the bundled database
+/// doesn't know yet, so they can be reported and added later.
+final missingIngredientsProvider = FutureProvider.autoDispose<List<String>>((
+  ref,
+) async {
+  final db = await ref.watch(ingredientDbProvider.future);
+  final names = await ref.watch(productsDaoProvider).usedIngredientNames();
+  return [
+    for (final n in names)
+      if (db.lookup(n) == null) n,
+  ];
+});
 
 /// Browsable, searchable view of the bundled ingredient database.
 class IngredientsScreen extends ConsumerStatefulWidget {
@@ -89,6 +104,7 @@ class _IngredientsScreenState extends ConsumerState<IngredientsScreen> {
             },
           ),
         ),
+        _MissingBanner(),
         Padding(
           padding: const EdgeInsets.fromLTRB(24, 8, 24, 4),
           child: Align(
@@ -125,6 +141,115 @@ class _IngredientsScreenState extends ConsumerState<IngredientsScreen> {
                 ),
         ),
       ],
+    );
+  }
+}
+
+class _MissingBanner extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final missing = ref.watch(missingIngredientsProvider).value ?? const [];
+    if (missing.isEmpty) return const SizedBox.shrink();
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+      child: Material(
+        color: theme.colorScheme.secondaryContainer,
+        borderRadius: BorderRadius.circular(16),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: () => _showMissing(context, missing),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 12, 8, 12),
+            child: Row(
+              children: [
+                const Icon(Icons.help_outline_rounded, size: 20),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    l10n.ingredientsMissing(missing.length),
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                ),
+                Text(
+                  l10n.ingredientsMissingShow,
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+                const Icon(Icons.chevron_right_rounded),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showMissing(BuildContext context, List<String> missing) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (sheetContext) => SafeArea(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.sizeOf(sheetContext).height * 0.75,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(24, 0, 24, 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.ingredientsMissingTitle,
+                      style: theme.textTheme.titleLarge,
+                    ),
+                    Text(
+                      l10n.ingredientsMissingHint,
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+              ),
+              Flexible(
+                child: ListView(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  children: [
+                    for (final name in missing)
+                      ListTile(dense: true, title: SelectableText(name)),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
+                child: FilledButton.icon(
+                  icon: const Icon(Icons.copy_rounded),
+                  label: Text(l10n.ingredientsMissingCopy),
+                  onPressed: () async {
+                    await Clipboard.setData(
+                      ClipboardData(text: missing.join('\n')),
+                    );
+                    if (sheetContext.mounted) {
+                      ScaffoldMessenger.of(sheetContext).showSnackBar(
+                        SnackBar(content: Text(l10n.ingredientsMissingCopied)),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

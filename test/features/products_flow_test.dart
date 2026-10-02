@@ -315,6 +315,33 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Sun Serum SPF50'), findsOneWidget);
   });
+
+  testWidgets('lists my ingredients that the database does not know', (
+    tester,
+  ) async {
+    await pumpApp(
+      tester,
+      seed: (db) => ProductsDao(db).createProduct(
+        const ProductDraft(
+          name: 'Mystery Toner',
+          category: ProductCategory.toner,
+          ingredients: ['Glycerin', 'Unicorn Tears'],
+        ),
+      ),
+    );
+    await tester.tap(find.text('สินค้า'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('ฐานข้อมูลส่วนผสม'));
+    await tester.pumpAndSettle();
+    expect(
+      find.text('มี 1 ส่วนผสมในสินค้าของคุณที่ยังไม่มีข้อมูล'),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('ดูรายชื่อ'));
+    await tester.pumpAndSettle();
+    expect(find.text('Unicorn Tears'), findsOneWidget);
+    expect(find.text('คัดลอกรายชื่อ'), findsOneWidget);
+  });
 }
 
 class _FakePicker implements ProductPhotoPicker {

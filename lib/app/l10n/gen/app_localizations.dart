@@ -2677,6 +2677,42 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'เลือกได้หลายหมวด · หมวดแรกเป็นหมวดหลัก ★'**
   String get fieldCategoryMultiHint;
+
+  /// No description provided for @ingredientsMissing.
+  ///
+  /// In th, this message translates to:
+  /// **'มี {count} ส่วนผสมในสินค้าของคุณที่ยังไม่มีข้อมูล'**
+  String ingredientsMissing(int count);
+
+  /// No description provided for @ingredientsMissingShow.
+  ///
+  /// In th, this message translates to:
+  /// **'ดูรายชื่อ'**
+  String get ingredientsMissingShow;
+
+  /// No description provided for @ingredientsMissingTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ส่วนผสมที่ยังไม่มีข้อมูล'**
+  String get ingredientsMissingTitle;
+
+  /// No description provided for @ingredientsMissingHint.
+  ///
+  /// In th, this message translates to:
+  /// **'คัดลอกรายชื่อแล้วส่งให้ผู้พัฒนา เพื่อเพิ่มข้อมูลในเวอร์ชันถัดไป'**
+  String get ingredientsMissingHint;
+
+  /// No description provided for @ingredientsMissingCopy.
+  ///
+  /// In th, this message translates to:
+  /// **'คัดลอกรายชื่อ'**
+  String get ingredientsMissingCopy;
+
+  /// No description provided for @ingredientsMissingCopied.
+  ///
+  /// In th, this message translates to:
+  /// **'คัดลอกแล้ว'**
+  String get ingredientsMissingCopied;
 }
 
 class _AppLocalizationsDelegate
