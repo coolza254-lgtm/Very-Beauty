@@ -11,6 +11,7 @@ import '../features/photos/photos_screen.dart';
 import '../core/db/app_database.dart';
 import '../core/utils/date_utils.dart';
 import '../features/products/product_detail_screen.dart';
+import '../features/products/ingredient_screen.dart';
 import '../features/products/ingredients_screen.dart';
 import '../features/products/product_form_screen.dart';
 import '../features/products/products_screen.dart';
@@ -33,6 +34,8 @@ abstract final class AppRoutes {
   static String productEdit(int id) => '/product/$id/edit';
 
   static const ingredients = '/ingredients';
+  static String ingredient(String name) =>
+      Uri(path: '/ingredient', queryParameters: {'name': name}).toString();
 
   static const routines = '/routines';
   static String routine(int id) => '/routines/$id';
@@ -65,6 +68,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.ingredients,
         builder: (context, state) => const IngredientsScreen(),
+      ),
+      GoRoute(
+        path: '/ingredient',
+        builder: (context, state) =>
+            IngredientScreen(name: state.uri.queryParameters['name'] ?? ''),
       ),
       GoRoute(
         path: AppRoutes.camera,

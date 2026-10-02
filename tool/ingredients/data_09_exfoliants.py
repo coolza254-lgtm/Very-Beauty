@@ -1,0 +1,82 @@
+"""Chemical exfoliants (AHA, BHA, PHA) and anti-acne actives."""
+from common import C, E, I, M, S, T
+
+_AHA = ('กรดผลไม้ (AHA) ที่ละลายน้ำ ทำงานบนผิวชั้นบนสุดโดยคลายพันธะที่ยึดเซลล์ผิวเก่าไว้ '
+        'ให้หลุดออกง่ายขึ้น')
+_AHA_GOOD = 'ผิวเรียบเนียน กระจ่างใส รอยดำและริ้วรอยตื้นดูจางลง ผิวรับสกินแคร์ตัวอื่นได้ดีขึ้น'
+_AHA_TIPS = ('เริ่มจากความเข้มข้นต่ำ 2–3 ครั้งต่อสัปดาห์ตอนกลางคืน ไม่ใช้ซ้อนกับเรตินอยด์หรือกรดตัวอื่นในคืนเดียวกัน '
+             'และทากันแดดทุกวัน')
+_PHA = ('กรดผลัดเซลล์รุ่นใหม่ (PHA) โมเลกุลใหญ่จึงซึมช้าและอ่อนโยนกว่า AHA มาก '
+        'และยังดึงความชุ่มชื้นได้ด้วย')
+_PHA_GOOD = 'ผลัดเซลล์อย่างอ่อนโยน เหมาะกับผิวแพ้ง่ายหรือมือใหม่ที่เพิ่งเริ่มใช้กรด'
+_ACNE_TIPS = 'สิวมักดีขึ้นหลังใช้ 6–8 สัปดาห์ ถ้าเป็นสิวอักเสบรุนแรงควรพบแพทย์ผิวหนัง'
+
+ROWS = [
+    I('Salicylic Acid', 'กรดซาลิไซลิก (BHA)', ['exfoliant', 'antiAcne'], [C, E, T],
+      'กรดผลัดเซลล์ชนิด BHA ละลายในน้ำมันได้ จึงซึมเข้าไปทำความสะอาดในรูขุมขนได้ ได้จากเปลือกต้นวิลโลว์หรือสังเคราะห์',
+      good='สลายสิวอุดตัน สิวเสี้ยน หัวดำ ลดการอักเสบของสิว เหมาะกับผิวมันและผิวเป็นสิวง่าย',
+      tips='ความเข้มข้นที่ใช้ทั่วไป 0.5–2% ใช้วันละครั้งหรือวันเว้นวัน ผู้ที่แพ้แอสไพรินควรระวัง ' + _ACNE_TIPS,
+      aka=['BHA', 'บีเอชเอ'], note='acid', en='Oil-soluble BHA that clears pores',
+      smi='O=C(O)c1ccccc1O', f='C7H6O3'),
+    I('Betaine Salicylate', 'บีเทนซาลิไซเลต', ['exfoliant', 'antiAcne'], [C, E, T],
+      'สารประกอบระหว่างกรดซาลิไซลิกกับบีเทน อ่อนโยนกว่าซาลิไซลิกเล็กน้อย นิยมในเครื่องสำอางเกาหลี',
+      good='ช่วยลดสิวอุดตันและผลัดเซลล์อย่างอ่อนโยน', aka=['BHA'], note='acid', en='Gentler salicylate',
+      smi='C[N+](C)(C)CC(=O)O.O=C([O-])c1ccccc1O', f='C12H17NO5'),
+    I('Capryloyl Salicylic Acid', 'แคพรีโลอิลซาลิไซลิกแอซิด (LHA)', ['exfoliant', 'antiAcne'], [C, E],
+      'อนุพันธ์ของกรดซาลิไซลิกที่ละลายในน้ำมันได้มากขึ้น (LHA) ออกฤทธิ์ช้าๆ ที่ผิวชั้นบน',
+      good='ผลัดเซลล์และลดสิวอุดตันอย่างอ่อนโยน', aka=['LHA'], note='acid', en='Slow-acting lipophilic salicylic derivative',
+      smi='CCCCCCCC(=O)c1ccc(O)c(C(=O)O)c1', f='C15H20O4'),
+    I('Salix Alba Bark Extract', 'สารสกัดเปลือกต้นวิลโลว์', ['exfoliant', 'soothing'], [C, T], 'สารสกัดจากเปลือกต้นวิลโลว์ขาว มีซาลิซินซึ่งเป็นสารตั้งต้นของกรดซาลิไซลิกตามธรรมชาติ',
+      good='ผลัดเซลล์อ่อนๆ และลดการอักเสบ', aka=['Willow Bark', 'วิลโลว์'], en='Willow bark; natural salicylates', kind='extract'),
+    I('Glycolic Acid', 'กรดไกลโคลิก (AHA)', 'exfoliant', [C, E, T], _AHA + ' โมเลกุลเล็กที่สุดในกลุ่ม AHA จึงซึมได้ลึกและออกฤทธิ์แรงที่สุด ได้จากอ้อย',
+      good=_AHA_GOOD + ' และกระตุ้นการสร้างคอลลาเจน', tips=_AHA_TIPS + ' ผิวแพ้ง่ายอาจแสบ', aka=['AHA', 'เอเอชเอ'], note='acid',
+      en='Strongest, smallest AHA', smi='OCC(=O)O', f='C2H4O3'),
+    I('Lactic Acid', 'กรดแลคติก (AHA)', ['exfoliant', 'humectant'], [C, E, T, M], _AHA + ' ได้จากนมเปรี้ยวหรือการหมัก โมเลกุลใหญ่กว่าไกลโคลิก จึงอ่อนโยนกว่า และยังเป็นส่วนหนึ่งของ NMF',
+      good=_AHA_GOOD + ' และเพิ่มความชุ่มชื้น เหมาะกับผิวแห้ง', tips=_AHA_TIPS, aka=['AHA', 'เอเอชเอ'], note='acid',
+      en='Gentler, hydrating AHA', smi='CC(O)C(=O)O', f='C3H6O3'),
+    I('Mandelic Acid', 'กรดแมนเดลิก (AHA)', ['exfoliant', 'antiAcne'], [C, E, T], _AHA + ' ได้จากอัลมอนด์ขม โมเลกุลใหญ่ ซึมช้า จึงอ่อนโยนที่สุดใน AHA และมีฤทธิ์ต้านเชื้อแบคทีเรีย',
+      good=_AHA_GOOD + ' เหมาะกับผิวแพ้ง่าย ผิวเป็นสิว และผิวคล้ำที่เสี่ยงรอยดำ', tips=_AHA_TIPS, aka=['AHA', 'เอเอชเอ'], note='acid',
+      en='Gentle AHA, good for acne and darker skin', smi='OC(C(=O)O)c1ccccc1', f='C8H8O3'),
+    I('Malic Acid', 'กรดมาลิก (AHA)', ['exfoliant', 'phAdjuster'], [T, E], _AHA + ' ได้จากแอปเปิล มักใช้ร่วมกับ AHA ตัวอื่นหรือปรับ pH', aka=['AHA'],
+      note='acid', en='Apple AHA', smi='OC(CC(=O)O)C(=O)O', f='C4H6O5'),
+    I('Tartaric Acid', 'กรดทาร์ทาริก (AHA)', ['exfoliant', 'phAdjuster'], [T, E], _AHA + ' ได้จากองุ่น', aka=['AHA'], note='acid',
+      en='Grape AHA', smi='OC(C(O)C(=O)O)C(=O)O', f='C4H6O6'),
+    I('Pyruvic Acid', 'กรดไพรูวิก', 'exfoliant', [E], 'กรดอัลฟาคีโต (alpha-keto acid) ที่ผลัดเซลล์ได้แรง ใช้ในการลอกผิวโดยแพทย์', note='acid',
+      en='Strong alpha-keto acid peel', smi='CC(=O)C(=O)O', f='C3H4O3'),
+    I('Gluconolactone', 'กลูโคโนแลคโตน (PHA)', ['exfoliant', 'humectant', 'antioxidant'], [C, E, T, M], _PHA + ' และต้านอนุมูลอิสระ',
+      good=_PHA_GOOD, tips='ใช้ได้บ่อยกว่า AHA แต่ยังควรทากันแดด', aka=['PHA', 'พีเอชเอ'], en='Gentle, hydrating PHA',
+      smi='OCC1OC(=O)C(O)C(O)C1O', f='C6H10O6'),
+    I('Lactobionic Acid', 'กรดแลคโตไบโอนิก (PHA)', ['exfoliant', 'humectant', 'antioxidant'], [E, T], _PHA + ' โมเลกุลใหญ่มาก (กลูโคนิก + กาแลคโตส)',
+      good=_PHA_GOOD, aka=['PHA', 'พีเอชเอ'], en='Gentle PHA with antioxidant action',
+      smi='OCC1OC(OC(C(O)CO)C(O)C(O)C(=O)O)C(O)C(O)C1O', f='C12H22O12'),
+    I('Succinic Acid', 'กรดซัคซินิก', 'antiAcne', [E, T], 'กรดอินทรีย์ที่มีฤทธิ์ต้านเชื้อแบคทีเรียอ่อนๆ นิยมในเจลแต้มสิว', en='Mild anti-blemish acid',
+      smi='OC(=O)CCC(=O)O', f='C4H6O4'),
+    I('Azelaic Acid', 'กรดอะเซลาอิก', ['antiAcne', 'brightening', 'soothing'], [E, M],
+      'กรดไดคาร์บอกซิลิกที่ได้จากธัญพืช (ข้าวสาลี ข้าวบาร์เลย์) และเชื้อยีสต์บนผิว',
+      good='ลดสิว ต้านเชื้อแบคทีเรีย ลดรอยแดงจากโรซาเซีย และยับยั้งการสร้างเม็ดสีจึงช่วยรอยดำ ปลอดภัยในหญิงตั้งครรภ์',
+      tips='ความเข้มข้น 10% ในเครื่องสำอาง 15–20% เป็นยา อาจแสบคันช่วงแรก', en='Multi-tasker for acne, redness and dark spots',
+      smi='OC(=O)CCCCCCCC(=O)O', f='C9H16O4'),
+    I('Potassium Azeloyl Diglycinate', 'โพแทสเซียมอะเซโลอิลไดไกลซิเนต', ['antiAcne', 'brightening'], [E, M, T],
+      'อนุพันธ์ของกรดอะเซลาอิกที่ละลายน้ำได้ อ่อนโยนกว่า ช่วยควบคุมความมันและให้ผิวกระจ่างใส', aka=['Azeloglicina'],
+      en='Water-soluble gentle azelaic derivative'),
+    I('Benzoyl Peroxide', 'เบนโซอิลเปอร์ออกไซด์', 'antiAcne', [C],
+      'สารฆ่าเชื้อแบคทีเรียสิว (C. acnes) ที่ได้ผลดีที่สุดตัวหนึ่ง โดยปล่อยออกซิเจนเข้าไปในรูขุมขน เชื้อจึงไม่ดื้อยา',
+      good='ลดสิวอักเสบได้เร็ว', tips='เริ่มที่ 2.5% ก็พอ (ได้ผลใกล้เคียง 10% แต่ระคายเคืองน้อยกว่า) แบบล้างออก (wash) อ่อนโยนกว่าแบบทาทิ้งไว้ ' + _ACNE_TIPS,
+      aka=['BPO'], note='bpo', en='Antibacterial acne treatment', smi='O=C(OOC(=O)c1ccccc1)c1ccccc1', f='C14H10O4'),
+    I('Sulfur', 'กำมะถัน', 'antiAcne', [C], 'ธาตุกำมะถัน ช่วยดูดซับความมันและผลัดเซลล์อ่อนๆ ต้านเชื้อแบคทีเรียและเชื้อรา',
+      good='ใช้แต้มสิวและดูแลผิวมัน รังแค', tips='กลิ่นค่อนข้างแรง อาจทำให้ผิวแห้ง', aka=['ซัลเฟอร์'], en='Drying anti-acne mineral',
+      kind='mineral', f='S'),
+    I('Zinc PCA', 'ซิงค์พีซีเอ', ['antiAcne', 'humectant'], [C, T, E], 'เกลือสังกะสีของ PCA (สารชุ่มชื้นในผิว) ช่วยควบคุมความมันและต้านเชื้อแบคทีเรีย',
+      good='ลดความมันและสิว โดยยังให้ความชุ่มชื้น', aka=['zinc', 'ซิงค์'], en='Oil-controlling zinc',
+      smi='[Zn+2].[O-]C(=O)C1CCC(=O)N1.[O-]C(=O)C1CCC(=O)N1', f='C10H12N2O6Zn'),
+    I('Zinc Gluconate', 'ซิงค์กลูโคเนต', ['antiAcne', 'soothing'], [C, E], 'เกลือสังกะสีที่ช่วยลดการอักเสบและควบคุมความมัน', aka=['zinc', 'ซิงค์'],
+      en='Soothing zinc salt', smi='[Zn+2].OCC(O)C(O)C(O)C(O)C(=O)[O-].OCC(O)C(O)C(O)C(O)C(=O)[O-]', f='C12H22O14Zn'),
+    I('Zinc Sulfate', 'ซิงค์ซัลเฟต', ['antiAcne', 'soothing'], [C, T], 'เกลือสังกะสีที่ช่วยสมานผิวและลดการอักเสบ', aka=['zinc'], en='Astringent zinc salt',
+      kind='mineral', f='ZnSO4'),
+    I('Hinokitiol', 'ฮิโนคิทิออล', ['antiAcne', 'preservative'], [C, E], 'สารจากไม้ฮิโนกิ/ซีดาร์ มีฤทธิ์ต้านเชื้อแบคทีเรียและเชื้อรา', en='Antimicrobial wood compound',
+      smi='CC(C)c1ccc(=O)c(O)cc1', f='C10H12O2'),
+    I('Hypochlorous Acid', 'กรดไฮโปคลอรัส', ['antiAcne', 'soothing'], [T, E], 'สารที่เม็ดเลือดขาวสร้างเพื่อฆ่าเชื้อ ใช้ในรูปสเปรย์ความเข้มข้นต่ำ ช่วยลดเชื้อแบคทีเรียและการอักเสบ',
+      tips='เสื่อมเร็วเมื่อโดนแสง เก็บในขวดทึบ', aka=['HOCl'], en='Gentle antimicrobial mist', f='HOCl'),
+    I('Piroctone Olamine', 'ไพรอคโทนโอลามีน', ['antiAcne', 'preservative'], [C], 'สารต้านเชื้อรา นิยมในแชมพูขจัดรังแคและผลิตภัณฑ์สำหรับสิวจากเชื้อรา',
+      en='Antifungal', smi='CC(C)(C)CC(C)CC1=CC(C)=CC(=O)N1O.NCCO', f='C16H30N2O3'),
+]

@@ -14,7 +14,7 @@ void main() {
   });
 
   test('bundled data is large and well-formed', () {
-    expect(db.all.length, greaterThan(250));
+    expect(db.all.length, greaterThan(700));
     final names = <String>{};
     for (final i in db.all) {
       expect(i.inci.trim(), isNotEmpty);
@@ -26,21 +26,26 @@ void main() {
       );
       if (i.note != null) expect(i.noteEn, isNotNull, reason: i.inci);
     }
-    // Every function code in the file is known.
+    // Every function code in the file is known, and every entry explains
+    // itself.
     expect(
       db.all.where((i) => i.function == IngredientFunction.other).length,
-      lessThan(db.all.length ~/ 5),
+      lessThan(db.all.length ~/ 20),
     );
+    for (final i in db.all) {
+      expect(i.what, isNotNull, reason: i.inci);
+      expect(i.summaryEn, isNotNull, reason: i.inci);
+    }
   });
 
   test('covers cleansers and sunscreens', () {
     expect(
       db.all.where((i) => i.usedIn.contains('sunscreen')).length,
-      greaterThan(80),
+      greaterThan(150),
     );
     expect(
       db.all.where((i) => i.usedIn.contains('cleanser')).length,
-      greaterThan(100),
+      greaterThan(300),
     );
     expect(db.lookup('Zinc Oxide')?.function, IngredientFunction.uvMineral);
     expect(
@@ -73,11 +78,52 @@ void main() {
       ProductCategory.moisturizer,
       ProductCategory.serum,
       ProductCategory.toner,
+      ProductCategory.treatment,
+      ProductCategory.mask,
     ]) {
       final popular = db.popularFor(c);
       expect(popular, isNotEmpty, reason: c.name);
       expect(popular.length, db.popular[c.name]!.length, reason: c.name);
     }
     expect(db.popularFor(ProductCategory.other), isEmpty);
+  });
+
+  test('molecules have valid layouts', () {
+    final withStructure = db.all.where((i) => i.molecule != null).toList();
+    expect(withStructure.length, greaterThan(250));
+    for (final i in withStructure) {
+      final m = i.molecule!;
+      expect(i.formula, isNotNull, reason: i.inci);
+      expect(i.molecularWeight, greaterThan(0), reason: i.inci);
+      for (final b in m.bonds) {
+        expect(b.from, lessThan(m.atoms.length), reason: i.inci);
+        expect(b.to, lessThan(m.atoms.length), reason: i.inci);
+        expect(b.order, inInclusiveRange(1, 3), reason: i.inci);
+      }
+    }
+    final niacinamide = db.lookup('Niacinamide')!;
+    expect(niacinamide.formula, 'C6H6N2O');
+    // 6 ring atoms + carbonyl C, O and amide N.
+    expect(niacinamide.molecule!.atoms, hasLength(9));
+    expect(
+      niacinamide.molecule!.atoms.where((a) => a.element == 'N'),
+      hasLength(2),
+    );
+  });
+
+  test('ingredients without one structure say why', () {
+    for (final i in db.all) {
+      if (i.molecule == null && i.kind == null) continue;
+      expect(i.molecule == null || i.kind == null, isTrue, reason: i.inci);
+    }
+    expect(db.lookup('Dimethicone')!.kind, 'polymer');
+    expect(db.lookup('Shea Butter')!.kind, 'oil');
+    expect(db.lookup('Zinc Oxide')!.formula, 'ZnO');
+  });
+
+  test('multiple functions are kept in order', () {
+    final niacinamide = db.lookup('Niacinamide')!;
+    expect(niacinamide.functions.first, IngredientFunction.brightening);
+    expect(niacinamide.functions, contains(IngredientFunction.barrier));
   });
 }

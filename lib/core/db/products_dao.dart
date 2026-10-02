@@ -243,6 +243,29 @@ class ProductsDao extends DatabaseAccessor<AppDatabase>
     return query.map((row) => row.read(tags.name)!).get();
   }
 
+  /// Products whose ingredients include any of [names] (case-insensitive).
+  Stream<List<Product>> watchProductsWithIngredient(Iterable<String> names) {
+    final lower = {for (final n in names) n.toLowerCase()};
+    final query =
+        select(products).join([
+            innerJoin(
+              productTags,
+              productTags.productId.equalsExp(products.id),
+            ),
+            innerJoin(tags, tags.id.equalsExp(productTags.tagId)),
+          ])
+          ..where(
+            tags.type.equals(tagTypeConverter.toSql(TagType.ingredient)) &
+                tags.name.lower().isIn(lower),
+          )
+          ..orderBy([OrderingTerm.asc(products.name)]);
+    return query.watch().map(
+      (rows) => {
+        for (final r in rows) r.readTable(products).id: r.readTable(products),
+      }.values.toList(),
+    );
+  }
+
   /// Inserts a product. If a start weight is given, also records the first
   /// weighing (docs/SPEC.md §5 weight_logs).
   Future<int> createProduct(ProductDraft draft) => transaction(() async {

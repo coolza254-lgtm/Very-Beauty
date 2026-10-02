@@ -45,12 +45,12 @@ class _IngredientsScreenState extends ConsumerState<IngredientsScreen> {
         : db.search(_query, limit: db.all.length);
     final items = [
       for (final i in matches)
-        if (_function == null || i.function == _function) i,
+        if (_function == null || i.functions.contains(_function)) i,
     ];
     final functions = [
       null,
       for (final f in IngredientFunction.values)
-        if (db.all.any((i) => i.function == f)) f,
+        if (db.all.any((i) => i.functions.contains(f))) f,
     ];
 
     return Column(

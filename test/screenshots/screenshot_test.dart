@@ -207,9 +207,23 @@ void main() {
       navigate: (t) async {
         await t.tap(find.byTooltip('ฐานข้อมูลส่วนผสม'));
         await t.pumpAndSettle();
-        await t.enterText(find.byType(TextField), 'salicylic');
+        await t.enterText(find.byType(TextField), 'niacinamide');
         await t.pumpAndSettle();
-        await open(t, 'Salicylic Acid');
+        await open(t, 'Niacinamide');
+      },
+    ),
+    '18_ingredient_structure': (t) => shoot(
+      t,
+      '18_ingredient_structure',
+      tab: 'สินค้า',
+      navigate: (t) async {
+        await t.tap(find.byTooltip('ฐานข้อมูลส่วนผสม'));
+        await t.pumpAndSettle();
+        await t.enterText(find.byType(TextField), 'tinosorb s');
+        await t.pumpAndSettle();
+        await open(t, 'Bis-Ethylhexyloxyphenol Methoxyphenyl Triazine');
+        await t.drag(find.byType(ListView).last, const Offset(0, -500));
+        await t.pumpAndSettle();
       },
     ),
     '20_insights_calendar': (t) =>

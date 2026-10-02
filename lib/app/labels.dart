@@ -92,6 +92,36 @@ extension IngredientLabels on AppLocalizations {
     IngredientFunction.phAdjuster => ingFnPhAdjuster,
     IngredientFunction.solvent => ingFnSolvent,
     IngredientFunction.fragrance => ingFnFragrance,
+    IngredientFunction.colorant => ingFnColorant,
     IngredientFunction.other => ingFnOther,
+  };
+
+  /// One sentence explaining what an ingredient with this role does.
+  String ingredientFunctionAbout(IngredientFunction f) => switch (f) {
+    IngredientFunction.surfactant => ingFnAboutSurfactant,
+    IngredientFunction.uvChemical => ingFnAboutUvChemical,
+    IngredientFunction.uvMineral => ingFnAboutUvMineral,
+    IngredientFunction.humectant => ingFnAboutHumectant,
+    IngredientFunction.emollient => ingFnAboutEmollient,
+    IngredientFunction.occlusive => ingFnAboutOcclusive,
+    IngredientFunction.barrier => ingFnAboutBarrier,
+    IngredientFunction.brightening => ingFnAboutBrightening,
+    IngredientFunction.antioxidant => ingFnAboutAntioxidant,
+    IngredientFunction.exfoliant => ingFnAboutExfoliant,
+    IngredientFunction.antiAcne => ingFnAboutAntiAcne,
+    IngredientFunction.retinoid => ingFnAboutRetinoid,
+    IngredientFunction.antiAging => ingFnAboutAntiAging,
+    IngredientFunction.soothing => ingFnAboutSoothing,
+    IngredientFunction.absorbent => ingFnAboutAbsorbent,
+    IngredientFunction.filmFormer => ingFnAboutFilmFormer,
+    IngredientFunction.emulsifier => ingFnAboutEmulsifier,
+    IngredientFunction.thickener => ingFnAboutThickener,
+    IngredientFunction.preservative => ingFnAboutPreservative,
+    IngredientFunction.chelating => ingFnAboutChelating,
+    IngredientFunction.phAdjuster => ingFnAboutPhAdjuster,
+    IngredientFunction.solvent => ingFnAboutSolvent,
+    IngredientFunction.fragrance => ingFnAboutFragrance,
+    IngredientFunction.colorant => ingFnAboutColorant,
+    IngredientFunction.other => ingFnAboutOther,
   };
 }

@@ -1220,4 +1220,162 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get weighMlNote => 'For ml products, 1 ml ≈ 1 g is assumed';
+
+  @override
+  String get ingFnColorant => 'Colorant';
+
+  @override
+  String get ingredientWhat => 'What it is';
+
+  @override
+  String get ingredientGood => 'What it does';
+
+  @override
+  String get ingredientTips => 'How to use';
+
+  @override
+  String get ingredientAbout => 'About';
+
+  @override
+  String get ingredientStructure => 'Chemical structure';
+
+  @override
+  String ingredientFormula(String formula) {
+    return 'Formula $formula';
+  }
+
+  @override
+  String ingredientMw(String mw) {
+    return 'Molecular weight $mw g/mol';
+  }
+
+  @override
+  String get ingredientZoomHint =>
+      'Pinch to zoom · skeletal formula (corners are carbon)';
+
+  @override
+  String get ingredientKindPolymer =>
+      'A polymer (long repeating chains of many sizes), so there is no single structure';
+
+  @override
+  String get ingredientKindExtract =>
+      'A natural extract made of many compounds';
+
+  @override
+  String get ingredientKindOil =>
+      'A natural oil or butter: a mix of triglycerides of several fatty acids';
+
+  @override
+  String get ingredientKindMixture =>
+      'A mixture of molecules of different sizes (e.g. coconut fatty acids)';
+
+  @override
+  String get ingredientKindMineral =>
+      'A mineral or inorganic solid, not a single molecule';
+
+  @override
+  String get ingredientKindProtein => 'A large protein or enzyme';
+
+  @override
+  String get ingredientKindFerment => 'A ferment containing many compounds';
+
+  @override
+  String get ingredientKindPeptide =>
+      'A peptide (chain of amino acids), too large to draw clearly';
+
+  @override
+  String get ingredientKindUnknown => 'No structure data yet';
+
+  @override
+  String get ingredientMyProducts => 'My products with this ingredient';
+
+  @override
+  String get ingredientFunctions => 'Functions';
+
+  @override
+  String get ingFnAboutSurfactant =>
+      'Binds both water and oil so grime and makeup rinse away';
+
+  @override
+  String get ingFnAboutUvChemical =>
+      'Absorbs UV rays and releases them as a little heat';
+
+  @override
+  String get ingFnAboutUvMineral =>
+      'Mineral particles that reflect, scatter and absorb UV';
+
+  @override
+  String get ingFnAboutHumectant => 'Draws water into the upper skin layers';
+
+  @override
+  String get ingFnAboutEmollient =>
+      'Fills gaps between skin cells for soft, smooth skin';
+
+  @override
+  String get ingFnAboutOcclusive => 'Forms a film that slows water loss';
+
+  @override
+  String get ingFnAboutBarrier =>
+      'Repairs the skin barrier with skin-like lipids';
+
+  @override
+  String get ingFnAboutBrightening => 'Reduces pigment for a more even tone';
+
+  @override
+  String get ingFnAboutAntioxidant =>
+      'Neutralises free radicals from sun and pollution';
+
+  @override
+  String get ingFnAboutExfoliant => 'Removes dead skin cells for smoother skin';
+
+  @override
+  String get ingFnAboutAntiAcne =>
+      'Targets acne bacteria, oil or clogged pores';
+
+  @override
+  String get ingFnAboutRetinoid => 'Vitamin A derivatives that renew skin';
+
+  @override
+  String get ingFnAboutAntiAging => 'Targets wrinkles and firmness';
+
+  @override
+  String get ingFnAboutSoothing => 'Calms irritation and redness';
+
+  @override
+  String get ingFnAboutAbsorbent => 'Absorbs excess oil for a matte finish';
+
+  @override
+  String get ingFnAboutFilmFormer =>
+      'Forms a thin film for long wear or water resistance';
+
+  @override
+  String get ingFnAboutEmulsifier => 'Holds water and oil together in creams';
+
+  @override
+  String get ingFnAboutThickener => 'Adjusts thickness and texture';
+
+  @override
+  String get ingFnAboutPreservative =>
+      'Keeps products free of bacteria and mould';
+
+  @override
+  String get ingFnAboutChelating => 'Binds metal ions to keep formulas stable';
+
+  @override
+  String get ingFnAboutPhAdjuster => 'Sets the formula’s pH';
+
+  @override
+  String get ingFnAboutSolvent => 'Dissolves other ingredients';
+
+  @override
+  String get ingFnAboutFragrance => 'Adds scent; can cause allergies';
+
+  @override
+  String get ingFnAboutColorant => 'Adds colour to the product or skin';
+
+  @override
+  String get ingFnAboutOther => 'Has a specialised role in the formula';
+
+  @override
+  String get ingredientRoles => 'Role in the formula';
 }

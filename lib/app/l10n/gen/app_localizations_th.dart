@@ -1219,4 +1219,179 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get weighMlNote => 'สินค้าหน่วย มล. คิดประมาณ 1 มล. ≈ 1 กรัม';
+
+  @override
+  String get ingFnColorant => 'สี/เม็ดสี';
+
+  @override
+  String get ingredientWhat => 'คืออะไร';
+
+  @override
+  String get ingredientGood => 'ช่วยอะไร';
+
+  @override
+  String get ingredientTips => 'วิธีใช้และเคล็ดลับ';
+
+  @override
+  String get ingredientAbout => 'ข้อมูลโดยย่อ';
+
+  @override
+  String get ingredientStructure => 'โครงสร้างทางเคมี';
+
+  @override
+  String ingredientFormula(String formula) {
+    return 'สูตรโมเลกุล $formula';
+  }
+
+  @override
+  String ingredientMw(String mw) {
+    return 'มวลโมเลกุล $mw g/mol';
+  }
+
+  @override
+  String get ingredientZoomHint =>
+      'จีบนิ้วเพื่อซูม · แสดงโครงสร้างแบบเส้น (มุมคือคาร์บอน)';
+
+  @override
+  String get ingredientKindPolymer =>
+      'เป็นพอลิเมอร์ (โมเลกุลสายยาวที่ต่อกันซ้ำๆ หลายขนาด) จึงไม่มีโครงสร้างเดียว';
+
+  @override
+  String get ingredientKindExtract =>
+      'เป็นสารสกัดจากธรรมชาติ ประกอบด้วยสารหลายชนิดรวมกัน';
+
+  @override
+  String get ingredientKindOil =>
+      'เป็นน้ำมัน/ไขมันธรรมชาติ ประกอบด้วยไตรกลีเซอไรด์ของกรดไขมันหลายชนิด';
+
+  @override
+  String get ingredientKindMixture =>
+      'เป็นสารผสมของโมเลกุลหลายขนาด (เช่น กรดไขมันจากมะพร้าวที่ยาวไม่เท่ากัน)';
+
+  @override
+  String get ingredientKindMineral =>
+      'เป็นแร่หรือสารอนินทรีย์ที่อยู่ในรูปผลึก ไม่ใช่โมเลกุลเดี่ยว';
+
+  @override
+  String get ingredientKindProtein => 'เป็นโปรตีนหรือเอนไซม์ขนาดใหญ่';
+
+  @override
+  String get ingredientKindFerment =>
+      'เป็นผลิตภัณฑ์จากการหมักจุลินทรีย์ มีสารหลายชนิดรวมกัน';
+
+  @override
+  String get ingredientKindPeptide =>
+      'เป็นเปปไทด์ (กรดอะมิโนหลายตัวต่อกัน) โมเลกุลใหญ่เกินกว่าจะแสดงชัดบนจอ';
+
+  @override
+  String get ingredientKindUnknown => 'ยังไม่มีข้อมูลโครงสร้างของสารนี้';
+
+  @override
+  String get ingredientMyProducts => 'สินค้าของฉันที่มีส่วนผสมนี้';
+
+  @override
+  String get ingredientFunctions => 'หน้าที่';
+
+  @override
+  String get ingFnAboutSurfactant =>
+      'สารลดแรงตึงผิวที่จับทั้งน้ำและน้ำมัน ทำให้คราบมัน เครื่องสำอาง และสิ่งสกปรกหลุดออกไปกับน้ำ';
+
+  @override
+  String get ingFnAboutUvChemical =>
+      'ดูดซับรังสี UV แล้วเปลี่ยนเป็นพลังงานความร้อนเล็กน้อย ป้องกันผิวไหม้ ฝ้า และผิวแก่ก่อนวัย';
+
+  @override
+  String get ingFnAboutUvMineral =>
+      'อนุภาคแร่ที่สะท้อน กระจาย และดูดซับรังสี UV บนผิว อ่อนโยน เหมาะกับผิวแพ้ง่าย';
+
+  @override
+  String get ingFnAboutHumectant =>
+      'ดึงน้ำจากอากาศและชั้นผิวด้านล่างมากักเก็บไว้ที่ผิวชั้นบน ทำให้ผิวอิ่มน้ำ';
+
+  @override
+  String get ingFnAboutEmollient =>
+      'เติมช่องว่างระหว่างเซลล์ผิวที่แห้งลอก ทำให้ผิวเรียบ นุ่ม ลื่น';
+
+  @override
+  String get ingFnAboutOcclusive =>
+      'สร้างชั้นเคลือบบนผิว ลดการระเหยของน้ำ เหมาะทาเป็นขั้นตอนสุดท้าย';
+
+  @override
+  String get ingFnAboutBarrier =>
+      'เป็นไขมันหรือสารที่ผิวใช้สร้างเกราะป้องกัน ช่วยซ่อมแซมผิวที่แห้ง แดง แสบง่าย';
+
+  @override
+  String get ingFnAboutBrightening =>
+      'ลดการสร้างหรือการกระจายของเม็ดสี ช่วยให้จุดด่างดำจางและสีผิวสม่ำเสมอ';
+
+  @override
+  String get ingFnAboutAntioxidant =>
+      'ดักจับอนุมูลอิสระจากแสงแดดและมลภาวะ ช่วยชะลอริ้วรอยและจุดด่างดำ หรือปกป้องสูตรไม่ให้เสื่อม';
+
+  @override
+  String get ingFnAboutExfoliant =>
+      'ช่วยให้เซลล์ผิวเก่าหลุดออก ผิวเรียบ กระจ่างใส ไม่หมองคล้ำ';
+
+  @override
+  String get ingFnAboutAntiAcne =>
+      'ช่วยลดสิวโดยลดเชื้อแบคทีเรีย ความมัน หรือการอุดตันของรูขุมขน';
+
+  @override
+  String get ingFnAboutRetinoid =>
+      'อนุพันธ์วิตามินเอที่เร่งการผลัดเซลล์และสร้างคอลลาเจน ลดริ้วรอยและสิว';
+
+  @override
+  String get ingFnAboutAntiAging =>
+      'ช่วยลดเลือนริ้วรอยหรือกระตุ้นการสร้างคอลลาเจน ทำให้ผิวกระชับ';
+
+  @override
+  String get ingFnAboutSoothing =>
+      'ลดการระคายเคือง รอยแดง และอาการแสบคัน ช่วยให้ผิวสงบ';
+
+  @override
+  String get ingFnAboutAbsorbent =>
+      'ดูดซับความมันหรือความชื้นส่วนเกิน ให้ผิวดูแมตต์และเนียน';
+
+  @override
+  String get ingFnAboutFilmFormer =>
+      'สร้างฟิล์มบางๆ บนผิว ช่วยให้ผลิตภัณฑ์ติดทน กันน้ำ หรือให้ความรู้สึกเรียบตึง';
+
+  @override
+  String get ingFnAboutEmulsifier =>
+      'ทำให้น้ำกับน้ำมันผสมกันเป็นเนื้อครีม/โลชั่นที่ไม่แยกชั้น';
+
+  @override
+  String get ingFnAboutThickener =>
+      'ปรับความข้นหนืดและเนื้อสัมผัสของผลิตภัณฑ์ให้ใช้ง่ายและคงตัว';
+
+  @override
+  String get ingFnAboutPreservative =>
+      'ป้องกันเชื้อโรคและเชื้อราในผลิตภัณฑ์ ทำให้ใช้ได้อย่างปลอดภัยจนหมด';
+
+  @override
+  String get ingFnAboutChelating =>
+      'จับแร่ธาตุโลหะในน้ำ ช่วยให้สูตรคงตัว ไม่เปลี่ยนสีหรือกลิ่น';
+
+  @override
+  String get ingFnAboutPhAdjuster =>
+      'ปรับความเป็นกรด-ด่างของสูตรให้เหมาะกับผิวและสารสำคัญ';
+
+  @override
+  String get ingFnAboutSolvent =>
+      'ตัวทำละลายที่ช่วยละลายส่วนผสมอื่นและกำหนดเนื้อสัมผัสของสูตร';
+
+  @override
+  String get ingFnAboutFragrance =>
+      'ให้กลิ่นหอมแก่ผลิตภัณฑ์ ไม่ได้บำรุงผิวโดยตรง และอาจก่อการแพ้ได้';
+
+  @override
+  String get ingFnAboutColorant =>
+      'ให้สีกับผลิตภัณฑ์หรือผิว เช่น เม็ดสีในรองพื้นหรือกันแดดสีเนื้อ';
+
+  @override
+  String get ingFnAboutOther =>
+      'มีบทบาทเฉพาะในสูตร เช่น ทำให้เย็น ให้ประกาย หรือช่วยให้สารอื่นคงตัว';
+
+  @override
+  String get ingredientRoles => 'หน้าที่ในสูตร';
 }

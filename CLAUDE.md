@@ -18,3 +18,5 @@
   writes phone-size PNGs to `build/screenshots/`.
 - Re-running `flutter_native_splash:create` rewrites `android/app/src/main/res/values*/styles.xml`;
   keep the AppCompat parents (needed by local_auth).
+- The ingredient database `assets/data/ingredients.json` is generated: edit
+  `tool/ingredients/data_*.py` and run `python3 tool/ingredients/build.py` (needs RDKit).

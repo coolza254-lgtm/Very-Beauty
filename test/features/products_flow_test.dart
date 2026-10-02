@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:very_beauty/core/db/app_database.dart';
 import 'package:very_beauty/core/db/products_dao.dart';
 
+import 'package:very_beauty/features/products/widgets/molecule_view.dart';
+
 import '../helpers/pump_app.dart';
 
 void main() {
@@ -195,5 +197,36 @@ void main() {
     await tester.tap(find.text('Retinol'));
     await tester.pumpAndSettle();
     expect(find.text('ควรรู้'), findsOneWidget);
+  });
+
+  testWidgets('ingredient page shows the structure and my products', (
+    tester,
+  ) async {
+    await pumpApp(
+      tester,
+      seed: (db) => ProductsDao(db).createProduct(
+        const ProductDraft(
+          name: 'Barrier Cream',
+          category: ProductCategory.moisturizer,
+          // Saved under an alias; the page still finds it.
+          ingredients: ['Vitamin B3'],
+        ),
+      ),
+    );
+    await tester.tap(find.text('สินค้า'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('ฐานข้อมูลส่วนผสม'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), 'niacinamide');
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Niacinamide'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('คืออะไร'), findsOneWidget);
+    await tapVisible(tester, find.text('สูตรโมเลกุล C₆H₆N₂O'));
+    expect(find.byType(MoleculeView), findsOneWidget);
+    await tapVisible(tester, find.text('Barrier Cream'));
+    expect(find.text('ประวัติการชั่ง'), findsNothing);
+    expect(find.text('Barrier Cream'), findsWidgets);
   });
 }

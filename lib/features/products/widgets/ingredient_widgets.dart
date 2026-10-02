@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../app/l10n/gen/app_localizations.dart';
 import '../../../app/labels.dart';
+import '../../../app/router.dart';
 import '../../../app/theme.dart';
 import '../../../core/db/enums.dart';
 import '../../../core/ingredients/ingredient_db.dart';
@@ -26,104 +28,9 @@ Color ingredientColor(IngredientFunction f) => switch (f) {
   _ => BrandColors.petal,
 };
 
-/// Opens the info sheet for an ingredient name (INCI, Thai or alias).
+/// Opens the full ingredient page (INCI, Thai or alias name).
 Future<void> showIngredientInfo(BuildContext context, String name) =>
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      showDragHandle: true,
-      builder: (_) => _IngredientInfoSheet(name: name),
-    );
-
-class _IngredientInfoSheet extends ConsumerWidget {
-  const _IngredientInfoSheet({required this.name});
-
-  final String name;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
-    final ingredient = ref.watch(ingredientDbProvider).value?.lookup(name);
-    final lang = Localizations.localeOf(context).languageCode;
-
-    Widget label(String text) => Padding(
-      padding: const EdgeInsets.only(top: 16, bottom: 4),
-      child: Text(text, style: theme.textTheme.bodySmall),
-    );
-
-    final i = ingredient;
-    return SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(i?.inci ?? name, style: theme.textTheme.titleLarge),
-            if (i == null) ...[
-              const SizedBox(height: 12),
-              Text(l10n.ingredientsUnknown, style: theme.textTheme.bodyMedium),
-            ] else ...[
-              const SizedBox(height: 2),
-              Text(i.thai, style: theme.textTheme.bodyLarge),
-              const SizedBox(height: 12),
-              FunctionChip(i.function),
-              if (i.aliases.isNotEmpty) ...[
-                label(l10n.ingredientsAlsoKnownAs),
-                Text(i.aliases.join(', '), style: theme.textTheme.bodyLarge),
-              ],
-              if (i.usedIn.isNotEmpty) ...[
-                label(l10n.ingredientsTypicalIn),
-                Text(
-                  [
-                    for (final c in ProductCategory.values)
-                      if (i.usedIn.contains(c.name)) l10n.category(c),
-                  ].join(', '),
-                  style: theme.textTheme.bodyLarge,
-                ),
-              ],
-              if (i.noteFor(lang) case final note?) ...[
-                const SizedBox(height: 16),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.secondaryContainer,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.info_outline_rounded, size: 20),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              l10n.ingredientsCaution,
-                              style: theme.textTheme.labelLarge,
-                            ),
-                            Text(note, style: theme.textTheme.bodyMedium),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-              const SizedBox(height: 16),
-              Text(
-                l10n.ingredientsDisclaimer,
-                style: theme.textTheme.bodySmall,
-              ),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
-}
+    context.push(AppRoutes.ingredient(name));
 
 /// Small pastel label naming what an ingredient does.
 class FunctionChip extends StatelessWidget {

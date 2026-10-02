@@ -2287,6 +2287,282 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'สินค้าหน่วย มล. คิดประมาณ 1 มล. ≈ 1 กรัม'**
   String get weighMlNote;
+
+  /// No description provided for @ingFnColorant.
+  ///
+  /// In th, this message translates to:
+  /// **'สี/เม็ดสี'**
+  String get ingFnColorant;
+
+  /// No description provided for @ingredientWhat.
+  ///
+  /// In th, this message translates to:
+  /// **'คืออะไร'**
+  String get ingredientWhat;
+
+  /// No description provided for @ingredientGood.
+  ///
+  /// In th, this message translates to:
+  /// **'ช่วยอะไร'**
+  String get ingredientGood;
+
+  /// No description provided for @ingredientTips.
+  ///
+  /// In th, this message translates to:
+  /// **'วิธีใช้และเคล็ดลับ'**
+  String get ingredientTips;
+
+  /// No description provided for @ingredientAbout.
+  ///
+  /// In th, this message translates to:
+  /// **'ข้อมูลโดยย่อ'**
+  String get ingredientAbout;
+
+  /// No description provided for @ingredientStructure.
+  ///
+  /// In th, this message translates to:
+  /// **'โครงสร้างทางเคมี'**
+  String get ingredientStructure;
+
+  /// No description provided for @ingredientFormula.
+  ///
+  /// In th, this message translates to:
+  /// **'สูตรโมเลกุล {formula}'**
+  String ingredientFormula(String formula);
+
+  /// No description provided for @ingredientMw.
+  ///
+  /// In th, this message translates to:
+  /// **'มวลโมเลกุล {mw} g/mol'**
+  String ingredientMw(String mw);
+
+  /// No description provided for @ingredientZoomHint.
+  ///
+  /// In th, this message translates to:
+  /// **'จีบนิ้วเพื่อซูม · แสดงโครงสร้างแบบเส้น (มุมคือคาร์บอน)'**
+  String get ingredientZoomHint;
+
+  /// No description provided for @ingredientKindPolymer.
+  ///
+  /// In th, this message translates to:
+  /// **'เป็นพอลิเมอร์ (โมเลกุลสายยาวที่ต่อกันซ้ำๆ หลายขนาด) จึงไม่มีโครงสร้างเดียว'**
+  String get ingredientKindPolymer;
+
+  /// No description provided for @ingredientKindExtract.
+  ///
+  /// In th, this message translates to:
+  /// **'เป็นสารสกัดจากธรรมชาติ ประกอบด้วยสารหลายชนิดรวมกัน'**
+  String get ingredientKindExtract;
+
+  /// No description provided for @ingredientKindOil.
+  ///
+  /// In th, this message translates to:
+  /// **'เป็นน้ำมัน/ไขมันธรรมชาติ ประกอบด้วยไตรกลีเซอไรด์ของกรดไขมันหลายชนิด'**
+  String get ingredientKindOil;
+
+  /// No description provided for @ingredientKindMixture.
+  ///
+  /// In th, this message translates to:
+  /// **'เป็นสารผสมของโมเลกุลหลายขนาด (เช่น กรดไขมันจากมะพร้าวที่ยาวไม่เท่ากัน)'**
+  String get ingredientKindMixture;
+
+  /// No description provided for @ingredientKindMineral.
+  ///
+  /// In th, this message translates to:
+  /// **'เป็นแร่หรือสารอนินทรีย์ที่อยู่ในรูปผลึก ไม่ใช่โมเลกุลเดี่ยว'**
+  String get ingredientKindMineral;
+
+  /// No description provided for @ingredientKindProtein.
+  ///
+  /// In th, this message translates to:
+  /// **'เป็นโปรตีนหรือเอนไซม์ขนาดใหญ่'**
+  String get ingredientKindProtein;
+
+  /// No description provided for @ingredientKindFerment.
+  ///
+  /// In th, this message translates to:
+  /// **'เป็นผลิตภัณฑ์จากการหมักจุลินทรีย์ มีสารหลายชนิดรวมกัน'**
+  String get ingredientKindFerment;
+
+  /// No description provided for @ingredientKindPeptide.
+  ///
+  /// In th, this message translates to:
+  /// **'เป็นเปปไทด์ (กรดอะมิโนหลายตัวต่อกัน) โมเลกุลใหญ่เกินกว่าจะแสดงชัดบนจอ'**
+  String get ingredientKindPeptide;
+
+  /// No description provided for @ingredientKindUnknown.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีข้อมูลโครงสร้างของสารนี้'**
+  String get ingredientKindUnknown;
+
+  /// No description provided for @ingredientMyProducts.
+  ///
+  /// In th, this message translates to:
+  /// **'สินค้าของฉันที่มีส่วนผสมนี้'**
+  String get ingredientMyProducts;
+
+  /// No description provided for @ingredientFunctions.
+  ///
+  /// In th, this message translates to:
+  /// **'หน้าที่'**
+  String get ingredientFunctions;
+
+  /// No description provided for @ingFnAboutSurfactant.
+  ///
+  /// In th, this message translates to:
+  /// **'สารลดแรงตึงผิวที่จับทั้งน้ำและน้ำมัน ทำให้คราบมัน เครื่องสำอาง และสิ่งสกปรกหลุดออกไปกับน้ำ'**
+  String get ingFnAboutSurfactant;
+
+  /// No description provided for @ingFnAboutUvChemical.
+  ///
+  /// In th, this message translates to:
+  /// **'ดูดซับรังสี UV แล้วเปลี่ยนเป็นพลังงานความร้อนเล็กน้อย ป้องกันผิวไหม้ ฝ้า และผิวแก่ก่อนวัย'**
+  String get ingFnAboutUvChemical;
+
+  /// No description provided for @ingFnAboutUvMineral.
+  ///
+  /// In th, this message translates to:
+  /// **'อนุภาคแร่ที่สะท้อน กระจาย และดูดซับรังสี UV บนผิว อ่อนโยน เหมาะกับผิวแพ้ง่าย'**
+  String get ingFnAboutUvMineral;
+
+  /// No description provided for @ingFnAboutHumectant.
+  ///
+  /// In th, this message translates to:
+  /// **'ดึงน้ำจากอากาศและชั้นผิวด้านล่างมากักเก็บไว้ที่ผิวชั้นบน ทำให้ผิวอิ่มน้ำ'**
+  String get ingFnAboutHumectant;
+
+  /// No description provided for @ingFnAboutEmollient.
+  ///
+  /// In th, this message translates to:
+  /// **'เติมช่องว่างระหว่างเซลล์ผิวที่แห้งลอก ทำให้ผิวเรียบ นุ่ม ลื่น'**
+  String get ingFnAboutEmollient;
+
+  /// No description provided for @ingFnAboutOcclusive.
+  ///
+  /// In th, this message translates to:
+  /// **'สร้างชั้นเคลือบบนผิว ลดการระเหยของน้ำ เหมาะทาเป็นขั้นตอนสุดท้าย'**
+  String get ingFnAboutOcclusive;
+
+  /// No description provided for @ingFnAboutBarrier.
+  ///
+  /// In th, this message translates to:
+  /// **'เป็นไขมันหรือสารที่ผิวใช้สร้างเกราะป้องกัน ช่วยซ่อมแซมผิวที่แห้ง แดง แสบง่าย'**
+  String get ingFnAboutBarrier;
+
+  /// No description provided for @ingFnAboutBrightening.
+  ///
+  /// In th, this message translates to:
+  /// **'ลดการสร้างหรือการกระจายของเม็ดสี ช่วยให้จุดด่างดำจางและสีผิวสม่ำเสมอ'**
+  String get ingFnAboutBrightening;
+
+  /// No description provided for @ingFnAboutAntioxidant.
+  ///
+  /// In th, this message translates to:
+  /// **'ดักจับอนุมูลอิสระจากแสงแดดและมลภาวะ ช่วยชะลอริ้วรอยและจุดด่างดำ หรือปกป้องสูตรไม่ให้เสื่อม'**
+  String get ingFnAboutAntioxidant;
+
+  /// No description provided for @ingFnAboutExfoliant.
+  ///
+  /// In th, this message translates to:
+  /// **'ช่วยให้เซลล์ผิวเก่าหลุดออก ผิวเรียบ กระจ่างใส ไม่หมองคล้ำ'**
+  String get ingFnAboutExfoliant;
+
+  /// No description provided for @ingFnAboutAntiAcne.
+  ///
+  /// In th, this message translates to:
+  /// **'ช่วยลดสิวโดยลดเชื้อแบคทีเรีย ความมัน หรือการอุดตันของรูขุมขน'**
+  String get ingFnAboutAntiAcne;
+
+  /// No description provided for @ingFnAboutRetinoid.
+  ///
+  /// In th, this message translates to:
+  /// **'อนุพันธ์วิตามินเอที่เร่งการผลัดเซลล์และสร้างคอลลาเจน ลดริ้วรอยและสิว'**
+  String get ingFnAboutRetinoid;
+
+  /// No description provided for @ingFnAboutAntiAging.
+  ///
+  /// In th, this message translates to:
+  /// **'ช่วยลดเลือนริ้วรอยหรือกระตุ้นการสร้างคอลลาเจน ทำให้ผิวกระชับ'**
+  String get ingFnAboutAntiAging;
+
+  /// No description provided for @ingFnAboutSoothing.
+  ///
+  /// In th, this message translates to:
+  /// **'ลดการระคายเคือง รอยแดง และอาการแสบคัน ช่วยให้ผิวสงบ'**
+  String get ingFnAboutSoothing;
+
+  /// No description provided for @ingFnAboutAbsorbent.
+  ///
+  /// In th, this message translates to:
+  /// **'ดูดซับความมันหรือความชื้นส่วนเกิน ให้ผิวดูแมตต์และเนียน'**
+  String get ingFnAboutAbsorbent;
+
+  /// No description provided for @ingFnAboutFilmFormer.
+  ///
+  /// In th, this message translates to:
+  /// **'สร้างฟิล์มบางๆ บนผิว ช่วยให้ผลิตภัณฑ์ติดทน กันน้ำ หรือให้ความรู้สึกเรียบตึง'**
+  String get ingFnAboutFilmFormer;
+
+  /// No description provided for @ingFnAboutEmulsifier.
+  ///
+  /// In th, this message translates to:
+  /// **'ทำให้น้ำกับน้ำมันผสมกันเป็นเนื้อครีม/โลชั่นที่ไม่แยกชั้น'**
+  String get ingFnAboutEmulsifier;
+
+  /// No description provided for @ingFnAboutThickener.
+  ///
+  /// In th, this message translates to:
+  /// **'ปรับความข้นหนืดและเนื้อสัมผัสของผลิตภัณฑ์ให้ใช้ง่ายและคงตัว'**
+  String get ingFnAboutThickener;
+
+  /// No description provided for @ingFnAboutPreservative.
+  ///
+  /// In th, this message translates to:
+  /// **'ป้องกันเชื้อโรคและเชื้อราในผลิตภัณฑ์ ทำให้ใช้ได้อย่างปลอดภัยจนหมด'**
+  String get ingFnAboutPreservative;
+
+  /// No description provided for @ingFnAboutChelating.
+  ///
+  /// In th, this message translates to:
+  /// **'จับแร่ธาตุโลหะในน้ำ ช่วยให้สูตรคงตัว ไม่เปลี่ยนสีหรือกลิ่น'**
+  String get ingFnAboutChelating;
+
+  /// No description provided for @ingFnAboutPhAdjuster.
+  ///
+  /// In th, this message translates to:
+  /// **'ปรับความเป็นกรด-ด่างของสูตรให้เหมาะกับผิวและสารสำคัญ'**
+  String get ingFnAboutPhAdjuster;
+
+  /// No description provided for @ingFnAboutSolvent.
+  ///
+  /// In th, this message translates to:
+  /// **'ตัวทำละลายที่ช่วยละลายส่วนผสมอื่นและกำหนดเนื้อสัมผัสของสูตร'**
+  String get ingFnAboutSolvent;
+
+  /// No description provided for @ingFnAboutFragrance.
+  ///
+  /// In th, this message translates to:
+  /// **'ให้กลิ่นหอมแก่ผลิตภัณฑ์ ไม่ได้บำรุงผิวโดยตรง และอาจก่อการแพ้ได้'**
+  String get ingFnAboutFragrance;
+
+  /// No description provided for @ingFnAboutColorant.
+  ///
+  /// In th, this message translates to:
+  /// **'ให้สีกับผลิตภัณฑ์หรือผิว เช่น เม็ดสีในรองพื้นหรือกันแดดสีเนื้อ'**
+  String get ingFnAboutColorant;
+
+  /// No description provided for @ingFnAboutOther.
+  ///
+  /// In th, this message translates to:
+  /// **'มีบทบาทเฉพาะในสูตร เช่น ทำให้เย็น ให้ประกาย หรือช่วยให้สารอื่นคงตัว'**
+  String get ingFnAboutOther;
+
+  /// No description provided for @ingredientRoles.
+  ///
+  /// In th, this message translates to:
+  /// **'หน้าที่ในสูตร'**
+  String get ingredientRoles;
 }
 
 class _AppLocalizationsDelegate
