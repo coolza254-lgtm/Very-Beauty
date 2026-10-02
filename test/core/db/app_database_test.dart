@@ -40,7 +40,8 @@ void main() {
     expect(p.netUnit, NetUnit.g);
     expect(p.price, null);
     expect(p.createdAt, greaterThan(0));
-    expect(p.updatedAt, p.createdAt);
+    // Both default to "now", read separately, so they may differ by a ms.
+    expect(p.updatedAt, greaterThanOrEqualTo(p.createdAt));
   });
 
   test('enums are stored as snake_case text', () async {
