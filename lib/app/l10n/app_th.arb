@@ -388,5 +388,42 @@
   "notificationPermissionDenied": "ยังไม่ได้รับสิทธิ์แจ้งเตือน เปิดได้ในการตั้งค่าของเครื่อง",
   "actionContinue": "ดำเนินการต่อ",
   "actionDone": "เสร็จ",
-  "pickTime": "เลือกเวลา"
+  "pickTime": "เลือกเวลา",
+  "cameraTitle": "ถ่ายรูปผิว",
+  "cameraTipTitle": "เคล็ดลับให้เทียบผลได้แม่น",
+  "cameraTip": "ถ่ายใกล้หน้าต่าง ใช้แสงธรรมชาติแบบเดิมทุกครั้ง ไม่ใช้แฟลช จัดหน้าให้อยู่ในกรอบวงรี",
+  "cameraPermissionTitle": "ขอใช้กล้อง",
+  "cameraPermissionBody": "ใช้กล้องเพื่อถ่ายรูปผิวไว้เทียบผล รูปจะเก็บในแอพนี้เท่านั้น ไม่ลงแกลเลอรีและไม่ส่งออกไปไหน",
+  "cameraDenied": "ไม่ได้รับสิทธิ์ใช้กล้อง เปิดได้ในการตั้งค่าของเครื่อง",
+  "cameraUnavailable": "ไม่พบกล้องบนอุปกรณ์นี้",
+  "cameraOnionSkin": "ภาพครั้งก่อน",
+  "cameraSwitch": "สลับกล้อง",
+  "cameraCapture": "ถ่ายรูป",
+  "cameraSaving": "กำลังบันทึก…",
+  "cameraSaved": "บันทึกรูปแล้ว",
+  "photoSession": "ช่วง",
+  "photosCompare": "เทียบรูป",
+  "photosSelectTwo": "เลือก 2 รูปที่จะเทียบ",
+  "photosSelected": "เลือกแล้ว {count}/2",
+  "@photosSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "photosTake": "ถ่ายรูป",
+  "photoDeleteTitle": "ลบรูปนี้?",
+  "photoDeleteBody": "รูปจะถูกลบออกจากเครื่องถาวร",
+  "photoNote": "โน้ตของรูป",
+  "compareTitle": "เทียบรูป",
+  "compareHint": "ลากเส้นกลางเพื่อเทียบ",
+  "compareDaysApart": "ห่างกัน {days} วัน",
+  "@compareDaysApart": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -721,4 +721,80 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get pickTime => 'เลือกเวลา';
+
+  @override
+  String get cameraTitle => 'ถ่ายรูปผิว';
+
+  @override
+  String get cameraTipTitle => 'เคล็ดลับให้เทียบผลได้แม่น';
+
+  @override
+  String get cameraTip =>
+      'ถ่ายใกล้หน้าต่าง ใช้แสงธรรมชาติแบบเดิมทุกครั้ง ไม่ใช้แฟลช จัดหน้าให้อยู่ในกรอบวงรี';
+
+  @override
+  String get cameraPermissionTitle => 'ขอใช้กล้อง';
+
+  @override
+  String get cameraPermissionBody =>
+      'ใช้กล้องเพื่อถ่ายรูปผิวไว้เทียบผล รูปจะเก็บในแอพนี้เท่านั้น ไม่ลงแกลเลอรีและไม่ส่งออกไปไหน';
+
+  @override
+  String get cameraDenied =>
+      'ไม่ได้รับสิทธิ์ใช้กล้อง เปิดได้ในการตั้งค่าของเครื่อง';
+
+  @override
+  String get cameraUnavailable => 'ไม่พบกล้องบนอุปกรณ์นี้';
+
+  @override
+  String get cameraOnionSkin => 'ภาพครั้งก่อน';
+
+  @override
+  String get cameraSwitch => 'สลับกล้อง';
+
+  @override
+  String get cameraCapture => 'ถ่ายรูป';
+
+  @override
+  String get cameraSaving => 'กำลังบันทึก…';
+
+  @override
+  String get cameraSaved => 'บันทึกรูปแล้ว';
+
+  @override
+  String get photoSession => 'ช่วง';
+
+  @override
+  String get photosCompare => 'เทียบรูป';
+
+  @override
+  String get photosSelectTwo => 'เลือก 2 รูปที่จะเทียบ';
+
+  @override
+  String photosSelected(int count) {
+    return 'เลือกแล้ว $count/2';
+  }
+
+  @override
+  String get photosTake => 'ถ่ายรูป';
+
+  @override
+  String get photoDeleteTitle => 'ลบรูปนี้?';
+
+  @override
+  String get photoDeleteBody => 'รูปจะถูกลบออกจากเครื่องถาวร';
+
+  @override
+  String get photoNote => 'โน้ตของรูป';
+
+  @override
+  String get compareTitle => 'เทียบรูป';
+
+  @override
+  String get compareHint => 'ลากเส้นกลางเพื่อเทียบ';
+
+  @override
+  String compareDaysApart(int days) {
+    return 'ห่างกัน $days วัน';
+  }
 }

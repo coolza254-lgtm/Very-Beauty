@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 
 import '../features/insights/insights_screen.dart';
 import '../features/log/daily_log_screen.dart';
+import '../features/photos/camera_screen.dart';
+import '../features/photos/compare_screen.dart';
+import '../features/photos/photo_viewer_screen.dart';
 import '../features/photos/photos_screen.dart';
 import '../core/db/app_database.dart';
 import '../core/utils/date_utils.dart';
@@ -31,6 +34,11 @@ abstract final class AppRoutes {
   static const routines = '/routines';
   static String routine(int id) => '/routines/$id';
   static String dailyLog(DateTime day) => '/log/${toDateKey(day)}';
+
+  static const camera = '/camera';
+  static String photoView(int id) => '/photo/$id';
+  static String photoCompare(int before, int after) =>
+      '/compare/$before/$after';
 }
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -50,6 +58,21 @@ final routerProvider = Provider<GoRouter>((ref) {
                 RoutineEditorScreen(routineId: _id(state)),
           ),
         ],
+      ),
+      GoRoute(
+        path: AppRoutes.camera,
+        builder: (context, state) => const CameraScreen(),
+      ),
+      GoRoute(
+        path: '/photo/:id',
+        builder: (context, state) => PhotoViewerScreen(photoId: _id(state)),
+      ),
+      GoRoute(
+        path: '/compare/:a/:b',
+        builder: (context, state) => CompareScreen(
+          beforeId: int.parse(state.pathParameters['a']!),
+          afterId: int.parse(state.pathParameters['b']!),
+        ),
       ),
       GoRoute(
         path: '/log/:date',

@@ -6,7 +6,6 @@ import '../../app/l10n/gen/app_localizations.dart';
 import '../../app/labels.dart';
 import '../../app/router.dart';
 import '../../app/theme.dart';
-import '../../app/widgets/empty_state_view.dart';
 import '../../app/widgets/soft_card.dart';
 import '../../core/db/app_database.dart';
 import '../../core/db/daily_log_dao.dart';
@@ -66,7 +65,7 @@ class TodayScreen extends ConsumerWidget {
                     icon: Icons.photo_camera_outlined,
                     color: BrandColors.sky,
                     label: l10n.quickPhoto,
-                    onTap: () => showComingSoon(context),
+                    onTap: () => context.push(AppRoutes.camera),
                   ),
                 ),
                 const SizedBox(width: 12),

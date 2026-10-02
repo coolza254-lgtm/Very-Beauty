@@ -720,4 +720,80 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pickTime => 'Pick a time';
+
+  @override
+  String get cameraTitle => 'Skin photo';
+
+  @override
+  String get cameraTipTitle => 'Tips for comparable photos';
+
+  @override
+  String get cameraTip =>
+      'Face a window, use the same natural light each time, no flash, and keep your face inside the oval';
+
+  @override
+  String get cameraPermissionTitle => 'Camera access';
+
+  @override
+  String get cameraPermissionBody =>
+      'The camera is used to take skin photos for comparison. Photos stay inside this app — not in your gallery and never uploaded.';
+
+  @override
+  String get cameraDenied =>
+      'Camera access is off — you can allow it in your phone\'s settings';
+
+  @override
+  String get cameraUnavailable => 'No camera found on this device';
+
+  @override
+  String get cameraOnionSkin => 'Last photo';
+
+  @override
+  String get cameraSwitch => 'Switch camera';
+
+  @override
+  String get cameraCapture => 'Take photo';
+
+  @override
+  String get cameraSaving => 'Saving…';
+
+  @override
+  String get cameraSaved => 'Photo saved';
+
+  @override
+  String get photoSession => 'Session';
+
+  @override
+  String get photosCompare => 'Compare';
+
+  @override
+  String get photosSelectTwo => 'Pick 2 photos to compare';
+
+  @override
+  String photosSelected(int count) {
+    return '$count/2 selected';
+  }
+
+  @override
+  String get photosTake => 'Take photo';
+
+  @override
+  String get photoDeleteTitle => 'Delete this photo?';
+
+  @override
+  String get photoDeleteBody => 'The photo will be permanently removed.';
+
+  @override
+  String get photoNote => 'Photo note';
+
+  @override
+  String get compareTitle => 'Compare';
+
+  @override
+  String get compareHint => 'Drag the divider to compare';
+
+  @override
+  String compareDaysApart(int days) {
+    return '$days days apart';
+  }
 }

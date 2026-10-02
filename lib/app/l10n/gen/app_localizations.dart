@@ -1405,6 +1405,144 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'เลือกเวลา'**
   String get pickTime;
+
+  /// No description provided for @cameraTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ถ่ายรูปผิว'**
+  String get cameraTitle;
+
+  /// No description provided for @cameraTipTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'เคล็ดลับให้เทียบผลได้แม่น'**
+  String get cameraTipTitle;
+
+  /// No description provided for @cameraTip.
+  ///
+  /// In th, this message translates to:
+  /// **'ถ่ายใกล้หน้าต่าง ใช้แสงธรรมชาติแบบเดิมทุกครั้ง ไม่ใช้แฟลช จัดหน้าให้อยู่ในกรอบวงรี'**
+  String get cameraTip;
+
+  /// No description provided for @cameraPermissionTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ขอใช้กล้อง'**
+  String get cameraPermissionTitle;
+
+  /// No description provided for @cameraPermissionBody.
+  ///
+  /// In th, this message translates to:
+  /// **'ใช้กล้องเพื่อถ่ายรูปผิวไว้เทียบผล รูปจะเก็บในแอพนี้เท่านั้น ไม่ลงแกลเลอรีและไม่ส่งออกไปไหน'**
+  String get cameraPermissionBody;
+
+  /// No description provided for @cameraDenied.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่ได้รับสิทธิ์ใช้กล้อง เปิดได้ในการตั้งค่าของเครื่อง'**
+  String get cameraDenied;
+
+  /// No description provided for @cameraUnavailable.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่พบกล้องบนอุปกรณ์นี้'**
+  String get cameraUnavailable;
+
+  /// No description provided for @cameraOnionSkin.
+  ///
+  /// In th, this message translates to:
+  /// **'ภาพครั้งก่อน'**
+  String get cameraOnionSkin;
+
+  /// No description provided for @cameraSwitch.
+  ///
+  /// In th, this message translates to:
+  /// **'สลับกล้อง'**
+  String get cameraSwitch;
+
+  /// No description provided for @cameraCapture.
+  ///
+  /// In th, this message translates to:
+  /// **'ถ่ายรูป'**
+  String get cameraCapture;
+
+  /// No description provided for @cameraSaving.
+  ///
+  /// In th, this message translates to:
+  /// **'กำลังบันทึก…'**
+  String get cameraSaving;
+
+  /// No description provided for @cameraSaved.
+  ///
+  /// In th, this message translates to:
+  /// **'บันทึกรูปแล้ว'**
+  String get cameraSaved;
+
+  /// No description provided for @photoSession.
+  ///
+  /// In th, this message translates to:
+  /// **'ช่วง'**
+  String get photoSession;
+
+  /// No description provided for @photosCompare.
+  ///
+  /// In th, this message translates to:
+  /// **'เทียบรูป'**
+  String get photosCompare;
+
+  /// No description provided for @photosSelectTwo.
+  ///
+  /// In th, this message translates to:
+  /// **'เลือก 2 รูปที่จะเทียบ'**
+  String get photosSelectTwo;
+
+  /// No description provided for @photosSelected.
+  ///
+  /// In th, this message translates to:
+  /// **'เลือกแล้ว {count}/2'**
+  String photosSelected(int count);
+
+  /// No description provided for @photosTake.
+  ///
+  /// In th, this message translates to:
+  /// **'ถ่ายรูป'**
+  String get photosTake;
+
+  /// No description provided for @photoDeleteTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'ลบรูปนี้?'**
+  String get photoDeleteTitle;
+
+  /// No description provided for @photoDeleteBody.
+  ///
+  /// In th, this message translates to:
+  /// **'รูปจะถูกลบออกจากเครื่องถาวร'**
+  String get photoDeleteBody;
+
+  /// No description provided for @photoNote.
+  ///
+  /// In th, this message translates to:
+  /// **'โน้ตของรูป'**
+  String get photoNote;
+
+  /// No description provided for @compareTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'เทียบรูป'**
+  String get compareTitle;
+
+  /// No description provided for @compareHint.
+  ///
+  /// In th, this message translates to:
+  /// **'ลากเส้นกลางเพื่อเทียบ'**
+  String get compareHint;
+
+  /// No description provided for @compareDaysApart.
+  ///
+  /// In th, this message translates to:
+  /// **'ห่างกัน {days} วัน'**
+  String compareDaysApart(int days);
 }
 
 class _AppLocalizationsDelegate

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app_database.dart';
 import 'daily_log_dao.dart';
+import 'photos_dao.dart';
 import 'products_dao.dart';
 import 'routines_dao.dart';
 import 'settings_dao.dart';
@@ -32,4 +33,8 @@ final dailyLogDaoProvider = Provider<DailyLogDao>(
 /// All `app_settings` as a key-value map.
 final settingsProvider = StreamProvider<Map<String, String>>(
   (ref) => ref.watch(settingsDaoProvider).watchAll(),
+);
+
+final photosDaoProvider = Provider<PhotosDao>(
+  (ref) => PhotosDao(ref.watch(databaseProvider)),
 );
