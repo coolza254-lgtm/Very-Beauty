@@ -103,6 +103,7 @@ class _CameraScreenState extends ConsumerState<CameraScreen>
     } on CameraException catch (e) {
       return _fail(e);
     }
+    if (!mounted) return;
     if (_cameras.isEmpty) {
       setState(() => _error = l10n.cameraUnavailable);
       return;
