@@ -1485,4 +1485,60 @@ class AppLocalizationsEn extends AppLocalizations {
   String ingredientsFixed(String name) {
     return 'Changed to $name';
   }
+
+  @override
+  String get importPaste => 'Paste list';
+
+  @override
+  String get importScan => 'Scan photo';
+
+  @override
+  String get importTitle => 'Add ingredients from a list';
+
+  @override
+  String get importHint =>
+      'Paste the ingredient list from the brand site or label, or scan a photo/screenshot. The app splits the names and matches them for you.';
+
+  @override
+  String get importFieldHint => 'e.g. Water, Glycerin, Niacinamide, …';
+
+  @override
+  String get importFromClipboard => 'Paste from clipboard';
+
+  @override
+  String get importTakePhoto => 'Photograph label';
+
+  @override
+  String get importPickImage => 'Choose image/screenshot';
+
+  @override
+  String get importScanning => 'Reading text from the image…';
+
+  @override
+  String get importScanFailed =>
+      'Couldn’t read this image. Try a sharper photo or paste the text.';
+
+  @override
+  String get importScanEmpty => 'No text found in the image';
+
+  @override
+  String importSummary(int exact, int close, int unknown) {
+    return 'Matched $exact · close $close · unknown $unknown';
+  }
+
+  @override
+  String importApproximate(String raw) {
+    return 'From “$raw” · please check';
+  }
+
+  @override
+  String get importUnknown => 'Not in the database; added as written';
+
+  @override
+  String importAdd(int count) {
+    return 'Add $count';
+  }
+
+  @override
+  String get importEmpty => 'Nothing yet: paste text or scan above';
 }

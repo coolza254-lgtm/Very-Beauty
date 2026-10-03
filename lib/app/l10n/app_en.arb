@@ -440,5 +440,21 @@
   "ingredientsFixTitle": "Fix “{name}”",
   "ingredientsFixHint": "Pick the right name; every product using it is updated",
   "ingredientsDidYouMean": "Did you mean {name}?",
-  "ingredientsFixed": "Changed to {name}"
+  "ingredientsFixed": "Changed to {name}",
+  "importPaste": "Paste list",
+  "importScan": "Scan photo",
+  "importTitle": "Add ingredients from a list",
+  "importHint": "Paste the ingredient list from the brand site or label, or scan a photo/screenshot. The app splits the names and matches them for you.",
+  "importFieldHint": "e.g. Water, Glycerin, Niacinamide, …",
+  "importFromClipboard": "Paste from clipboard",
+  "importTakePhoto": "Photograph label",
+  "importPickImage": "Choose image/screenshot",
+  "importScanning": "Reading text from the image…",
+  "importScanFailed": "Couldn’t read this image. Try a sharper photo or paste the text.",
+  "importScanEmpty": "No text found in the image",
+  "importSummary": "Matched {exact} · close {close} · unknown {unknown}",
+  "importApproximate": "From “{raw}” · please check",
+  "importUnknown": "Not in the database; added as written",
+  "importAdd": "Add {count}",
+  "importEmpty": "Nothing yet: paste text or scan above"
 }

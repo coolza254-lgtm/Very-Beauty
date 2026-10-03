@@ -818,5 +818,48 @@
         "type": "String"
       }
     }
-  }
+  },
+  "importPaste": "วางรายชื่อ",
+  "importScan": "สแกนจากรูป",
+  "importTitle": "เพิ่มจากรายชื่อ",
+  "importHint": "วางรายชื่อส่วนผสมจากเว็บไซต์แบรนด์หรือฉลาก หรือสแกนจากรูป/ภาพหน้าจอ แอพจะแยกชื่อและจับคู่กับฐานข้อมูลให้อัตโนมัติ",
+  "importFieldHint": "เช่น Water, Glycerin, Niacinamide, …",
+  "importFromClipboard": "วางจากคลิปบอร์ด",
+  "importTakePhoto": "ถ่ายรูปฉลาก",
+  "importPickImage": "เลือกรูป/ภาพหน้าจอ",
+  "importScanning": "กำลังอ่านตัวอักษรจากรูป…",
+  "importScanFailed": "อ่านรูปนี้ไม่ได้ ลองถ่ายให้ชัดขึ้นหรือวางข้อความแทน",
+  "importScanEmpty": "ไม่พบตัวอักษรในรูป",
+  "importSummary": "ตรงกัน {exact} · ใกล้เคียง {close} · ไม่รู้จัก {unknown}",
+  "@importSummary": {
+    "placeholders": {
+      "exact": {
+        "type": "int"
+      },
+      "close": {
+        "type": "int"
+      },
+      "unknown": {
+        "type": "int"
+      }
+    }
+  },
+  "importApproximate": "จาก “{raw}” · ช่วยตรวจอีกครั้ง",
+  "@importApproximate": {
+    "placeholders": {
+      "raw": {
+        "type": "String"
+      }
+    }
+  },
+  "importUnknown": "ไม่มีในฐานข้อมูล จะเพิ่มตามที่เขียนไว้",
+  "importAdd": "เพิ่ม {count} รายการ",
+  "@importAdd": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importEmpty": "ยังไม่มีรายชื่อ วางข้อความหรือสแกนรูปด้านบน"
 }

@@ -134,6 +134,21 @@ class Ingredient {
   ];
 }
 
+/// Result of [IngredientDb.match].
+class IngredientMatch {
+  const IngredientMatch(this.raw, this.ingredient, {this.approximate = false});
+
+  /// The text as it appeared in the pasted list.
+  final String raw;
+
+  /// Null when nothing in the database fits.
+  final Ingredient? ingredient;
+
+  /// True when found by a close spelling rather than an exact name, so the
+  /// user should check it.
+  final bool approximate;
+}
+
 /// A 2D skeletal structure laid out offline by tool/ingredients/build.py.
 class Molecule {
   const Molecule(this.atoms, this.bonds);
@@ -284,6 +299,71 @@ class IngredientDb {
       return byLength != 0 ? byLength : a.$3.inci.compareTo(b.$3.inci);
     });
     return [for (final (_, _, i) in ranked.take(limit)) i];
+  }
+
+  /// Best guess for one name taken from a label, website or OCR text:
+  /// exact (INCI, Thai, alias, ignoring bracketed common names), then each
+  /// part of "Aqua/Water/Eau" or "Water (Aqua)", then a close spelling
+  /// (typos and OCR slips such as "Glycerine" or "Niacinarnide").
+  IngredientMatch match(String raw) {
+    final name = raw.trim();
+    if (name.isEmpty) return IngredientMatch(raw, null);
+    final exact = lookup(name);
+    if (exact != null) return IngredientMatch(raw, exact);
+    for (final part in [
+      ...name.split('/'),
+      ...RegExp(r'\(([^)]*)\)').allMatches(name).map((m) => m.group(1)!),
+    ]) {
+      if (part.trim() == name) continue;
+      final hit = lookup(part);
+      if (hit != null) return IngredientMatch(raw, hit);
+    }
+    final fuzzy = _closest(normalize(name.replaceAll(_parenthetical, ' ')));
+    return fuzzy == null
+        ? IngredientMatch(raw, null)
+        : IngredientMatch(raw, fuzzy, approximate: true);
+  }
+
+  /// Closest known name within a small edit distance (about one slip per
+  /// eight letters), or null.
+  Ingredient? _closest(String q) {
+    if (q.length < 4) return null;
+    final maxDistance = (q.length / 8).ceil().clamp(1, 4);
+    Ingredient? best;
+    var bestDistance = maxDistance + 1;
+    for (final MapEntry(key: name, value: ingredient) in _byName.entries) {
+      if ((name.length - q.length).abs() >= bestDistance) continue;
+      final d = _editDistance(q, name, bestDistance);
+      if (d < bestDistance) {
+        bestDistance = d;
+        best = ingredient;
+        if (d == 1) break;
+      }
+    }
+    return best;
+  }
+
+  /// Levenshtein distance, giving up (returning [limit]) once it can't be
+  /// below [limit].
+  static int _editDistance(String a, String b, int limit) {
+    var previous = List<int>.generate(b.length + 1, (i) => i);
+    for (var i = 1; i <= a.length; i++) {
+      final current = List<int>.filled(b.length + 1, 0)..[0] = i;
+      var rowMin = current[0];
+      for (var j = 1; j <= b.length; j++) {
+        final cost = a.codeUnitAt(i - 1) == b.codeUnitAt(j - 1) ? 0 : 1;
+        final v = [
+          previous[j] + 1,
+          current[j - 1] + 1,
+          previous[j - 1] + cost,
+        ].reduce((x, y) => x < y ? x : y);
+        current[j] = v;
+        if (v < rowMin) rowMin = v;
+      }
+      if (rowMin >= limit) return limit;
+      previous = current;
+    }
+    return previous[b.length];
   }
 
   /// Key ingredients often found in [category], most typical first.

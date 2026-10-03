@@ -8,6 +8,7 @@ import '../../../app/router.dart';
 import '../../../app/theme.dart';
 import '../../../core/db/enums.dart';
 import '../../../core/ingredients/ingredient_db.dart';
+import '../ingredient_import_screen.dart';
 
 /// Pastel colour per ingredient function, so lists are easy to scan.
 Color ingredientColor(IngredientFunction f) => switch (f) {
@@ -167,6 +168,11 @@ class _IngredientInputState extends ConsumerState<IngredientInput> {
     if (next.length != widget.values.length) widget.onChanged(next);
   }
 
+  Future<void> _import({required bool scan}) async {
+    final names = await importIngredients(context, scan: scan);
+    if (names != null && mounted) _add(names);
+  }
+
   void _remove(String name) =>
       widget.onChanged([...widget.values]..remove(name));
 
@@ -321,6 +327,23 @@ class _IngredientInputState extends ConsumerState<IngredientInput> {
               ),
             ),
           ),
+        ),
+        const SizedBox(height: 4),
+        Wrap(
+          spacing: 4,
+          children: [
+            TextButton.icon(
+              key: const Key('importPaste'),
+              onPressed: () => _import(scan: false),
+              icon: const Icon(Icons.content_paste_rounded, size: 18),
+              label: Text(l10n.importPaste),
+            ),
+            TextButton.icon(
+              onPressed: () => _import(scan: true),
+              icon: const Icon(Icons.document_scanner_outlined, size: 18),
+              label: Text(l10n.importScan),
+            ),
+          ],
         ),
         if (popular.isNotEmpty) ...[
           const SizedBox(height: 16),

@@ -191,6 +191,25 @@ void main() {
         await t.pumpAndSettle();
       },
     ),
+    '15b_ingredient_import': (t) => shoot(
+      t,
+      '15b_ingredient_import',
+      tab: 'สินค้า',
+      demo: true,
+      navigate: (t) async {
+        await open(t, 'เพิ่มสินค้า');
+        await t.drag(find.byType(ListView).first, const Offset(0, -500));
+        await t.pumpAndSettle();
+        await open(t, 'วางรายชื่อ');
+        await t.enterText(
+          find.byKey(const Key('importField')),
+          'Ingredients: Water (Aqua), Glycerine, Niacinamide 4%, '
+          'Butylene Glycol, Centella Asiatica Extract, Ethylhexyl\n'
+          'Methoxycinnamate, Moonbeam Essence*, Phenoxyethanol. *Organic',
+        );
+        await t.pumpAndSettle();
+      },
+    ),
     '16_ingredient_db': (t) => shoot(
       t,
       '16_ingredient_db',

@@ -1501,4 +1501,60 @@ class AppLocalizationsTh extends AppLocalizations {
   String ingredientsFixed(String name) {
     return 'แก้เป็น $name แล้ว';
   }
+
+  @override
+  String get importPaste => 'วางรายชื่อ';
+
+  @override
+  String get importScan => 'สแกนจากรูป';
+
+  @override
+  String get importTitle => 'เพิ่มจากรายชื่อ';
+
+  @override
+  String get importHint =>
+      'วางรายชื่อส่วนผสมจากเว็บไซต์แบรนด์หรือฉลาก หรือสแกนจากรูป/ภาพหน้าจอ แอพจะแยกชื่อและจับคู่กับฐานข้อมูลให้อัตโนมัติ';
+
+  @override
+  String get importFieldHint => 'เช่น Water, Glycerin, Niacinamide, …';
+
+  @override
+  String get importFromClipboard => 'วางจากคลิปบอร์ด';
+
+  @override
+  String get importTakePhoto => 'ถ่ายรูปฉลาก';
+
+  @override
+  String get importPickImage => 'เลือกรูป/ภาพหน้าจอ';
+
+  @override
+  String get importScanning => 'กำลังอ่านตัวอักษรจากรูป…';
+
+  @override
+  String get importScanFailed =>
+      'อ่านรูปนี้ไม่ได้ ลองถ่ายให้ชัดขึ้นหรือวางข้อความแทน';
+
+  @override
+  String get importScanEmpty => 'ไม่พบตัวอักษรในรูป';
+
+  @override
+  String importSummary(int exact, int close, int unknown) {
+    return 'ตรงกัน $exact · ใกล้เคียง $close · ไม่รู้จัก $unknown';
+  }
+
+  @override
+  String importApproximate(String raw) {
+    return 'จาก “$raw” · ช่วยตรวจอีกครั้ง';
+  }
+
+  @override
+  String get importUnknown => 'ไม่มีในฐานข้อมูล จะเพิ่มตามที่เขียนไว้';
+
+  @override
+  String importAdd(int count) {
+    return 'เพิ่ม $count รายการ';
+  }
+
+  @override
+  String get importEmpty => 'ยังไม่มีรายชื่อ วางข้อความหรือสแกนรูปด้านบน';
 }

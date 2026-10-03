@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
+import 'package:very_beauty/core/ingredients/ingredient_text_scanner.dart';
 import 'package:very_beauty/core/storage/app_paths.dart';
 import 'package:very_beauty/core/storage/product_photo_picker.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -359,10 +360,65 @@ void main() {
     expect(find.text('Crosspolymer-6'), findsNothing);
     expect(find.text('Unicorn Tears'), findsOneWidget);
   });
+
+  testWidgets('paste or scan a whole ingredient list and review matches', (
+    tester,
+  ) async {
+    final db = await pumpApp(
+      tester,
+      overrides: [
+        ingredientTextScannerProvider.overrideWithValue(_FakeScanner()),
+      ],
+    );
+    await tester.tap(find.text('สินค้า'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('เพิ่มสินค้า').last);
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.widgetWithText(TextFormField, 'ชื่อสินค้า'),
+      'Calming Toner',
+    );
+    await tester.tap(find.text('โทนเนอร์'));
+    await tester.pump();
+
+    await tapVisible(tester, find.byKey(const Key('importPaste')));
+    await tester.enterText(
+      find.byKey(const Key('importField')),
+      'Ingredients: Water (Aqua), Glycerine, Niacinamide 4%, '
+      'Moonbeam Essence*. *Organic',
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('ตรงกัน 2 · ใกล้เคียง 1 · ไม่รู้จัก 1'), findsOneWidget);
+    expect(find.text('จาก “Glycerine” · ช่วยตรวจอีกครั้ง'), findsOneWidget);
+    // Untick the unknown one.
+    await tapVisible(tester, find.text('Moonbeam Essence'));
+
+    // Scanning appends the recognised text.
+    await tapVisible(tester, find.text('สแกนจากรูป'));
+    await tester.tap(find.text('เลือกรูป/ภาพหน้าจอ'));
+    await tester.pumpAndSettle();
+    expect(find.text('Allantoin'), findsOneWidget);
+    await tester.tap(find.text('เพิ่ม 4 รายการ').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('บันทึก').first);
+    await tester.pumpAndSettle();
+
+    final names = await tester.runAsync(() async {
+      final p = (await ProductsDao(db).loadAll()).single.product;
+      return ProductsDao(db).ingredientsOf(p.id);
+    });
+    expect(names, ['Allantoin', 'Aqua', 'Glycerin', 'Niacinamide']);
+  });
 }
 
 class _FakePicker implements ProductPhotoPicker {
   @override
   Future<Uint8List?> pick({required bool fromCamera}) async =>
       img.encodeJpg(img.Image(width: 40, height: 60));
+}
+
+class _FakeScanner implements IngredientTextScanner {
+  @override
+  Future<String?> scan({required bool fromCamera}) async =>
+      'INGREDIENTS: ALLANTOIN, NIACINAMIDE.';
 }

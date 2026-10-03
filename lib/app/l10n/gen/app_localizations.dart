@@ -2743,6 +2743,102 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'แก้เป็น {name} แล้ว'**
   String ingredientsFixed(String name);
+
+  /// No description provided for @importPaste.
+  ///
+  /// In th, this message translates to:
+  /// **'วางรายชื่อ'**
+  String get importPaste;
+
+  /// No description provided for @importScan.
+  ///
+  /// In th, this message translates to:
+  /// **'สแกนจากรูป'**
+  String get importScan;
+
+  /// No description provided for @importTitle.
+  ///
+  /// In th, this message translates to:
+  /// **'เพิ่มจากรายชื่อ'**
+  String get importTitle;
+
+  /// No description provided for @importHint.
+  ///
+  /// In th, this message translates to:
+  /// **'วางรายชื่อส่วนผสมจากเว็บไซต์แบรนด์หรือฉลาก หรือสแกนจากรูป/ภาพหน้าจอ แอพจะแยกชื่อและจับคู่กับฐานข้อมูลให้อัตโนมัติ'**
+  String get importHint;
+
+  /// No description provided for @importFieldHint.
+  ///
+  /// In th, this message translates to:
+  /// **'เช่น Water, Glycerin, Niacinamide, …'**
+  String get importFieldHint;
+
+  /// No description provided for @importFromClipboard.
+  ///
+  /// In th, this message translates to:
+  /// **'วางจากคลิปบอร์ด'**
+  String get importFromClipboard;
+
+  /// No description provided for @importTakePhoto.
+  ///
+  /// In th, this message translates to:
+  /// **'ถ่ายรูปฉลาก'**
+  String get importTakePhoto;
+
+  /// No description provided for @importPickImage.
+  ///
+  /// In th, this message translates to:
+  /// **'เลือกรูป/ภาพหน้าจอ'**
+  String get importPickImage;
+
+  /// No description provided for @importScanning.
+  ///
+  /// In th, this message translates to:
+  /// **'กำลังอ่านตัวอักษรจากรูป…'**
+  String get importScanning;
+
+  /// No description provided for @importScanFailed.
+  ///
+  /// In th, this message translates to:
+  /// **'อ่านรูปนี้ไม่ได้ ลองถ่ายให้ชัดขึ้นหรือวางข้อความแทน'**
+  String get importScanFailed;
+
+  /// No description provided for @importScanEmpty.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่พบตัวอักษรในรูป'**
+  String get importScanEmpty;
+
+  /// No description provided for @importSummary.
+  ///
+  /// In th, this message translates to:
+  /// **'ตรงกัน {exact} · ใกล้เคียง {close} · ไม่รู้จัก {unknown}'**
+  String importSummary(int exact, int close, int unknown);
+
+  /// No description provided for @importApproximate.
+  ///
+  /// In th, this message translates to:
+  /// **'จาก “{raw}” · ช่วยตรวจอีกครั้ง'**
+  String importApproximate(String raw);
+
+  /// No description provided for @importUnknown.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่มีในฐานข้อมูล จะเพิ่มตามที่เขียนไว้'**
+  String get importUnknown;
+
+  /// No description provided for @importAdd.
+  ///
+  /// In th, this message translates to:
+  /// **'เพิ่ม {count} รายการ'**
+  String importAdd(int count);
+
+  /// No description provided for @importEmpty.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่มีรายชื่อ วางข้อความหรือสแกนรูปด้านบน'**
+  String get importEmpty;
 }
 
 class _AppLocalizationsDelegate
