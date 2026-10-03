@@ -27,6 +27,7 @@ class _SignedUpdate implements AppUpdateService {
     versionLabel: 'Very Beauty v1.0.0 (build 9)',
     url: Uri.parse('https://example.com/a.apk'),
     apkUrl: Uri.parse('https://example.com/a.apk'),
+    abiApkUrls: {'arm64-v8a': Uri.parse('https://example.com/a-arm64-v8a.apk')},
   );
 }
 
@@ -40,8 +41,13 @@ class _FakeInstaller implements ApkInstaller {
   @override
   Stream<InstallStatus> get statuses => _statuses.stream;
 
+  final downloaded = <Uri>[];
+
   @override
   Future<bool> canInstall() async => true;
+
+  @override
+  Future<List<String>> supportedAbis() async => ['arm64-v8a', 'armeabi-v7a'];
 
   @override
   Future<void> openInstallSettings() async {}
@@ -51,6 +57,7 @@ class _FakeInstaller implements ApkInstaller {
     Uri url, {
     void Function(double? progress)? onProgress,
   }) async {
+    downloaded.add(url);
     onProgress?.call(0.5);
     onProgress?.call(1);
     return File('/tmp/very_beauty_update.apk');
@@ -78,6 +85,8 @@ void main() {
     await tester.tap(find.text('อัปเดตเลย'));
     await tester.pumpAndSettle();
     expect(installer.installed, ['/tmp/very_beauty_update.apk']);
+    // The smaller APK for this phone's CPU is used.
+    expect(installer.downloaded.single.path, '/a-arm64-v8a.apk');
     expect(find.textContaining('กำลังติดตั้ง'), findsOneWidget);
   });
 

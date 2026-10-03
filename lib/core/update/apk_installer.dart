@@ -39,6 +39,10 @@ abstract class ApkInstaller {
   /// Whether "install unknown apps" is allowed for Very Beauty.
   Future<bool> canInstall();
 
+  /// The phone's CPU types, preferred first (e.g. `arm64-v8a`), to pick the
+  /// smaller per-ABI APK.
+  Future<List<String>> supportedAbis();
+
   /// Opens the system page where the user allows installs from this app.
   Future<void> openInstallSettings();
 
@@ -71,6 +75,16 @@ class PlatformApkInstaller implements ApkInstaller {
   @override
   Future<bool> canInstall() async =>
       await _channel.invokeMethod<bool>('canInstall') ?? false;
+
+  @override
+  Future<List<String>> supportedAbis() async {
+    try {
+      return await _channel.invokeListMethod<String>('supportedAbis') ??
+          const [];
+    } catch (_) {
+      return const [];
+    }
+  }
 
   @override
   Future<void> openInstallSettings() =>

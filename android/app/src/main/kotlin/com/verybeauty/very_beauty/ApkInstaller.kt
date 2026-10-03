@@ -32,6 +32,7 @@ object ApkInstaller {
     fun handle(context: Context, method: String, path: String?, result: MethodChannel.Result) {
         when (method) {
             "canInstall" -> result.success(canInstall(context))
+            "supportedAbis" -> result.success(Build.SUPPORTED_ABIS.toList())
             "openInstallSettings" -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     val intent = Intent(

@@ -39,11 +39,6 @@ android {
         // flag during build.
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        // Real phones only (matches --target-platform in CI): keeps native
-        // libraries of plugins such as ML Kit from adding x86 copies.
-        ndk {
-            abiFilters += listOf("armeabi-v7a", "arm64-v8a")
-        }
     }
 
     signingConfigs {

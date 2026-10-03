@@ -57,25 +57,35 @@ jobs:
           echo "signed=true" >> "$GITHUB_OUTPUT"
 
       - name: Build APK
-        # ARM only (every real Android phone): a much smaller download for
-        # in-app updates than a build that also carries x86_64 emulator code.
-        run: >-
-          flutter build apk --release --build-number=${{ github.run_number }}
-          --target-platform android-arm,android-arm64
+        # ARM only (every real Android phone). The universal APK is for manual
+        # installs; per-CPU APKs (same version code) are what in-app updates
+        # download, since on-device text recognition makes each ABI large.
+        run: |
+          flutter build apk --release --build-number=${{ github.run_number }} \
+            --target-platform android-arm,android-arm64
+          mkdir -p dist && mv build/app/outputs/flutter-apk/app-release.apk dist/universal.apk
+          flutter build apk --release --build-number=${{ github.run_number }} \
+            --target-platform android-arm,android-arm64 --split-per-abi \
+            -P force-version-code-ignoring-abi=true
 
-      - name: Name the APK
+      - name: Name the APKs
         id: apk
         run: |
           version=$(grep '^version:' pubspec.yaml | sed 's/version: *//; s/+.*//')
-          name="VeryBeauty-v${version}-build${{ github.run_number }}.apk"
-          mv build/app/outputs/flutter-apk/app-release.apk "$name"
-          echo "name=$name" >> "$GITHUB_OUTPUT"
+          base="VeryBeauty-v${version}-build${{ github.run_number }}"
+          mv dist/universal.apk "$base.apk"
+          for abi in arm64-v8a armeabi-v7a; do
+            mv "build/app/outputs/flutter-apk/app-$abi-release.apk" "$base-$abi.apk"
+          done
+          ls -l *.apk
+          echo "name=$base.apk" >> "$GITHUB_OUTPUT"
+          echo "base=$base" >> "$GITHUB_OUTPUT"
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.apk.outputs.name }}
-          path: ${{ steps.apk.outputs.name }}
+          name: ${{ steps.apk.outputs.base }}
+          path: ${{ steps.apk.outputs.base }}*.apk
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
@@ -84,9 +94,14 @@ jobs:
           name: Very Beauty v${{ steps.apk.outputs.version }} (build ${{ github.run_number }})
           target_commitish: ${{ github.sha }}
           prerelease: true
-          files: ${{ steps.apk.outputs.name }}
+          # Universal first: older app versions take the first APK listed.
+          files: |
+            ${{ steps.apk.outputs.name }}
+            ${{ steps.apk.outputs.base }}-arm64-v8a.apk
+            ${{ steps.apk.outputs.base }}-armeabi-v7a.apk
           body: |
             ดาวน์โหลดไฟล์ `${{ steps.apk.outputs.name }}` ด้านล่างบนมือถือ Android แล้วแตะเพื่อติดตั้ง
+            (ไฟล์ที่ลงท้าย -arm64-v8a / -armeabi-v7a เป็นไฟล์เล็กเฉพาะรุ่นเครื่อง ที่ปุ่ม "อัปเดตเลย" ในแอปใช้)
             (ครั้งแรกระบบจะถามให้อนุญาต "ติดตั้งแอปที่ไม่รู้จัก" จากเบราว์เซอร์ — กดอนุญาต)
 
             ${{ steps.signing.outputs.signed == 'true' && '✅ เซ็นด้วยกุญแจถาวร — กด "อัปเดตเลย" ในแอปได้ ข้อมูลไม่หาย' || '⚠️ บิลด์นี้เซ็นด้วยกุญแจชั่วคราว: ถ้าจะติดตั้งเวอร์ชันใหม่ ต้องลบแอปเดิมก่อน (ข้อมูลในแอปจะหาย) — ตั้งค่ากุญแจถาวรตาม README หัวข้อ "เซ็นแอพ"' }}

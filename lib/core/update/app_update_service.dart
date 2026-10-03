@@ -21,6 +21,7 @@ class UpdateInfo {
     this.notes,
     this.mandatory = false,
     this.apkUrl,
+    this.abiApkUrls = const {},
   });
 
   /// Shown to the user, e.g. "1.0.0 (build 12)".
@@ -38,6 +39,19 @@ class UpdateInfo {
   /// signed with the permanent key (`signing: release` in the notes); other
   /// builds can't update an installed app in place.
   final Uri? apkUrl;
+
+  /// Smaller APKs built for one CPU type (`arm64-v8a`, `armeabi-v7a`).
+  final Map<String, Uri> abiApkUrls;
+
+  /// The smallest APK that runs on a phone supporting [abis] (preferred
+  /// first), or the universal one.
+  Uri? apkUrlFor(List<String> abis) {
+    if (apkUrl == null) return null;
+    for (final abi in abis) {
+      if (abiApkUrls[abi] case final url?) return url;
+    }
+    return apkUrl;
+  }
 }
 
 /// Checks for a newer version. The app's only network access
@@ -104,6 +118,7 @@ class AppStoreUpdateService implements AppUpdateService {
 
 final _buildTag = RegExp(r'^build-(\d+)$');
 final _minBuild = RegExp(r'min_supported_build:\s*(\d+)');
+final _abiSuffix = RegExp(r'-(arm64-v8a|armeabi-v7a|x86_64)\.apk$');
 final _releaseSigned = RegExp(r'^signing:\s*release\s*$', multiLine: true);
 
 /// Picks the newest `build-N` release with an APK newer than [current].
@@ -117,10 +132,20 @@ UpdateInfo? parseGitHubReleases(Object? json, AppVersionInfo current) {
     if (match == null) continue;
     final build = int.parse(match.group(1)!);
     if (build <= bestBuild) continue;
-    final apk = (r['assets'] as List? ?? const [])
+    final apks = (r['assets'] as List? ?? const [])
         .whereType<Map<String, dynamic>>()
         .where((a) => '${a['name']}'.endsWith('.apk'))
-        .firstOrNull;
+        .toList();
+    Map<String, dynamic>? apk;
+    final perAbi = <String, Uri>{};
+    for (final a in apks) {
+      final abi = _abiSuffix.firstMatch('${a['name']}')?.group(1);
+      if (abi == null) {
+        apk ??= a;
+      } else {
+        perAbi[abi] = Uri.parse('${a['browser_download_url']}');
+      }
+    }
     final url = apk?['browser_download_url'] ?? r['html_url'];
     if (url is! String) continue;
     final body = '${r['body'] ?? ''}';
@@ -134,6 +159,7 @@ UpdateInfo? parseGitHubReleases(Object? json, AppVersionInfo current) {
       apkUrl: apk != null && _releaseSigned.hasMatch(body)
           ? Uri.parse('${apk['browser_download_url']}')
           : null,
+      abiApkUrls: _releaseSigned.hasMatch(body) ? perAbi : const {},
     );
   }
   return best;

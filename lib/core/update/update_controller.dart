@@ -164,10 +164,8 @@ Future<void> installUpdate(
   );
   File apk;
   try {
-    apk = await installer.download(
-      info.apkUrl!,
-      onProgress: (p) => progress.value = p,
-    );
+    final url = info.apkUrlFor(await installer.supportedAbis())!;
+    apk = await installer.download(url, onProgress: (p) => progress.value = p);
   } catch (e) {
     debugPrint('Update download failed: $e');
     navigator.pop();

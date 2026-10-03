@@ -51,6 +51,33 @@ void main() {
       );
     });
 
+    test('per-CPU APKs are offered for in-app updates', () {
+      final release = _release(7, body: 'signing: release')
+        ..['assets'] = [
+          {
+            'name': 'VeryBeauty-v1.0.0-build7.apk',
+            'browser_download_url': 'https://x/u.apk',
+          },
+          {
+            'name': 'VeryBeauty-v1.0.0-build7-arm64-v8a.apk',
+            'browser_download_url': 'https://x/arm64.apk',
+          },
+          {
+            'name': 'VeryBeauty-v1.0.0-build7-armeabi-v7a.apk',
+            'browser_download_url': 'https://x/arm32.apk',
+          },
+        ];
+      final info = parseGitHubReleases([release], _current)!;
+      expect(info.url.toString(), 'https://x/u.apk');
+      expect(
+        info.apkUrlFor(['arm64-v8a', 'armeabi-v7a']).toString(),
+        'https://x/arm64.apk',
+      );
+      expect(info.apkUrlFor(['armeabi-v7a']).toString(), 'https://x/arm32.apk');
+      expect(info.apkUrlFor(['x86']).toString(), 'https://x/u.apk');
+      expect(info.apkUrlFor(const []).toString(), 'https://x/u.apk');
+    });
+
     test('null when up to date, drafts ignored', () {
       expect(parseGitHubReleases([_release(5), _release(3)], _current), isNull);
       expect(parseGitHubReleases([_release(9, draft: true)], _current), isNull);
